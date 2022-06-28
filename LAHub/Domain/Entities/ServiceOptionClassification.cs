@@ -1,8 +1,8 @@
 ﻿namespace LAHub.Domain.Entities;
 
-public class ServiceOptionCategory : BaseAuditableEntity<Guid>
+public class ServiceOptionClassification : BaseAuditableEntity<Guid>
 {
-    public ServiceOptionCategory(
+    public ServiceOptionClassification(
         Guid serviceOptionTypeId,
         Guid linkId,
         Guid classificationId
