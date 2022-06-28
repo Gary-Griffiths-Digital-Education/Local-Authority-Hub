@@ -1,18 +1,18 @@
 ﻿namespace LAHub.Domain.Entities;
 
-public class ServiceCategory : BaseAuditableEntity<Guid>
+public class ServiceClassification : BaseAuditableEntity<Guid>
 {
-    public ServiceCategory(
+    public ServiceClassification(
         Guid serviceId,
-        Guid categoryId
+        Guid classificationId
     )
     {
         Id = Guid.NewGuid();
         ServiceId = serviceId;
-        CategoryId = categoryId;
+        ClassificationId = classificationId;
     }
 
     public Guid ServiceId { get; }
 
-    public Guid CategoryId { get; }
+    public Guid ClassificationId { get; }
 }
