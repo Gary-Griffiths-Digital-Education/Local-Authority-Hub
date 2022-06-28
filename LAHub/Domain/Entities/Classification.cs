@@ -1,8 +1,8 @@
 ﻿namespace LAHub.Domain.Entities;
 
-public class Category : BaseAuditableEntity<Guid>
+public class Classification : BaseAuditableEntity<Guid>
 {
-    public Category(
+    public Classification(
         string name,
         string? description
     )

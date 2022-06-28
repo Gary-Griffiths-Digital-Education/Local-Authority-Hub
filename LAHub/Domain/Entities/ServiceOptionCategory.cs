@@ -5,19 +5,19 @@ public class ServiceOptionCategory : BaseAuditableEntity<Guid>
     public ServiceOptionCategory(
         Guid serviceOptionTypeId,
         Guid linkId,
-        Guid categoryId
+        Guid classificationId
     )
     {
         Id = Guid.NewGuid();
         ServiceOptionTypeId = serviceOptionTypeId;
         LinkId = linkId;
-        CategoryId = categoryId;
+        ClassificationId = classificationId;
     }
 
     public Guid ServiceOptionTypeId { get; }
 
     public Guid LinkId { get; }
 
-    public Guid CategoryId { get; }
+    public Guid ClassificationId { get; }
 }
 
