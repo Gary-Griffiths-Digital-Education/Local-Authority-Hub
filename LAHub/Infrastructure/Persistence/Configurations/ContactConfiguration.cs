@@ -13,10 +13,14 @@ public class ContactConfiguration : IEntityTypeConfiguration<ContactDto>
         builder.Property(t => t.ServiceId)
             .IsRequired();
         builder.Property(t => t.Name)
+            .HasMaxLength(50)
             .IsRequired();
+        builder.Property(t => t.Title)
+            .HasMaxLength(50);
         builder.Property(t => t.Created)
             .IsRequired();
         builder.Property(t => t.CreatedBy)
+            .HasMaxLength(255)
             .IsRequired();
     }
 }

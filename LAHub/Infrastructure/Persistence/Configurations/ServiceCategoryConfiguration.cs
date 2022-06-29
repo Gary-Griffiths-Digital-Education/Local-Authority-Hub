@@ -15,6 +15,7 @@ public class ServiceCategoryConfiguration : IEntityTypeConfiguration<ServiceCate
         builder.Property(t => t.Created)
             .IsRequired();
         builder.Property(t => t.CreatedBy)
+            .HasMaxLength(255)
             .IsRequired();
     }
 }

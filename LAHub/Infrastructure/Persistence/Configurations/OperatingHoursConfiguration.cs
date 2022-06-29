@@ -12,9 +12,12 @@ public class OperatingHoursConfiguration : IEntityTypeConfiguration<OperatingHou
             .IsRequired();
         builder.Property(t => t.ServiceLocationId)
             .IsRequired();
+        builder.Property(t => t.Description)
+            .HasMaxLength(500);
         builder.Property(t => t.Created)
             .IsRequired();
         builder.Property(t => t.CreatedBy)
+            .HasMaxLength(255)
             .IsRequired();
     }
 }

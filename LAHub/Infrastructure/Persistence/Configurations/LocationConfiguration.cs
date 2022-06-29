@@ -9,6 +9,10 @@ public class LocationConfiguration : IEntityTypeConfiguration<LocationDto>
     public void Configure(EntityTypeBuilder<LocationDto> builder)
     {
         builder.Property(t => t.Name)
+            .HasMaxLength(50)
+            .IsRequired();
+        builder.Property(t => t.Description)
+            .HasMaxLength(500)
             .IsRequired();
         builder.Property(t => t.Latitude)
             .IsRequired();
@@ -17,6 +21,7 @@ public class LocationConfiguration : IEntityTypeConfiguration<LocationDto>
         builder.Property(t => t.Created)
             .IsRequired();
         builder.Property(t => t.CreatedBy)
+            .HasMaxLength(255)
             .IsRequired();
     }
 }
