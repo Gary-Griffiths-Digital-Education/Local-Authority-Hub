@@ -1,12 +1,12 @@
-﻿using LAHub.Domain.DbEntities;
+﻿using LAHub.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Infrastructure.Persistence.Configurations;
 
-public class ServiceLocationConfiguration : IEntityTypeConfiguration<ServiceLocationDto>
+public class ServiceLocationConfiguration : IEntityTypeConfiguration<ServiceLocation>
 {
-    public void Configure(EntityTypeBuilder<ServiceLocationDto> builder)
+    public void Configure(EntityTypeBuilder<ServiceLocation> builder)
     {
         builder.Property(t => t.ServiceId)
             .IsRequired();

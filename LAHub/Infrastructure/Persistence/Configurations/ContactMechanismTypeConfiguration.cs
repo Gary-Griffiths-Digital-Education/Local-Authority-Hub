@@ -1,12 +1,12 @@
-﻿using LAHub.Domain.DbEntities;
+﻿using LAHub.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Infrastructure.Persistence.Configurations;
 
-public class ContactMechanismTypeConfiguration : IEntityTypeConfiguration<ContactMechanismTypeDto>
+public class ContactMechanismTypeConfiguration : IEntityTypeConfiguration<ContactMechanismType>
 {
-    public void Configure(EntityTypeBuilder<ContactMechanismTypeDto> builder)
+    public void Configure(EntityTypeBuilder<ContactMechanismType> builder)
     {
         builder.Property(t => t.Name)
             .HasMaxLength(50)

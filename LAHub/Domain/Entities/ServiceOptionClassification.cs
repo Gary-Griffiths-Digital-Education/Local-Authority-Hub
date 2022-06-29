@@ -2,6 +2,8 @@
 
 public class ServiceOptionClassification : BaseAuditableEntity<Guid>
 {
+    public ServiceOptionClassification() { }
+
     public ServiceOptionClassification(
         Guid serviceOptionTypeId,
         Guid linkId,

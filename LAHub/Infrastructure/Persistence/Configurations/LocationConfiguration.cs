@@ -1,12 +1,12 @@
-﻿using LAHub.Domain.DbEntities;
+﻿using LAHub.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Infrastructure.Persistence.Configurations;
 
-public class LocationConfiguration : IEntityTypeConfiguration<LocationDto>
+public class LocationConfiguration : IEntityTypeConfiguration<Location>
 {
-    public void Configure(EntityTypeBuilder<LocationDto> builder)
+    public void Configure(EntityTypeBuilder<Location> builder)
     {
         builder.Property(t => t.Name)
             .HasMaxLength(50)

@@ -2,6 +2,9 @@
 {
     public class OperatingHours : BaseAuditableEntity<Guid>
     {
+        public OperatingHours()
+        {
+        }
         public OperatingHours(
             Guid serviceId,
             Guid serviceLocationId,

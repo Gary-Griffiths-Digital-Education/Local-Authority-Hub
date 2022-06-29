@@ -1,12 +1,12 @@
-﻿using LAHub.Domain.DbEntities;
+﻿using LAHub.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Infrastructure.Persistence.Configurations;
 
-public class EligibilityConfiguration : IEntityTypeConfiguration<EligibilityDto>
+public class EligibilityConfiguration : IEntityTypeConfiguration<Eligibility>
 {
-    public void Configure(EntityTypeBuilder<EligibilityDto> builder)
+    public void Configure(EntityTypeBuilder<Eligibility> builder)
     {
         builder.Property(t => t.ServiceId)
             .IsRequired();

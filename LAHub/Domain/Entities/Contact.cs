@@ -2,6 +2,10 @@
 
 public class Contact : BaseAuditableEntity<Guid>
 {
+    public Contact() 
+    {
+        Name = string.Empty;
+    }
     public Contact(
         Guid contactMechanismTypeId,
         Guid serviceId,
@@ -17,8 +21,10 @@ public class Contact : BaseAuditableEntity<Guid>
     }
 
     public Guid ContactMechanismTypeId { get; set; }
+    public ContactMechanismType ContactMechanismType { get; set; } = default!;
 
     public Guid ServiceId { get; set; }
+    public Service Service { get; set; } = default!;
 
     public string Name { get; set; }
 

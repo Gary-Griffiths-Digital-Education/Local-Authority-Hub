@@ -2,6 +2,8 @@
 
 public class ServiceOptionCategory : BaseAuditableEntity<Guid>
 {
+    public ServiceOptionCategory() { }
+
     public ServiceOptionCategory(
         Guid serviceOptionTypeId,
         Guid linkId,

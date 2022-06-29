@@ -2,6 +2,10 @@
 
 public class Category : BaseAuditableEntity<Guid>
 {
+    public Category() 
+    {
+        Name = string.Empty;
+    }
     public Category(
         string name,
         string? description

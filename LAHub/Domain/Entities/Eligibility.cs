@@ -2,6 +2,9 @@
 
 public class Eligibility : BaseAuditableEntity<Guid>
 {
+    public Eligibility()
+    {
+    }
     public Eligibility(
         Guid? serviceId,
         byte? minimumAge,

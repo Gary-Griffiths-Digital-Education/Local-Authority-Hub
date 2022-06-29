@@ -1,12 +1,12 @@
-﻿using LAHub.Domain.DbEntities;
+﻿using LAHub.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Infrastructure.Persistence.Configurations;
 
-public class ContactConfiguration : IEntityTypeConfiguration<ContactDto>
+public class ContactConfiguration : IEntityTypeConfiguration<Contact>
 {
-    public void Configure(EntityTypeBuilder<ContactDto> builder)
+    public void Configure(EntityTypeBuilder<Contact> builder)
     {
         builder.Property(t => t.ContactMechanismTypeId)
             .IsRequired();

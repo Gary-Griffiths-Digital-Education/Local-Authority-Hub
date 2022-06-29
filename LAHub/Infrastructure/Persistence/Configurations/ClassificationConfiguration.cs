@@ -1,12 +1,12 @@
-﻿using LAHub.Domain.DbEntities;
+﻿using LAHub.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Infrastructure.Persistence.Configurations;
 
-public class ClassificationConfiguration : IEntityTypeConfiguration<ClassificationDto>
+public class ClassificationConfiguration : IEntityTypeConfiguration<Classification>
 {
-    public void Configure(EntityTypeBuilder<ClassificationDto> builder)
+    public void Configure(EntityTypeBuilder<Classification> builder)
     {
         builder.Property(t => t.Name)
             .HasMaxLength(50)

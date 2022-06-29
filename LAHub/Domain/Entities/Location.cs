@@ -2,6 +2,10 @@
 
 public class Location : BaseAuditableEntity<Guid>
 {
+    public Location()
+    {
+        Name = string.Empty;
+    }
     public Location(
         string name,
         string? description,

@@ -1,12 +1,12 @@
-﻿using LAHub.Domain.DbEntities;
+﻿using LAHub.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Infrastructure.Persistence.Configurations;
 
-public class ServiceOptionTypeConfiguration : IEntityTypeConfiguration<ServiceOptionTypeDto>
+public class ServiceOptionTypeConfiguration : IEntityTypeConfiguration<ServiceOptionType>
 {
-    public void Configure(EntityTypeBuilder<ServiceOptionTypeDto> builder)
+    public void Configure(EntityTypeBuilder<ServiceOptionType> builder)
     {
         builder.Property(t => t.Name)
             .HasMaxLength(50)

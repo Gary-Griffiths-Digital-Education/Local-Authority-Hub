@@ -1,27 +1,27 @@
-﻿using LAHub.Domain.DbEntities;
+﻿using LAHub.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace Application.Common.Interfaces;
 
 public interface ILAHubDbContext
 {
-    DbSet<AddressDto> Addresses { get; }
-    DbSet<CategoryDto> Categories { get; }
-    DbSet<ClassificationDto> Classifications { get; }
-    DbSet<ContactDto> Contacts { get; }
-    DbSet<ContactMechanismDto> ContactMechanisms { get; }
-    DbSet<ContactMechanismTypeDto> ContactMechanismTypes { get; }
-    DbSet<EligibilityDto> Eligibilities { get; }
-    DbSet<LocationDto> Locations { get; }
-    DbSet<OperatingHoursDto> OperatingHours { get; }
-    DbSet<OrganisationDto> Organisations { get; }
-    DbSet<ServiceAreaDto> ServiceAreas { get; }
-    DbSet<ServiceCategoryDto> ServiceCategories { get; }
-    DbSet<ServiceClassificationDto> ServiceClassifications { get; }
-    DbSet<ServiceDto> Services { get; }
-    DbSet<ServiceLocationDto> ServiceLocations { get; }
-    DbSet<ServiceOptionCategoryDto> ServiceOptionCategories { get; }
-    DbSet<ServiceOptionClassificationDto> ServiceOptionClassifications { get; }
-    DbSet<ServiceOptionTypeDto> ServiceOptionTypes { get; }
+    DbSet<Address> Addresses { get; }
+    DbSet<Category> Categories { get; }
+    DbSet<Classification> Classifications { get; }
+    DbSet<Contact> Contacts { get; }
+    DbSet<ContactMechanism> ContactMechanisms { get; }
+    DbSet<ContactMechanismType> ContactMechanismTypes { get; }
+    DbSet<Eligibility> Eligibilities { get; }
+    DbSet<Location> Locations { get; }
+    DbSet<OperatingHours> OperatingHours { get; }
+    DbSet<Organisation> Organisations { get; }
+    DbSet<ServiceArea> ServiceAreas { get; }
+    DbSet<ServiceCategory> ServiceCategories { get; }
+    DbSet<ServiceClassification> ServiceClassifications { get; }
+    DbSet<Service> Services { get; }
+    DbSet<ServiceLocation> ServiceLocations { get; }
+    DbSet<ServiceOptionCategory> ServiceOptionCategories { get; }
+    DbSet<ServiceOptionClassification> ServiceOptionClassifications { get; }
+    DbSet<ServiceOptionType> ServiceOptionTypes { get; }
     Task<int> SaveChangesAsync(CancellationToken cancellationToken);
 }

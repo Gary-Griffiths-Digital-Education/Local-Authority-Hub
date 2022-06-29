@@ -2,7 +2,7 @@
 using Duende.IdentityServer.EntityFramework.Options;
 using Infrastructure.Identity;
 using Infrastructure.Persistence.Interceptors;
-using LAHub.Domain.DbEntities;
+using LAHub.Domain.Entities;
 using MediatR;
 using Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
 using Microsoft.EntityFrameworkCore;
@@ -27,24 +27,24 @@ public class LAHubDbContext : ApiAuthorizationDbContext<ApplicationUser>, ILAHub
         _auditableEntitySaveChangesInterceptor = auditableEntitySaveChangesInterceptor;
     }
 
-    public DbSet<AddressDto> Addresses => Set<AddressDto>();
-    public DbSet<CategoryDto> Categories => Set<CategoryDto>();
-    public DbSet<ClassificationDto> Classifications => Set<ClassificationDto>();
-    public DbSet<ContactDto> Contacts => Set<ContactDto>();
-    public DbSet<ContactMechanismDto> ContactMechanisms => Set<ContactMechanismDto>();
-    public DbSet<ContactMechanismTypeDto> ContactMechanismTypes => Set<ContactMechanismTypeDto>();
-    public DbSet<EligibilityDto> Eligibilities => Set<EligibilityDto>();
-    public DbSet<LocationDto> Locations => Set<LocationDto>();
-    public DbSet<OperatingHoursDto> OperatingHours => Set<OperatingHoursDto>();
-    public DbSet<OrganisationDto> Organisations => Set<OrganisationDto>();
-    public DbSet<ServiceAreaDto> ServiceAreas => Set<ServiceAreaDto>();
-    public DbSet<ServiceCategoryDto> ServiceCategories => Set<ServiceCategoryDto>();
-    public DbSet<ServiceClassificationDto> ServiceClassifications => Set<ServiceClassificationDto>();
-    public DbSet<ServiceDto> Services => Set<ServiceDto>();
-    public DbSet<ServiceLocationDto> ServiceLocations => Set<ServiceLocationDto>();
-    public DbSet<ServiceOptionCategoryDto> ServiceOptionCategories => Set<ServiceOptionCategoryDto>();
-    public DbSet<ServiceOptionClassificationDto> ServiceOptionClassifications => Set<ServiceOptionClassificationDto>();
-    public DbSet<ServiceOptionTypeDto> ServiceOptionTypes => Set<ServiceOptionTypeDto>();
+    public DbSet<Address> Addresses => Set<Address>();
+    public DbSet<Category> Categories => Set<Category>();
+    public DbSet<Classification> Classifications => Set<Classification>();
+    public DbSet<Contact> Contacts => Set<Contact>();
+    public DbSet<ContactMechanism> ContactMechanisms => Set<ContactMechanism>();
+    public DbSet<ContactMechanismType> ContactMechanismTypes => Set<ContactMechanismType>();
+    public DbSet<Eligibility> Eligibilities => Set<Eligibility>();
+    public DbSet<Location> Locations => Set<Location>();
+    public DbSet<OperatingHours> OperatingHours => Set<OperatingHours>();
+    public DbSet<Organisation> Organisations => Set<Organisation>();
+    public DbSet<ServiceArea> ServiceAreas => Set<ServiceArea>();
+    public DbSet<ServiceCategory> ServiceCategories => Set<ServiceCategory>();
+    public DbSet<ServiceClassification> ServiceClassifications => Set<ServiceClassification>();
+    public DbSet<Service> Services => Set<Service>();
+    public DbSet<ServiceLocation> ServiceLocations => Set<ServiceLocation>();
+    public DbSet<ServiceOptionCategory> ServiceOptionCategories => Set<ServiceOptionCategory>();
+    public DbSet<ServiceOptionClassification> ServiceOptionClassifications => Set<ServiceOptionClassification>();
+    public DbSet<ServiceOptionType> ServiceOptionTypes => Set<ServiceOptionType>();
 
     protected override void OnModelCreating(ModelBuilder builder)
     {

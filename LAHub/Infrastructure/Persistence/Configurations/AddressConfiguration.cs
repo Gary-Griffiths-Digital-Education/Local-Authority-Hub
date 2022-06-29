@@ -1,12 +1,12 @@
-﻿using LAHub.Domain.DbEntities;
+﻿using LAHub.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Infrastructure.Persistence.Configurations;
 
-public class AddressConfiguration : IEntityTypeConfiguration<AddressDto>
+public class AddressConfiguration : IEntityTypeConfiguration<Address>
 {
-    public void Configure(EntityTypeBuilder<AddressDto> builder)
+    public void Configure(EntityTypeBuilder<Address> builder)
     {
         builder.Property(t => t.AddressLine1)
             .HasMaxLength(50)

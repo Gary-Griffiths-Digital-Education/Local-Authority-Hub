@@ -1,12 +1,12 @@
-﻿using LAHub.Domain.DbEntities;
+﻿using LAHub.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Infrastructure.Persistence.Configurations;
 
-public class ServiceOptionClassificationConfiguration : IEntityTypeConfiguration<ServiceOptionClassificationDto>
+public class ServiceOptionClassificationConfiguration : IEntityTypeConfiguration<ServiceOptionClassification>
 {
-    public void Configure(EntityTypeBuilder<ServiceOptionClassificationDto> builder)
+    public void Configure(EntityTypeBuilder<ServiceOptionClassification> builder)
     {
         builder.Property(t => t.ServiceOptionTypeId)
             .IsRequired();

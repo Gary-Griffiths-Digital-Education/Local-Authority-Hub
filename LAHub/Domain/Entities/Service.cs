@@ -2,6 +2,10 @@
 
 public class Service : BaseAuditableEntity<Guid>
 {
+    public Service()
+    {
+        Name = String.Empty;
+    }
     public Service(
         string name,
         string? description,
@@ -19,4 +23,6 @@ public class Service : BaseAuditableEntity<Guid>
     public string? Description { get; set; }
 
     public Guid OrganisationId { get; set; }
+
+    public ICollection<ServiceLocation> ServiceLocations { get; set; } = default!;
 }

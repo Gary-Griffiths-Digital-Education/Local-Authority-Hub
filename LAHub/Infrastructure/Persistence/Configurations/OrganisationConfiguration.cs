@@ -1,12 +1,12 @@
-﻿using LAHub.Domain.DbEntities;
+﻿using LAHub.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Infrastructure.Persistence.Configurations;
 
-public class OrganisationConfiguration : IEntityTypeConfiguration<OrganisationDto>
+public class OrganisationConfiguration : IEntityTypeConfiguration<Organisation>
 {
-    public void Configure(EntityTypeBuilder<OrganisationDto> builder)
+    public void Configure(EntityTypeBuilder<Organisation> builder)
     {
         builder.Property(t => t.Name)
             .HasMaxLength(50)

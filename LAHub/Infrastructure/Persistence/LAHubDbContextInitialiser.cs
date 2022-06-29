@@ -1,5 +1,5 @@
 ﻿using Infrastructure.Identity;
-using LAHub.Domain.DbEntities;
+using LAHub.Domain.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -73,13 +73,13 @@ public class ApplicationDbContextInitialiser
         // Seed, if necessary
         if (!_context.ContactMechanismTypes.Any())
         {
-            _context.ContactMechanismTypes.Add(new ContactMechanismTypeDto
+            _context.ContactMechanismTypes.Add(new ContactMechanismType
             {
                 Name = "Phone",
                 Description = "Phone number"
             });
 
-            _context.ContactMechanismTypes.Add(new ContactMechanismTypeDto
+            _context.ContactMechanismTypes.Add(new ContactMechanismType
             {
                 Name = "Email",
                 Description = "Email address"

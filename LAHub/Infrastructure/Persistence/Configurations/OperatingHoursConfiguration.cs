@@ -1,12 +1,12 @@
-﻿using LAHub.Domain.DbEntities;
+﻿using LAHub.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Infrastructure.Persistence.Configurations;
 
-public class OperatingHoursConfiguration : IEntityTypeConfiguration<OperatingHoursDto>
+public class OperatingHoursConfiguration : IEntityTypeConfiguration<OperatingHours>
 {
-    public void Configure(EntityTypeBuilder<OperatingHoursDto> builder)
+    public void Configure(EntityTypeBuilder<OperatingHours> builder)
     {
         builder.Property(t => t.ServiceId)
             .IsRequired();

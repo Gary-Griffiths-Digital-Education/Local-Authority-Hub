@@ -2,6 +2,10 @@
 
 public class ServiceArea : BaseAuditableEntity<Guid>
 {
+    public ServiceArea()
+    {
+    }
+
     public ServiceArea(
         Guid? serviceId,
         string? extent,

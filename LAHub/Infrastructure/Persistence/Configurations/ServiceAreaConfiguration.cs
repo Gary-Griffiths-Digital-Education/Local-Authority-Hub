@@ -1,12 +1,12 @@
-﻿using LAHub.Domain.DbEntities;
+﻿using LAHub.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Infrastructure.Persistence.Configurations;
 
-public class ServiceAreaConfiguration : IEntityTypeConfiguration<ServiceAreaDto>
+public class ServiceAreaConfiguration : IEntityTypeConfiguration<ServiceArea>
 {
-    public void Configure(EntityTypeBuilder<ServiceAreaDto> builder)
+    public void Configure(EntityTypeBuilder<ServiceArea> builder)
     {
         builder.Property(t => t.ServiceId)
             .IsRequired();

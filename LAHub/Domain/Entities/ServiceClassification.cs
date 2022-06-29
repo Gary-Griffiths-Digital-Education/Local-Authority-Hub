@@ -2,6 +2,10 @@
 
 public class ServiceClassification : BaseAuditableEntity<Guid>
 {
+    public ServiceClassification()
+    {
+    }
+
     public ServiceClassification(
         Guid serviceId,
         Guid classificationId
