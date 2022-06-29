@@ -12,8 +12,8 @@ public class ServiceLocation : BaseAuditableEntity<Guid>
         LocationId = locationId;
     }
 
-    public Guid ServiceId { get; }
+    public Guid ServiceId { get; set; }
 
-    public Guid LocationId { get; }
+    public Guid LocationId { get; set; }
 }
 

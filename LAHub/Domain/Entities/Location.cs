@@ -16,12 +16,12 @@ public class Location : BaseAuditableEntity<Guid>
         Longitude = longitude;
     }
 
-    public string Name { get; }
+    public string Name { get; set; }
 
-    public string? Description { get; }
+    public string? Description { get; set; }
 
-    public double Latitude { get; }
+    public double Latitude { get; set; }
 
-    public double Longitude { get; }
+    public double Longitude { get; set; }
 }
 

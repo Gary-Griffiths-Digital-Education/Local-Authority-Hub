@@ -14,10 +14,10 @@ public class ServiceArea : BaseAuditableEntity<Guid>
         Uri = uri ?? default!;
     }
 
-    public Guid? ServiceId { get; }
+    public Guid? ServiceId { get; set; }
 
-    public string? Extent { get; }
+    public string? Extent { get; set; }
 
-    public string? Uri { get; }
+    public string? Uri { get; set; }
 }
 

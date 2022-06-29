@@ -16,11 +16,11 @@ public class Contact : BaseAuditableEntity<Guid>
         Title = title ?? string.Empty;
     }
 
-    public Guid ContactMechanismTypeId { get; }
+    public Guid ContactMechanismTypeId { get; set; }
 
-    public Guid ServiceId { get; }
+    public Guid ServiceId { get; set; }
 
-    public string Name { get; }
+    public string Name { get; set; }
 
-    public string? Title { get; }
+    public string? Title { get; set; }
 }

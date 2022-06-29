@@ -14,10 +14,10 @@ public class Eligibility : BaseAuditableEntity<Guid>
         MaximumAge = maximumAge;
     }
 
-    public Guid? ServiceId { get; }
+    public Guid? ServiceId { get; set; }
 
-    public byte? MinimumAge { get; }
+    public byte? MinimumAge { get; set; }
 
-    public byte? MaximumAge { get; }
+    public byte? MaximumAge { get; set; }
 }
 

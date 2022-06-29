@@ -14,9 +14,9 @@ public class Service : BaseAuditableEntity<Guid>
         OrganisationId = organisationId;
     }
 
-    public string Name { get; }
+    public string Name { get; set; }
 
-    public string? Description { get; }
+    public string? Description { get; set; }
 
-    public Guid OrganisationId { get; }
+    public Guid OrganisationId { get; set; }
 }

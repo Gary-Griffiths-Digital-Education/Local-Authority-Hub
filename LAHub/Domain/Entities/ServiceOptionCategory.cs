@@ -14,9 +14,9 @@ public class ServiceOptionCategory : BaseAuditableEntity<Guid>
         CategoryId = categoryId;
     }
 
-    public Guid ServiceOptionTypeId { get; }
+    public Guid ServiceOptionTypeId { get; set; }
 
-    public Guid LinkId { get; }
+    public Guid LinkId { get; set; }
 
     public Guid CategoryId { get; }
 }

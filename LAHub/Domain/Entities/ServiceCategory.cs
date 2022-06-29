@@ -12,7 +12,7 @@ public class ServiceCategory : BaseAuditableEntity<Guid>
         CategoryId = categoryId;
     }
 
-    public Guid ServiceId { get; }
+    public Guid ServiceId { get; set; }
 
-    public Guid CategoryId { get; }
+    public Guid CategoryId { get; set; }
 }

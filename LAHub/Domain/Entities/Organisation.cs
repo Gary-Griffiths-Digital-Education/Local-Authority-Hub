@@ -14,9 +14,9 @@ public class Organisation : BaseAuditableEntity<Guid>
         ParentOrganisationId = parentOrganisationId ?? Guid.Empty;
     }
 
-    public string Name { get; }
+    public string Name { get; set; }
 
-    public string? Description { get; }
+    public string? Description { get; set; }
 
-    public Guid? ParentOrganisationId { get; }
+    public Guid? ParentOrganisationId { get; set; }
 }

@@ -16,13 +16,13 @@ public class Address : BaseAuditableEntity<Guid>
         Postcode = postcode;
     }
 
-    public string AddressLine1 { get; }
+    public string AddressLine1 { get; set; }
 
-    public string? AddressLine2 { get; }
+    public string? AddressLine2 { get; set; }
 
-    public string? TownOrCity { get; }
+    public string? TownOrCity { get; set; }
 
-    public string Postcode { get; }
+    public string Postcode { get; set; }
 }
 
 
