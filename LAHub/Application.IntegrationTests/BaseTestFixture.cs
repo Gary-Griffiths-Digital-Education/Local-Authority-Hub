@@ -1,15 +1,9 @@
-﻿using NUnit.Framework;
+﻿namespace Application.IntegrationTests;
 
-namespace CleanArchitecture.Application.IntegrationTests;
-
-using static Testing;
-
-[TestFixture]
 public abstract class BaseTestFixture
 {
-    [SetUp]
-    public async Task TestSetUp()
+    public BaseTestFixture()
     {
-        await ResetState();
+        
     }
 }

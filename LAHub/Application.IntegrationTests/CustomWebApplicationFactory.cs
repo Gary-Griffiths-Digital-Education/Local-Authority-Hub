@@ -1,5 +1,5 @@
-﻿using CleanArchitecture.Application.Common.Interfaces;
-using CleanArchitecture.Infrastructure.Persistence;
+﻿using Application.Common.Interfaces;
+using Infrastructure.Persistence;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.EntityFrameworkCore;
@@ -7,7 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Moq;
 
-namespace CleanArchitecture.Application.IntegrationTests;
+namespace Application.IntegrationTests;
 
 using static Testing;
 
@@ -33,10 +33,10 @@ public class CustomWebApplicationFactory : WebApplicationFactory<Program>
                     s.UserId == GetCurrentUserId()));
 
             services
-                .Remove<DbContextOptions<ApplicationDbContext>>()
-                .AddDbContext<ApplicationDbContext>((sp, options) =>
+                .Remove<DbContextOptions<LAHubDbContext>>()
+                .AddDbContext<LAHubDbContext>((sp, options) =>
                     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"),
-                        builder => builder.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName)));
+                        builder => builder.MigrationsAssembly(typeof(LAHubDbContext).Assembly.FullName)));
         });
     }
 }

@@ -1,17 +1,15 @@
-﻿using CleanArchitecture.Infrastructure.Identity;
-using CleanArchitecture.Infrastructure.Persistence;
+﻿using Infrastructure.Identity;
+using Infrastructure.Persistence;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using NUnit.Framework;
 using Respawn;
 
-namespace CleanArchitecture.Application.IntegrationTests;
+namespace Application.IntegrationTests;
 
-[SetUpFixture]
 public partial class Testing
 {
     private static WebApplicationFactory<Program> _factory = null!;
@@ -20,7 +18,7 @@ public partial class Testing
     private static Checkpoint _checkpoint = null!;
     private static string? _currentUserId;
 
-    [OneTimeSetUp]
+    //[OneTimeSetUp]
     public void RunBeforeAnyTests()
     {
         _factory = new CustomWebApplicationFactory();
@@ -103,7 +101,7 @@ public partial class Testing
     {
         using var scope = _scopeFactory.CreateScope();
 
-        var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+        var context = scope.ServiceProvider.GetRequiredService<LAHubDbContext>();
 
         return await context.FindAsync<TEntity>(keyValues);
     }
@@ -113,7 +111,7 @@ public partial class Testing
     {
         using var scope = _scopeFactory.CreateScope();
 
-        var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+        var context = scope.ServiceProvider.GetRequiredService<LAHubDbContext>();
 
         context.Add(entity);
 
@@ -124,12 +122,12 @@ public partial class Testing
     {
         using var scope = _scopeFactory.CreateScope();
 
-        var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+        var context = scope.ServiceProvider.GetRequiredService<LAHubDbContext>();
 
         return await context.Set<TEntity>().CountAsync();
     }
 
-    [OneTimeTearDown]
+    //[OneTimeTearDown]
     public void RunAfterAnyTests()
     {
     }
