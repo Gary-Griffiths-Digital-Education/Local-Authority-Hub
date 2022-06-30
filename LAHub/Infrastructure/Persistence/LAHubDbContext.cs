@@ -55,6 +55,7 @@ public class LAHubDbContext : ApiAuthorizationDbContext<ApplicationUser>, ILAHub
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
+        optionsBuilder.EnableSensitiveDataLogging();
         optionsBuilder.AddInterceptors(_auditableEntitySaveChangesInterceptor);
     }
 

@@ -5,9 +5,11 @@ VisualStudioVersion = 17.2.32616.157
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "Domain\Domain.csproj", "{FD238FD0-2365-4250-8535-A190A4D91564}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{00E1399F-C70C-46B4-B3FA-D96F8B9928E5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{00E1399F-C70C-46B4-B3FA-D96F8B9928E5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application", "Application\Application.csproj", "{9E71F986-3E99-4D5B-9096-A8C8CC6DEB91}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application", "Application\Application.csproj", "{9E71F986-3E99-4D5B-9096-A8C8CC6DEB91}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebUI", "WebUI\WebUI.csproj", "{73447A36-1894-48B0-9D9B-402F8139DC69}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{9E71F986-3E99-4D5B-9096-A8C8CC6DEB91}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9E71F986-3E99-4D5B-9096-A8C8CC6DEB91}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9E71F986-3E99-4D5B-9096-A8C8CC6DEB91}.Release|Any CPU.Build.0 = Release|Any CPU
+		{73447A36-1894-48B0-9D9B-402F8139DC69}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{73447A36-1894-48B0-9D9B-402F8139DC69}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{73447A36-1894-48B0-9D9B-402F8139DC69}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{73447A36-1894-48B0-9D9B-402F8139DC69}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

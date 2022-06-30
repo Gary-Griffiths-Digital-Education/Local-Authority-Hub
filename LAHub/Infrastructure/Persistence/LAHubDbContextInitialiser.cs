@@ -29,6 +29,10 @@ public class ApplicationDbContextInitialiser
             {
                 await _context.Database.MigrateAsync();
             }
+            //else
+            //{
+            //    _context.Database.EnsureDeleted();
+            //}
         }
         catch (Exception ex)
         {
@@ -73,17 +77,30 @@ public class ApplicationDbContextInitialiser
         // Seed, if necessary
         if (!_context.ContactMechanismTypes.Any())
         {
-            _context.ContactMechanismTypes.Add(new ContactMechanismType
+            List<ContactMechanismType> contactMechanismTypes = new List<ContactMechanismType>()
             {
-                Name = "Phone",
-                Description = "Phone number"
-            });
+                new ContactMechanismType
+                {
+                    Id = Guid.NewGuid(),
+                    Name = "Phone",
+                    Description = "Phone number",
+                    Created = DateTime.Now,
+                    CreatedBy = "System"
+                },
+                new ContactMechanismType
+                {
+                    Id = Guid.NewGuid(),
+                    Name = "Email",
+                    Description = "Email address",
+                    Created = DateTime.Now,
+                    CreatedBy = "System"
+                }
+            };
 
-            _context.ContactMechanismTypes.Add(new ContactMechanismType
+            foreach (var contactMechanismType in contactMechanismTypes)
             {
-                Name = "Email",
-                Description = "Email address"
-            });
+                _context.ContactMechanismTypes.Add(contactMechanismType);
+            }
 
             await _context.SaveChangesAsync();
         }
