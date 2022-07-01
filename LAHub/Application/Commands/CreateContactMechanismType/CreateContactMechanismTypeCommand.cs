@@ -17,7 +17,7 @@ public record class CreateContactMechanismTypeCommand : IRequest<Guid>
     public string? Description { get; init; }
 }
 
-public class CreateContactMechanismTypeCommandHandler : IRequestHandler<UpdateContactMechanismTypeCommand, Guid>
+public class CreateContactMechanismTypeCommandHandler : IRequestHandler<CreateContactMechanismTypeCommand, Guid>
 {
     private readonly ILAHubDbContext _context;
 
@@ -25,7 +25,7 @@ public class CreateContactMechanismTypeCommandHandler : IRequestHandler<UpdateCo
     {
         _context = context;
     }
-    public async Task<Guid> Handle(UpdateContactMechanismTypeCommand request, CancellationToken cancellationToken)
+    public async Task<Guid> Handle(CreateContactMechanismTypeCommand request, CancellationToken cancellationToken)
     {
         var entity = new LAHub.Domain.Entities.ContactMechanismType()
         {

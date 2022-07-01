@@ -2,11 +2,12 @@
 
 namespace Application.Commands.CreateContactMechanismType;
 
-public class CreateContactMechanismTypeCommandValidator : AbstractValidator<UpdateContactMechanismTypeCommand>
+public class CreateContactMechanismTypeCommandValidator : AbstractValidator<CreateContactMechanismTypeCommand>
 {
     public CreateContactMechanismTypeCommandValidator()
     {
         RuleFor(v => v.Name)
+            .MinimumLength(1)
             .MaximumLength(50)
             .NotEmpty();
 
