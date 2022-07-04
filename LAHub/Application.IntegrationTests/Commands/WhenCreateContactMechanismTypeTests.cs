@@ -1,6 +1,7 @@
 ﻿using Application.Commands.CreateContactMechanismType;
 using Application.Common.Exceptions;
 using FluentAssertions;
+using LAHub.Domain.Entities;
 
 namespace Application.IntegrationTests.Commands;
 
@@ -36,11 +37,11 @@ public class WhenCreateContactMechanismTypeTests : BaseTestFixture
 
         var itemId = await SendAsync(command);
 
-        //var item = await FindAsync<TodoItem>(itemId);
+        var item = await FindAsync<ContactMechanismType>(itemId);
 
-        //item.Should().NotBeNull();
-        //item!.ListId.Should().Be(command.ListId);
-        //item.Title.Should().Be(command.Title);
+        item.Should().NotBeNull();
+        item!.Name.Should().Be(command.Name);
+        item!.Description.Should().Be(command.Description);
         //item.CreatedBy.Should().Be(userId);
         //item.Created.Should().BeCloseTo(DateTime.Now, TimeSpan.FromMilliseconds(10000));
         //item.LastModifiedBy.Should().Be(userId);

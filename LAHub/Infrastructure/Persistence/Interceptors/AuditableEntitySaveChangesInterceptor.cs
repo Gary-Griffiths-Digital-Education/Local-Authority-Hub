@@ -43,7 +43,11 @@ public class AuditableEntitySaveChangesInterceptor : SaveChangesInterceptor
             {
                 if (entry.Entity.CreatedBy == null)
                 {
-                    entry.Entity.CreatedBy = _currentUserService.UserId;
+                    if (_currentUserService.UserId != null)
+                        entry.Entity.CreatedBy = _currentUserService.UserId;
+                    else
+                        entry.Entity.CreatedBy = "System";
+
                 }
                 entry.Entity.Created = _dateTime.Now;
             }

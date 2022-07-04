@@ -125,6 +125,11 @@ public class ApplicationDbContextInitialiser
                 },
             };
 
+            foreach (var serviceOptionType in serviceOptionTypes)
+            {
+                _context.ServiceOptionTypes.Add(serviceOptionType);
+            }
+
             await _context.SaveChangesAsync();
         }
     }

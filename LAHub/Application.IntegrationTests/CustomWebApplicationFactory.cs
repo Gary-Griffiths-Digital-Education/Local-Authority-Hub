@@ -34,9 +34,12 @@ public class CustomWebApplicationFactory : WebApplicationFactory<Program>
 
             services
                 .Remove<DbContextOptions<LAHubDbContext>>()
-                .AddDbContext<LAHubDbContext>((sp, options) =>
-                    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"),
-                        builder => builder.MigrationsAssembly(typeof(LAHubDbContext).Assembly.FullName)));
+                .AddDbContext<LAHubDbContext>(options =>
+                    options.UseInMemoryDatabase("LAHubDb"));
+
+                //.AddDbContext<LAHubDbContext>((sp, options) =>
+                //    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"),
+                //        builder => builder.MigrationsAssembly(typeof(LAHubDbContext).Assembly.FullName)));
         });
     }
 }
