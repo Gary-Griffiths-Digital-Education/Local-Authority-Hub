@@ -1,6 +1,8 @@
-﻿namespace LAHub.Domain.Entities;
+﻿using LAHub.Domain.Common;
 
-public class ContactMechanism : BaseAuditableEntity<Guid>
+namespace LAHub.Domain.Entities;
+
+public class ContactMechanism : BaseEntity
 {
     public ContactMechanism(
         string name,

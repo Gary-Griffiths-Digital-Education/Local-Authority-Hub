@@ -1,6 +1,8 @@
-﻿namespace LAHub.Domain.Entities;
+﻿using LAHub.Domain.Common;
 
-public class ServiceArea : BaseAuditableEntity<Guid>
+namespace LAHub.Domain.Entities;
+
+public class ServiceArea : BaseEntity
 {
     public ServiceArea(
         Guid? serviceId,

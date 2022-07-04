@@ -1,1 +1,1 @@
-﻿global using Domain.Common;
+﻿global using LAHub.Domain.Common;

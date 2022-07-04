@@ -1,6 +1,8 @@
-﻿namespace LAHub.Domain.Entities;
+﻿using LAHub.Domain.Common;
 
-public class ServiceOptionType : BaseAuditableEntity<Guid>
+namespace LAHub.Domain.Entities;
+
+public class ServiceOptionType : BaseEntity
 {
     public ServiceOptionType(
         string name,

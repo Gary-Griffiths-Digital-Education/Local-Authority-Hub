@@ -1,6 +1,8 @@
-﻿namespace LAHub.Domain.Entities;
+﻿using LAHub.Domain.Common;
 
-public class ServiceClassification : BaseAuditableEntity<Guid>
+namespace LAHub.Domain.Entities;
+
+public class ServiceClassification : BaseEntity
 {
     public ServiceClassification(
         Guid serviceId,

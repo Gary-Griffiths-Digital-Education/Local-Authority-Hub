@@ -1,22 +1,26 @@
-﻿namespace LAHub.Domain.Entities;
+﻿using LAHub.Domain.Interfaces;
 
-public class Organisation : BaseAuditableEntity<Guid>
+namespace LAHub.Domain.Entities;
+
+public class Organisation : BaseEntity, IAggregateRoot
 {
+    public string? Name { get; set; }
+
+    public string? Description { get; set; }
+
+    public Organisation? ParentOrganisation { get; set; }
+
+    public Organisation() { }
+
     public Organisation(
-        string name,
-        string? description,
-        Guid? parentOrganisationId
+        string? name,
+        string? description = default!,
+        Organisation parentOrganisation = default!
     )
     {
         Id = Guid.NewGuid();
-        Name = name;
-        Description = description ?? string.Empty;
-        ParentOrganisationId = parentOrganisationId ?? Guid.Empty;
+        Name = name ?? String.Empty;
+        Description = description ?? String.Empty;
+        ParentOrganisation = parentOrganisation;
     }
-
-    public string Name { get; }
-
-    public string? Description { get; }
-
-    public Guid? ParentOrganisationId { get; }
 }

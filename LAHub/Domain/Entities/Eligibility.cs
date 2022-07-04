@@ -1,6 +1,8 @@
-﻿namespace LAHub.Domain.Entities;
+﻿using LAHub.Domain.Common;
 
-public class Eligibility : BaseAuditableEntity<Guid>
+namespace LAHub.Domain.Entities;
+
+public class Eligibility : BaseEntity
 {
     public Eligibility(
         Guid? serviceId,

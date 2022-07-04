@@ -1,6 +1,8 @@
-﻿namespace LAHub.Domain.Entities;
+﻿using LAHub.Domain.Common;
 
-public class Address : BaseAuditableEntity<Guid>
+namespace LAHub.Domain.Entities;
+
+public class Address : BaseEntity
 {
     public Address(
         string addressLine1,

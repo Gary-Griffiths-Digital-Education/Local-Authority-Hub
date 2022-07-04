@@ -1,6 +1,8 @@
-﻿namespace LAHub.Domain.Entities;
+﻿using LAHub.Domain.Common;
 
-public class ServiceLocation : BaseAuditableEntity<Guid>
+namespace LAHub.Domain.Entities;
+
+public class ServiceLocation : BaseEntity
 {
     public ServiceLocation(
         Guid serviceId,

@@ -1,8 +1,10 @@
-﻿namespace LAHub.Domain.Entities
+﻿using LAHub.Domain.Common;
+
+namespace LAHub.Domain.Entities
 {
-    public class OperatingHours : BaseAuditableEntity<Guid>
+    public class ServiceLocationOperatingHours : BaseEntity
     {
-        public OperatingHours(
+        public ServiceLocationOperatingHours(
             Guid serviceId,
             Guid serviceLocationId,
             string description

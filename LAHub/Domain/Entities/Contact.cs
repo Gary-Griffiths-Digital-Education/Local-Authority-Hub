@@ -1,19 +1,21 @@
-﻿namespace LAHub.Domain.Entities;
+﻿using LAHub.Domain.Common;
 
-public class Contact : BaseAuditableEntity<Guid>
+namespace LAHub.Domain.Entities;
+
+public class Contact : BaseEntity
 {
     public Contact(
         Guid contactMechanismTypeId,
         Guid serviceId,
         string name,
-        string? title
+        string? jobTitle
     )
     {
         Id = Guid.NewGuid();
         ContactMechanismTypeId = contactMechanismTypeId;
         ServiceId = serviceId;
         Name = name;
-        Title = title ?? string.Empty;
+        JobTitle = jobTitle ?? string.Empty;
     }
 
     public Guid ContactMechanismTypeId { get; }
@@ -22,5 +24,7 @@ public class Contact : BaseAuditableEntity<Guid>
 
     public string Name { get; }
 
-    public string? Title { get; }
+    public string? Description { get; }
+
+    public string? JobTitle { get; }
 }

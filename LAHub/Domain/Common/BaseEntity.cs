@@ -1,28 +1,14 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿namespace LAHub.Domain.Common;
 
-namespace Domain.Common;
-
-public abstract class BaseEntity<T>
+public abstract class BaseEntity
 {
-    public T Id { get; set; } = default!;
+    public Guid Id { get; set; } = Guid.NewGuid();
 
-    private readonly List<BaseEvent> _domainEvents = new();
+    public DateTime Created { get; set; } = DateTime.MinValue;
 
-    [NotMapped]
-    public IReadOnlyCollection<BaseEvent> DomainEvents => _domainEvents.AsReadOnly();
+    public string CreatedBy { get; set; } = String.Empty;
 
-    public void AddDomainEvent(BaseEvent domainEvent)
-    {
-        _domainEvents.Add(domainEvent);
-    }
+    public DateTime LastModified { get; set; } = DateTime.MinValue;
 
-    public void RemoveDomainEvent(BaseEvent domainEvent)
-    {
-        _domainEvents.Remove(domainEvent);
-    }
-
-    public void ClearDomainEvents()
-    {
-        _domainEvents.Clear();
-    }
+    public string LastModifiedBy { get; set; } = String.Empty;
 }
