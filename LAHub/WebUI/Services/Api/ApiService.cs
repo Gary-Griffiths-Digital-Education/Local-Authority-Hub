@@ -4,8 +4,8 @@ namespace WebUI.Services.Api;
 
 public class ApiService : IApiService
 {
-    private readonly HttpClient _client;
-    private readonly IHashingService _hashingService;
+    protected readonly HttpClient _client;
+    protected readonly IHashingService _hashingService;
 
     public ApiService(HttpClient client, IHashingService hashingService)
     {

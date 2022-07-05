@@ -11,6 +11,7 @@ public static class ServiceCollectionExtensions
     public static IServiceCollection AddClientServices(this IServiceCollection serviceCollection)
     {
         serviceCollection.AddClient<IApiService>((c, s) => new ApiService(c, s.GetRequiredService<IHashingService>()));
+        serviceCollection.AddClient<IPostcodeLocationClientService>((c, s) => new PostcodeLocationClientService(c, s.GetRequiredService<IHashingService>()));
         return serviceCollection;
     }
     public static IServiceCollection AddHashingService(this IServiceCollection serviceCollection)
