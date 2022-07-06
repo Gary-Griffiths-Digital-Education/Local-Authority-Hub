@@ -40,16 +40,15 @@ public class GetServicesByDistanceCommandHandler : IRequestHandler<GetServicesBy
     }
     public async Task<PaginatedList<ServiceItem>> Handle(GetServicesByDistanceCommand request, CancellationToken cancellationToken)
     {
-        var currentLocation = Helper.CreatePoint(request.Latitude, request.Longtitude);
-        //var locations = _context.Locations.Where(s => s.LocationPoint.Distance(currentLocation) < request.Meters)
-        //    .OrderBy(s => s.LocationPoint.Distance(currentLocation)).ToList();
-
+        //var currentLocation = Helper.CreatePoint(request.Latitude, request.Longtitude);
+        
         var services =
             from serv in _context.Services
             join servloc in _context.ServiceLocations on serv.Id equals servloc.ServiceId
             join loc in _context.Locations on servloc.LocationId equals loc.Id
-            where loc.LocationPoint.Distance(currentLocation) < request.Meters
-            orderby loc.LocationPoint.Distance(currentLocation)
+            where Helper.GetDistance(request.Latitude, request.Longtitude, loc.Latitude, loc.Longitude) < request.Meters
+            //where loc.LocationPoint.Distance(currentLocation) < request.Meters
+            //orderby loc.LocationPoint.Distance(currentLocation)
             select serv;
 
         var lst = services.ToList();

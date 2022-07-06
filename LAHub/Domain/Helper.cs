@@ -1,4 +1,5 @@
 ﻿using GeoAPI.Geometries;
+using GeoCoordinatePortable;
 using NetTopologySuite;
 using NetTopologySuite.Geometries;
 using ProjNet.CoordinateSystems;
@@ -24,5 +25,16 @@ public class Helper
         var newLocation = geometryFactory.CreatePoint(new Coordinate(longitude, latitude));
 
         return (Point)newLocation;
+    }
+
+    //return distance in meters https://stackoverflow.com/questions/6366408/calculating-distance-between-two-latitude-and-longitude-geocoordinates
+    public static double GetDistance(double latitude1, double longitude1, double latitude2, double longitude2)
+    {
+        GeoCoordinate pin1 = new(latitude1, longitude1);
+        GeoCoordinate pin2 = new(latitude2, longitude2);
+
+        var d = pin1.GetDistanceTo(pin2);
+
+        return pin1.GetDistanceTo(pin2);
     }
 }

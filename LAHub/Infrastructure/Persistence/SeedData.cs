@@ -52,16 +52,12 @@ We also offer a repair service to any of the above, in and out of warranty."
             , null
         );
 
-        _context.Organisations.Add(organisation);
-
         var location = new LAHub.Domain.Entities.Location(name
             , description
-                , 52.05440646936693, 1.143434288801912
+                , latitude, logtitude
                 );
 
         location.LocationPoint = Helper.CreatePoint(location.Latitude, location.Longitude);
-
-        _context.Locations.Add(location);
 
         var serviceItem = new Service(
                 name
@@ -70,9 +66,14 @@ We also offer a repair service to any of the above, in and out of warranty."
                 , organisation
                 );
 
-        _context.Services.Add(serviceItem);
+        organisation.Services = new List<Service>()
+        {
+            serviceItem
+        };
 
         var serviceLocation = new ServiceLocation(serviceItem.Id, location.Id);
+        serviceLocation.Location = location;
+        serviceLocation.Service = serviceItem;
 
         serviceItem.ServiceLocations = new List<ServiceLocation>()
         {
@@ -84,7 +85,7 @@ We also offer a repair service to any of the above, in and out of warranty."
             serviceItem
         };
 
-        _context.ServiceLocations.Add(serviceLocation);
+        _context.Organisations.Add(organisation);
 
         await _context.SaveChangesAsync();
     }

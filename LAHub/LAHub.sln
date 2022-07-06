@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebUI", "WebUI\WebUI.csproj
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application.IntegrationTests", "Application.IntegrationTests\Application.IntegrationTests.csproj", "{29D8E8B4-F08F-40CC-A0E9-7579F96E6980}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAPI", "WebAPI\WebAPI.csproj", "{19001E78-EAD3-48C9-97DE-B12480B4355C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{29D8E8B4-F08F-40CC-A0E9-7579F96E6980}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{29D8E8B4-F08F-40CC-A0E9-7579F96E6980}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{29D8E8B4-F08F-40CC-A0E9-7579F96E6980}.Release|Any CPU.Build.0 = Release|Any CPU
+		{19001E78-EAD3-48C9-97DE-B12480B4355C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{19001E78-EAD3-48C9-97DE-B12480B4355C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{19001E78-EAD3-48C9-97DE-B12480B4355C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{19001E78-EAD3-48C9-97DE-B12480B4355C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

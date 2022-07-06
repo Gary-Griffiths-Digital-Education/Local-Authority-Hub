@@ -56,11 +56,12 @@ public  class WhenGettingServices : BaseTestFixture
         await AddAsync(service);
 
 
-        var query = new GetServicesByDistanceCommand(52.394, -1.93, 3.1);
+        var query = new GetServicesByDistanceCommand(52.394, -1.93, 212892);
 
         var result = await SendAsync(query);
 
         result.Should().NotBeNull();
+        result.Items.Count.Should().Be(2);
     }
     
 }
