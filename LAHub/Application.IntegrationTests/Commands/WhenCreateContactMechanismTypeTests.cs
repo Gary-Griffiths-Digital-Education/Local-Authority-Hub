@@ -13,8 +13,10 @@ public class WhenCreateContactMechanismTypeTests : BaseTestFixture
     public WhenCreateContactMechanismTypeTests()
     {
         _testing = new Testing();
+        
         _testing.RunBeforeAnyTests();
-        //Task.Run(() => Testing.ResetState()).Wait();
+        Task.Run(() => Testing.ResetState()).Wait();
+
     }
         
     [Fact]

@@ -1,4 +1,8 @@
-﻿namespace LAHub.Domain.Entities;
+﻿using NetTopologySuite.Geometries;
+using System.ComponentModel.DataAnnotations.Schema;
+
+
+namespace LAHub.Domain.Entities;
 
 public class Location : BaseAuditableEntity<Guid>
 {
@@ -19,6 +23,9 @@ public class Location : BaseAuditableEntity<Guid>
         Latitude = latitude;
         Longitude = longitude;
     }
+
+    //[Column(TypeName = "geography (point)")]
+    public Point LocationPoint { get; set; } = default!;
 
     public string Name { get; set; }
 

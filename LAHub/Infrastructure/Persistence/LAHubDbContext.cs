@@ -48,6 +48,9 @@ public class LAHubDbContext : ApiAuthorizationDbContext<ApplicationUser>, ILAHub
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
+        builder.Entity<LAHub.Domain.Entities.Location>()
+            .Property(e => e.LocationPoint)
+            .HasColumnType("geography (point)");
         builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
 
         base.OnModelCreating(builder);
