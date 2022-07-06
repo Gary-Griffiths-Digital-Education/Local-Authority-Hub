@@ -16,11 +16,7 @@ public  class WhenGettingServices : BaseTestFixture
     private readonly Testing _testing;
     public WhenGettingServices()
     {
-        _testing = new Testing();
-        
-        _testing.RunBeforeAnyTests();
-        Task.Run(() => Testing.ResetState()).Wait();
-
+        _testing = TestHelper.CreateTesting();
     }
 
     
