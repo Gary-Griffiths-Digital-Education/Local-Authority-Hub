@@ -1,4 +1,5 @@
 ﻿using Application.Commands.GetServices;
+using Application.Commands.TestCommand;
 using Application.Common.Models;
 using Application.Models;
 using Ardalis.ApiEndpoints;
@@ -10,22 +11,22 @@ using Swashbuckle.AspNetCore.Annotations;
 
 namespace WebAPI.Endpoints.Services;
 
-public class GetServicesEndPoint : EndpointBaseAsync
-    .WithRequest<GetServicesByDistanceCommand>
-    .WithResult<ActionResult<PaginatedList<ServiceItem>>>
+public class GetTestItemEndPoint : EndpointBaseAsync
+    .WithRequest<TestCommand>
+    .WithResult<ActionResult<PaginatedList<TestItem>>>
 {
     private ISender _mediator = null!;
     protected ISender Mediator => _mediator ??= HttpContext.RequestServices.GetRequiredService<ISender>();
 
     [SwaggerOperation(
-    Summary = "Get a list of service within a certain distance",
-    Description = "Get a list of service within a certain distance",
+    Summary = "Test Command",
+    Description = "Test Command",
     //OperationId = "Author.Create",
-    Tags = new[] { "GetServicesByDistance" })
+    Tags = new[] { "GetTestCommand" })
     ]
     [HttpPost]
-    [Route("api/GetServicesByDistance")]
-    public override async Task<ActionResult<PaginatedList<ServiceItem>>> HandleAsync([FromBody] GetServicesByDistanceCommand request, CancellationToken cancellationToken = default)
+    [Route("api/GetTestCommand")]
+    public override async Task<ActionResult<PaginatedList<TestItem>>> HandleAsync([FromBody] TestCommand request, CancellationToken cancellationToken = default)
     {
         try
         {
@@ -39,6 +40,6 @@ public class GetServicesEndPoint : EndpointBaseAsync
             System.Diagnostics.Debug.WriteLine(ex.Message);
             return BadRequest();
         }
-        
+
     }
 }

@@ -1,4 +1,7 @@
+using Application.Common.Interfaces;
+using Infrastructure.Persistence;
 using Microsoft.OpenApi.Models;
+using WebAPI;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -6,8 +9,12 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-//builder.Services.AddSwaggerGen();
+builder.Services.AddEndpointsApiExplorer()
+                .AddInfrastructureServices(builder.Configuration)
+                .AddApplicationServices();
+
+builder.Services.AddSingleton<ICurrentUserService, CurrentUserService>();
+
 
 builder.Services.AddSwaggerGen(c => {
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
@@ -21,6 +28,13 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+
+    using (var scope = app.Services.CreateScope())
+    {
+        var initialiser = scope.ServiceProvider.GetRequiredService<ApplicationDbContextInitialiser>();
+        await initialiser.InitialiseAsync();
+        await initialiser.SeedAsync();
+    }
 }
 
 app.UseHttpsRedirection();

@@ -33,7 +33,13 @@ namespace WebUI.Pages
             var lat = postcodeApiModel.result.latitude;
             var lng = postcodeApiModel.result.longitude;
 
-            return new RedirectToPageResult("/SearchResults");
+            return RedirectToPage("LocalOfferResults", new
+            {
+                latitude = postcodeApiModel.result.latitude,
+                longitude = postcodeApiModel.result.longitude
+            });
+
+            //return new RedirectToPageResult($"/LocalOfferResults/{lat}/{lng}");
         }
     }
 }

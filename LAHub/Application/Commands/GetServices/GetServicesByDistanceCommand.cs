@@ -5,7 +5,6 @@ using Application.Models;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using LAHub.Domain;
-using LAHub.Domain.Entities;
 using MediatR;
 
 namespace Application.Commands.GetServices;
@@ -56,7 +55,6 @@ public class GetServicesByDistanceCommandHandler : IRequestHandler<GetServicesBy
         var result = await services.ProjectTo<ServiceItem>(_mapper.ConfigurationProvider)
             .PaginatedListAsync(request.PageNumber, request.PageSize);
         
-
         //throw new NotImplementedException();
         return result;
     }
