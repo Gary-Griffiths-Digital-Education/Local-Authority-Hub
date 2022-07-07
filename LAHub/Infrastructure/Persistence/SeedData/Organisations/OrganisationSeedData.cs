@@ -40,7 +40,12 @@ namespace Infrastructure.Persistence.SeedData.Organisations
                             Telephone = "0121 303 9944",
                             NextGenerationText = "Dial 18001 before the full national phone number.",
                             WebSite = new Uri("https://www.birmingham.gov.uk/contactus"),
-                            Minicom = "0121 303 1119 or 0121 675 8221"
+                            Minicom = "0121 303 1119 or 0121 675 8221",
+                            AddressLine1 = "Council House",
+                            AddressLine2 = "Victoria Square",
+                            TownOrCity = "Birmingham",
+                            County = "West Midlands",
+                            Postcode = "B1 1BB"
                         }
                     }
                 },
