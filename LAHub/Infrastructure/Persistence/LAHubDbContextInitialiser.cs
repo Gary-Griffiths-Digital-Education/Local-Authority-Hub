@@ -56,13 +56,39 @@ public class ApplicationDbContextInitialiser
 
     public async Task TrySeedAsync()
     {
+        // Default roles
+        var administratorRole = new IdentityRole("Administrator");
+
+        if (_roleManager.Roles.All(r => r.Name != administratorRole.Name))
+        {
+            await _roleManager.CreateAsync(administratorRole);
+        }
+
+        // Default users
+        var administrator = new ApplicationUser { UserName = "administrator@localhost", Email = "administrator@localhost" };
+       
+        if (_userManager.Users.All(u => u.UserName != administrator.UserName))
+        {
+            await _userManager.CreateAsync(administrator, "Administrator1!");
+            await _userManager.AddToRolesAsync(administrator, new[] { administratorRole.Name });
+        }
+
+
+
+        // Default data
+        // Seed, if necessary
         var organisationSeedData = new Infrastructure.Persistence.SeedData.Organisations.OrganisationSeedData();
         IReadOnlyCollection<Organisation> organisations = organisationSeedData.SeedOrganistions();
 
-        foreach(var organidation in organisations)
+        foreach (var organisation in organisations)
         {
-            _context.Organisations.Add(organidation);
+            _context.Organisations.Add(organisation);
         }
+
+        //SeedData seedData = new(_context);
+        //await seedData.AddServices();
+        //await seedData.AddContactMechanismTypes();
+        //await seedData.AddServiceOptionTypes();
         await _context.SaveChangesAsync();
     }
 }

@@ -1,7 +1,7 @@
 ﻿using FluentValidation;
 
 namespace Application.Commands.CreateContactMechanismType;
-
+/*
 public class UpdateContactMechanismTypeCommandValidator : AbstractValidator<UpdateContactMechanismTypeCommand>
 {
     public UpdateContactMechanismTypeCommandValidator()
@@ -14,3 +14,4 @@ public class UpdateContactMechanismTypeCommandValidator : AbstractValidator<Upda
             .MaximumLength(500);
     }
 }
+*/

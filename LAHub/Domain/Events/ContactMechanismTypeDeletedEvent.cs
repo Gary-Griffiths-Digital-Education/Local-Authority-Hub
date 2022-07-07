@@ -1,7 +1,7 @@
 ﻿using LAHub.Domain.Entities;
 
 namespace LAHub.Domain.Events;
-
+/*
 public class ContactMechanismTypeDeletedEvent : BaseEvent
 {
     public ContactMechanismTypeDeletedEvent(ContactMechanismType item)
@@ -11,3 +11,4 @@ public class ContactMechanismTypeDeletedEvent : BaseEvent
 
     public ContactMechanismType Item { get; }
 }
+*/

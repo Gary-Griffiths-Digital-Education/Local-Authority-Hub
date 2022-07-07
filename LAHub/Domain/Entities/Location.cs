@@ -1,4 +1,8 @@
-﻿namespace LAHub.Domain.Entities;
+﻿using NetTopologySuite.Geometries;
+using System.ComponentModel.DataAnnotations.Schema;
+
+
+namespace LAHub.Domain.Entities;
 
 public class Location : BaseAuditableEntity<Guid>
 {

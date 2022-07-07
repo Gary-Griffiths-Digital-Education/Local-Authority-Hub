@@ -31,8 +31,6 @@ public class LAHubDbContext : ApiAuthorizationDbContext<ApplicationUser>, ILAHub
     public DbSet<Category> Categories => Set<Category>();
     public DbSet<Classification> Classifications => Set<Classification>();
     public DbSet<Contact> Contacts => Set<Contact>();
-    public DbSet<ContactMechanism> ContactMechanisms => Set<ContactMechanism>();
-    public DbSet<ContactMechanismType> ContactMechanismTypes => Set<ContactMechanismType>();
     public DbSet<Eligibility> Eligibilities => Set<Eligibility>();
     public DbSet<Location> Locations => Set<Location>();
     public DbSet<OperatingHours> OperatingHours => Set<OperatingHours>();
@@ -45,9 +43,13 @@ public class LAHubDbContext : ApiAuthorizationDbContext<ApplicationUser>, ILAHub
     public DbSet<ServiceOptionCategory> ServiceOptionCategories => Set<ServiceOptionCategory>();
     public DbSet<ServiceOptionClassification> ServiceOptionClassifications => Set<ServiceOptionClassification>();
     public DbSet<ServiceOptionType> ServiceOptionTypes => Set<ServiceOptionType>();
+    public DbSet<Tenant> Tenants => Set<Tenant>();
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
+        //builder.Entity<LAHub.Domain.Entities.Location>()
+        //    .Property(e => e.LocationPoint)
+        //    .HasColumnType("geography (point)");
         builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
 
         base.OnModelCreating(builder);

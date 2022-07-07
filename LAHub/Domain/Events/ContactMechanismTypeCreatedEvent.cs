@@ -1,7 +1,7 @@
 ﻿using LAHub.Domain.Entities;
 
 namespace LAHub.Domain.Events;
-
+/*
 public class ContactMechanismTypeCreatedEvent : BaseEvent
 {
     public ContactMechanismTypeCreatedEvent(ContactMechanismType item)
@@ -11,4 +11,4 @@ public class ContactMechanismTypeCreatedEvent : BaseEvent
 
     public ContactMechanismType Item { get; }
 }
-
+*/
