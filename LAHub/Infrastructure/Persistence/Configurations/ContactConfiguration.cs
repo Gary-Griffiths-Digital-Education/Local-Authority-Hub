@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Infrastructure.Persistence.Configurations;
 
-public class ContactConfiguration : IEntityTypeConfiguration<Contact>
+public class ContactConfiguration : IEntityTypeConfiguration<OldContact>
 {
-    public void Configure(EntityTypeBuilder<Contact> builder)
+    public void Configure(EntityTypeBuilder<OldContact> builder)
     {
         builder.Property(t => t.ContactMechanismTypeId)
             .IsRequired();

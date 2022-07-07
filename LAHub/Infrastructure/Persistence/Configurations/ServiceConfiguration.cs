@@ -13,8 +13,6 @@ public class ServiceConfiguration : IEntityTypeConfiguration<Service>
             .IsRequired();
         builder.Property(t => t.Description)
             .HasMaxLength(500);
-        builder.Property(t => t.OrganisationId)
-            .IsRequired();
         builder.Property(t => t.Created)
             .IsRequired();
         builder.Property(t => t.CreatedBy)
