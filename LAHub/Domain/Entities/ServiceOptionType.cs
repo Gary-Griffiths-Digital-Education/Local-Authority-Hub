@@ -2,6 +2,11 @@
 
 public class ServiceOptionType : BaseAuditableEntity<Guid>
 {
+    public ServiceOptionType() 
+    {
+        Name = string.Empty;
+    }
+
     public ServiceOptionType(
         string name,
         string? description
@@ -12,8 +17,8 @@ public class ServiceOptionType : BaseAuditableEntity<Guid>
         Description = description ?? string.Empty;
     }
 
-    public string Name { get; }
+    public string Name { get; set; }
 
-    public string? Description { get; }
+    public string? Description { get; set; }
 }
 

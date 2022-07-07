@@ -2,6 +2,10 @@
 
 public class Category : BaseAuditableEntity<Guid>
 {
+    public Category() 
+    {
+        Name = string.Empty;
+    }
     public Category(
         string name,
         string? description
@@ -12,7 +16,7 @@ public class Category : BaseAuditableEntity<Guid>
         Description = description ?? string.Empty;
     }
 
-    public string Name { get; }
+    public string Name { get; set; }
 
-    public string? Description { get; }
+    public string? Description { get; set; }
 }

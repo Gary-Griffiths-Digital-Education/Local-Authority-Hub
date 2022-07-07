@@ -2,21 +2,39 @@
 
 public class Organisation : BaseAuditableEntity<Guid>
 {
+    public Organisation() {}
+
     public Organisation(
+        Tenant tenant,
+        OrganisationType organisationType,
         string name,
         string? description,
-        Guid? parentOrganisationId
+        Organisation? parentOrganisation,
+        Guid parentOrganisationId
     )
     {
         Id = Guid.NewGuid();
+        Tenant = tenant;
+        OrganisationType = organisationType;
         Name = name;
-        Description = description ?? string.Empty;
-        ParentOrganisationId = parentOrganisationId ?? Guid.Empty;
+        Description = description;
+        ParentOrganisation = parentOrganisation;
+        ParentOrganisationId = parentOrganisationId;
     }
 
-    public string Name { get; }
+    public Tenant Tenant { get; set; } = default!;
 
-    public string? Description { get; }
+    public OrganisationType OrganisationType { get; set; } = default!;
 
-    public Guid? ParentOrganisationId { get; }
+    public string Name { get; set; } = String.Empty;
+
+    public string? Description { get; set; } = String.Empty;
+
+    public virtual Organisation? ParentOrganisation { get; set; } = default!;
+
+    public Guid ParentOrganisationId { get; set; } = Guid.Empty;
+
+    public virtual ICollection<Contact> OrganisationContacts { get; set; } = default!;
+
+    public virtual ICollection<Service> Services { get; set; } = default!;
 }

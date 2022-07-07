@@ -2,6 +2,10 @@
 
 public class ContactMechanismType : BaseAuditableEntity<Guid>
 {
+    public ContactMechanismType()
+    {
+        Name = String.Empty;
+    }
     public ContactMechanismType(
         string name,
         string? description
@@ -12,7 +16,7 @@ public class ContactMechanismType : BaseAuditableEntity<Guid>
         Description = description ?? string.Empty;
     }
 
-    public string Name { get; }
+    public string Name { get; set; }
 
-    public string? Description { get; }
+    public string? Description { get; set; }
 }

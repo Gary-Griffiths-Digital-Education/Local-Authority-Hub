@@ -2,6 +2,10 @@
 
 public class Classification : BaseAuditableEntity<Guid>
 {
+    public Classification()
+    {
+        Name = string.Empty;
+    }
     public Classification(
         string name,
         string? description
@@ -12,7 +16,7 @@ public class Classification : BaseAuditableEntity<Guid>
         Description = description ?? string.Empty;
     }
 
-    public string Name { get; }
+    public string Name { get; set; }
 
-    public string? Description { get; }
+    public string? Description { get; set; }
 }
