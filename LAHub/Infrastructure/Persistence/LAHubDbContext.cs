@@ -30,7 +30,7 @@ public class LAHubDbContext : ApiAuthorizationDbContext<ApplicationUser>, ILAHub
     public DbSet<Address> Addresses => Set<Address>();
     public DbSet<Category> Categories => Set<Category>();
     public DbSet<Classification> Classifications => Set<Classification>();
-    public DbSet<OldContact> Contacts => Set<OldContact>();
+    public DbSet<Contact> Contacts => Set<Contact>();
     public DbSet<ContactMechanism> ContactMechanisms => Set<ContactMechanism>();
     public DbSet<ContactMechanismType> ContactMechanismTypes => Set<ContactMechanismType>();
     public DbSet<Eligibility> Eligibilities => Set<Eligibility>();

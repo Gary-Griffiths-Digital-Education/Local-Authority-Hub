@@ -8,7 +8,7 @@ public interface ILAHubDbContext
     DbSet<Address> Addresses { get; }
     DbSet<Category> Categories { get; }
     DbSet<Classification> Classifications { get; }
-    DbSet<OldContact> Contacts { get; }
+    DbSet<Contact> Contacts { get; }
     DbSet<ContactMechanism> ContactMechanisms { get; }
     DbSet<ContactMechanismType> ContactMechanismTypes { get; }
     DbSet<Eligibility> Eligibilities { get; }
