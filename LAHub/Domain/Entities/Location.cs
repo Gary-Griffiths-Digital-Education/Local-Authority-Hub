@@ -24,9 +24,6 @@ public class Location : BaseAuditableEntity<Guid>
         Longitude = longitude;
     }
 
-    //[Column(TypeName = "geography (point)")]
-    public Point LocationPoint { get; set; } = default!;
-
     public string Name { get; set; }
 
     public string? Description { get; set; }

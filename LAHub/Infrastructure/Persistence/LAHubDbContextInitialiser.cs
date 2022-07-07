@@ -66,7 +66,7 @@ public class ApplicationDbContextInitialiser
 
         // Default users
         var administrator = new ApplicationUser { UserName = "administrator@localhost", Email = "administrator@localhost" };
-
+       
         if (_userManager.Users.All(u => u.UserName != administrator.UserName))
         {
             await _userManager.CreateAsync(administrator, "Administrator1!");
@@ -77,10 +77,19 @@ public class ApplicationDbContextInitialiser
 
         // Default data
         // Seed, if necessary
-        SeedData seedData = new(_context);
-        await seedData.AddServices();
-        await seedData.AddContactMechanismTypes();
-        await seedData.AddServiceOptionTypes();
+        var organisationSeedData = new Infrastructure.Persistence.SeedData.Organisations.OrganisationSeedData();
+        IReadOnlyCollection<Organisation> organisations = organisationSeedData.SeedOrganistions();
+
+        foreach (var organisation in organisations)
+        {
+            _context.Organisations.Add(organisation);
+        }
+
+        //SeedData seedData = new(_context);
+        //await seedData.AddServices();
+        //await seedData.AddContactMechanismTypes();
+        //await seedData.AddServiceOptionTypes();
+        await _context.SaveChangesAsync();
     }
 }
 

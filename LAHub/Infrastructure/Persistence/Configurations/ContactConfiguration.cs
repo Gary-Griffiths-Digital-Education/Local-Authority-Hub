@@ -8,9 +8,8 @@ public class ContactConfiguration : IEntityTypeConfiguration<Contact>
 {
     public void Configure(EntityTypeBuilder<Contact> builder)
     {
-        builder.Property(t => t.ContactMechanismTypeId)
-            .IsRequired();
-        builder.Property(t => t.ServiceId)
+        /*
+        builder.Property(t => t.Tenant)
             .IsRequired();
         builder.Property(t => t.Name)
             .HasMaxLength(50)
@@ -22,5 +21,6 @@ public class ContactConfiguration : IEntityTypeConfiguration<Contact>
         builder.Property(t => t.CreatedBy)
             .HasMaxLength(255)
             .IsRequired();
+        */
     }
 }

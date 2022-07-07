@@ -25,15 +25,22 @@ public  class WhenGettingServices : BaseTestFixture
     {
         // Assign
         await RunAsDefaultUserAsync();
-        Organisation organisation = new("Organisation 1",
+
+        Tenant tenant = new("Tenant 1", "Tenant 1");
+        OrganisationType organisationType = new OrganisationType("LA", "Local Authority");
+
+
+        Organisation organisation = new(
+            tenant,
+            organisationType,
+        "Organisation 1",
         "This is Organisation 1",
         null,
-        null);
+        Guid.Empty);
 
         Service service = new(
             "Service 1",
             "We supply this service",
-            organisation.Id,
             organisation
             );
 
@@ -41,9 +48,7 @@ public  class WhenGettingServices : BaseTestFixture
         "Edgbaston",
         52.45,
         -1.92
-                );
-
-        location.LocationPoint = Helper.CreatePoint(location.Latitude, location.Longitude);
+        );
 
         ServiceLocation serviceLocation = new(service.Id, location.Id);
 
@@ -54,7 +59,6 @@ public  class WhenGettingServices : BaseTestFixture
 
         
         await AddAsync(service);
-
 
         var query = new GetServicesByDistanceCommand(52.394, -1.93, 212892);
 

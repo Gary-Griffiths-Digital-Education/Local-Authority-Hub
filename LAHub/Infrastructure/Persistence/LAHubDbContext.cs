@@ -45,12 +45,13 @@ public class LAHubDbContext : ApiAuthorizationDbContext<ApplicationUser>, ILAHub
     public DbSet<ServiceOptionCategory> ServiceOptionCategories => Set<ServiceOptionCategory>();
     public DbSet<ServiceOptionClassification> ServiceOptionClassifications => Set<ServiceOptionClassification>();
     public DbSet<ServiceOptionType> ServiceOptionTypes => Set<ServiceOptionType>();
+    public DbSet<Tenant> Tenants => Set<Tenant>();
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
-        builder.Entity<LAHub.Domain.Entities.Location>()
-            .Property(e => e.LocationPoint)
-            .HasColumnType("geography (point)");
+        //builder.Entity<LAHub.Domain.Entities.Location>()
+        //    .Property(e => e.LocationPoint)
+        //    .HasColumnType("geography (point)");
         builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
 
         base.OnModelCreating(builder);

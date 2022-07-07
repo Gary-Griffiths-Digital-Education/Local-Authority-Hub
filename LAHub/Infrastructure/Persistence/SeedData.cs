@@ -8,6 +8,7 @@ namespace Infrastructure.Persistence;
 
 
 // find 52.47747187167772, 1.7507070439319121
+/*
 public class SeedData
 {
     private readonly LAHubDbContext _context;
@@ -155,3 +156,4 @@ We also offer a repair service to any of the above, in and out of warranty."
     }
     
 }
+*/
