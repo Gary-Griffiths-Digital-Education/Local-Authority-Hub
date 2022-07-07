@@ -31,8 +31,6 @@ public class LAHubDbContext : ApiAuthorizationDbContext<ApplicationUser>, ILAHub
     public DbSet<Category> Categories => Set<Category>();
     public DbSet<Classification> Classifications => Set<Classification>();
     public DbSet<Contact> Contacts => Set<Contact>();
-    public DbSet<ContactMechanism> ContactMechanisms => Set<ContactMechanism>();
-    public DbSet<ContactMechanismType> ContactMechanismTypes => Set<ContactMechanismType>();
     public DbSet<Eligibility> Eligibilities => Set<Eligibility>();
     public DbSet<Location> Locations => Set<Location>();
     public DbSet<OperatingHours> OperatingHours => Set<OperatingHours>();

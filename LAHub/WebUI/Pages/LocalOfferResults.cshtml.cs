@@ -1,6 +1,5 @@
 using Application.Common.Models;
 using Application.Models;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using WebUI.Services.Api;
 
@@ -10,7 +9,7 @@ namespace WebUI.Pages
     {
         private readonly ILocalOfferClientService _localOfferClientService;
 
-        public PaginatedList<ServiceItem> SearchResult { get; set; }
+        public PaginatedList<ServiceItem> SearchResult { get; set; } = default!;
 
         public LocalOfferResultsModel(ILocalOfferClientService localOfferClientService)
         {

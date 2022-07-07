@@ -1,16 +1,16 @@
-﻿using Application.Common.Exceptions;
-using Application.Common.Interfaces;
-using LAHub.Domain.Entities;
-using LAHub.Domain.Events;
-using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿//using Application.Common.Exceptions;
+//using Application.Common.Interfaces;
+//using LAHub.Domain.Entities;
+//using LAHub.Domain.Events;
+//using MediatR;
+//using System;
+//using System.Collections.Generic;
+//using System.Linq;
+//using System.Text;
+//using System.Threading.Tasks;
 
 namespace Application.Commands.DeleteContactMechanismType;
-
+/*
 public record class DeleteContactMechanismTypeCommand : IRequest<Guid>
 {
     public DeleteContactMechanismTypeCommand(Guid id)
@@ -48,3 +48,4 @@ public class DeleteContactMechanismTypeCommandHandler : IRequestHandler<DeleteCo
         return entity.Id;
     }
 }
+*/

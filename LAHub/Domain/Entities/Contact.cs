@@ -4,7 +4,7 @@ public class Contact : BaseAuditableEntity<Guid>
 {
     public Contact() { }
 
-    /*
+    
     public Contact(
         Tenant tenant,
         string name,
@@ -80,5 +80,5 @@ public class Contact : BaseAuditableEntity<Guid>
     public string? Title { get; set;  }
 
     public string? Postcode { get; set; }
-    */
+    
 }

@@ -4,7 +4,7 @@ using LAHub.Domain.Entities;
 using MediatR;
 
 namespace Application.Commands.CreateContactMechanismType;
-
+/*
 public record class UpdateContactMechanismTypeCommand : IRequest<Guid>
 {
     public UpdateContactMechanismTypeCommand(Guid id, string name, string? description)
@@ -46,3 +46,4 @@ public class UpdateContactMechanismTypeCommandHandler : IRequestHandler<UpdateCo
 
     }
 }
+*/

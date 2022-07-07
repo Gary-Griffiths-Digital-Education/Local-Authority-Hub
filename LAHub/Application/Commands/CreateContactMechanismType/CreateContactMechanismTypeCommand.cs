@@ -1,9 +1,8 @@
 ﻿using Application.Common.Interfaces;
-using LAHub.Domain.Events;
 using MediatR;
 
 namespace Application.Commands.CreateContactMechanismType;
-
+/*
 public record class CreateContactMechanismTypeCommand : IRequest<Guid>
 {
     public CreateContactMechanismTypeCommand(string name, string? description)
@@ -43,3 +42,4 @@ public class CreateContactMechanismTypeCommandHandler : IRequestHandler<CreateCo
 
     }
 }
+*/

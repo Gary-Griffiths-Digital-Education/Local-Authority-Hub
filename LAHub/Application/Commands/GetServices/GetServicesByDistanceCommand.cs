@@ -40,7 +40,10 @@ public class GetServicesByDistanceCommandHandler : IRequestHandler<GetServicesBy
     public async Task<PaginatedList<ServiceItem>> Handle(GetServicesByDistanceCommand request, CancellationToken cancellationToken)
     {
         //var currentLocation = Helper.CreatePoint(request.Latitude, request.Longtitude);
-        
+
+        var allServices = _context.Services.ToList();
+
+
         var services =
             from serv in _context.Services
             join servloc in _context.ServiceLocations on serv.Id equals servloc.ServiceId

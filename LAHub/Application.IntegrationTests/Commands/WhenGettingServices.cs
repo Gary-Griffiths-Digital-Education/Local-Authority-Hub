@@ -44,6 +44,8 @@ public  class WhenGettingServices : BaseTestFixture
             organisation
             );
 
+        organisation.Services = new List<Service>() { service };
+
         var location = new LAHub.Domain.Entities.Location("Edgbaston",
         "Edgbaston",
         52.45,
@@ -51,6 +53,8 @@ public  class WhenGettingServices : BaseTestFixture
         );
 
         ServiceLocation serviceLocation = new(service.Id, location.Id);
+        serviceLocation.Service = service;
+        serviceLocation.Location = location;
 
         service.ServiceLocations = new List<ServiceLocation>
         {
@@ -58,7 +62,7 @@ public  class WhenGettingServices : BaseTestFixture
         };
 
         
-        await AddAsync(service);
+        await AddAsync(organisation);
 
         var query = new GetServicesByDistanceCommand(52.394, -1.93, 212892);
 

@@ -34,7 +34,7 @@ public class Organisation : BaseAuditableEntity<Guid>
 
     public Guid ParentOrganisationId { get; set; } = Guid.Empty;
 
-    //public virtual ICollection<Contact> OrganisationContacts { get; set; } = default!;
+    public virtual ICollection<Contact> OrganisationContacts { get; set; } = default!;
 
-    //public virtual ICollection<Service> Services { get; set; } = default!;
+    public virtual ICollection<Service> Services { get; set; } = default!;
 }
