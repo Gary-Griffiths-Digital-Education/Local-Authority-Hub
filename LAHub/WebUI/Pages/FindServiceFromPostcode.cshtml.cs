@@ -30,13 +30,12 @@ namespace WebUI.Pages
 
             PostcodeApiModel postcodeApiModel = await _postcodeLocationClientService.LookupPostcode(postCode);
 
-            var lat = postcodeApiModel.result.latitude;
-            var lng = postcodeApiModel.result.longitude;
 
             return RedirectToPage("LocalOfferResults", new
             {
-                latitude = postcodeApiModel.result.latitude,
-                longitude = postcodeApiModel.result.longitude
+                postcodeApiModel.result.latitude,
+                postcodeApiModel.result.longitude,
+                distance = 32186.9 //212892.0
             });
 
             //return new RedirectToPageResult($"/LocalOfferResults/{lat}/{lng}");

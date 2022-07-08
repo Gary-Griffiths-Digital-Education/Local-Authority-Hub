@@ -12,7 +12,6 @@ public class Address : BaseAuditableEntity<Guid>
         string? addressLine2,
         string? townOrCity,
         string postcode,
-        Guid locationId,
         Location? location
     )
     {
@@ -21,8 +20,9 @@ public class Address : BaseAuditableEntity<Guid>
         AddressLine2 = addressLine2 ?? string.Empty;
         TownOrCity = townOrCity;
         Postcode = postcode;
-        LocationId = locationId;
         Location = location;
+        if (location != null)
+            LocationId = location.Id;
 
     }
 
