@@ -165,7 +165,6 @@ namespace Infrastructure.Persistence.SeedData.Organisations
             suffolkCountyCouncil
             );
 
-            suffolkCountyCouncil.Services = new List<Service>() { parenta };
 
             var parentalocation = new LAHub.Domain.Entities.Location("Kent",
             "Head Office",
@@ -185,10 +184,62 @@ namespace Infrastructure.Persistence.SeedData.Organisations
             parentaLocation.Location = parentalocation;
             //Parenta End
 
+            //Robins Childcare Start
+            Service robinsChildCare = new(
+            "Day nursery",
+            "A purpose built childcare establishment for 3 months to 11 years. Seperate rooms for differing age groups. 2, 3 and 4 year old grant funding available.Full day care and sessional care.",
+            suffolkCountyCouncil
+            );
+
+            var robinsChildCarelocation = new LAHub.Domain.Entities.Location("Ipswich",
+            "Capel St Mary School Grounds",
+            52.00339205075704, 1.0454474001635043
+            );
+
+            var robinsChildCareAddress = new Address(
+                "Capel St Mary School Grounds",
+                "The Street, Capel St Mary",
+                "Ipswich",
+                "IP9 2EG",
+                robinsChildCarelocation
+            );
+
+            ServiceLocation robinsChildCareLocation = new(robinsChildCare.Id, robinsChildCarelocation.Id);
+            robinsChildCareLocation.Service = robinsChildCare;
+            robinsChildCareLocation.Location = robinsChildCarelocation;
+            //Robins Childcare End
+
+            //YMCA Childcare Grundisburgh Start
+            Service YmcaChildcareGrundisburgh = new(
+            "Day nursery",
+            "YMCA Childcare Grundisburgh is a 24 place preschool on the grounds on Grundisburgh Primary School. It is a term time only setting, opened 8-3.15 weekdays offering childcare for children aged between 2 and 5 years.",
+            suffolkCountyCouncil
+            );
+
+            var YmcaChildcareGrundisburghlocation = new LAHub.Domain.Entities.Location("Ipswich",
+            "Alice Driver Road",
+            52.10982481333804, 1.2459413292867294
+            );
+
+            var YmcaChildcareGrundisburghAddress = new Address(
+                "Alice Driver Road",
+                "Grundisburgh",
+                "Ipswich",
+                "IP13 6XH",
+                YmcaChildcareGrundisburghlocation
+            );
+
+            ServiceLocation YmcaChildcareGrundisburghLocation = new(YmcaChildcareGrundisburgh.Id, YmcaChildcareGrundisburghlocation.Id);
+            YmcaChildcareGrundisburghLocation.Service = YmcaChildcareGrundisburgh;
+            YmcaChildcareGrundisburghLocation.Location = YmcaChildcareGrundisburghlocation;
+            //YMCA Childcare Grundisburgh End
+
             parenta.ServiceLocations = new List<ServiceLocation>
             {
-                parentaLocation
+                robinsChildCareLocation
             };
+
+            suffolkCountyCouncil.Services = new List<Service>() { parenta, robinsChildCare, YmcaChildcareGrundisburgh };
 
             return suffolkCountyCouncil;
         }
