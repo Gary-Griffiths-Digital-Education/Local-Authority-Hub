@@ -179,21 +179,24 @@ namespace Infrastructure.Persistence.SeedData.Organisations
                 parentalocation
             );
 
-            ServiceLocation parentaLocation = new(parenta.Id, parentalocation.Id);
-            parentaLocation.Service = parenta;
-            parentaLocation.Location = parentalocation;
+            ServiceLocation parentaServiceLocation = new(parenta.Id, parentalocation.Id);
+            parentaServiceLocation.Service = parenta;
+            parentaServiceLocation.Location = parentalocation;
+            parenta.ServiceLocations = new [] { parentaServiceLocation };
             //Parenta End
 
             //Robins Childcare Start
             Service robinsChildCare = new(
-            "Day nursery",
+            "Robins Child Care",
             "A purpose built childcare establishment for 3 months to 11 years. Seperate rooms for differing age groups. 2, 3 and 4 year old grant funding available.Full day care and sessional care.",
             suffolkCountyCouncil
             );
 
+
+
             var robinsChildCarelocation = new LAHub.Domain.Entities.Location("Ipswich",
             "Capel St Mary School Grounds",
-            52.00339205075704, 1.0454474001635043
+            52.00337217140149, 1.0454688472631388
             );
 
             var robinsChildCareAddress = new Address(
@@ -204,21 +207,26 @@ namespace Infrastructure.Persistence.SeedData.Organisations
                 robinsChildCarelocation
             );
 
-            ServiceLocation robinsChildCareLocation = new(robinsChildCare.Id, robinsChildCarelocation.Id);
-            robinsChildCareLocation.Service = robinsChildCare;
-            robinsChildCareLocation.Location = robinsChildCarelocation;
+            ServiceLocation robinsChildCareServiceLocation = new(robinsChildCare.Id, robinsChildCarelocation.Id);
+            robinsChildCareServiceLocation.Service = robinsChildCare;
+            robinsChildCareServiceLocation.Location = robinsChildCarelocation;
+
+            robinsChildCare.ServiceLocations = new List<ServiceLocation>
+            {
+                robinsChildCareServiceLocation
+            };
             //Robins Childcare End
 
             //YMCA Childcare Grundisburgh Start
             Service YmcaChildcareGrundisburgh = new(
-            "Day nursery",
+            "YMCA Childcare Grundisburgh",
             "YMCA Childcare Grundisburgh is a 24 place preschool on the grounds on Grundisburgh Primary School. It is a term time only setting, opened 8-3.15 weekdays offering childcare for children aged between 2 and 5 years.",
             suffolkCountyCouncil
             );
 
             var YmcaChildcareGrundisburghlocation = new LAHub.Domain.Entities.Location("Ipswich",
             "Alice Driver Road",
-            52.10982481333804, 1.2459413292867294
+            52.10981163510955, 1.2458769562756002
             );
 
             var YmcaChildcareGrundisburghAddress = new Address(
@@ -229,15 +237,15 @@ namespace Infrastructure.Persistence.SeedData.Organisations
                 YmcaChildcareGrundisburghlocation
             );
 
-            ServiceLocation YmcaChildcareGrundisburghLocation = new(YmcaChildcareGrundisburgh.Id, YmcaChildcareGrundisburghlocation.Id);
-            YmcaChildcareGrundisburghLocation.Service = YmcaChildcareGrundisburgh;
-            YmcaChildcareGrundisburghLocation.Location = YmcaChildcareGrundisburghlocation;
-            //YMCA Childcare Grundisburgh End
+            ServiceLocation YmcaChildcareGrundisburghServiceLocation = new(YmcaChildcareGrundisburgh.Id, YmcaChildcareGrundisburghlocation.Id);
+            YmcaChildcareGrundisburghServiceLocation.Service = YmcaChildcareGrundisburgh;
+            YmcaChildcareGrundisburghServiceLocation.Location = YmcaChildcareGrundisburghlocation;
 
-            parenta.ServiceLocations = new List<ServiceLocation>
+            YmcaChildcareGrundisburgh.ServiceLocations = new List<ServiceLocation>
             {
-                robinsChildCareLocation
+                YmcaChildcareGrundisburghServiceLocation
             };
+            //YMCA Childcare Grundisburgh End
 
             suffolkCountyCouncil.Services = new List<Service>() { parenta, robinsChildCare, YmcaChildcareGrundisburgh };
 

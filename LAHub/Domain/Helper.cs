@@ -28,8 +28,12 @@ public class Helper
     }
 
     //return distance in meters https://stackoverflow.com/questions/6366408/calculating-distance-between-two-latitude-and-longitude-geocoordinates
-    public static double GetDistance(double latitude1, double longitude1, double latitude2, double longitude2)
+    public static double GetDistance(double latitude1, double longitude1, double latitude2, double longitude2, string name = null)
     {
+        if (!string.IsNullOrEmpty(name))
+        {
+            System.Diagnostics.Debug.WriteLine(name);
+        }
         GeoCoordinate pin1 = new(latitude1, longitude1);
         GeoCoordinate pin2 = new(latitude2, longitude2);
 
