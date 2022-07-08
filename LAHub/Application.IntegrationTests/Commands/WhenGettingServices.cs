@@ -69,7 +69,7 @@ public  class WhenGettingServices : BaseTestFixture
         var result = await SendAsync(query);
 
         result.Should().NotBeNull();
-        result.Items.Count.Should().Be(2);
+        result.Items.Count.Should().BeGreaterThanOrEqualTo(2);
     }
     
 }
