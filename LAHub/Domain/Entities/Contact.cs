@@ -8,21 +8,23 @@ public class Contact : BaseAuditableEntity<Guid>
     public Contact(
         Tenant tenant,
         string name,
-        string? description,
-        string? telephone,
-        string? nextGenerationText,
-        string? whatsApp,
-        string? email,
-        Uri? webSite,
-        Uri? faceBook,
-        Uri? twitter,
-        Uri? forum,
-        string? addressLine1,
-        string? addressLine2,
-        string? townOrCity,
-        string? county,
-        string? postcode,
-        string? minicom
+        string? description = default,
+        string? telephone = default,
+        string? nextGenerationText = default,
+        string? whatsApp = default,
+        string? email = default,
+        Uri? webSite = default,
+        Uri? faceBook = default,
+        Uri? twitter  = default,
+        Uri? forum = default,
+        string? addressLine1 = default,
+        string? addressLine2 = default,
+        string? townOrCity = default,
+        string? county = default,
+        string? postcode = default,
+        string? minicom = default,
+        double? latitude = default,
+        double? longitude = default
     )
     {
         Id = Guid.NewGuid();
@@ -43,6 +45,8 @@ public class Contact : BaseAuditableEntity<Guid>
         County = county;
         Postcode = postcode;
         Minicom = minicom;
+        Latitude = latitude;
+        Longitude = longitude;
     }
     
     public Tenant Tenant { get; set; } = default!;
@@ -61,13 +65,13 @@ public class Contact : BaseAuditableEntity<Guid>
 
     public string? Email { get; set; } = string.Empty;
 
-    public Uri? WebSite { get; set; } = default!;
+    public Uri? WebSite { get; set; } = default;
 
-    public Uri? FaceBook { get; set; } = default!;
+    public Uri? FaceBook { get; set; } = default;
 
-    public Uri? Twitter { get; set; } = default!;
+    public Uri? Twitter { get; set; } = default;
 
-    public Uri? Forum { get; set; } = default!;
+    public Uri? Forum { get; set; } = default;
 
     public string? AddressLine1 { get; set; } = string.Empty;
 
@@ -77,8 +81,9 @@ public class Contact : BaseAuditableEntity<Guid>
 
     public string? County { get; set; } = string.Empty;
 
-    public string? Title { get; set;  }
+    public string? Postcode { get; set; } = string.Empty;
 
-    public string? Postcode { get; set; }
-    
+    public double? Latitude { get; set; } = default;
+
+    public double? Longitude { get; set; } = default;
 }

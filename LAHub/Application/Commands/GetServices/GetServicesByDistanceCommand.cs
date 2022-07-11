@@ -5,6 +5,7 @@ using Application.Models;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using LAHub.Domain;
+using LAHub.Domain.Entities;
 using MediatR;
 
 namespace Application.Commands.GetServices;
@@ -41,24 +42,28 @@ public class GetServicesByDistanceCommandHandler : IRequestHandler<GetServicesBy
     {
         //var currentLocation = Helper.CreatePoint(request.Latitude, request.Longtitude);
 
-        var allServices = _context.Services.ToList();
+        //var allServices = _context.Services.ToList();
 
 
-        var services =
-            from serv in _context.Services
-            join servloc in _context.ServiceLocations on serv.Id equals servloc.ServiceId
-            join loc in _context.Locations on servloc.LocationId equals loc.Id
-            where Helper.GetDistance(request.Latitude, request.Longtitude, loc.Latitude, loc.Longitude) < request.Meters
-            //where loc.LocationPoint.Distance(currentLocation) < request.Meters
-            //orderby loc.LocationPoint.Distance(currentLocation)
-            select serv;
+        //var services =
+        //    from serv in _context.Services
+        //    join servloc in _context.ServiceLocations on serv.Id equals servloc.ServiceId
+        //    join loc in _context.Locations on servloc.LocationId equals loc.Id
+        //    where Helper.GetDistance(request.Latitude, request.Longtitude, loc.Latitude, loc.Longitude) < request.Meters
+        //    //where loc.LocationPoint.Distance(currentLocation) < request.Meters
+        //    //orderby loc.LocationPoint.Distance(currentLocation)
+        //    select serv;
 
-        var lst = services.ToList();
+        //var lst = services.ToList();
 
+        //var result = await services.ProjectTo<ServiceItem>(_mapper.ConfigurationProvider)
+        //    .PaginatedListAsync(request.PageNumber, request.PageSize);
+
+
+        var services = _context.Services; //TODO: temp return val for commented out code
         var result = await services.ProjectTo<ServiceItem>(_mapper.ConfigurationProvider)
             .PaginatedListAsync(request.PageNumber, request.PageSize);
-        
-        //throw new NotImplementedException();
+
         return result;
     }
 }

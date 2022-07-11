@@ -27,22 +27,11 @@ public class LAHubDbContext : ApiAuthorizationDbContext<ApplicationUser>, ILAHub
         _auditableEntitySaveChangesInterceptor = auditableEntitySaveChangesInterceptor;
     }
 
-    public DbSet<Address> Addresses => Set<Address>();
     public DbSet<Category> Categories => Set<Category>();
-    public DbSet<Classification> Classifications => Set<Classification>();
     public DbSet<Contact> Contacts => Set<Contact>();
     public DbSet<Eligibility> Eligibilities => Set<Eligibility>();
-    public DbSet<Location> Locations => Set<Location>();
-    public DbSet<OperatingHours> OperatingHours => Set<OperatingHours>();
     public DbSet<Organisation> Organisations => Set<Organisation>();
-    public DbSet<ServiceArea> ServiceAreas => Set<ServiceArea>();
-    public DbSet<ServiceCategory> ServiceCategories => Set<ServiceCategory>();
-    public DbSet<ServiceClassification> ServiceClassifications => Set<ServiceClassification>();
     public DbSet<Service> Services => Set<Service>();
-    public DbSet<ServiceLocation> ServiceLocations => Set<ServiceLocation>();
-    public DbSet<ServiceOptionCategory> ServiceOptionCategories => Set<ServiceOptionCategory>();
-    public DbSet<ServiceOptionClassification> ServiceOptionClassifications => Set<ServiceOptionClassification>();
-    public DbSet<ServiceOptionType> ServiceOptionTypes => Set<ServiceOptionType>();
     public DbSet<Tenant> Tenants => Set<Tenant>();
 
     protected override void OnModelCreating(ModelBuilder builder)
