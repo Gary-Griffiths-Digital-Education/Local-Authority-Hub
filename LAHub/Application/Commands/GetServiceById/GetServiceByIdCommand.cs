@@ -42,7 +42,9 @@ public class GetServiceByIdCommandHandler : IRequestHandler<GetServiceByIdComman
             throw new NotFoundException(nameof(Service), request.Id);
         }
 
-        return entity;
+        Service service = entity;
+
+        return service;
     }
 }
 

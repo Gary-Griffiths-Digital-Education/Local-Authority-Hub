@@ -27,8 +27,6 @@ namespace WebAPI.Endpoints.Services
             try
             {
                 var result = await Mediator.Send(request, cancellationToken);
-                var servicelocs = result.ServiceLocations; 
-
                 return result;
                 //var retVal = Ok(result);
                 //return Ok(result);
