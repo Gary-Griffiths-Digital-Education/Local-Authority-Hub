@@ -11,8 +11,8 @@ public class Address : BaseAuditableEntity<Guid>
         string addressLine1,
         string? addressLine2,
         string? townOrCity,
-        string postcode,
-        Location? location
+        string postcode
+        //Location? location
     )
     {
         Id = Guid.NewGuid();
@@ -20,9 +20,9 @@ public class Address : BaseAuditableEntity<Guid>
         AddressLine2 = addressLine2 ?? string.Empty;
         TownOrCity = townOrCity;
         Postcode = postcode;
-        Location = location;
-        if (location != null)
-            LocationId = location.Id;
+        //Location = location;
+        //if (location != null)
+        //    LocationId = location.Id;
 
     }
 
@@ -33,9 +33,9 @@ public class Address : BaseAuditableEntity<Guid>
     public string? TownOrCity { get; set; }
 
     public string Postcode { get; set; }
-    public Guid LocationId { get; set; }
+    //public Guid LocationId { get; set; }
 
-    public virtual Location? Location { get; set; } = default!;
+    //public virtual Location? Location { get; set; } = default!;
 }
 
 

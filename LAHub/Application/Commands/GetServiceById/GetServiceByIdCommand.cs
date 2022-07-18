@@ -28,11 +28,12 @@ public class GetServiceByIdCommandHandler : IRequestHandler<GetServiceByIdComman
     public async Task<Service> Handle(GetServiceByIdCommand request, CancellationToken cancellationToken)
     {
         var entity = await _context.Services
-            //.Include(x => x.Organisation)
-            //.ThenInclude(x => x.OrganisationContacts)
+            .Include(x => x.Organisation)
+            .ThenInclude(x => x.OrganisationContacts)
             .Include(x => x.ServiceLocations)
-            //.ThenInclude(x => x.Location)
-            .FirstOrDefaultAsync(p => p.Id == request.Id);
+            .ThenInclude(x => x.Location)
+            .ThenInclude(x => x.Address)
+            .FirstOrDefaultAsync(p => p.Id == request.Id, cancellationToken: cancellationToken);
 
         //var entity = await _context.Services
         //.FindAsync(new object[] { request.Id }, cancellationToken);
@@ -42,9 +43,14 @@ public class GetServiceByIdCommandHandler : IRequestHandler<GetServiceByIdComman
             throw new NotFoundException(nameof(Service), request.Id);
         }
 
-        Service service = entity;
+        //Need to remove self referencing items
+        entity.Organisation.Services = null!;
+        foreach(var item in entity.ServiceLocations)
+        {
+            item.Service = null;
+        }
 
-        return service;
+        return entity;
     }
 }
 

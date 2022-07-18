@@ -101,6 +101,15 @@ namespace Infrastructure.Persistence.SeedData.Organisations
                     }
             };
 
+            var address = new Address("Council House",
+                        "Victoria Square",
+                        "Birmingham",
+                        "B1 1BB"
+                        //,
+                        //null
+                        );
+      
+
             Service service = new(
             "Service 1",
             "We supply this service",
@@ -113,6 +122,9 @@ namespace Infrastructure.Persistence.SeedData.Organisations
             "Council House",
             52.48101394467345, -1.9041462501082664
             );
+
+            location.Address = address;
+            location.AddressId = address.Id;
 
             ServiceLocation serviceLocation = new(service.Id, location.Id);
             serviceLocation.Service = service;
@@ -175,13 +187,16 @@ namespace Infrastructure.Persistence.SeedData.Organisations
                 "2-8 London Road",
                 "Rocky Hill",
                 "Maidstone",
-                "Kent",
-                parentalocation
+                "Kent"
+                //,
+                //parentalocation
             );
 
             ServiceLocation parentaServiceLocation = new(parenta.Id, parentalocation.Id);
-            parentaServiceLocation.Service = parenta;
+            parentaServiceLocation.Service = parenta;     
             parentaServiceLocation.Location = parentalocation;
+            parentaServiceLocation.Location.Address = parentaAddress;
+            parentaServiceLocation.Location.AddressId = parentaAddress.Id;
             parenta.ServiceLocations = new [] { parentaServiceLocation };
             //Parenta End
 
@@ -203,13 +218,16 @@ namespace Infrastructure.Persistence.SeedData.Organisations
                 "Capel St Mary School Grounds",
                 "The Street, Capel St Mary",
                 "Ipswich",
-                "IP9 2EG",
-                robinsChildCarelocation
+                "IP9 2EG"
+                //,
+                //robinsChildCarelocation
             );
 
             ServiceLocation robinsChildCareServiceLocation = new(robinsChildCare.Id, robinsChildCarelocation.Id);
             robinsChildCareServiceLocation.Service = robinsChildCare;
             robinsChildCareServiceLocation.Location = robinsChildCarelocation;
+            robinsChildCareServiceLocation.Location.Address = robinsChildCareAddress;
+            robinsChildCareServiceLocation.Location.AddressId = robinsChildCareAddress.Id;
 
             robinsChildCare.ServiceLocations = new List<ServiceLocation>
             {
@@ -233,13 +251,16 @@ namespace Infrastructure.Persistence.SeedData.Organisations
                 "Alice Driver Road",
                 "Grundisburgh",
                 "Ipswich",
-                "IP13 6XH",
-                YmcaChildcareGrundisburghlocation
+                "IP13 6XH"
+                //,
+                //YmcaChildcareGrundisburghlocation
             );
 
-            ServiceLocation YmcaChildcareGrundisburghServiceLocation = new(YmcaChildcareGrundisburgh.Id, YmcaChildcareGrundisburghlocation.Id);
+            ServiceLocation YmcaChildcareGrundisburghServiceLocation = new(YmcaChildcareGrundisburgh.Id, YmcaChildcareGrundisburghlocation.Id);     
             YmcaChildcareGrundisburghServiceLocation.Service = YmcaChildcareGrundisburgh;
             YmcaChildcareGrundisburghServiceLocation.Location = YmcaChildcareGrundisburghlocation;
+            YmcaChildcareGrundisburghServiceLocation.Location.Address = YmcaChildcareGrundisburghAddress;
+            YmcaChildcareGrundisburghServiceLocation.Location.AddressId = YmcaChildcareGrundisburghAddress.Id;
 
             YmcaChildcareGrundisburgh.ServiceLocations = new List<ServiceLocation>
             {

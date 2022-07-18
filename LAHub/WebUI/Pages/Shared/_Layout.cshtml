@@ -30,8 +30,8 @@
             document.body.className = ((document.body.className) ? document.body.className + ' js-enabled' : 'js-enabled');
     </script>
 
-    @await Html.PartialAsync("_CookieBanner", Html.GetCookieBannerViewModel())
-    @await Html.PartialAsync("_Header", Html.GetHeaderViewModel())
+    @*@await Html.PartialAsync("_CookieBanner", Html.GetCookieBannerViewModel())
+    @await Html.PartialAsync("_Header", Html.GetHeaderViewModel())*@
 
     <div class="govuk-phase-banner govuk-width-container">
         <p class="govuk-phase-banner__content">
@@ -48,7 +48,7 @@
         @RenderBody()
     </div>
 
-    @await Html.PartialAsync("_Footer", Html.GetFooterViewModel())
+    @*@await Html.PartialAsync("_Footer", Html.GetFooterViewModel())*@
 
     @*<footer class="border-top footer text-muted">
         <div class="container">

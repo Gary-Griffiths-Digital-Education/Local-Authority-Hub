@@ -3,8 +3,33 @@
 @{
 }
 
-<a asp-page="/FindServiceFromPostcode" class="govuk-back-link">Back</a>
+<style>
+* {
+  box-sizing: border-box;
+}
 
+/* Create two equal columns that floats next to each other */
+.column1 {
+  float: left;
+  width: 25%;
+  padding: 10px;
+}
+
+.column2 {
+  float: left;
+  width: 75%;
+  padding: 10px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+</style>
+
+<a asp-page="/FindServiceFromPostcode" class="govuk-back-link">Back</a>
 
 <div class="govuk-grid-row">
     <div class="govuk-grid-row">
@@ -13,7 +38,50 @@
 	    <h1 class="govuk-heading-l">There are @Model.SearchResults.TotalCount results found in your local area</h1>
 	    @*<p class="govuk-body">Find a Service will help you to find the best service to meet your needs from the full list of services that are available in your area.</p>*@
 
-		<table>
+        <div class="row">
+          <div class="column1">
+            <form method="post">
+                
+                    <fieldset class="govuk-fieldset">
+                        <h1 class="govuk-heading-m">
+                            Filter By
+                        </h1>
+                        <input asp-for="@Model.CurrentLatitude" type="hidden" >
+                        <input asp-for="@Model.CurrentLongitude" type="hidden">
+
+                        <div class="govuk-form-group">
+                        <label class="govuk-label" for="SelectedDistance">
+                            Waiting List
+                        </label>
+                        <select class="govuk-select" id="Cost" name="SelectedDistance" asp-for="SelectedDistance" asp-items="Model.DistanceSelectionList"></select> 
+                        </div>
+                      
+
+                    </fieldset>
+
+                     <button type="submit" class="govuk-button" data-module="govuk-button" data-prevent-double-click="true">
+                        Filter
+                    </button>
+
+                </form>
+          </div>
+          <div class="column2" >
+            <h1 class="govuk-heading-m">
+                          Services
+                </h1>
+                @foreach(var item in Model.SearchResults.Items)
+                {
+                    <ul class="no-bullets">
+                        <li><a asp-page="/LocalOfferDetail" asp-route-id="@item.Id" style="color:blue" class="govuk-!-font-weight-bold govuk-body govuk-!-font-size-19">@item.Name</a></li>
+                        <li>@item.Description</li>
+                    </ul>
+                            
+                }
+          </div>
+        </div>
+
+
+		@*<table>
           <tr>
             <td>
                 <form method="post">
@@ -48,14 +116,14 @@
                 @foreach(var item in Model.SearchResults.Items)
                 {
                     <ul class="no-bullets">
-                        <li><a asp-page="/LocalOfferDetail" asp-route-id="@item.Id" class="govuk-heading-s">@item.Name</a></li>
+                        <li><a asp-page="/LocalOfferDetail" asp-route-id="@item.Id" style="color:blue" class="govuk-!-font-weight-bold govuk-body govuk-!-font-size-19">@item.Name</a></li>
                         <li>@item.Description</li>
                     </ul>
                             
                 }
             </td>
           </tr>
-        </table>
+        </table>*@
 	   
     </div>
 </div>

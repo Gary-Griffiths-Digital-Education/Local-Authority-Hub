@@ -2,3 +2,30 @@
 @model WebUI.Pages.LocalOfferDetailModel
 @{
 }
+
+<main class="govuk-main-wrapper " id="main-content" role="main">
+    <div class="govuk-grid-row">
+        <h1 class="govuk-heading-m">Your Selection</h1>
+        <hr/>
+
+        <div>
+            <ul class="no-bullets">
+                <li><label><span style="color:blue" class="govuk-!-font-weight-bold govuk-body govuk-!-font-size-19">@Model.LocalOffer.Name</span></label></li>
+                <li>@Model.LocalOffer.Description</li>
+                @if(@Model.LocalOffer.ServiceLocations != null && @Model.LocalOffer.ServiceLocations.Any())
+                {
+                   <li><strong>Location:</strong>&nbsp; @Model.LocalOffer.ServiceLocations.ElementAt(0).Location.Name</li> 
+                   @if(@Model.LocalOffer.ServiceLocations.ElementAt(0).Location.Address != null)
+                    {
+                        <li>@Model.LocalOffer.ServiceLocations.ElementAt(0).Location.Address.AddressLine1</li>
+                        <li>@Model.LocalOffer.ServiceLocations.ElementAt(0).Location.Address.AddressLine2</li>
+                        <li>@Model.LocalOffer.ServiceLocations.ElementAt(0).Location.Address.TownOrCity</li>
+                        <li>@Model.LocalOffer.ServiceLocations.ElementAt(0).Location.Address.Postcode</li>
+                    }
+                    
+                }
+            </ul>
+        </div>
+
+    </div>
+</main>
