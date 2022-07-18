@@ -3,7 +3,7 @@
 @{
 }
 
-<a href="/FindServiceFromPostcode" class="govuk-back-link">Back</a>
+<a asp-page="/FindServiceFromPostcode" class="govuk-back-link">Back</a>
 
 
 <div class="govuk-grid-row">
@@ -48,7 +48,7 @@
                 @foreach(var item in Model.SearchResults.Items)
                 {
                     <ul class="no-bullets">
-                        <li><a href="#" class="govuk-heading-s">@item.Name</a></li>
+                        <li><a asp-page="/LocalOfferDetail" asp-route-id="@item.Id" class="govuk-heading-s">@item.Name</a></li>
                         <li>@item.Description</li>
                     </ul>
                             
