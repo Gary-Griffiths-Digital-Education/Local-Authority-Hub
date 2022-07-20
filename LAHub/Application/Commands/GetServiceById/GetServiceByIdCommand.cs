@@ -27,15 +27,14 @@ public class GetServiceByIdCommandHandler : IRequestHandler<GetServiceByIdComman
 
     public async Task<Service> Handle(GetServiceByIdCommand request, CancellationToken cancellationToken)
     {
-#pragma warning disable CS8602 // Dereference of a possibly null reference.
         var entity = await _context.Services
             .Include(x => x.Organisation)
-            .ThenInclude(x => x.OrganisationContacts)
-            .Include(x => x.ServiceLocations)
-            .ThenInclude(x => x.Location)
-            .ThenInclude(x => x.Address)
+            .Include(x => x.ServiceClassifications)
+            .ThenInclude(x => x.Classification)
+            .Include(x => x.Contact)
+            .Include(x => x.Location)
+            .ThenInclude(x => (x != null) ? x.Address : null)
             .FirstOrDefaultAsync(p => p.Id == request.Id, cancellationToken: cancellationToken);
-#pragma warning restore CS8602 // Dereference of a possibly null reference.
 
         //var entity = await _context.Services
         //.FindAsync(new object[] { request.Id }, cancellationToken);
@@ -50,12 +49,12 @@ public class GetServiceByIdCommandHandler : IRequestHandler<GetServiceByIdComman
 #pragma warning disable CS8602 // Dereference of a possibly null reference.
         entity.Organisation.Services = null!;
 
-        foreach (var item in entity.ServiceLocations)
-        {
-#pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
-            item.Service = null;
-#pragma warning restore CS8625 // Cannot convert null literal to non-nullable reference type.
-        }
+//        foreach (var item in entity.ServiceLocations)
+//        {
+//#pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
+//            item.Service = null;
+//#pragma warning restore CS8625 // Cannot convert null literal to non-nullable reference type.
+//        }
 #pragma warning restore CS8602 // Dereference of a possibly null reference.          
 
         return entity;

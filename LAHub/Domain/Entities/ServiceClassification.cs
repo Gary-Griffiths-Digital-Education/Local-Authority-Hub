@@ -8,15 +8,21 @@ public class ServiceClassification : BaseAuditableEntity<Guid>
 
     public ServiceClassification(
         Guid serviceId,
-        Guid classificationId
+        Classification classification
     )
     {
         Id = Guid.NewGuid();
         ServiceId = serviceId;
-        ClassificationId = classificationId;
+        Classification = classification;
+        if (classification != null)
+        {
+            ClassificationId = classification.Id;
+        }
     }
 
     public Guid ServiceId { get; private set; }
 
     public Guid ClassificationId { get; private set; }
+
+    public Classification Classification { get; private set; } = default!;
 }

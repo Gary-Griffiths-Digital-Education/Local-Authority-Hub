@@ -12,7 +12,13 @@
             <ul class="no-bullets">
                 <li><label><span style="color:blue" class="govuk-!-font-weight-bold govuk-body govuk-!-font-size-19">@Model.LocalOffer.Name</span></label></li>
                 <li>@Model.LocalOffer.Description</li>
-                @if(@Model.LocalOffer.ServiceLocations != null && @Model.LocalOffer.ServiceLocations.Any())
+                <li><label>Minimum Age:  </label>@Model.LocalOffer.MinimumAge</li>
+                <li><label>Minimum Age:  </label>@Model.LocalOffer.MaximumAge</li>
+                <li><label>Cost:         </label>@Model.LocalOffer.CostAmount</li>
+                <li><label>OpeningHours: </label>@Model.LocalOffer.OpeningHours</li>
+                
+                
+                @*@if(@Model.LocalOffer.ServiceLocations != null && @Model.LocalOffer.ServiceLocations.Any())
                 {
                    <li><strong>Location:</strong>&nbsp; @Model.LocalOffer.ServiceLocations.ElementAt(0).Location.Name</li> 
                    @if(@Model.LocalOffer.ServiceLocations.ElementAt(0).Location.Address != null)
@@ -23,8 +29,19 @@
                         <li>@Model?.LocalOffer?.ServiceLocations?.ElementAt(0)?.Location?.Address?.Postcode</li>
                     }
                     
-                }
+                }*@
             </ul>
+
+            @if (@Model.LocalOffer.ServiceClassifications != null && @Model.LocalOffer.ServiceClassifications.Any())
+            {
+                <h3>Support For:</h3>
+                <ul class="no-bullets">
+                @foreach(var item in @Model.LocalOffer.ServiceClassifications)
+                {
+                    <li>@item.Classification.Name</li>
+                }
+                </ul>
+            }
         </div>
 
     </div>

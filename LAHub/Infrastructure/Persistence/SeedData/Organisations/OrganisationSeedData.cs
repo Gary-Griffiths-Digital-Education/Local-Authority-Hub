@@ -24,12 +24,15 @@ namespace Infrastructure.Persistence.SeedData.Organisations
             new OrganisationType("Charity", "Charity")
         };
 
-        public OrganisationSeedData() { }
+        private readonly List<Classification> _classifications;
+
+        public OrganisationSeedData(List<Classification> classifications)
+        {
+            _classifications = classifications;
+        }
 
         public IReadOnlyCollection<Organisation> SeedOrganistions()
         {
-            
-
             var organisations = new List<Organisation>()
             {
 
@@ -41,7 +44,8 @@ namespace Infrastructure.Persistence.SeedData.Organisations
                     "Bristol City Council",
                     "Bristol City Council",
                     null,
-                    Guid.Empty
+                    null,
+                    null
                 ),
                 new Organisation(
                     _tenants?.Where(tenant => tenant.Name.Equals("Red"))?.FirstOrDefault() ?? _tenantUnknown,
@@ -49,22 +53,11 @@ namespace Infrastructure.Persistence.SeedData.Organisations
                     "Redbridge Council",
                     "Redbridge Council",
                     null,
-                    Guid.Empty
+                    null,
+                    null
                 ),
 
                 GetSuffolkCountyCouncil(),
-
-                //new Organisation
-                //{
-                //    Tenant = new Tenant(),
-                //    Name = "Suffolk County Council",
-                //    OrganisationType = _organisationTypes?.Where(organisationType => organisationType.Name.Equals("Local Authority"))?.FirstOrDefault() ?? new OrganisationType(),
-                //    Services = new List<Service>()
-                //    {
-
-                //    }
-                    
-                //},
 
                 new Organisation(
                     _tenants?.Where(tenant => tenant.Name.Equals("TH"))?.FirstOrDefault() ?? _tenantUnknown,
@@ -72,27 +65,28 @@ namespace Infrastructure.Persistence.SeedData.Organisations
                     "Tower Hamlets Council",
                     "Tower Hamlets Council",
                     null,
-                    Guid.Empty
+                    null,
+                    null
                 ),
             };
 
             return new ReadOnlyCollection<Organisation>(organisations);
         }
 
+        private void AddServiceClasifications(Service service)
+        {
+            List<ServiceClassification> serviceClassification = new()
+            {
+                new ServiceClassification(service.Id, _classifications.ElementAt(0)),
+                new ServiceClassification(service.Id, _classifications.ElementAt(1))
+            };
+
+            service.ServiceClassifications = serviceClassification;
+        }
+
         private Organisation GetBirminghamCityCouncil()
         {
-            var birminghamCityCouncil = new Organisation(
-                 _tenants?.Where(tenant => tenant.Name.Equals("Bir"))?.FirstOrDefault() ?? _tenantUnknown,
-                 _organisationTypes?.Where(organisationType => organisationType.Name.Equals("Local Authority"))?.FirstOrDefault() ?? _organisationTypeUnknown,
-                    "Birmingham City Council",
-                    "Birmingham City Council",
-                    null,
-                    Guid.Empty
-                )
-            {
-                OrganisationContacts = new List<Contact>
-                    {
-                        new Contact(
+            Contact contact = new(
                             _tenants?.Where(tenant => tenant.Name.Equals("Bir"))?.FirstOrDefault() ?? _tenantUnknown,
                             "Switchboard",
                             "Switchboard",
@@ -110,10 +104,17 @@ namespace Infrastructure.Persistence.SeedData.Organisations
                             "West Midlands",
                             "B1 1BB",
                             "0121 303 1119 or 0121 675 8221"
-                            )
+                            );
 
-                    }
-            };
+            var birminghamCityCouncil = new Organisation(
+                 _tenants?.Where(tenant => tenant.Name.Equals("Bir"))?.FirstOrDefault() ?? _tenantUnknown,
+                 _organisationTypes?.Where(organisationType => organisationType.Name.Equals("Local Authority"))?.FirstOrDefault() ?? _organisationTypeUnknown,
+                    "Birmingham City Council",
+                    "Birmingham City Council",
+                    null,
+                    null,
+                    contact
+                );
 
             var address = new Address("Council House",
                         "Victoria Square",
@@ -122,15 +123,6 @@ namespace Infrastructure.Persistence.SeedData.Organisations
                         //,
                         //null
                         );
-      
-
-            Service service = new(
-            "Service 1",
-            "We supply this service",
-            birminghamCityCouncil
-            );
-
-            birminghamCityCouncil.Services = new List<Service>() { service };
 
             var location = new LAHub.Domain.Entities.Location("Edgbaston",
             "Council House",
@@ -141,14 +133,22 @@ namespace Infrastructure.Persistence.SeedData.Organisations
             location.Address = address;
             location.AddressId = address.Id;
 
-            ServiceLocation serviceLocation = new(service.Id, location.Id);
-            serviceLocation.Service = service;
-            serviceLocation.Location = location;
+            Service service = new(
+            "Service 1",
+            "We supply this service",
+            3,
+            25,
+            "Free",
+            "Free",
+            "9am to 5pm",
+            birminghamCityCouncil,
+            contact,
+            location
+            );
 
-            service.ServiceLocations = new List<ServiceLocation>
-            {
-                serviceLocation
-            };
+            AddServiceClasifications(service);
+
+            birminghamCityCouncil.Services = new List<Service>() { service };
 
             return birminghamCityCouncil;
         }
@@ -161,12 +161,8 @@ namespace Infrastructure.Persistence.SeedData.Organisations
                     "Suffolk County Council",
                     "Suffolk County Council",
                     null,
-                    Guid.Empty
-                )
-            {
-                OrganisationContacts = new List<Contact>
-                    {
-                        new Contact(
+                    null,
+                    new Contact(
                             _tenants?.Where(tenant => tenant.Name.Equals("Suf"))?.FirstOrDefault() ?? _tenantUnknown,
                             "Customer Services",
                             "Customer Services",
@@ -185,24 +181,16 @@ namespace Infrastructure.Persistence.SeedData.Organisations
                             "IP1 BX",
                             null
                             )
-
-                    }
-            };
+                );
 
             //Parenta Start
-            Service parenta = new(
-            "Parenta",
-            "There’s so much to think about when it comes to running a childcare setting. At Parenta, our aim is to provide Early Years practitioners with the tools you need to run your business efficiently, from training qualifications to administration software, fee collection services etc",
-            suffolkCountyCouncil
-            );
-
             var parentaAddress = new Address(
                 "2-8 London Road",
                 "Rocky Hill",
                 "Maidstone",
                 "Kent"
-                //,
-                //parentalocation
+            //,
+            //parentalocation
             );
 
             var parentalocation = new LAHub.Domain.Entities.Location("Kent",
@@ -211,28 +199,49 @@ namespace Infrastructure.Persistence.SeedData.Organisations
             parentaAddress
             );
 
-            ServiceLocation parentaServiceLocation = new(parenta.Id, parentalocation.Id);
-            parentaServiceLocation.Service = parenta;     
-            parentaServiceLocation.Location = parentalocation;
-            parentaServiceLocation.Location.Address = parentaAddress;
-            parentaServiceLocation.Location.AddressId = parentaAddress.Id;
-            parenta.ServiceLocations = new [] { parentaServiceLocation };
+            Service parenta = new(
+            "Parenta",
+            "There’s so much to think about when it comes to running a childcare setting. At Parenta, our aim is to provide Early Years practitioners with the tools you need to run your business efficiently, from training qualifications to administration software, fee collection services etc",
+            3,
+            25,
+            "Free",
+            "Free",
+            "9am to 5pm",
+            suffolkCountyCouncil,
+            new Contact(
+                            _tenants?.Where(tenant => tenant.Name.Equals("Suf"))?.FirstOrDefault() ?? _tenantUnknown,
+                            "Customer Services",
+                            "Customer Services",
+                            "0345 606 6067",
+                            null,
+                            null,
+                            "customer.services@​​suffolk.gov.uk",
+                            new Uri("https://www.suffolk.gov.uk/"),
+                            null,
+                            null,
+                            null,
+                            "Endeavour House",
+                            "8 Russell Road",
+                            "Ipswich",
+                            "Suffolk",
+                            "IP1 BX",
+                            null
+                            ),
+            parentalocation
+            );
+
+            AddServiceClasifications(parenta);
+
             //Parenta End
 
             //Robins Childcare Start
-            Service robinsChildCare = new(
-            "Robins Child Care",
-            "A purpose built childcare establishment for 3 months to 11 years. Seperate rooms for differing age groups. 2, 3 and 4 year old grant funding available.Full day care and sessional care.",
-            suffolkCountyCouncil
-            );
-
             var robinsChildCareAddress = new Address(
                 "Capel St Mary School Grounds",
                 "The Street, Capel St Mary",
                 "Ipswich",
                 "IP9 2EG"
-                //,
-                //robinsChildCarelocation
+            //,
+            //robinsChildCarelocation
             );
 
             var robinsChildCarelocation = new LAHub.Domain.Entities.Location("Ipswich",
@@ -241,32 +250,50 @@ namespace Infrastructure.Persistence.SeedData.Organisations
             robinsChildCareAddress
             );
 
-            ServiceLocation robinsChildCareServiceLocation = new(robinsChildCare.Id, robinsChildCarelocation.Id);
-            robinsChildCareServiceLocation.Service = robinsChildCare;
-            robinsChildCareServiceLocation.Location = robinsChildCarelocation;
-            robinsChildCareServiceLocation.Location.Address = robinsChildCareAddress;
-            robinsChildCareServiceLocation.Location.AddressId = robinsChildCareAddress.Id;
 
-            robinsChildCare.ServiceLocations = new List<ServiceLocation>
-            {
-                robinsChildCareServiceLocation
-            };
+            Service robinsChildCare = new(
+            "Robins Child Care",
+            "A purpose built childcare establishment for 3 months to 11 years. Seperate rooms for differing age groups. 2, 3 and 4 year old grant funding available.Full day care and sessional care.",
+            3,
+            25,
+            "Free",
+            "Free",
+            "9am to 5pm",
+            suffolkCountyCouncil,
+            new Contact(
+                            _tenants?.Where(tenant => tenant.Name.Equals("Suf"))?.FirstOrDefault() ?? _tenantUnknown,
+                            "Customer Services",
+                            "Customer Services",
+                            "0345 606 6067",
+                            null,
+                            null,
+                            "customer.services@​​suffolk.gov.uk",
+                            new Uri("https://www.suffolk.gov.uk/"),
+                            null,
+                            null,
+                            null,
+                            "Endeavour House",
+                            "8 Russell Road",
+                            "Ipswich",
+                            "Suffolk",
+                            "IP1 BX",
+                            null
+                            ),
+            robinsChildCarelocation
+            
+            );
+
+            AddServiceClasifications(robinsChildCare);
             //Robins Childcare End
 
             //YMCA Childcare Grundisburgh Start
-            Service YmcaChildcareGrundisburgh = new(
-            "YMCA Childcare Grundisburgh",
-            "YMCA Childcare Grundisburgh is a 24 place preschool on the grounds on Grundisburgh Primary School. It is a term time only setting, opened 8-3.15 weekdays offering childcare for children aged between 2 and 5 years.",
-            suffolkCountyCouncil
-            );
-
             var YmcaChildcareGrundisburghAddress = new Address(
                 "Alice Driver Road",
                 "Grundisburgh",
                 "Ipswich",
                 "IP13 6XH"
-                //,
-                //YmcaChildcareGrundisburghlocation
+            //,
+            //YmcaChildcareGrundisburghlocation
             );
 
             var YmcaChildcareGrundisburghlocation = new LAHub.Domain.Entities.Location("Ipswich",
@@ -275,16 +302,39 @@ namespace Infrastructure.Persistence.SeedData.Organisations
             YmcaChildcareGrundisburghAddress
             );
 
-            ServiceLocation YmcaChildcareGrundisburghServiceLocation = new(YmcaChildcareGrundisburgh.Id, YmcaChildcareGrundisburghlocation.Id);     
-            YmcaChildcareGrundisburghServiceLocation.Service = YmcaChildcareGrundisburgh;
-            YmcaChildcareGrundisburghServiceLocation.Location = YmcaChildcareGrundisburghlocation;
-            YmcaChildcareGrundisburghServiceLocation.Location.Address = YmcaChildcareGrundisburghAddress;
-            YmcaChildcareGrundisburghServiceLocation.Location.AddressId = YmcaChildcareGrundisburghAddress.Id;
+            Service YmcaChildcareGrundisburgh = new(
+            "YMCA Childcare Grundisburgh",
+            "YMCA Childcare Grundisburgh is a 24 place preschool on the grounds on Grundisburgh Primary School. It is a term time only setting, opened 8-3.15 weekdays offering childcare for children aged between 2 and 5 years.",
+            3,
+            25,
+            "Free",
+            "Free",
+            "9am to 5pm",
+            suffolkCountyCouncil,
+            new Contact(
+                            _tenants?.Where(tenant => tenant.Name.Equals("Suf"))?.FirstOrDefault() ?? _tenantUnknown,
+                            "Customer Services",
+                            "Customer Services",
+                            "0345 606 6067",
+                            null,
+                            null,
+                            "customer.services@​​suffolk.gov.uk",
+                            new Uri("https://www.suffolk.gov.uk/"),
+                            null,
+                            null,
+                            null,
+                            "Endeavour House",
+                            "8 Russell Road",
+                            "Ipswich",
+                            "Suffolk",
+                            "IP1 BX",
+                            null
+                            ),
+            YmcaChildcareGrundisburghlocation
+            );
 
-            YmcaChildcareGrundisburgh.ServiceLocations = new List<ServiceLocation>
-            {
-                YmcaChildcareGrundisburghServiceLocation
-            };
+            AddServiceClasifications(YmcaChildcareGrundisburgh);
+
             //YMCA Childcare Grundisburgh End
 
             suffolkCountyCouncil.Services = new List<Service>() { parenta, robinsChildCare, YmcaChildcareGrundisburgh };

@@ -77,7 +77,19 @@ public class ApplicationDbContextInitialiser
 
         // Default data
         // Seed, if necessary
-        var organisationSeedData = new Infrastructure.Persistence.SeedData.Organisations.OrganisationSeedData();
+        List<Classification> classifications = new()
+        {
+            new Classification("Autism", "Autism" ),
+            new Classification("Brest Feeding", "Brest Feeding Support" ),
+        };
+
+        var organisationSeedData = new Infrastructure.Persistence.SeedData.Organisations.OrganisationSeedData(classifications);
+        
+
+        _context.Classifications.AddRange(classifications);
+
+        await _context.SaveChangesAsync();
+
         IReadOnlyCollection<Organisation> organisations = organisationSeedData.SeedOrganistions();
 
         foreach (var organisation in organisations)

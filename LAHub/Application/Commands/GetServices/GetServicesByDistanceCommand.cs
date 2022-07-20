@@ -44,8 +44,7 @@ public class GetServicesByDistanceCommandHandler : IRequestHandler<GetServicesBy
 
         var services =
             from serv in _context.Services
-            join servloc in _context.ServiceLocations on serv.Id equals servloc.ServiceId
-            join loc in _context.Locations on servloc.LocationId equals loc.Id
+            join loc in _context.Locations on serv.LocationId equals loc.Id
             where Helper.GetDistance(request.Latitude, request.Longtitude, loc.Latitude, loc.Longitude, serv.Name) < request.Meters
             //where loc.LocationPoint.Distance(currentLocation) < request.Meters
             //orderby loc.LocationPoint.Distance(currentLocation)
