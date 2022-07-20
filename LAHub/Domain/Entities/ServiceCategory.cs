@@ -2,7 +2,7 @@
 
 public class ServiceCategory : BaseAuditableEntity<Guid>
 {
-    public ServiceCategory()
+    private ServiceCategory()
     {
     }
 
@@ -18,8 +18,8 @@ public class ServiceCategory : BaseAuditableEntity<Guid>
         CategoryId = category.Id;
     }
 
-    public Guid ServiceId { get; set; }
-    public Guid CategoryId { get; set; }
-    public virtual Service Service { get; set; } = default!;
-    public virtual Category Category { get; set; } = default!;
+    public Guid ServiceId { get; private set; }
+    public Guid CategoryId { get; private set; }
+    public virtual Service Service { get; private set; } = default!;
+    public virtual Category Category { get; private set; } = default!;
 }

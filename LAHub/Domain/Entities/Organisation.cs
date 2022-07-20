@@ -2,7 +2,7 @@
 
 public class Organisation : BaseAuditableEntity<Guid>
 {
-    public Organisation() {}
+    private Organisation() {}
 
     public Organisation(
         Tenant tenant,
@@ -22,17 +22,17 @@ public class Organisation : BaseAuditableEntity<Guid>
         ParentOrganisationId = parentOrganisationId;
     }
 
-    public Tenant Tenant { get; set; } = default!;
+    public Tenant Tenant { get; private set; } = default!;
 
-    public OrganisationType OrganisationType { get; set; } = default!;
+    public OrganisationType OrganisationType { get; private set; } = default!;
 
-    public string Name { get; set; } = String.Empty;
+    public string Name { get; private set; } = String.Empty;
 
-    public string? Description { get; set; } = String.Empty;
+    public string? Description { get; private set; } = String.Empty;
 
-    public virtual Organisation? ParentOrganisation { get; set; } = default!;
+    public virtual Organisation? ParentOrganisation { get; private set; } = default!;
 
-    public Guid ParentOrganisationId { get; set; } = Guid.Empty;
+    public Guid ParentOrganisationId { get; private set; } = Guid.Empty;
 
     public virtual ICollection<Contact> OrganisationContacts { get; set; } = default!;
 

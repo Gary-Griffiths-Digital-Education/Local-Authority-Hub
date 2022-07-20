@@ -27,6 +27,7 @@ public class GetServiceByIdCommandHandler : IRequestHandler<GetServiceByIdComman
 
     public async Task<Service> Handle(GetServiceByIdCommand request, CancellationToken cancellationToken)
     {
+#pragma warning disable CS8602 // Dereference of a possibly null reference.
         var entity = await _context.Services
             .Include(x => x.Organisation)
             .ThenInclude(x => x.OrganisationContacts)
@@ -34,6 +35,7 @@ public class GetServiceByIdCommandHandler : IRequestHandler<GetServiceByIdComman
             .ThenInclude(x => x.Location)
             .ThenInclude(x => x.Address)
             .FirstOrDefaultAsync(p => p.Id == request.Id, cancellationToken: cancellationToken);
+#pragma warning restore CS8602 // Dereference of a possibly null reference.
 
         //var entity = await _context.Services
         //.FindAsync(new object[] { request.Id }, cancellationToken);
@@ -44,11 +46,17 @@ public class GetServiceByIdCommandHandler : IRequestHandler<GetServiceByIdComman
         }
 
         //Need to remove self referencing items
+
+#pragma warning disable CS8602 // Dereference of a possibly null reference.
         entity.Organisation.Services = null!;
-        foreach(var item in entity.ServiceLocations)
+
+        foreach (var item in entity.ServiceLocations)
         {
+#pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
             item.Service = null;
+#pragma warning restore CS8625 // Cannot convert null literal to non-nullable reference type.
         }
+#pragma warning restore CS8602 // Dereference of a possibly null reference.          
 
         return entity;
     }

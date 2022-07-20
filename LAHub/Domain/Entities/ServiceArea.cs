@@ -2,7 +2,7 @@
 
 public class ServiceArea : BaseAuditableEntity<Guid>
 {
-    public ServiceArea()
+    private ServiceArea()
     {
     }
 
@@ -18,10 +18,10 @@ public class ServiceArea : BaseAuditableEntity<Guid>
         Uri = uri ?? default!;
     }
 
-    public Guid? ServiceId { get; set; }
+    public Guid? ServiceId { get; private set; }
 
-    public string? Extent { get; set; }
+    public string? Extent { get; private set; }
 
-    public string? Uri { get; set; }
+    public string? Uri { get; private set; }
 }
 

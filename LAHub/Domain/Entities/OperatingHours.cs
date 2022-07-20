@@ -2,7 +2,7 @@
 {
     public class OperatingHours : BaseAuditableEntity<Guid>
     {
-        public OperatingHours()
+        private OperatingHours()
         {
         }
         public OperatingHours(
@@ -17,10 +17,10 @@
             Description = description ?? string.Empty;
         }
 
-        public Guid ServiceId { get; set; }
+        public Guid ServiceId { get; private set; }
 
-        public Guid ServiceLocationId { get; set; }
+        public Guid ServiceLocationId { get; private set; }
 
-        public string? Description { get; set; }
+        public string? Description { get; private set; }
     }
 }

@@ -27,7 +27,7 @@ public  class WhenGettingServices : BaseTestFixture
         await RunAsDefaultUserAsync();
 
         Tenant tenant = new("Tenant 1", "Tenant 1");
-        OrganisationType organisationType = new OrganisationType("LA", "Local Authority");
+        OrganisationType organisationType = new("LA", "Local Authority");
 
 
         Organisation organisation = new(
@@ -49,7 +49,8 @@ public  class WhenGettingServices : BaseTestFixture
         var location = new LAHub.Domain.Entities.Location("Edgbaston",
         "Edgbaston",
         52.45,
-        -1.92
+        -1.92,
+        null
         );
 
         ServiceLocation serviceLocation = new(service.Id, location.Id);

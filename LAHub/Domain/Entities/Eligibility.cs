@@ -2,7 +2,7 @@
 
 public class Eligibility : BaseAuditableEntity<Guid>
 {
-    public Eligibility()
+    private Eligibility()
     {
     }
     public Eligibility(
@@ -17,10 +17,10 @@ public class Eligibility : BaseAuditableEntity<Guid>
         MaximumAge = maximumAge;
     }
 
-    public Guid? ServiceId { get; set; }
+    public Guid? ServiceId { get; private set; }
 
-    public byte? MinimumAge { get; set; }
+    public byte? MinimumAge { get; private set; }
 
-    public byte? MaximumAge { get; set; }
+    public byte? MaximumAge { get; private set; }
 }
 

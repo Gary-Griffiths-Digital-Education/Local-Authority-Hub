@@ -2,7 +2,7 @@
 {
     public class Tenant : BaseAuditableEntity<Guid>
     {
-        public Tenant() { }
+        private Tenant() { }
 
         public Tenant(
                 string name,
@@ -14,8 +14,8 @@
             Description = description ?? string.Empty;
         }
 
-        public string Name { get; set; } = String.Empty;
+        public string Name { get; private set; } = String.Empty;
 
-        public string? Description { get; set; } = String.Empty;
+        public string? Description { get; private set; } = String.Empty;
     }
 }

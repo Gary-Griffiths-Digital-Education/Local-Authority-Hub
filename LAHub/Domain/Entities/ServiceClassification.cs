@@ -2,7 +2,7 @@
 
 public class ServiceClassification : BaseAuditableEntity<Guid>
 {
-    public ServiceClassification()
+    private ServiceClassification()
     {
     }
 
@@ -16,7 +16,7 @@ public class ServiceClassification : BaseAuditableEntity<Guid>
         ClassificationId = classificationId;
     }
 
-    public Guid ServiceId { get; set; }
+    public Guid ServiceId { get; private set; }
 
-    public Guid ClassificationId { get; set; }
+    public Guid ClassificationId { get; private set; }
 }

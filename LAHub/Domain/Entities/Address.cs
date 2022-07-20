@@ -2,7 +2,7 @@
 
 public class Address : BaseAuditableEntity<Guid>
 {
-    public Address() 
+    private Address() 
     {
         AddressLine1 = default!;
         Postcode = default!;
@@ -26,13 +26,13 @@ public class Address : BaseAuditableEntity<Guid>
 
     }
 
-    public string AddressLine1 { get; set; }
+    public string AddressLine1 { get; private set; }
 
-    public string? AddressLine2 { get; set; }
+    public string? AddressLine2 { get; private set; }
 
-    public string? TownOrCity { get; set; }
-
-    public string Postcode { get; set; }
+    public string? TownOrCity { get; private set; }
+     
+    public string Postcode { get; }
     //public Guid LocationId { get; set; }
 
     //public virtual Location? Location { get; set; } = default!;

@@ -5,7 +5,7 @@ namespace LAHub.Domain.Entities
 {
     public class OrganisationType : BaseAuditableEntity<Guid>
     {
-        public OrganisationType() { }
+        private OrganisationType() { }
 
         public OrganisationType(
             string name,
@@ -17,8 +17,8 @@ namespace LAHub.Domain.Entities
             Description = description ?? string.Empty;
         }
 
-        public string Name { get; set; } = String.Empty;
+        public string Name { get; private set; } = string.Empty;
 
-        public string? Description { get; set; } = String.Empty;
+        public string? Description { get; private set; } = string.Empty;
     }
 }

@@ -17,10 +17,10 @@
                    <li><strong>Location:</strong>&nbsp; @Model.LocalOffer.ServiceLocations.ElementAt(0).Location.Name</li> 
                    @if(@Model.LocalOffer.ServiceLocations.ElementAt(0).Location.Address != null)
                     {
-                        <li>@Model.LocalOffer.ServiceLocations.ElementAt(0).Location.Address.AddressLine1</li>
-                        <li>@Model.LocalOffer.ServiceLocations.ElementAt(0).Location.Address.AddressLine2</li>
-                        <li>@Model.LocalOffer.ServiceLocations.ElementAt(0).Location.Address.TownOrCity</li>
-                        <li>@Model.LocalOffer.ServiceLocations.ElementAt(0).Location.Address.Postcode</li>
+                        <li>@Model?.LocalOffer?.ServiceLocations?.ElementAt(0)?.Location?.Address?.AddressLine1</li>
+                        <li>@Model?.LocalOffer?.ServiceLocations?.ElementAt(0)?.Location?.Address?.AddressLine2</li>
+                        <li>@Model?.LocalOffer?.ServiceLocations?.ElementAt(0)?.Location?.Address?.TownOrCity</li>
+                        <li>@Model?.LocalOffer?.ServiceLocations?.ElementAt(0)?.Location?.Address?.Postcode</li>
                     }
                     
                 }

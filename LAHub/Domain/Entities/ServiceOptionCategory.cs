@@ -2,7 +2,7 @@
 
 public class ServiceOptionCategory : BaseAuditableEntity<Guid>
 {
-    public ServiceOptionCategory() { }
+    private ServiceOptionCategory() { }
 
     public ServiceOptionCategory(
         Guid serviceOptionTypeId,
@@ -16,10 +16,10 @@ public class ServiceOptionCategory : BaseAuditableEntity<Guid>
         CategoryId = categoryId;
     }
 
-    public Guid ServiceOptionTypeId { get; set; }
+    public Guid ServiceOptionTypeId { get; private set; }
 
-    public Guid LinkId { get; set; }
+    public Guid LinkId { get; private set; }
 
-    public Guid CategoryId { get; }
+    public Guid CategoryId { get; private set; }
 }
 

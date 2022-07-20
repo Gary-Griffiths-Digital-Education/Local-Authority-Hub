@@ -2,7 +2,7 @@
 
 public class Service : BaseAuditableEntity<Guid>
 {
-    public Service()
+    private Service()
     {
         Name = String.Empty;
     }
@@ -18,11 +18,11 @@ public class Service : BaseAuditableEntity<Guid>
         Organisation = organisation;
     }
 
-    public string Name { get; set; }
+    public string Name { get; private set; }
 
-    public string? Description { get; set; }
+    public string? Description { get; private set; }
 
-    public virtual Organisation? Organisation { get; set; } = default!;
+    public virtual Organisation? Organisation { get; private set; } = default!;
 
     public ICollection<ServiceLocation> ServiceLocations { get; set; } = default!;
 }

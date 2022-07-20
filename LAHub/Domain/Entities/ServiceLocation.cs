@@ -2,7 +2,7 @@
 
 public class ServiceLocation : BaseAuditableEntity<Guid>
 {
-    public ServiceLocation() { }
+    private ServiceLocation() { }
 
     public ServiceLocation(
         Guid serviceId,
@@ -14,8 +14,8 @@ public class ServiceLocation : BaseAuditableEntity<Guid>
         LocationId = locationId;
     }
 
-    public Guid ServiceId { get; set; }
-    public Guid LocationId { get; set; }
+    public Guid ServiceId { get; private set; }
+    public Guid LocationId { get; private set; }
     public virtual Service Service { get; set; } = default!;
     public virtual Location Location { get; set; } = default!;
 }

@@ -2,7 +2,7 @@
 
 public class Contact : BaseAuditableEntity<Guid>
 {
-    public Contact() { }
+    private Contact() { }
 
     
     public Contact(
@@ -45,40 +45,39 @@ public class Contact : BaseAuditableEntity<Guid>
         Minicom = minicom;
     }
     
-    public Tenant Tenant { get; set; } = default!;
+    public Tenant Tenant { get; private set; } = default!;
 
-    public string Name { get; set; } = string.Empty;
+    public string Name { get; private set; } = string.Empty;
 
-    public string? Description { get; set; } = string.Empty;
+    public string? Description { get; private set; } = string.Empty;
 
-    public string? Telephone { get; set; } = string.Empty;
+    public string? Telephone { get; private set; } = string.Empty;
 
-    public string? NextGenerationText { get; set; } = string.Empty;
+    public string? NextGenerationText { get; private set; } = string.Empty;
 
-    public string? Minicom { get; set; } = string.Empty;
+    public string? Minicom { get; private set; } = string.Empty;
 
-    public string? WhatsApp { get; set; } = string.Empty;
+    public string? WhatsApp { get; private set; } = string.Empty;
 
-    public string? Email { get; set; } = string.Empty;
+    public string? Email { get; private set; } = string.Empty;
 
-    public Uri? WebSite { get; set; } = default!;
+    public Uri? WebSite { get; private set; } = default!;
 
-    public Uri? FaceBook { get; set; } = default!;
+    public Uri? FaceBook { get; private set; } = default!;
 
-    public Uri? Twitter { get; set; } = default!;
+    public Uri? Twitter { get; private set; } = default!;
 
-    public Uri? Forum { get; set; } = default!;
+    public Uri? Forum { get; private set; } = default!;
 
-    public string? AddressLine1 { get; set; } = string.Empty;
+    public string? AddressLine1 { get; private set; } = string.Empty;
 
-    public string? AddressLine2 { get; set; } = string.Empty;
+    public string? AddressLine2 { get; private set; } = string.Empty;
 
-    public string? TownOrCity { get; set; } = string.Empty;
+    public string? TownOrCity { get; private set; } = string.Empty;
 
-    public string? County { get; set; } = string.Empty;
+    public string? County { get; private set; } = string.Empty;
 
-    public string? Title { get; set;  }
+    public string? Postcode { get; private set; }
+    public string? Title { get; set; }
 
-    public string? Postcode { get; set; }
-    
 }

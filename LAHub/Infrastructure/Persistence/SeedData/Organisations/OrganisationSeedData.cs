@@ -6,19 +6,22 @@ namespace Infrastructure.Persistence.SeedData.Organisations
 {
     public class OrganisationSeedData
     {
+        private Tenant _tenantUnknown = new("Unknown", "Unknown");
+        private OrganisationType _organisationTypeUnknown = new OrganisationType("Unknown", "Unknown");
+
         private readonly IReadOnlyCollection<Tenant> _tenants = new List<Tenant>
         {
-            new Tenant { Name = "Bir" },
-            new Tenant { Name = "Bri" },
-            new Tenant { Name = "Red" },
-            new Tenant { Name = "Suf" },
-            new Tenant { Name = "TH" },
+            new Tenant("Bir", "Birmingham City Council" ),
+            new Tenant("Bri", "Bristol City Council" ),
+            new Tenant("Red", "Redbridge District Council" ),
+            new Tenant("Suf", "Suffolk County Council" ),
+            new Tenant("TH", "Tower Hamlets Council" ),
         };
 
         private readonly IReadOnlyCollection<OrganisationType> _organisationTypes = new List<OrganisationType>
         {
-            new OrganisationType { Name = "Local Authority" },
-            new OrganisationType { Name = "Charity" }
+            new OrganisationType("Local Authority", "Local Authority"),
+            new OrganisationType("Charity", "Charity")
         };
 
         public OrganisationSeedData() { }
@@ -32,18 +35,22 @@ namespace Infrastructure.Persistence.SeedData.Organisations
 
                 GetBirminghamCityCouncil(),
 
-                new Organisation()
-                {
-                    Tenant = new Tenant(),
-                    Name = "Bristol City Council",
-                    OrganisationType = _organisationTypes?.Where(organisationType => organisationType.Name.Equals("Local Authority"))?.FirstOrDefault() ?? new OrganisationType(),
-                },
-                new Organisation()
-                {
-                    Tenant = new Tenant(),
-                    Name = "Redbridge Council",
-                    OrganisationType = _organisationTypes?.Where(organisationType => organisationType.Name.Equals("Local Authority"))?.FirstOrDefault() ?? new OrganisationType(),
-                },
+                new Organisation(
+                    _tenants?.Where(tenant => tenant.Name.Equals("Bri"))?.FirstOrDefault() ?? _tenantUnknown,
+                    _organisationTypes?.Where(organisationType => organisationType.Name.Equals("Local Authority"))?.FirstOrDefault() ?? _organisationTypeUnknown,
+                    "Bristol City Council",
+                    "Bristol City Council",
+                    null,
+                    Guid.Empty
+                ),
+                new Organisation(
+                    _tenants?.Where(tenant => tenant.Name.Equals("Red"))?.FirstOrDefault() ?? _tenantUnknown,
+                    _organisationTypes?.Where(organisationType => organisationType.Name.Equals("Local Authority"))?.FirstOrDefault() ?? _organisationTypeUnknown,
+                    "Redbridge Council",
+                    "Redbridge Council",
+                    null,
+                    Guid.Empty
+                ),
 
                 GetSuffolkCountyCouncil(),
 
@@ -58,12 +65,15 @@ namespace Infrastructure.Persistence.SeedData.Organisations
                 //    }
                     
                 //},
-                
-                new Organisation()
-                {
-                    Tenant = new Tenant(),
-                    Name = "Tower Hamlets Council"
-                }
+
+                new Organisation(
+                    _tenants?.Where(tenant => tenant.Name.Equals("TH"))?.FirstOrDefault() ?? _tenantUnknown,
+                    _organisationTypes?.Where(organisationType => organisationType.Name.Equals("Local Authority"))?.FirstOrDefault() ?? _organisationTypeUnknown,
+                    "Tower Hamlets Council",
+                    "Tower Hamlets Council",
+                    null,
+                    Guid.Empty
+                ),
             };
 
             return new ReadOnlyCollection<Organisation>(organisations);
@@ -71,15 +81,19 @@ namespace Infrastructure.Persistence.SeedData.Organisations
 
         private Organisation GetBirminghamCityCouncil()
         {
-            var birminghamCityCouncil = new Organisation()
+            var birminghamCityCouncil = new Organisation(
+                 _tenants?.Where(tenant => tenant.Name.Equals("Bir"))?.FirstOrDefault() ?? _tenantUnknown,
+                 _organisationTypes?.Where(organisationType => organisationType.Name.Equals("Local Authority"))?.FirstOrDefault() ?? _organisationTypeUnknown,
+                    "Birmingham City Council",
+                    "Birmingham City Council",
+                    null,
+                    Guid.Empty
+                )
             {
-                Tenant = _tenants?.Where(tenant => tenant.Name.Equals("Bir"))?.FirstOrDefault() ?? new Tenant(),
-                Name = "Birmingham City Council",
-                OrganisationType = _organisationTypes?.Where(organisationType => organisationType.Name.Equals("Local Authority"))?.FirstOrDefault() ?? new OrganisationType(),
                 OrganisationContacts = new List<Contact>
                     {
                         new Contact(
-                            _tenants?.Where(tenant => tenant.Name.Equals("Bir"))?.FirstOrDefault() ?? new Tenant(),
+                            _tenants?.Where(tenant => tenant.Name.Equals("Bir"))?.FirstOrDefault() ?? _tenantUnknown,
                             "Switchboard",
                             "Switchboard",
                             "0121 303 9944",
@@ -120,7 +134,8 @@ namespace Infrastructure.Persistence.SeedData.Organisations
 
             var location = new LAHub.Domain.Entities.Location("Edgbaston",
             "Council House",
-            52.48101394467345, -1.9041462501082664
+            52.48101394467345, -1.9041462501082664,
+            address
             );
 
             location.Address = address;
@@ -140,15 +155,19 @@ namespace Infrastructure.Persistence.SeedData.Organisations
 
         private Organisation GetSuffolkCountyCouncil()
         {
-            var suffolkCountyCouncil = new Organisation()
+            var suffolkCountyCouncil = new Organisation(
+                _tenants?.Where(tenant => tenant.Name.Equals("Suf"))?.FirstOrDefault() ?? _tenantUnknown,
+                _organisationTypes?.Where(organisationType => organisationType.Name.Equals("Local Authority"))?.FirstOrDefault() ?? _organisationTypeUnknown,
+                    "Suffolk County Council",
+                    "Suffolk County Council",
+                    null,
+                    Guid.Empty
+                )
             {
-                Tenant = _tenants?.Where(tenant => tenant.Name.Equals("Suf"))?.FirstOrDefault() ?? new Tenant(),
-                Name = "Suffolk County Council",
-                OrganisationType = _organisationTypes?.Where(organisationType => organisationType.Name.Equals("Local Authority"))?.FirstOrDefault() ?? new OrganisationType(),
                 OrganisationContacts = new List<Contact>
                     {
                         new Contact(
-                            _tenants?.Where(tenant => tenant.Name.Equals("Suf"))?.FirstOrDefault() ?? new Tenant(),
+                            _tenants?.Where(tenant => tenant.Name.Equals("Suf"))?.FirstOrDefault() ?? _tenantUnknown,
                             "Customer Services",
                             "Customer Services",
                             "0345 606 6067",
@@ -177,12 +196,6 @@ namespace Infrastructure.Persistence.SeedData.Organisations
             suffolkCountyCouncil
             );
 
-
-            var parentalocation = new LAHub.Domain.Entities.Location("Kent",
-            "Head Office",
-            51.27235015967112, 0.5139561924728728
-            );
-
             var parentaAddress = new Address(
                 "2-8 London Road",
                 "Rocky Hill",
@@ -190,6 +203,12 @@ namespace Infrastructure.Persistence.SeedData.Organisations
                 "Kent"
                 //,
                 //parentalocation
+            );
+
+            var parentalocation = new LAHub.Domain.Entities.Location("Kent",
+            "Head Office",
+            51.27235015967112, 0.5139561924728728,
+            parentaAddress
             );
 
             ServiceLocation parentaServiceLocation = new(parenta.Id, parentalocation.Id);
@@ -207,13 +226,6 @@ namespace Infrastructure.Persistence.SeedData.Organisations
             suffolkCountyCouncil
             );
 
-
-
-            var robinsChildCarelocation = new LAHub.Domain.Entities.Location("Ipswich",
-            "Capel St Mary School Grounds",
-            52.00337217140149, 1.0454688472631388
-            );
-
             var robinsChildCareAddress = new Address(
                 "Capel St Mary School Grounds",
                 "The Street, Capel St Mary",
@@ -221,6 +233,12 @@ namespace Infrastructure.Persistence.SeedData.Organisations
                 "IP9 2EG"
                 //,
                 //robinsChildCarelocation
+            );
+
+            var robinsChildCarelocation = new LAHub.Domain.Entities.Location("Ipswich",
+            "Capel St Mary School Grounds",
+            52.00337217140149, 1.0454688472631388,
+            robinsChildCareAddress
             );
 
             ServiceLocation robinsChildCareServiceLocation = new(robinsChildCare.Id, robinsChildCarelocation.Id);
@@ -242,11 +260,6 @@ namespace Infrastructure.Persistence.SeedData.Organisations
             suffolkCountyCouncil
             );
 
-            var YmcaChildcareGrundisburghlocation = new LAHub.Domain.Entities.Location("Ipswich",
-            "Alice Driver Road",
-            52.10981163510955, 1.2458769562756002
-            );
-
             var YmcaChildcareGrundisburghAddress = new Address(
                 "Alice Driver Road",
                 "Grundisburgh",
@@ -254,6 +267,12 @@ namespace Infrastructure.Persistence.SeedData.Organisations
                 "IP13 6XH"
                 //,
                 //YmcaChildcareGrundisburghlocation
+            );
+
+            var YmcaChildcareGrundisburghlocation = new LAHub.Domain.Entities.Location("Ipswich",
+            "Alice Driver Road",
+            52.10981163510955, 1.2458769562756002,
+            YmcaChildcareGrundisburghAddress
             );
 
             ServiceLocation YmcaChildcareGrundisburghServiceLocation = new(YmcaChildcareGrundisburgh.Id, YmcaChildcareGrundisburghlocation.Id);     

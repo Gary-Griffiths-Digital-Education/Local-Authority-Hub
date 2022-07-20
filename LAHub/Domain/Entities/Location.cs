@@ -6,7 +6,7 @@ namespace LAHub.Domain.Entities;
 
 public class Location : BaseAuditableEntity<Guid>
 {
-    public Location()
+    private Location()
     {
         Name = string.Empty;
     }
@@ -14,7 +14,8 @@ public class Location : BaseAuditableEntity<Guid>
         string name,
         string? description,
         double latitude,
-        double longitude
+        double longitude,
+        Address? address
     )
     {
         Id = Guid.NewGuid();
@@ -22,17 +23,21 @@ public class Location : BaseAuditableEntity<Guid>
         Description = description ?? string.Empty;
         Latitude = latitude;
         Longitude = longitude;
+        Address = address;
+        if (address != null)
+            AddressId = address.Id;
+
     }
 
-    public string Name { get; set; }
+    public string Name { get; private set; }
 
-    public string? Description { get; set; }
+    public string? Description { get; private set; }
 
-    public double Latitude { get; set; }
+    public double Latitude { get; private set; }
 
-    public double Longitude { get; set; }
+    public double Longitude { get; private set; }
 
-    public Guid AddressId { get; set; }
+    public Guid AddressId { get; set;  }
     public Address? Address { get; set; }
 }
 
