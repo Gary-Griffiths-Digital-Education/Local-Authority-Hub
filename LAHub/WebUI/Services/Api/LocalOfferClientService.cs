@@ -8,84 +8,83 @@ using SFA.DAS.HashingService;
 using System.Text;
 using System.Text.Json;
 
-namespace WebUI.Services.Api
+namespace WebUI.Services.Api;
+
+public interface ILocalOfferClientService
 {
-    public interface ILocalOfferClientService
+    Task<PaginatedList<ServiceItem>> GetLocalOffers(double latitude, double logtitude, double meters);
+    Task<PaginatedList<TestItem>> GetTestCommand(double latitude, double logtitude, double meters);
+    Task<Service> GetLocalOfferById(Guid id);
+}
+
+public class LocalOfferClientService : ApiService, ILocalOfferClientService
+{
+    public LocalOfferClientService(HttpClient client, IHashingService hashingService)
+        : base(client, hashingService)
     {
-        Task<PaginatedList<ServiceItem>> GetLocalOffers(double latitude, double logtitude, double meters);
-        Task<PaginatedList<TestItem>> GetTestCommand(double latitude, double logtitude, double meters);
-        Task<Service> GetLocalOfferById(Guid id);
+        
     }
 
-    public class LocalOfferClientService : ApiService, ILocalOfferClientService
+    public async Task<PaginatedList<ServiceItem>> GetLocalOffers(double latitude, double logtitude, double meters)
     {
-        public LocalOfferClientService(HttpClient client, IHashingService hashingService)
-            : base(client, hashingService)
+        GetServicesByDistanceCommand command = new(latitude, logtitude, meters);
+
+        var request = new HttpRequestMessage
         {
-            
-        }
+            Method = HttpMethod.Post,
+            RequestUri = new Uri(_client.BaseAddress + "api/GetServicesByDistance"),
+            Content = new StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(command), Encoding.UTF8, "application/json"),
+        };
 
-        public async Task<PaginatedList<ServiceItem>> GetLocalOffers(double latitude, double logtitude, double meters)
-        {
-            GetServicesByDistanceCommand command = new(latitude, logtitude, meters);
+        using var response = await _client.SendAsync(request);
 
-            var request = new HttpRequestMessage
-            {
-                Method = HttpMethod.Post,
-                RequestUri = new Uri(_client.BaseAddress + "api/GetServicesByDistance"),
-                Content = new StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(command), Encoding.UTF8, "application/json"),
-            };
-
-            using var response = await _client.SendAsync(request);
-
-            response.EnsureSuccessStatusCode();
+        response.EnsureSuccessStatusCode();
 
 #pragma warning disable CS8603 // Possible null reference return.
-            return await JsonSerializer.DeserializeAsync<PaginatedList<ServiceItem>>(await response.Content.ReadAsStreamAsync(), options: new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+        return await JsonSerializer.DeserializeAsync<PaginatedList<ServiceItem>>(await response.Content.ReadAsStreamAsync(), options: new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
 #pragma warning restore CS8603 // Possible null reference return.
-            
-        }
+        
+    }
 
-        public async Task<Service> GetLocalOfferById(Guid id)
+    public async Task<Service> GetLocalOfferById(Guid id)
+    {
+        GetServiceByIdCommand command = new(id);
+
+        var request = new HttpRequestMessage
         {
-            GetServiceByIdCommand command = new(id);
+            Method = HttpMethod.Post,
+            RequestUri = new Uri(_client.BaseAddress + "api/GetServiceById"),
+            Content = new StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(command), Encoding.UTF8, "application/json"),
+        };
 
-            var request = new HttpRequestMessage
-            {
-                Method = HttpMethod.Post,
-                RequestUri = new Uri(_client.BaseAddress + "api/GetServiceById"),
-                Content = new StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(command), Encoding.UTF8, "application/json"),
-            };
+        using var response = await _client.SendAsync(request);
 
-            using var response = await _client.SendAsync(request);
-
-            response.EnsureSuccessStatusCode();
+        response.EnsureSuccessStatusCode();
 
 #pragma warning disable CS8603 // Possible null reference return.
-            return await JsonSerializer.DeserializeAsync<Service>(await response.Content.ReadAsStreamAsync(), options: new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+        return await JsonSerializer.DeserializeAsync<Service>(await response.Content.ReadAsStreamAsync(), options: new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
 #pragma warning restore CS8603 // Possible null reference return.
 
-        }
+    }
 
-        public async Task<PaginatedList<TestItem>> GetTestCommand(double latitude, double logtitude, double meters)
+    public async Task<PaginatedList<TestItem>> GetTestCommand(double latitude, double logtitude, double meters)
+    {
+        GetServicesByDistanceCommand command = new(latitude, logtitude, meters);
+
+        var request = new HttpRequestMessage
         {
-            GetServicesByDistanceCommand command = new(latitude, logtitude, meters);
+            Method = HttpMethod.Post,
+            RequestUri = new Uri(_client.BaseAddress + "api/GetTestCommand"),
+            Content = new StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(command), Encoding.UTF8, "application/json"),
+        };
 
-            var request = new HttpRequestMessage
-            {
-                Method = HttpMethod.Post,
-                RequestUri = new Uri(_client.BaseAddress + "api/GetTestCommand"),
-                Content = new StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(command), Encoding.UTF8, "application/json"),
-            };
+        using var response = await _client.SendAsync(request);
 
-            using var response = await _client.SendAsync(request);
-
-            response.EnsureSuccessStatusCode();
+        response.EnsureSuccessStatusCode();
 
 #pragma warning disable CS8603 // Possible null reference return.
-            return await JsonSerializer.DeserializeAsync<PaginatedList<TestItem>>(await response.Content.ReadAsStreamAsync(), options: new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+        return await JsonSerializer.DeserializeAsync<PaginatedList<TestItem>>(await response.Content.ReadAsStreamAsync(), options: new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
 #pragma warning restore CS8603 // Possible null reference return.
 
-        }
     }
 }

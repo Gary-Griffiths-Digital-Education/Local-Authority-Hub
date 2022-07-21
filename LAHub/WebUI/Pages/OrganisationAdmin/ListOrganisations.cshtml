@@ -1,0 +1,77 @@
+﻿@page
+@model WebUI.Pages.OrganisationAdmin.ListOrganisationsModel
+@{
+}
+
+<style>
+fieldset br{
+display:none;
+}
+</style>
+
+<main class="govuk-main-wrapper " id="main-content" role="main">
+    <div class="govuk-grid-row">
+
+        <form method="post">
+            
+            <fieldset class="govuk-fieldset">
+            <h1 class="govuk-heading-m">
+                    Organisations
+                </h1>
+
+                <p>
+                    When the authentication feature has been added to the application this selection will no longer be avilable 
+                    as the application will know the Tenant by who the logged in user is.
+                </p>
+            </fieldset>
+            <fieldset class="govuk-fieldset">
+                
+                <div class="govuk-form-group">
+                    <label class="govuk-label" for="SelectedTenant">
+                        Tenants
+                    </label>
+                    <select class="govuk-select" id="SelectedTenant" name="SelectedTenant" asp-for="SelectedTenant" asp-items="Model.TenantSelectionList"></select> 
+                </div>
+                <br>
+                <div class="govuk-form-group">
+                    <label class="govuk-label" for="SelectedOrganisationType">
+                        Organisation Types
+                    </label>
+                    <select class="govuk-select" id="SelectedOrganisationType" name="SelectedOrganisationType" asp-for="SelectedOrganisationType" asp-items="Model.OrganisationTypeList"></select> 
+                </div>
+                <br>
+                 <button type="submit" class="govuk-button" data-module="govuk-button" data-prevent-double-click="true">
+                    Get Organisations
+                </button>
+
+            </fieldset>
+        </form>
+
+        <a asp-page="/OrganisationAdmin/OrganisationDetail" asp-route-id="" class="govuk-button" data-module="govuk-button" data-prevent-double-click="true">Add New Orgaisation +</a>
+
+        @if (@Model.Organisations != null && @Model.Organisations.Any())
+        {
+            <table class="govuk-table">
+                <thead class="govuk-table__head">
+                    <tr class="govuk-table__row">
+                        <th scope="col" class="govuk-table__header">Name</th>
+                        <th scope="col" class="govuk-table__header">Description</th>
+                        <th scope="col" class="govuk-table__header">Action</th>
+                    </tr>
+                </thead>
+                <tbody class="govuk-table__body">
+                    @foreach (var item in @Model.Organisations)
+                    {
+                        <tr class="govuk-table__row">
+                            <th scope="row" class="govuk-table__header">@item.Name</th>
+                            <td class="govuk-table__cell">@item.Description</td>
+                            <td class="govuk-table__cell">
+                                <a asp-page="/OrganisationDetail" asp-route-id="@item.Id" style="color:blue" class="govuk-!-font-weight-bold govuk-body govuk-!-font-size-16">Edit</a>
+                            </td>
+                        </tr>
+                    }
+          </tbody>
+        </table>
+        }
+    </div>
+</main>
