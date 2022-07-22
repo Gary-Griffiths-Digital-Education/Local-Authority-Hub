@@ -81,7 +81,7 @@ public class OrganisationDetailModel : PageModel
                             null,
                             null)
             );
-            */
+            
             Organisation = new OrganisationDto
             {
                 Tenant = tenantDto,
@@ -107,9 +107,35 @@ public class OrganisationDetailModel : PageModel
                             null,
                             null)
             };
+            */
+            Organisation = new OrganisationDto
+            {
+                Tenant = tenantDto,
+                OrganisationType = organisationTypeDto,
+                Name = "New Organisation",
+                Description = null,
+                LogoUrl = null,
+                LogoAltText = null,
+                Contact = new ContactDto(tenantDto, "New Contact",
+                            null,
+                            null,
+                            null,
+                            null,
+                            null,
+                            null,
+                            null,
+                            null,
+                            null,
+                            null,
+                            null,
+                            null,
+                            null,
+                            null,
+                            null)
+            };
 
-                
-            
+
+
 
             //So we know it is a new one
             Organisation.Id = Guid.Empty;
