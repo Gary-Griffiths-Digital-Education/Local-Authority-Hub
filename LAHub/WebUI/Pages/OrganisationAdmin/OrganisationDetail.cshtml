@@ -14,12 +14,12 @@
                         Edit Organisation
                     </h1>
 
-                    <input asp-for="@Model.Organisation.Id" type="hidden" >
-                    <input asp-for="@Model.Organisation.Tenant.Id" type="hidden" >
-                    <input asp-for="@Model.Organisation.OrganisationType.Id" type="hidden" >
+                    <input asp-for="@Model.OrganisationId" type="hidden" >
+                    <input asp-for="@Model.TenantId" type="hidden" >
+                    <input asp-for="@Model.OrganisationTypeId" type="hidden" >
                     @if(@Model.Organisation.Contact != null)
                     {
-                        <input asp-for="@Model.Organisation.Contact.Id" type="hidden" >    
+                        <input asp-for="@Model.ContactId" type="hidden" >    
                     }
                     
                     <div class="govuk-form-group">
@@ -61,14 +61,14 @@
                         <label class="govuk-label" for="contact-name">
                             Contact Name
                         </label>
-                        <input class="govuk-input" id="contact-name" name="contact-name" value="@Model.Organisation?.Contact?.Name" type="text" autocomplete="contact-name">
+                        <input class="govuk-input" id="contact-name" name="contact-name" value="@Model.ContactName" type="text" autocomplete="contact-name">
                     </div>
 
                     <div class="govuk-form-group">
                         <label class="govuk-label" for="contact-email">
                             Contact Email
                         </label>
-                        <input class="govuk-input" id="contact-email" name="contact-email" value="@Model.Organisation?.Contact?.Email" type="text" autocomplete="contact-email">
+                        <input class="govuk-input" id="contact-email" name="contact-email" value="@Model.ContactEmail" type="text" autocomplete="contact-email">
                     </div>
 
                      <button type="submit" class="govuk-button" data-module="govuk-button" data-prevent-double-click="true">

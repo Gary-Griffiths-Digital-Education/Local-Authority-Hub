@@ -4,6 +4,40 @@ public class OrganisationDto
 {
     public OrganisationDto() { }
 
+    public Guid Id { get; set; }
+    public TenantDto Tenant { get; set; } = default!;
+    public string? Name { get; set; } = default!;
+    public string? Description { get; set; } = default!;
+
+    public string? LogoUrl { get; set; } = default!;
+    public string? LogoAltText { get; set; } = default!;
+    public ContactDto? Contact { get; set; } = default!;
+    public ICollection<ServiceDto> Services { get; set; } = default!;
+    public OrganisationTypeDto OrganisationType { get; set; } = default!;
+}
+
+/*
+public class OrganisationDto
+{
+    public OrganisationDto() { }
+    public Guid Id { get; set; }
+    public TenantDto Tenant { get; set; } = default!;
+    public string? Name { get; set; } = default!;
+    public string? Description { get; set; } = default!;
+
+    public string? LogoUrl { get; set; } = default!;
+    public string? LogoAltText { get; set; } = default!;
+    public OrganisationTypeDto OrganisationType { get; set; } = default!;
+    public ContactDto? Contact { get; set; } = default!;
+
+    public ICollection<ServiceDto> Services { get; set; } = default!;
+}
+*/
+/*
+public class OrganisationDto
+{
+    public OrganisationDto() { }
+
     public OrganisationDto(
         TenantDto tenant,
         OrganisationTypeDto organisationType,
@@ -22,10 +56,6 @@ public class OrganisationDto
         LogoUrl = logoUrl;
         LogoAltText = logoAltText;
         Contact = contact;
-        if (contact != null)
-        {
-            ContactId = contact.Id;
-        }
     }
 
     public Guid Id { get; set; }
@@ -41,11 +71,9 @@ public class OrganisationDto
     public string? LogoUrl { get; set; } = default!;
     public string? LogoAltText { get; set; } = default!;
 
-    public Guid? ContactId { get; set; } = default!;
+    public ContactDto? Contact { get; set; } = default!;
 
-    public virtual ContactDto? Contact { get; set; } = default!;
-
-    public virtual ICollection<ServiceDto> Services { get; set; } = default!;
+    public  ICollection<ServiceDto> Services { get; set; } = default!;
 }
-
+*/
 

@@ -21,9 +21,23 @@ public class OrganisationDetailModel : PageModel
     [BindProperty]
     public string SelectedOrganisationType { get; set; } = default!;
 
-
     [BindProperty]
     public OrganisationDto Organisation { get; set; } = default!;
+
+    [BindProperty]
+    public string ContactName { get; set; } = string.Empty;
+    [BindProperty]
+    public string ContactEmail { get; set; } = string.Empty;
+
+    [BindProperty]
+    public Guid OrganisationId { get; set; }
+    [BindProperty]
+    public Guid TenantId { get; set; }
+    [BindProperty]
+    public Guid ContactId { get; set; }
+    [BindProperty]
+    public Guid OrganisationTypeId { get; set; }
+
     public OrganisationDetailModel(IOrganisationAdminClientService organisationAdminClientService, IMapper mapper)
     {
         _organisationAdminClientService = organisationAdminClientService;
@@ -68,14 +82,15 @@ public class OrganisationDetailModel : PageModel
                             null)
             );
             */
-            Organisation = new(
-                tenantDto,
-                organisationTypeDto,
-                "New Organisation",
-                "Description",
-                "Logo Url",
-                "Logo Alt Test",
-                new ContactDto(tenantDto, "New Contact",
+            Organisation = new OrganisationDto
+            {
+                Tenant = tenantDto,
+                OrganisationType = organisationTypeDto,
+                Name = "New Organisation",
+                Description = "Description",
+                LogoUrl = "Logo Url",
+                LogoAltText = "Logo Alt Test",
+                Contact = new ContactDto(tenantDto, "New Contact",
                             null,
                             null,
                             null,
@@ -91,21 +106,62 @@ public class OrganisationDetailModel : PageModel
                             null,
                             null,
                             null)
-            );
+            };
+
+                
+            
 
             //So we know it is a new one
             Organisation.Id = Guid.Empty;
+
         }
 
+        OrganisationId = Organisation.Id;
+        OrganisationTypeId = Organisation.OrganisationType.Id;
+        TenantId = Organisation.Tenant.Id;
+        if (Organisation.Contact != null)
+        {
+            ContactId = Organisation.Contact.Id;
+            ContactName = Organisation.Contact.Name;
+            if (Organisation.Contact.Email != null)
+                ContactEmail = Organisation.Contact.Email;
+        }
+
+        
+        
         await PopulateOrganisationTypeList(Organisation?.OrganisationType?.Name);
     }
 
     public async Task<IActionResult> OnPost()
     {
-        var tenant = await GetTenantById(Organisation.Tenant.Id);
+        var tenant = await GetTenantById(TenantId);
         Organisation.Tenant = _mapper.Map<TenantDto>(tenant);
-        var organisationType = await GetOrganisationTypeById(Organisation.OrganisationType.Id);
+        var organisationType = await GetOrganisationTypeById(OrganisationTypeId);
         Organisation.OrganisationType = _mapper.Map<OrganisationTypeDto>(organisationType);
+
+        Organisation.Id = OrganisationId;
+        Organisation.OrganisationType.Id = OrganisationTypeId;
+        Organisation.Tenant.Id = TenantId;
+        Organisation.Contact = new ContactDto(Organisation.Tenant, ContactName,
+                            null,
+                            null,
+                            null,
+                            null,
+                            ContactEmail,
+                            null,
+                            null,
+                            null,
+                            null,
+                            null,
+                            null,
+                            null,
+                            null,
+                            null,
+                            null);
+        if (Organisation.Contact != null)
+        {
+            Organisation.Contact.Id = ContactId;
+        }
 
         Guid retVal;
 
