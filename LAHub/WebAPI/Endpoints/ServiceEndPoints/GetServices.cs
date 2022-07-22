@@ -10,7 +10,7 @@ using Swashbuckle.AspNetCore.Annotations;
 
 namespace WebAPI.Endpoints.Services;
 
-public class GetServicesEndPoint : EndpointBaseAsync
+public class GetServices : EndpointBaseAsync
     .WithRequest<GetServicesByDistanceCommand>
     .WithResult<ActionResult<PaginatedList<ServiceItem>>>
 {

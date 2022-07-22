@@ -40,14 +40,16 @@ display:none;
                     <select class="govuk-select" id="SelectedOrganisationType" name="SelectedOrganisationType" asp-for="SelectedOrganisationType" asp-items="Model.OrganisationTypeList"></select> 
                 </div>
                 <br>
-                 <button type="submit" class="govuk-button" data-module="govuk-button" data-prevent-double-click="true">
+                 <button type="submit" asp-page-handler="Button1" class="govuk-button" data-module="govuk-button" data-prevent-double-click="true">
                     Get Organisations
+                </button>
+                <br>
+                <button type="submit" asp-page-handler="Button2" class="govuk-button" data-module="govuk-button" data-prevent-double-click="true">
+                    Add New Orgaisation +
                 </button>
 
             </fieldset>
         </form>
-
-        <a asp-page="/OrganisationAdmin/OrganisationDetail" asp-route-id="" class="govuk-button" data-module="govuk-button" data-prevent-double-click="true">Add New Orgaisation +</a>
 
         @if (@Model.Organisations != null && @Model.Organisations.Any())
         {
@@ -66,7 +68,7 @@ display:none;
                             <th scope="row" class="govuk-table__header">@item.Name</th>
                             <td class="govuk-table__cell">@item.Description</td>
                             <td class="govuk-table__cell">
-                                <a asp-page="/OrganisationDetail" asp-route-id="@item.Id" style="color:blue" class="govuk-!-font-weight-bold govuk-body govuk-!-font-size-16">Edit</a>
+                                <a asp-page="/OrganisationAdmin/OrganisationDetail" asp-route-id="@item.Id" style="color:blue" class="govuk-!-font-weight-bold govuk-body govuk-!-font-size-16">Edit</a>
                             </td>
                         </tr>
                     }

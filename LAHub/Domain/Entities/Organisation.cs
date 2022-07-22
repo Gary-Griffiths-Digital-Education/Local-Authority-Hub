@@ -28,20 +28,20 @@ public class Organisation : BaseAuditableEntity<Guid>
         }
     }
 
-    public Tenant Tenant { get; private set; } = default!;
+    public Tenant Tenant { get; set; } = default!;
 
-    public OrganisationType OrganisationType { get; private set; } = default!;
+    public OrganisationType OrganisationType { get; set; } = default!;
 
-    public string Name { get; private set; } = String.Empty;
+    public string Name { get; set; } = String.Empty;
 
-    public string? Description { get; private set; } = String.Empty;
+    public string? Description { get; set; } = String.Empty;
 
-    public string? LogoUrl { get; private set; } = default!;
-    public string? LogoAltText { get; private set; } = default!;
+    public string? LogoUrl { get; set; } = default!;
+    public string? LogoAltText { get; set; } = default!;
 
-    public Guid? ContactId { get; private set; } = default!;
+    public Guid? ContactId { get; set; } = default!;
 
-    public virtual Contact? Contact { get; private set; } = default!;
+    public virtual Contact? Contact { get; set; } = default!;
 
 
     public virtual ICollection<Service> Services { get; set; } = default!;

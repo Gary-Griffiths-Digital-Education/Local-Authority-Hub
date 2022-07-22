@@ -21,16 +21,17 @@ namespace WebUI.Pages.OrganisationAdmin
 
         public List<SelectListItem> OrganisationTypeList { get; private set; } = new List<SelectListItem>();
 
-        public List<OrganisationRecord> Organisations { get; private set; } = default!;
-
         [BindProperty]
         public string SelectedOrganisationType { get; set; } = default!;
+        public List<OrganisationRecord> Organisations { get; private set; } = default!;
+
         public async Task OnGet()
         {
             await PopulateLists();
         }
 
-        public async Task OnPost()
+        //[HttpPost("button1")]
+        public async Task OnPostButton1()
         {
             Guid? selectedOrganisationType = null;
             if (SelectedOrganisationType != null && SelectedOrganisationType != "All")
@@ -42,7 +43,26 @@ namespace WebUI.Pages.OrganisationAdmin
             await PopulateLists();
         }
 
-        
+
+        //[HttpPost("button2")]
+        public IActionResult OnPostButton2()
+        {
+            Guid? idGuid = null;
+            Guid? selectedOrganisationType = null;
+            if (SelectedOrganisationType != null && SelectedOrganisationType != "All")
+            {
+                selectedOrganisationType = new Guid(SelectedOrganisationType);
+            }
+
+            Guid? selectedTenant = new Guid(SelectedTenant);
+
+            return RedirectToPage("/OrganisationAdmin/OrganisationDetail", new
+            {
+                id = idGuid,
+                tenantId = selectedTenant,
+                organisationTypeId = selectedOrganisationType
+            });
+        }
 
         private async Task PopulateLists()
         {
