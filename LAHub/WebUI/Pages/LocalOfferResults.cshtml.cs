@@ -33,7 +33,7 @@ namespace WebUI.Pages
             _localOfferClientService = localOfferClientService;
         }
 
-        public async Task OnGet(double latitude, double longitude, double distance)
+        public async Task OnGetAsync(double latitude, double longitude, double distance)
         {
             CurrentLatitude = latitude;
             CurrentLongitude = longitude;

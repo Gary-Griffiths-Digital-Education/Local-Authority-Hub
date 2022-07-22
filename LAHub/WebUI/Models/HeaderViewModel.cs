@@ -27,7 +27,10 @@ public class HeaderViewModel : IHeaderViewModel
         IUrlHelper? urlHelper = null,
         bool useLegacyStyles = false)
     {
-        if (configuration == null) throw new ArgumentNullException("configuration");
+        ArgumentNullException.ThrowIfNull(configuration, nameof(configuration));
+        //ArgumentNullException.ThrowIfNull(userContext, nameof(userContext));
+
+        //if (configuration == null) throw new ArgumentNullException("configuration");
         UserContext = userContext ?? throw new ArgumentNullException("userContext");
 
         _linkCollection = linkCollection ?? new LinkCollection();

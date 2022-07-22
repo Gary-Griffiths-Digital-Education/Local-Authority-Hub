@@ -43,7 +43,7 @@ public class OrganisationDetailModel : PageModel
         _organisationAdminClientService = organisationAdminClientService;
         _mapper = mapper;
     }
-    public async Task OnGet(Guid? id, Guid? tenantId, Guid? organisationTypeId)
+    public async Task OnGetAsync(Guid? id, Guid? tenantId, Guid? organisationTypeId)
     {
         if (id != null)
         {
@@ -160,10 +160,27 @@ public class OrganisationDetailModel : PageModel
 
     public async Task<IActionResult> OnPost()
     {
+        string[] KeysToIgnore = { "Tenant", "Services", "OrganisationType" };
+        foreach (var key in KeysToIgnore)
+        {            
+#pragma warning disable CS8602 // Dereference of a possibly null reference.
+            if (ModelState[key].Errors.Any())
+                ModelState.Remove(key);
+#pragma warning restore CS8602 // Dereference of a possibly null reference.
+        }
+
         var tenant = await GetTenantById(TenantId);
         Organisation.Tenant = _mapper.Map<TenantDto>(tenant);
-        var organisationType = await GetOrganisationTypeById(OrganisationTypeId);
+        var organisationType = await GetOrganisationTypeById(new Guid(SelectedOrganisationType));
         Organisation.OrganisationType = _mapper.Map<OrganisationTypeDto>(organisationType);
+
+        if (!ModelState.IsValid)
+        {
+            await PopulateOrganisationTypeList(Organisation?.OrganisationType?.Name);
+            return Page();
+        }
+
+
 
         Organisation.Id = OrganisationId;
         Organisation.OrganisationType.Id = OrganisationTypeId;
@@ -226,16 +243,13 @@ public class OrganisationDetailModel : PageModel
         {
             retVal
         });
-
-        //await PopulateOrganisationTypeList(Organisation?.OrganisationType?.Name);
     }
 
     private async Task<Tenant> GetTenantById(Guid? tenantId)
     {
         var tenantList = await _organisationAdminClientService.GetTenantList();
         var tenantRecord = tenantList.FirstOrDefault(x => x.Id == tenantId);
-        if (tenantRecord == null)
-            throw new ArgumentNullException(nameof(tenantRecord));
+        ArgumentNullException.ThrowIfNull(tenantRecord,nameof(tenantRecord));
         return new Tenant(tenantRecord.Name, tenantRecord.Description)
         {
             Id = tenantRecord.Id

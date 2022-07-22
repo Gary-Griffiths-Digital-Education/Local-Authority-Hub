@@ -20,8 +20,9 @@ namespace WebUI.Pages.OrganisationAdmin
             _mapper = mapper;
         }
 
-        public async Task OnGet(Guid? id)
+        public async Task OnGetAsync(Guid? id)
         {
+            ArgumentNullException.ThrowIfNull(id, nameof(id));
             var organisation = await _organisationAdminClientService.GetOrganisationById(id.Value);
             Organisation = _mapper.Map<OrganisationDto>(organisation);
         }

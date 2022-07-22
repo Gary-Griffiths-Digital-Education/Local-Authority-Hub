@@ -27,8 +27,8 @@ public class FooterViewModel : IFooterViewModel
         IUrlHelper? urlHelper = null,
         bool useLegacyStyles = false)
     {
-        if (configuration == null) throw new ArgumentNullException("configuration");
-        if (userContext == null) throw new ArgumentNullException("userContext");
+        ArgumentNullException.ThrowIfNull(configuration, nameof(configuration));
+        ArgumentNullException.ThrowIfNull(userContext, nameof(userContext));
 
         _linkCollection = new LinkCollection();
 

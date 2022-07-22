@@ -37,7 +37,7 @@ public static class ServiceCollectionExtensions
         _ = serviceCollection.AddTransient(s =>
         {
             var settings = s.GetService<IOptions<ApiOptions>>()?.Value;
-            ArgumentNullException.ThrowIfNull(settings);
+            ArgumentNullException.ThrowIfNull(settings, nameof(settings));
 
             var clientBuilder = new HttpClientBuilder()
                 .WithDefaultHeaders()

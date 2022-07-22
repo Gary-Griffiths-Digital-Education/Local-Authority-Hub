@@ -1,9 +1,8 @@
+using Application.Commands.ListOrganisation;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using WebUI.Services.Api;
-using System.Linq;
-using Application.Commands.ListOrganisation;
 
 namespace WebUI.Pages.OrganisationAdmin
 {
@@ -25,7 +24,7 @@ namespace WebUI.Pages.OrganisationAdmin
         public string SelectedOrganisationType { get; set; } = default!;
         public List<OrganisationRecord> Organisations { get; private set; } = default!;
 
-        public async Task OnGet()
+        public async Task OnGetAsync()
         {
             await PopulateLists();
         }

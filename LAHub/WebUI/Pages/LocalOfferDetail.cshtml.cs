@@ -16,7 +16,7 @@ namespace WebUI.Pages
             _localOfferClientService = localOfferClientService;
         }   
 
-        public async Task OnGet(Guid id)
+        public async Task OnGetAsync(Guid id)
         {
             LocalOffer = await _localOfferClientService.GetLocalOfferById(id);
         }
