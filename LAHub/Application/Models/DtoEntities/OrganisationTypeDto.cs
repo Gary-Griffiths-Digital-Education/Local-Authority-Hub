@@ -1,4 +1,4 @@
-﻿namespace WebUI.Models.DtoEntities;
+﻿namespace Application.Models.DtoEntities;
 
 public class OrganisationTypeDto
 {

@@ -19,7 +19,7 @@ public interface IOrganisationAdminClientService
     Task<List<OrganisationRecord>> GetOrganisations(Guid tenantId, Guid? organisationTypeId);
     Task<Organisation> GetOrganisationById(Guid id);
 
-    Task<List<OrganisationRecord>> CreateOrganisation(
+    Task<Guid> CreateOrganisation(
         Tenant tenant,
         string name,
         string? description,
@@ -29,7 +29,7 @@ public interface IOrganisationAdminClientService
         Contact? contact,
         ICollection<Service> services);
 
-    Task<List<OrganisationRecord>> UpdateOrganisation(
+    Task<Guid> UpdateOrganisation(
         Guid id,
         Tenant tenant,
         string name,
@@ -127,7 +127,7 @@ public class OrganisationAdminClientService : ApiService, IOrganisationAdminClie
 
     }
 
-    public async Task<List<OrganisationRecord>> CreateOrganisation(
+    public async Task<Guid> CreateOrganisation(
         Tenant tenant,
         string name,
         string? description,
@@ -161,12 +161,12 @@ public class OrganisationAdminClientService : ApiService, IOrganisationAdminClie
         response.EnsureSuccessStatusCode();
 
 #pragma warning disable CS8603 // Possible null reference return.
-        return await JsonSerializer.DeserializeAsync<List<OrganisationRecord>>(await response.Content.ReadAsStreamAsync(), options: new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+        return await JsonSerializer.DeserializeAsync<Guid>(await response.Content.ReadAsStreamAsync(), options: new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
 #pragma warning restore CS8603 // Possible null reference return.
 
     }
 
-    public async Task<List<OrganisationRecord>> UpdateOrganisation(
+    public async Task<Guid> UpdateOrganisation(
         Guid id,
         Tenant tenant,
         string name,
@@ -201,7 +201,7 @@ public class OrganisationAdminClientService : ApiService, IOrganisationAdminClie
         response.EnsureSuccessStatusCode();
 
 #pragma warning disable CS8603 // Possible null reference return.
-        return await JsonSerializer.DeserializeAsync<List<OrganisationRecord>>(await response.Content.ReadAsStreamAsync(), options: new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+        return await JsonSerializer.DeserializeAsync<Guid>(await response.Content.ReadAsStreamAsync(), options: new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
 #pragma warning restore CS8603 // Possible null reference return.
 
     }

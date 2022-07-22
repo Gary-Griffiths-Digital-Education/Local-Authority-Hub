@@ -3,6 +3,8 @@
 @{
 }
 
+<a asp-page="/OrganisationAdmin/ListOrganisations" class="govuk-back-link">Back</a>
+
 <main class="govuk-main-wrapper " id="main-content" role="main">
     <div class="govuk-grid-column-two-thirds">
          <div class="govuk-grid-row">
@@ -11,7 +13,15 @@
                     <h1 class="govuk-heading-m">
                         Edit Organisation
                     </h1>
-                
+
+                    <input asp-for="@Model.Organisation.Id" type="hidden" >
+                    <input asp-for="@Model.Organisation.Tenant.Id" type="hidden" >
+                    <input asp-for="@Model.Organisation.OrganisationType.Id" type="hidden" >
+                    @if(@Model.Organisation.Contact != null)
+                    {
+                        <input asp-for="@Model.Organisation.Contact.Id" type="hidden" >    
+                    }
+                    
                     <div class="govuk-form-group">
                         <label class="govuk-label" for="SelectedOrganisationType">
                             Organisation Types

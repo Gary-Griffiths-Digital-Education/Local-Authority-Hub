@@ -30,7 +30,6 @@ namespace WebUI.Pages.OrganisationAdmin
             await PopulateLists();
         }
 
-        //[HttpPost("button1")]
         public async Task OnPostButton1()
         {
             Guid? selectedOrganisationType = null;
@@ -43,8 +42,6 @@ namespace WebUI.Pages.OrganisationAdmin
             await PopulateLists();
         }
 
-
-        //[HttpPost("button2")]
         public IActionResult OnPostButton2()
         {
             Guid? idGuid = null;

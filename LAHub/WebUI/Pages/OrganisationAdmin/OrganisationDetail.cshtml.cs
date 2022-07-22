@@ -1,4 +1,6 @@
 using Application.Commands.ListOrganisationType;
+using Application.Models.DtoEntities;
+using AutoMapper;
 using LAHub.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -10,6 +12,7 @@ namespace WebUI.Pages.OrganisationAdmin;
 public class OrganisationDetailModel : PageModel
 {
     private readonly IOrganisationAdminClientService _organisationAdminClientService;
+    private readonly IMapper _mapper;
 
     private List<OrganisationTypeRecord> _organisationTypeRecords = new List<OrganisationTypeRecord>();
 
@@ -20,30 +23,34 @@ public class OrganisationDetailModel : PageModel
 
 
     [BindProperty]
-    public Organisation Organisation { get; set; } = default!;
-    public OrganisationDetailModel(IOrganisationAdminClientService organisationAdminClientService)
+    public OrganisationDto Organisation { get; set; } = default!;
+    public OrganisationDetailModel(IOrganisationAdminClientService organisationAdminClientService, IMapper mapper)
     {
         _organisationAdminClientService = organisationAdminClientService;
+        _mapper = mapper;
     }
     public async Task OnGet(Guid? id, Guid? tenantId, Guid? organisationTypeId)
     {
         if (id != null)
         {
-            Organisation = await _organisationAdminClientService.GetOrganisationById(id.Value);
+            var organisation = await _organisationAdminClientService.GetOrganisationById(id.Value);
+            Organisation = _mapper.Map<OrganisationDto>(organisation);
         }   
         else
         {
-            var tennant = await GetTenantById(tenantId);
+            var tenant = await GetTenantById(tenantId);
+            TenantDto tenantDto = _mapper.Map<TenantDto>(tenant);
             var organisationType = await GetOrganisationTypeById(organisationTypeId);
+            OrganisationTypeDto organisationTypeDto = _mapper.Map<OrganisationTypeDto>(organisationType);
 
             Organisation = new(
-                tennant,
-                organisationType,
+                tenantDto,
+                organisationTypeDto,
                 "New Organisation",
                 null,
                 null,
                 null,
-                new Contact(tennant,"New Contact",
+                new ContactDto(tenantDto,"New Contact",
                             null,
                             null,
                             null,
@@ -65,9 +72,49 @@ public class OrganisationDetailModel : PageModel
         await PopulateOrganisationTypeList(Organisation?.OrganisationType?.Name);
     }
 
-    public async Task OnPost()
+    public async Task<IActionResult> OnPost()
     {
-        await PopulateOrganisationTypeList(Organisation?.OrganisationType?.Name);
+        var tenant = await GetTenantById(Organisation.Tenant.Id);
+        Organisation.Tenant = _mapper.Map<TenantDto>(tenant);
+        var organisationType = await GetOrganisationTypeById(Organisation.OrganisationType.Id);
+        Organisation.OrganisationType = _mapper.Map<OrganisationTypeDto>(organisationType);
+
+        if (Organisation.Id == Guid.Empty)
+        {
+            var organisation = _mapper.Map<Organisation>(Organisation);
+            await _organisationAdminClientService.CreateOrganisation(
+                organisation.Tenant,
+                organisation.Name,
+                organisation.Description,
+                organisation.LogoUrl,
+                organisation.LogoAltText,
+                organisation.OrganisationType,
+                organisation.Contact,
+                new List<Service>());
+        }
+        else
+        {
+            var orginalOrganisation = await _organisationAdminClientService.GetOrganisationById(Organisation.Id);
+            var organisation = _mapper.Map<Organisation>(Organisation);
+            organisation.Id = Organisation.Id;
+            await _organisationAdminClientService.UpdateOrganisation(
+                organisation.Id,
+                organisation.Tenant,
+                organisation.Name,
+                organisation.Description,
+                organisation.LogoUrl,
+                organisation.LogoAltText,
+                organisation.OrganisationType,
+                orginalOrganisation.Contact,
+                orginalOrganisation.Services);
+        }
+
+        return RedirectToPage("/OrganisationAdmin/CheckOrganisationDetailAnswers", new
+        {
+            Organisation.Id
+        });
+
+        //await PopulateOrganisationTypeList(Organisation?.OrganisationType?.Name);
     }
 
     private async Task<Tenant> GetTenantById(Guid? tenantId)

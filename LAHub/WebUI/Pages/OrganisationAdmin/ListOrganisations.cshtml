@@ -9,6 +9,8 @@ display:none;
 }
 </style>
 
+<a asp-page="/Index" class="govuk-back-link">Back</a>
+
 <main class="govuk-main-wrapper " id="main-content" role="main">
     <div class="govuk-grid-row">
 
@@ -69,6 +71,7 @@ display:none;
                             <td class="govuk-table__cell">@item.Description</td>
                             <td class="govuk-table__cell">
                                 <a asp-page="/OrganisationAdmin/OrganisationDetail" asp-route-id="@item.Id" style="color:blue" class="govuk-!-font-weight-bold govuk-body govuk-!-font-size-16">Edit</a>
+                                @*<a asp-page="/OrganisationAdmin/CheckOrganisationDetailAnswers" asp-route-id="@item.Id" style="color:blue" class="govuk-!-font-weight-bold govuk-body govuk-!-font-size-16">TestCheckAnswers</a>*@
                             </td>
                         </tr>
                     }
