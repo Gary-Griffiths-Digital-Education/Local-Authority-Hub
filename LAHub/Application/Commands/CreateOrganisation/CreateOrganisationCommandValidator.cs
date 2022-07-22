@@ -2,15 +2,16 @@
 
 namespace Application.Commands.CreateOrganisation;
 
+/*
 public class CreateOrganisationCommandValidator : AbstractValidator<CreateOrganisationCommand>
 {
     public CreateOrganisationCommandValidator()
     {
-        RuleFor(v => v.Tenant)
-            .NotNull();
+        //RuleFor(v => v.Tenant)
+        //    .NotNull();
 
-        RuleFor(v => v.OrganisationType)
-            .NotNull();
+        //RuleFor(v => v.OrganisationType)
+        //    .NotNull();
 
         RuleFor(v => v.Name)
             .MinimumLength(1)
@@ -22,3 +23,4 @@ public class CreateOrganisationCommandValidator : AbstractValidator<CreateOrgani
             .MaximumLength(500);
     }
 }
+*/

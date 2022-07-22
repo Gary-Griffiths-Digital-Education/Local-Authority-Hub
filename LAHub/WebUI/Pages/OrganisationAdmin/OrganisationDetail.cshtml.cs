@@ -42,7 +42,7 @@ public class OrganisationDetailModel : PageModel
             TenantDto tenantDto = _mapper.Map<TenantDto>(tenant);
             var organisationType = await GetOrganisationTypeById(organisationTypeId);
             OrganisationTypeDto organisationTypeDto = _mapper.Map<OrganisationTypeDto>(organisationType);
-
+            /*
             Organisation = new(
                 tenantDto,
                 organisationTypeDto,
@@ -67,6 +67,34 @@ public class OrganisationDetailModel : PageModel
                             null,
                             null)
             );
+            */
+            Organisation = new(
+                tenantDto,
+                organisationTypeDto,
+                "New Organisation",
+                "Description",
+                "Logo Url",
+                "Logo Alt Test",
+                new ContactDto(tenantDto, "New Contact",
+                            null,
+                            null,
+                            null,
+                            null,
+                            null,
+                            null,
+                            null,
+                            null,
+                            null,
+                            null,
+                            null,
+                            null,
+                            null,
+                            null,
+                            null)
+            );
+
+            //So we know it is a new one
+            Organisation.Id = Guid.Empty;
         }
 
         await PopulateOrganisationTypeList(Organisation?.OrganisationType?.Name);
@@ -79,25 +107,28 @@ public class OrganisationDetailModel : PageModel
         var organisationType = await GetOrganisationTypeById(Organisation.OrganisationType.Id);
         Organisation.OrganisationType = _mapper.Map<OrganisationTypeDto>(organisationType);
 
+        Guid retVal;
+
         if (Organisation.Id == Guid.Empty)
         {
             var organisation = _mapper.Map<Organisation>(Organisation);
-            await _organisationAdminClientService.CreateOrganisation(
-                organisation.Tenant,
+            retVal = await _organisationAdminClientService.CreateOrganisation(
+                //organisation.Tenant,
                 organisation.Name,
-                organisation.Description,
-                organisation.LogoUrl,
-                organisation.LogoAltText,
-                organisation.OrganisationType,
-                organisation.Contact,
-                new List<Service>());
+                organisation.Description
+                //organisation.LogoUrl,
+                //organisation.LogoAltText,
+                //organisation.OrganisationType,
+                //organisation.Contact,
+                //new List<Service>()
+                );
         }
         else
         {
             var orginalOrganisation = await _organisationAdminClientService.GetOrganisationById(Organisation.Id);
             var organisation = _mapper.Map<Organisation>(Organisation);
             organisation.Id = Organisation.Id;
-            await _organisationAdminClientService.UpdateOrganisation(
+            retVal = await _organisationAdminClientService.UpdateOrganisation(
                 organisation.Id,
                 organisation.Tenant,
                 organisation.Name,
@@ -111,7 +142,7 @@ public class OrganisationDetailModel : PageModel
 
         return RedirectToPage("/OrganisationAdmin/CheckOrganisationDetailAnswers", new
         {
-            Organisation.Id
+            retVal
         });
 
         //await PopulateOrganisationTypeList(Organisation?.OrganisationType?.Name);

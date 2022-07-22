@@ -6,7 +6,7 @@ using Swashbuckle.AspNetCore.Annotations;
 
 namespace WebAPI.Endpoints.OrganisationEndPoints;
 
-public class Create : EndpointBaseAsync
+public class CreateOrganisation : EndpointBaseAsync
     .WithRequest<CreateOrganisationCommand>
     .WithResult<ActionResult<Guid>>
 {
@@ -20,7 +20,7 @@ public class Create : EndpointBaseAsync
     Tags = new[] { "CreateOrganisation" })
     ]
     [HttpPost]
-    [Route("api/CreateOrganisation")]
+    [Route("api/CreateMyOrganisation")]
     public override async Task<ActionResult<Guid>> HandleAsync([FromBody] CreateOrganisationCommand request, CancellationToken cancellationToken = default)
     {
         

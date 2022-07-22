@@ -7,7 +7,12 @@ namespace Application.Commands.CreateOrganisation;
 
 public record class CreateOrganisationCommand : IRequest<Guid>
 {
-    public CreateOrganisationCommand(Tenant tenant,
+    public CreateOrganisationCommand() 
+    { 
+    }
+    /*
+    public CreateOrganisationCommand(
+        Tenant tenant,
         string name,
         string? description,
         string? logoUrl,
@@ -29,23 +34,23 @@ public record class CreateOrganisationCommand : IRequest<Guid>
         }
         Services = services;
     }
+    */
+    public string Name { get; set; }
 
-    public string Name { get; init; }
+    public string? Description { get; set; }
 
-    public string? Description { get; init; }
+    //public Tenant Tenant { get; set; } = default!;
 
-    public Tenant Tenant { get; private set; } = default!;
+    //public OrganisationType OrganisationType { get; set; } = default!;
 
-    public OrganisationType OrganisationType { get; private set; } = default!;
+    //public string? LogoUrl { get; set; } = default!;
+    //public string? LogoAltText { get; set; } = default!;
 
-    public string? LogoUrl { get; private set; } = default!;
-    public string? LogoAltText { get; private set; } = default!;
+    //public Guid? ContactId { get; set; } = default!;
 
-    public Guid? ContactId { get; private set; } = default!;
+    //public Contact? Contact { get; set; } = default!;
 
-    public Contact? Contact { get; private set; } = default!;
-
-    public ICollection<Service> Services { get; set; }
+    //public ICollection<Service> Services { get; set; }
 }
 
 public class CreateOrganisationCommandHandler : IRequestHandler<CreateOrganisationCommand, Guid>
@@ -58,6 +63,7 @@ public class CreateOrganisationCommandHandler : IRequestHandler<CreateOrganisati
     }
     public async Task<Guid> Handle(CreateOrganisationCommand request, CancellationToken cancellationToken)
     {
+        /*
         var entity = new LAHub.Domain.Entities.Organisation(
             request.Tenant,
             request.OrganisationType,
@@ -77,5 +83,8 @@ public class CreateOrganisationCommandHandler : IRequestHandler<CreateOrganisati
         await _context.SaveChangesAsync(cancellationToken);
 
         return entity.Id;
+        */
+
+        return Guid.NewGuid();
     }
 }
