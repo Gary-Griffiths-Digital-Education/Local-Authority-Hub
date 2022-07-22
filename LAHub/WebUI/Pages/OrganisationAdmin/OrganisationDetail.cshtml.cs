@@ -113,14 +113,14 @@ public class OrganisationDetailModel : PageModel
         {
             var organisation = _mapper.Map<Organisation>(Organisation);
             retVal = await _organisationAdminClientService.CreateOrganisation(
-                //organisation.Tenant,
+                organisation.Tenant,
                 organisation.Name,
-                organisation.Description
-                //organisation.LogoUrl,
-                //organisation.LogoAltText,
-                //organisation.OrganisationType,
-                //organisation.Contact,
-                //new List<Service>()
+                organisation.Description,
+                organisation.LogoUrl,
+                organisation.LogoAltText,
+                organisation.OrganisationType,
+                organisation.Contact,
+                new List<Service>()
                 );
         }
         else

@@ -6,7 +6,7 @@ public class Contact : BaseAuditableEntity<Guid>
 
     
     public Contact(
-        Tenant tenant,
+        Tenant? tenant,
         string name,
         string? description,
         string? telephone,
@@ -45,7 +45,7 @@ public class Contact : BaseAuditableEntity<Guid>
         Minicom = minicom;
     }
     
-    public Tenant Tenant { get; private set; } = default!;
+    public Tenant? Tenant { get; private set; } = default!;
 
     public string Name { get; private set; } = string.Empty;
 

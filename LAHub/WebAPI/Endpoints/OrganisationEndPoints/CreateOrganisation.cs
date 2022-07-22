@@ -21,6 +21,7 @@ public class CreateOrganisation : EndpointBaseAsync
     ]
     [HttpPost]
     [Route("api/CreateMyOrganisation")]
+    //public override async Task<ActionResult<Guid>> HandleAsync([FromBody] CreateOrganisationCommand request, CancellationToken cancellationToken = default)
     public override async Task<ActionResult<Guid>> HandleAsync([FromBody] CreateOrganisationCommand request, CancellationToken cancellationToken = default)
     {
         

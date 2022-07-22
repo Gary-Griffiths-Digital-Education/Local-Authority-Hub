@@ -7,7 +7,7 @@ public class Service : BaseAuditableEntity<Guid>
         Name = String.Empty;
     }
     public Service(
-        string name,
+        string? name,
         string? description,
         int minimumAge,
         int maximumAge,
@@ -44,7 +44,7 @@ public class Service : BaseAuditableEntity<Guid>
         }
     }
 
-    public string Name { get; private set; }
+    public string? Name { get; private set; }
     public string? Description { get; private set; }
     public int MinimumAge { get; private set; }
     public int MaximumAge { get; private set; }

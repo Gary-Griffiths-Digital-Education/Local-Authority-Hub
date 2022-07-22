@@ -5,65 +5,50 @@ using MediatR;
 
 namespace Application.Commands.CreateOrganisation;
 
-public record class CreateOrganisationCommand : IRequest<Guid>
+public class CreateOrganisationCommand : IRequest<Guid>
 {
-    public CreateOrganisationCommand() 
-    { 
-    }
-    /*
     public CreateOrganisationCommand(
-        Tenant tenant,
-        string name,
+        Tenant? tenant,
+        string? name,
         string? description,
         string? logoUrl,
         string? logoAltText,
-        OrganisationType organisationType,
+        OrganisationType? organisationType,
         Contact? contact,
-        ICollection<Service> services)
+        ICollection<Service>? services
+        )
     {
-        Tenant = tenant;
-        OrganisationType = organisationType;
         Name = name;
         Description = description;
         LogoUrl = logoUrl;
         LogoAltText = logoAltText;
+        Tenant = tenant;
+        OrganisationType = organisationType;
         Contact = contact;
-        if (contact != null)
-        {
-            ContactId = contact.Id;
-        }
         Services = services;
     }
-    */
-    public string Name { get; set; }
 
+    public Tenant? Tenant { get; set; }
+    public string? Name { get; set; }
     public string? Description { get; set; }
-
-    //public Tenant Tenant { get; set; } = default!;
-
-    //public OrganisationType OrganisationType { get; set; } = default!;
-
-    //public string? LogoUrl { get; set; } = default!;
-    //public string? LogoAltText { get; set; } = default!;
-
-    //public Guid? ContactId { get; set; } = default!;
-
-    //public Contact? Contact { get; set; } = default!;
-
-    //public ICollection<Service> Services { get; set; }
+    public string? LogoUrl { get; set; }
+    public string? LogoAltText { get; set; }
+    public OrganisationType? OrganisationType { get; set; }
+    public Contact? Contact { get; set; }
+    public ICollection<Service>? Services { get; set; }
 }
 
-public class CreateOrganisationCommandHandler : IRequestHandler<CreateOrganisationCommand, Guid>
+public class GetOrganisationByIdCommandHandler : IRequestHandler<CreateOrganisationCommand, Guid>
 {
     private readonly ILAHubDbContext _context;
 
-    public CreateOrganisationCommandHandler(ILAHubDbContext context)
+    public GetOrganisationByIdCommandHandler(ILAHubDbContext context)
     {
         _context = context;
     }
     public async Task<Guid> Handle(CreateOrganisationCommand request, CancellationToken cancellationToken)
     {
-        /*
+#pragma warning disable CS8604 // Possible null reference argument.
         var entity = new LAHub.Domain.Entities.Organisation(
             request.Tenant,
             request.OrganisationType,
@@ -72,9 +57,11 @@ public class CreateOrganisationCommandHandler : IRequestHandler<CreateOrganisati
             request.LogoUrl,
             request.LogoAltText,
             request.Contact);
+#pragma warning restore CS8604 // Possible null reference argument.
 
-        entity.Services = request.Services;
-        
+        if (request.Services != null)
+            entity.Services = request.Services;
+
 
         entity.AddDomainEvent(new OrganisationCreatedEvent(entity));
 
@@ -83,8 +70,9 @@ public class CreateOrganisationCommandHandler : IRequestHandler<CreateOrganisati
         await _context.SaveChangesAsync(cancellationToken);
 
         return entity.Id;
-        */
-
-        return Guid.NewGuid();
     }
 }
+
+
+
+

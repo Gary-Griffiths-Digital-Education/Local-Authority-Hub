@@ -19,17 +19,16 @@ public interface IOrganisationAdminClientService
     Task<List<OrganisationRecord>> GetOrganisations(Guid tenantId, Guid? organisationTypeId);
     Task<Organisation> GetOrganisationById(Guid id);
 
-    Task<Guid> CreateOrganisation(string name, string? description);
 
-    //Task<Guid> CreateOrganisation(
-    //    Tenant tenant,
-    //    string name,
-    //    string? description,
-    //    string? logoUrl,
-    //    string? logoAltText,
-    //    OrganisationType organisationType,
-    //    Contact? contact,
-    //    ICollection<Service> services);
+    Task<Guid> CreateOrganisation(
+        Tenant tenant,
+        string name,
+        string? description,
+        string? logoUrl,
+        string? logoAltText,
+        OrganisationType organisationType,
+        Contact? contact,
+        ICollection<Service> services);
 
     Task<Guid> UpdateOrganisation(
         Guid id,
@@ -129,13 +128,26 @@ public class OrganisationAdminClientService : ApiService, IOrganisationAdminClie
 
     }
 
-    public async Task<Guid> CreateOrganisation(string name, string? description)
+    public async Task<Guid> CreateOrganisation(
+        Tenant tenant,
+        string name,
+        string? description,
+        string? logoUrl,
+        string? logoAltText,
+        OrganisationType organisationType,
+        Contact? contact,
+        ICollection<Service> services)
     {
-        CreateOrganisationCommand command = new()
-        {
-            Name = name,
-            Description = description
-        };
+        CreateOrganisationCommand command = new(
+        tenant,
+        name,
+        description,
+        logoUrl,
+        logoAltText,
+        organisationType,
+        contact,
+        services
+        );
 
         var request = new HttpRequestMessage
         {
