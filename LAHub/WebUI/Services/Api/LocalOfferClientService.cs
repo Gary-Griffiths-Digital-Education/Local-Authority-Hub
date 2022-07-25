@@ -52,8 +52,8 @@ public class LocalOfferClientService : ApiService, ILocalOfferClientService
 
         var request = new HttpRequestMessage
         {
-            Method = HttpMethod.Post,
-            RequestUri = new Uri(_client.BaseAddress + "api/GetServiceById"),
+            Method = HttpMethod.Get,
+            RequestUri = new Uri(_client.BaseAddress + GetServiceByIdCommand.BuildRoute(id)),
             Content = new StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(command), Encoding.UTF8, "application/json"),
         };
 

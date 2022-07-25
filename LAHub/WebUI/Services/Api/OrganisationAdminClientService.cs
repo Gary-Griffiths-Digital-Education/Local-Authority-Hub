@@ -116,8 +116,8 @@ public class OrganisationAdminClientService : ApiService, IOrganisationAdminClie
 
         var request = new HttpRequestMessage
         {
-            Method = HttpMethod.Post,
-            RequestUri = new Uri(_client.BaseAddress + "api/GetOrganisationById"),
+            Method = HttpMethod.Get,
+            RequestUri = new Uri(_client.BaseAddress + GetOrganisationByIdCommand.BuildRoute(id)),
             Content = new StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(command), Encoding.UTF8, "application/json"),
         };
 

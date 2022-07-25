@@ -20,8 +20,7 @@ public class GetOrganisationByIdEndPoint : EndpointBaseAsync
     //OperationId = "Author.Create",
     Tags = new[] { "GetOrganisationsById" })
     ]
-    [HttpPost]
-    [Route("api/GetOrganisationById")]
+    [HttpGet(GetOrganisationByIdCommand.Route)]
     public override async Task<ActionResult<Organisation>> HandleAsync([FromBody] GetOrganisationByIdCommand request, CancellationToken cancellationToken = default)
     {
         try
