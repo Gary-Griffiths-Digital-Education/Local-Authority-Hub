@@ -2,7 +2,7 @@
 
 namespace Application.Commands.CreateOrganisation;
 
-/*
+
 public class CreateOrganisationCommandValidator : AbstractValidator<CreateOrganisationCommand>
 {
     public CreateOrganisationCommandValidator()
@@ -23,4 +23,3 @@ public class CreateOrganisationCommandValidator : AbstractValidator<CreateOrgani
             .MaximumLength(500);
     }
 }
-*/

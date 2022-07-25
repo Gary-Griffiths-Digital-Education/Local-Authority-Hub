@@ -56,32 +56,8 @@ public class OrganisationDetailModel : PageModel
             TenantDto tenantDto = _mapper.Map<TenantDto>(tenant);
             var organisationType = await GetOrganisationTypeById(organisationTypeId);
             OrganisationTypeDto organisationTypeDto = _mapper.Map<OrganisationTypeDto>(organisationType);
-            /*
-            Organisation = new(
-                tenantDto,
-                organisationTypeDto,
-                "New Organisation",
-                null,
-                null,
-                null,
-                new ContactDto(tenantDto,"New Contact",
-                            null,
-                            null,
-                            null,
-                            null,
-                            null,
-                            null,
-                            null,
-                            null,
-                            null,
-                            null,
-                            null,
-                            null,
-                            null,
-                            null,
-                            null)
-            );
             
+            /*
             Organisation = new OrganisationDto
             {
                 Tenant = tenantDto,
@@ -95,7 +71,7 @@ public class OrganisationDetailModel : PageModel
                             null,
                             null,
                             null,
-                            null,
+                            "someone@aol.com",
                             null,
                             null,
                             null,
@@ -133,10 +109,7 @@ public class OrganisationDetailModel : PageModel
                             null,
                             null)
             };
-
-
-
-
+            
             //So we know it is a new one
             Organisation.Id = Guid.Empty;
 
@@ -164,7 +137,7 @@ public class OrganisationDetailModel : PageModel
         foreach (var key in KeysToIgnore)
         {            
 #pragma warning disable CS8602 // Dereference of a possibly null reference.
-            if (ModelState[key].Errors.Any())
+            if (ModelState[key] is not null && ModelState[key].Errors.Any())
                 ModelState.Remove(key);
 #pragma warning restore CS8602 // Dereference of a possibly null reference.
         }
@@ -174,51 +147,32 @@ public class OrganisationDetailModel : PageModel
         var organisationType = await GetOrganisationTypeById(new Guid(SelectedOrganisationType));
         Organisation.OrganisationType = _mapper.Map<OrganisationTypeDto>(organisationType);
 
-        if (!ModelState.IsValid)
-        {
-            await PopulateOrganisationTypeList(Organisation?.OrganisationType?.Name);
-            return Page();
-        }
+        //if (!ModelState.IsValid)
+        //{
+        //    await PopulateOrganisationTypeList(Organisation?.OrganisationType?.Name);
+        //    return Page();
+        //}
 
 
 
         Organisation.Id = OrganisationId;
         Organisation.OrganisationType.Id = OrganisationTypeId;
         Organisation.Tenant.Id = TenantId;
-        Organisation.Contact = new ContactDto(Organisation.Tenant, ContactName,
-                            null,
-                            null,
-                            null,
-                            null,
-                            ContactEmail,
-                            null,
-                            null,
-                            null,
-                            null,
-                            null,
-                            null,
-                            null,
-                            null,
-                            null,
-                            null);
-        if (Organisation.Contact != null)
-        {
-            Organisation.Contact.Id = ContactId;
-        }
-
+        
         Guid retVal;
 
         if (Organisation.Id == Guid.Empty)
         {
             var organisation = _mapper.Map<Organisation>(Organisation);
             retVal = await _organisationAdminClientService.CreateOrganisation(
-                organisation.Tenant,
+                organisation.Tenant.Id,
                 organisation.Name,
                 organisation.Description,
                 organisation.LogoUrl,
                 organisation.LogoAltText,
-                organisation.OrganisationType,
-                organisation.Contact,
+                organisation.OrganisationType.Id,
+                ContactName,
+                ContactEmail,
                 new List<Service>()
                 );
         }
@@ -229,19 +183,21 @@ public class OrganisationDetailModel : PageModel
             organisation.Id = Organisation.Id;
             retVal = await _organisationAdminClientService.UpdateOrganisation(
                 organisation.Id,
-                organisation.Tenant,
+                organisation.Tenant.Id,
                 organisation.Name,
                 organisation.Description,
                 organisation.LogoUrl,
                 organisation.LogoAltText,
-                organisation.OrganisationType,
-                orginalOrganisation.Contact,
+                organisation.OrganisationType.Id,
+                (orginalOrganisation.Contact != null) ? orginalOrganisation.Contact.Id : Guid.Empty,
+                ContactName,
+                ContactEmail,
                 orginalOrganisation.Services);
         }
 
         return RedirectToPage("/OrganisationAdmin/CheckOrganisationDetailAnswers", new
         {
-            retVal
+            id = retVal
         });
     }
 

@@ -21,24 +21,27 @@ public interface IOrganisationAdminClientService
 
 
     Task<Guid> CreateOrganisation(
-        Tenant tenant,
+        Guid tenantId,
         string name,
         string? description,
         string? logoUrl,
         string? logoAltText,
-        OrganisationType organisationType,
-        Contact? contact,
+        Guid organisationTypeId,
+        string contactName,
+        string contactEmail,
         ICollection<Service> services);
 
     Task<Guid> UpdateOrganisation(
         Guid id,
-        Tenant tenant,
+        Guid tenantId,
         string name,
         string? description,
         string? logoUrl,
         string? logoAltText,
-        OrganisationType organisationType,
-        Contact? contact,
+        Guid organisationTypeId,
+        Guid contactId,
+        string contactName,
+        string contactEmail,
         ICollection<Service> services);
 }
 
@@ -129,70 +132,27 @@ public class OrganisationAdminClientService : ApiService, IOrganisationAdminClie
     }
 
     public async Task<Guid> CreateOrganisation(
-        Tenant tenant,
+        Guid tenantId,
         string name,
         string? description,
         string? logoUrl,
         string? logoAltText,
-        OrganisationType organisationType,
-        Contact? contact,
+        Guid organisationTypeId,
+        string contactName,
+        string contactEmail,
         ICollection<Service> services)
     {
         CreateOrganisationCommand command = new(
-        tenant,
+        tenantId,
         name,
         description,
         logoUrl,
         logoAltText,
-        organisationType,
-        contact,
+        organisationTypeId,
+        contactName,
+        contactEmail,
         services
         );
-
-        var request = new HttpRequestMessage
-        {
-            Method = HttpMethod.Post,
-            RequestUri = new Uri(_client.BaseAddress + "api/GetOrganisationById"),
-            Content = new StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(command), Encoding.UTF8, "application/json"),
-        };
-
-        using var response = await _client.SendAsync(request);
-
-        response.EnsureSuccessStatusCode();
-
-#pragma warning disable CS8603 // Possible null reference return.
-        return await JsonSerializer.DeserializeAsync<Guid>(await response.Content.ReadAsStreamAsync(), options: new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
-#pragma warning restore CS8603 // Possible null reference return.
-
-    }
-
-    /*
-    public async Task<Guid> CreateOrganisation(
-        Tenant tenant,
-        string name,
-        string? description,
-        string? logoUrl,
-        string? logoAltText,
-        OrganisationType organisationType,
-        Contact? contact,
-        ICollection<Service> services)
-    {
-
-        CreateOrganisationCommand command = new()
-        {
-            Name = name,
-            Description = description
-        };
-        //CreateOrganisationCommand command = new(
-        //tenant,
-        //name,
-        //description,
-        //logoUrl,
-        //logoAltText,
-        //organisationType,
-        //contact,
-        //services
-        //);
 
         var request = new HttpRequestMessage
         {
@@ -210,33 +170,39 @@ public class OrganisationAdminClientService : ApiService, IOrganisationAdminClie
 #pragma warning restore CS8603 // Possible null reference return.
 
     }
-    */
+
+    
     public async Task<Guid> UpdateOrganisation(
         Guid id,
-        Tenant tenant,
+        Guid tenantId,
         string name,
         string? description,
         string? logoUrl,
         string? logoAltText,
-        OrganisationType organisationType,
-        Contact? contact,
+        Guid organisationTypeId,
+        Guid contactId,
+        string contactName,
+        string contactEmail,
         ICollection<Service> services)
     { 
         
-        UpdateOrganisationCommand command = new(id,
-        tenant,
+        UpdateOrganisationCommand command = new(
+        id,
+        tenantId,
         name,
         description,
         logoUrl,
         logoAltText,
-        organisationType,
-        contact,
+        organisationTypeId,
+        contactId,
+        contactName,
+        contactEmail,
         services
         );
 
         var request = new HttpRequestMessage
         {
-            Method = HttpMethod.Post,
+            Method = HttpMethod.Put,
             RequestUri = new Uri(_client.BaseAddress + "api/UpdateOrganisation"),
             Content = new StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(command), Encoding.UTF8, "application/json"),
         };

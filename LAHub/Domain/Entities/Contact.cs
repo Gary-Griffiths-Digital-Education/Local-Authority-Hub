@@ -47,7 +47,7 @@ public class Contact : BaseAuditableEntity<Guid>
     
     public Tenant? Tenant { get; private set; } = default!;
 
-    public string Name { get; private set; } = string.Empty;
+    public string Name { get; set; } = string.Empty;
 
     public string? Description { get; private set; } = string.Empty;
 
@@ -59,7 +59,7 @@ public class Contact : BaseAuditableEntity<Guid>
 
     public string? WhatsApp { get; private set; } = string.Empty;
 
-    public string? Email { get; private set; } = string.Empty;
+    public string? Email { get; set; } = string.Empty;
 
     public Uri? WebSite { get; private set; } = default!;
 

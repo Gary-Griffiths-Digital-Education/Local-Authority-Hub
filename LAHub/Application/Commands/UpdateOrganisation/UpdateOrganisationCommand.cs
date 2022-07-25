@@ -11,48 +11,41 @@ public record class UpdateOrganisationCommand : IRequest<Guid>
 {
     public UpdateOrganisationCommand(
         Guid id,
-        Tenant tenant,
-        string name,
+        Guid? tenantId,
+        string? name,
         string? description,
         string? logoUrl,
         string? logoAltText,
-        OrganisationType organisationType,
-        Contact? contact,
-        ICollection<Service> services)
+        Guid? organisationTypeId,
+        Guid? contactId,
+        string? contactName,
+        string? contactEmail,
+        ICollection<Service>? services)
     {
         Id = id;
-        Tenant = tenant;
-        OrganisationType = organisationType;
+        TenantId = tenantId;
+        OrganisationTypeId = organisationTypeId;
         Name = name;
         Description = description;
         LogoUrl = logoUrl;
         LogoAltText = logoAltText;
-        Contact = contact;
-        if (contact != null)
-        {
-            ContactId = contact.Id;
-        }
+        ContactId = contactId;
+        ContactName = contactName;
+        ContactEmail = contactEmail;
         Services = services;
     }
 
-    public Guid Id { get; init; }
-
-    public string Name { get; init; }
-
-    public string? Description { get; init; }
-
-    public Tenant Tenant { get; private set; } = default!;
-
-    public OrganisationType OrganisationType { get; private set; } = default!;
-
-    public string? LogoUrl { get; private set; } = default!;
-    public string? LogoAltText { get; private set; } = default!;
-
-    public Guid? ContactId { get; private set; } = default!;
-
-    public Contact? Contact { get; private set; } = default!;
-
-    public ICollection<Service> Services { get; set; }
+    public Guid Id { get; set; }
+    public Guid? TenantId { get; set; }
+    public string? Name { get; set; }
+    public string? Description { get; set; }
+    public string? LogoUrl { get; set; }
+    public string? LogoAltText { get; set; }
+    public Guid? OrganisationTypeId { get; set; }
+    public Guid? ContactId { get; set; }
+    public string? ContactName { get; set; }
+    public string? ContactEmail { get; set; }
+    public ICollection<Service>? Services { get; set; }
 }
 
 public class UpdateOrganisationCommandHandler : IRequestHandler<UpdateOrganisationCommand, Guid>
@@ -85,19 +78,60 @@ public class UpdateOrganisationCommandHandler : IRequestHandler<UpdateOrganisati
             .ThenInclude(x => (x != null) ? x.Address : null)
             .Where(p => p.Id == entity.Id).ToListAsync(cancellationToken: cancellationToken);
 
+        var tenant = _context.Tenants.FirstOrDefault(x => x.Id == request.TenantId);
+        var organisationType = _context.OrganisationTypes.FirstOrDefault(x => x.Id == request.OrganisationTypeId);
+        var contact = _context.Contacts.FirstOrDefault(x => x.Id == request.ContactId);
+        if (contact != null)
+        {
+            if(request.ContactName != null)
+                contact.Name = request.ContactName;
+            contact.Email = request.ContactEmail;
+        }
+        else
+        {
+            contact = new Contact(tenant, (request.ContactName != null) ? request.ContactName : string.Empty,
+                            null,
+                            null,
+                            null,
+                            null,
+                            request.ContactEmail,
+                            null,
+                            null,
+                            null,
+                            null,
+                            null,
+                            null,
+                            null,
+                            null,
+                            null,
+                            null);
+        }
+        
+
+#pragma warning disable CS8601 // Possible null reference assignment.
         entity.Id = request.Id;
-        entity.Tenant = request.Tenant;
-        entity.OrganisationType = request.OrganisationType;
+        entity.Tenant = tenant;
+        entity.OrganisationType = organisationType;
         entity.Name = request.Name;
         entity.Description = request.Description;
         entity.LogoUrl = request.LogoUrl;
         entity.LogoAltText = request.LogoAltText;
-        entity.Contact = request.Contact;
-        entity.Services = request.Services;
+        entity.Contact = contact;
 
-        _context.Organisations.Add(entity);
+        if (request.Services != null && request.Services.Any())
+            entity.Services = request.Services;
+#pragma warning restore CS8601 // Possible null reference assignment.
 
-        await _context.SaveChangesAsync(cancellationToken);
+        try
+        {
+            await _context.SaveChangesAsync(cancellationToken);
+        }
+        catch (Exception ex)
+        {
+            throw new Exception(ex.Message, ex);
+        }
+
+
 
         return entity.Id;
     }

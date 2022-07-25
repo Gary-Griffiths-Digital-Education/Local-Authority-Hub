@@ -5,10 +5,10 @@ public class UpdateOrganisationCommandValidator : AbstractValidator<UpdateOrgani
 {
     public UpdateOrganisationCommandValidator()
     {
-        RuleFor(v => v.Tenant)
+        RuleFor(v => v.TenantId)
             .NotNull();
 
-        RuleFor(v => v.OrganisationType)
+        RuleFor(v => v.OrganisationTypeId)
             .NotNull();
 
         RuleFor(v => v.Name)
