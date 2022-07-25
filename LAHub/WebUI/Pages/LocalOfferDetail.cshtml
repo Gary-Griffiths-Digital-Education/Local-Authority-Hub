@@ -16,21 +16,22 @@
                 <li><label>Minimum Age:  </label>@Model.LocalOffer.MaximumAge</li>
                 <li><label>Cost:         </label>@Model.LocalOffer.CostAmount</li>
                 <li><label>OpeningHours: </label>@Model.LocalOffer.OpeningHours</li>
-                
-                
-                @*@if(@Model.LocalOffer.ServiceLocations != null && @Model.LocalOffer.ServiceLocations.Any())
-                {
-                   <li><strong>Location:</strong>&nbsp; @Model.LocalOffer.ServiceLocations.ElementAt(0).Location.Name</li> 
-                   @if(@Model.LocalOffer.ServiceLocations.ElementAt(0).Location.Address != null)
-                    {
-                        <li>@Model?.LocalOffer?.ServiceLocations?.ElementAt(0)?.Location?.Address?.AddressLine1</li>
-                        <li>@Model?.LocalOffer?.ServiceLocations?.ElementAt(0)?.Location?.Address?.AddressLine2</li>
-                        <li>@Model?.LocalOffer?.ServiceLocations?.ElementAt(0)?.Location?.Address?.TownOrCity</li>
-                        <li>@Model?.LocalOffer?.ServiceLocations?.ElementAt(0)?.Location?.Address?.Postcode</li>
-                    }
-                    
-                }*@
             </ul>
+
+            <br />
+            @if(@Model.LocalOffer.Contact != null)
+            {
+                <h1 class="govuk-heading-s">Adddress:</h1>   
+                <ul class="no-bullets">
+                <li><label>Name: </label>@Model.LocalOffer.Contact.Name</li>
+                <li>@Model.LocalOffer.Contact.AddressLine1</li>
+                <li>@Model.LocalOffer.Contact.AddressLine2</li>
+                <li>@Model.LocalOffer.Contact.TownOrCity</li>
+                <li>@Model.LocalOffer.Contact.County</li>
+                <li>@Model.LocalOffer.Contact.Postcode</li>
+                </ul>
+                    
+            }
 
             @if (@Model.LocalOffer.ServiceClassifications != null && @Model.LocalOffer.ServiceClassifications.Any())
             {

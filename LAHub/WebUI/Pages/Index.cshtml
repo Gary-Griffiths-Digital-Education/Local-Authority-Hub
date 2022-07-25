@@ -17,26 +17,31 @@
             <br />
 
             <h1 class="govuk-heading-l">
-                Put the name of your service here <a href="https://www.gov.uk/service-manual/design/naming-your-service">Details</a>
+                Request local help and support for children, young people and families</a>
             </h1>
             <p class="govuk-body">
-                First line of text.
+                This is for professionals working with children, young people and families in England.
             </p>
             <p class="govuk-body">
-                Second line of text.
+                Find and request support from local organisations, community groups and charities.
             </p>
-            <p class="govuk-body">
-                Third line of text.
-            </p>
+            
+            <div class="govuk-warning-text">
+              <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
+              <strong class="govuk-warning-text__text">
+                <span class="govuk-warning-text__assistive">Warning</span>
+                Do not use this service if you believe the child is being harmed or is in immediate danger. Call the police on 999 instead.
+              </strong>
+            </div>
 
 			<div class="govuk-details__text">
-                Message worthy of note.
+                You need consent to request support. If the person is under 19, you need consent from a parent or carer. 
             </div>
 
 			<br />
 			<br />
 
-            <div class="govuk-notification-banner" role="region" aria-labelledby="govuk-notification-banner-title" data-module="govuk-notification-banner">
+            @*<div class="govuk-notification-banner" role="region" aria-labelledby="govuk-notification-banner-title" data-module="govuk-notification-banner">
               <div class="govuk-notification-banner__header">
                 <h2 class="govuk-notification-banner__title" id="govuk-notification-banner-title">
                   Important
@@ -47,7 +52,7 @@
                   An important message!
                 </p>
              </div>
-            </div>
+            </div>*@
 
             <a asp-page="/FindServiceFromPostcode" class="govuk-button" data-module="govuk-button">Start now ></a>
             @*<a asp-controller="Home" asp-action="Index" class="govuk-button" data-module="govuk-button">Start now ></a>*@

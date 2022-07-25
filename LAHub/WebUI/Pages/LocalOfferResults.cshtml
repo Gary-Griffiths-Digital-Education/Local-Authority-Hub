@@ -72,9 +72,10 @@
                 @foreach(var item in Model.SearchResults.Items)
                 {
                     <ul class="no-bullets">
-                        <li><a asp-page="/LocalOfferDetail" asp-route-id="@item.Id" style="color:blue" class="govuk-!-font-weight-bold govuk-body govuk-!-font-size-19">@item.Name</a></li>
+                        <li><a asp-page="/LocalOfferDetail" asp-route-id="@item.Id" style="color:blue" class="govuk-!-font-weight-bold govuk-body govuk-!-font-size-24">@item.Name</a></li>
                         <li>@item.Description</li>
                     </ul>
+                    <br />
                             
                 }
           </div>

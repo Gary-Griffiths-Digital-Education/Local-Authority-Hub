@@ -118,8 +118,9 @@ public class UpdateOrganisationCommandHandler : IRequestHandler<UpdateOrganisati
         entity.LogoAltText = request.LogoAltText;
         entity.Contact = contact;
 
-        if (request.Services != null && request.Services.Any())
-            entity.Services = request.Services;
+        //ToDo
+        //if (request.Services != null && request.Services.Any())
+        //    entity.Services = request.Services;
 #pragma warning restore CS8601 // Possible null reference assignment.
 
         try
@@ -130,8 +131,6 @@ public class UpdateOrganisationCommandHandler : IRequestHandler<UpdateOrganisati
         {
             throw new Exception(ex.Message, ex);
         }
-
-
 
         return entity.Id;
     }

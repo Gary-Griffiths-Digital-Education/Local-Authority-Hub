@@ -86,8 +86,9 @@ public class GetOrganisationByIdCommandHandler : IRequestHandler<CreateOrganisat
 
         try
         {
-            if (request.Services != null && request.Services.Any())
-                entity.Services = request.Services;
+            //ToDo
+            //if (request.Services != null && request.Services.Any())
+            //    entity.Services = request.Services;
 
             entity.AddDomainEvent(new OrganisationCreatedEvent(entity));
 

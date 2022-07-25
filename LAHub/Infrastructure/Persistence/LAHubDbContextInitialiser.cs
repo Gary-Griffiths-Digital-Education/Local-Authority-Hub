@@ -99,19 +99,6 @@ public class ApplicationDbContextInitialiser
 
         await _context.SaveChangesAsync();
 
-        //var allServices =
-        //    (from serv in _context.Services
-        //         join servloc in _context.ServiceLocations on serv.Id equals servloc.ServiceId
-        //         join loc in _context.Locations on servloc.LocationId equals loc.Id
-        //     select serv).ToList();
-
-
-
-        //SeedData seedData = new(_context);
-        //await seedData.AddServices();
-        //await seedData.AddContactMechanismTypes();
-        //await seedData.AddServiceOptionTypes();
-
     }
 }
 
