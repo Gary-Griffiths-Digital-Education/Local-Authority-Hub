@@ -7,41 +7,7 @@
 //using Microsoft.AspNetCore.Mvc.Rendering;
 //using WebUI.Services.Api;
 
-using Application.Models.DtoEntities;
-using AutoMapper;
-using LAHub.Domain.Entities;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using WebUI.Services.Api;
-
-namespace WebUI.Pages.OrganisationAdmin;
-
-public class OrganisationDetailModel : PageModel
-{
-    private readonly IOrganisationAdminClientService _organisationAdminClientService;
-    private readonly IMapper _mapper;
-
-    public Organisation OrganisationModel { get; set; } = new Organisation();
-
-    public OrganisationDetailModel(IOrganisationAdminClientService organisationAdminClientService, IMapper mapper)
-    {
-        _organisationAdminClientService = organisationAdminClientService;
-        _mapper = mapper;
-    }
-
-    public async Task OnGet(Guid? id, Guid? tenantId, Guid? organisationTypeId)
-    {
-        if (id != null)
-        {
-            var organisation = await _organisationAdminClientService.GetOrganisationById(id.Value);
-            var organisationDto = _mapper.Map<OrganisationDto>(organisation);
-        }
-        //else
-        //{
-
-        //}
-    }
-}
-
+//namespace WebUI.Pages.OrganisationAdmin;
 
 //public class OrganisationDetailModel : PageModel
 //{
@@ -239,7 +205,7 @@ public class OrganisationDetailModel : PageModel
 //        {
 //            _organisationTypeRecords = await _organisationAdminClientService.GetOrganisationTypeList();
 //        }
-
+       
 //        if (_organisationTypeRecords != null)
 //        {
 //            OrganisationTypeList = _organisationTypeRecords.Select(orgType => new SelectListItem

@@ -1,0 +1,83 @@
+﻿@*@page
+@model WebUI.Pages.OrganisationAdmin.OrganisationDetailModel
+@{
+}
+
+<a asp-page="/OrganisationAdmin/ListOrganisations" class="govuk-back-link">Back</a>
+
+<main class="govuk-main-wrapper " id="main-content" role="main">
+    <div class="govuk-grid-column-two-thirds">
+         <div class="govuk-grid-row">
+            <form method="post">
+                <fieldset class="govuk-fieldset">
+                    <h1 class="govuk-heading-m">
+                        Edit Organisation
+                    </h1>
+
+                    <input asp-for="@Model.Organisation.Id" type="hidden" >
+                    <input asp-for="@Model.Organisation.Tenant.Id" type="hidden" >
+                    <input asp-for="@Model.Organisation.OrganisationType.Id" type="hidden" >
+                    @if(@Model.Organisation.Contact != null)
+                    {
+                        <input asp-for="@Model.Organisation.Contact.Id" type="hidden" >    
+                    }
+                    
+                    <div class="govuk-form-group">
+                        <label class="govuk-label" for="SelectedOrganisationType">
+                            Organisation Types
+                        </label>
+                        <select class="govuk-select" id="SelectedOrganisationType" name="SelectedOrganisationType" asp-for="SelectedOrganisationType" asp-items="Model.OrganisationTypeList"></select> 
+                    </div>
+
+                    <div class="govuk-form-group">
+                        <label class="govuk-label" for="name">
+                            Name
+                        </label>
+                        <input class="govuk-input" id="name" name="name" value="@Model.Organisation.Name" type="text" autocomplete="name">
+                    </div>
+
+                    <div class="govuk-form-group">
+                        <label class="govuk-label" for="description">
+                            Description
+                        </label>
+                        <input class="govuk-input" id="description" name="description" value="@Model.Organisation.Description" type="text" autocomplete="description">
+                    </div>
+
+                    <div class="govuk-form-group">
+                        <label class="govuk-label" for="logoUrl">
+                            Logo Url
+                        </label>
+                        <input class="govuk-input" id="logoUrl" name="logoUrl" value="@Model.Organisation.LogoUrl" type="text" autocomplete="logoUrl">
+                    </div>
+
+                    <div class="govuk-form-group">
+                        <label class="govuk-label" for="logoAltText">
+                            Logo Alt Text
+                        </label>
+                        <input class="govuk-input" id="logoAltText" name="logoAltText" value="@Model.Organisation.LogoAltText" type="text" autocomplete="logoAltText">
+                    </div>
+
+                    <div class="govuk-form-group">
+                        <label class="govuk-label" for="contact-name">
+                            Contact Name
+                        </label>
+                        <input class="govuk-input" id="contact-name" name="contact-name" value="@Model.Organisation?.Contact?.Name" type="text" autocomplete="contact-name">
+                    </div>
+
+                    <div class="govuk-form-group">
+                        <label class="govuk-label" for="contact-email">
+                            Contact Email
+                        </label>
+                        <input class="govuk-input" id="contact-email" name="contact-email" value="@Model.Organisation?.Contact?.Email" type="text" autocomplete="contact-email">
+                    </div>
+
+                     <button type="submit" class="govuk-button" data-module="govuk-button" data-prevent-double-click="true">
+                        Save and Continue
+                    </button>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+   
+</main>
+*@
