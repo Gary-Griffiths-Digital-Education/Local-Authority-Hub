@@ -19,8 +19,7 @@ public class ListOrganisations : EndpointBaseAsync
     OperationId = "Organisation.List",
     Tags = new[] { "ListOrganisations" })
     ]
-    [HttpPost]
-    [Route("api/ListOrganisations")]
+    [HttpGet(ListOrganisationCommand.Route)]
     public override async Task<ActionResult<List<OrganisationRecord>>> HandleAsync([FromBody] ListOrganisationCommand request, CancellationToken cancellationToken = default)
     {
         

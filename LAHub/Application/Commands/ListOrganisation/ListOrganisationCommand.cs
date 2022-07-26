@@ -15,6 +15,15 @@ public class ListOrganisationCommand : IRequest<List<OrganisationRecord>>
         OrganisationTypeId = organisationTypeId;
     }
 
+    public const string Route = "api/ListOrganisations/{TenantId:Guid}/{OrganisationTypeId:Guid}";
+    public static string BuildRoute(Guid tenantId, Guid? orgTypeId)
+    {
+        string route = Route.Replace("{TenantId:Guid}", tenantId.ToString());
+        route = route.Replace("{OrganisationTypeId:Guid}", orgTypeId.ToString());
+        return route;
+    }
+    
+
     public Guid TenantId { get; private set; } = default!;
 
     public Guid? OrganisationTypeId { get; private set; } = default!;
@@ -32,7 +41,10 @@ public class ListOrganisationCommandHandler : IRequestHandler<ListOrganisationCo
     public async Task<List<OrganisationRecord>> Handle(ListOrganisationCommand request, CancellationToken cancellationToken)
     {
         var lst = _context.Organisations.Where(x => x.Tenant.Id == request.TenantId);
-        if (request.OrganisationTypeId != null)
+        Guid? organisationTypeId = request.OrganisationTypeId;
+        if (request.OrganisationTypeId == Guid.Empty)
+            organisationTypeId = null;
+        if (organisationTypeId != null)
         {
             lst = lst.Where(x => x.OrganisationType.Id == request.OrganisationTypeId);
         }
