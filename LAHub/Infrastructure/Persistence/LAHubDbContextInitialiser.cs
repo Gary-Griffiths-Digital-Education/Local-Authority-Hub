@@ -22,13 +22,15 @@ public class ApplicationDbContextInitialiser
         _roleManager = roleManager;
     }
 
-    public async Task InitialiseAsync()
+    public void InitialiseAsync()
     {
         try
         {
             if (_context.Database.IsSqlServer() || _context.Database.IsNpgsql())
             {
-                await _context.Database.MigrateAsync();
+                _context.Database.EnsureDeleted();
+                _context.Database.EnsureCreated();
+                //await _context.Database.MigrateAsync();
             }
             //else
             //{
@@ -57,7 +59,9 @@ public class ApplicationDbContextInitialiser
 
     public async Task TrySeedAsync()
     {
-        /*
+        if (_context.Classifications.Any())
+            return;
+
         // Default roles
         var administratorRole = new IdentityRole("Administrator");
 
@@ -74,7 +78,7 @@ public class ApplicationDbContextInitialiser
             await _userManager.CreateAsync(administrator, "Administrator1!");
             await _userManager.AddToRolesAsync(administrator, new[] { administratorRole.Name });
         }
-        */
+        
 
 
         // Default data

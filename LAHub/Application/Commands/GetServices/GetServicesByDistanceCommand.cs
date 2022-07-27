@@ -1,11 +1,10 @@
 ﻿using Application.Common.Interfaces;
-using Application.Common.Mappings;
 using Application.Common.Models;
 using Application.Models;
 using AutoMapper;
-using AutoMapper.QueryableExtensions;
 using LAHub.Domain;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 
 namespace Application.Commands.GetServices;
 
@@ -39,22 +38,52 @@ public class GetServicesByDistanceCommandHandler : IRequestHandler<GetServicesBy
     }
     public async Task<PaginatedList<ServiceItem>> Handle(GetServicesByDistanceCommand request, CancellationToken cancellationToken)
     {
+        return await Task.Run(() => GetServicesByDistance(request, cancellationToken), cancellationToken);
+    }
+
+    private PaginatedList<ServiceItem> GetServicesByDistance(GetServicesByDistanceCommand request, CancellationToken token)
+    {
         //var currentLocation = Helper.CreatePoint(request.Latitude, request.Longtitude);
         //var srv = _context.Services.ToList();
 
-        var services =
-            from serv in _context.Services
-            join loc in _context.Locations on serv.LocationId equals loc.Id
-            where Helper.GetDistance(request.Latitude, request.Longtitude, loc.Latitude, loc.Longitude, serv.Name) < request.Meters
-            //where loc.LocationPoint.Distance(currentLocation) < request.Meters
-            //orderby loc.LocationPoint.Distance(currentLocation)
-            select serv;
+        var entities = _context.Services
+           .Include(x => x.Location);
 
-        var lst = services.ToList();
+        //var services =
+        //    from serv in _context.Services
+        //    join loc in _context.Locations on serv.LocationId equals loc.Id
+        //    //where Helper.GetDistance(request.Latitude, request.Longtitude, loc.Latitude, loc.Longitude, serv.Name) < request.Meters
+        //    //where loc.LocationPoint.Distance(currentLocation) < request.Meters
+        //    //orderby loc.LocationPoint.Distance(currentLocation)
+        //    select serv;
 
-        var result = await services.ProjectTo<ServiceItem>(_mapper.ConfigurationProvider)
-            .PaginatedListAsync(request.PageNumber, request.PageSize);
-        
+        //var services =
+        //    from serv in _context.Services
+        //    join loc in _context.Locations on serv.LocationId equals loc.Id
+        //    //where loc.LocationPoint.Distance(currentLocation) < request.Meters
+        //    //orderby loc.LocationPoint.Distance(currentLocation)
+        //    select serv;
+
+        var lst = entities.ToList();
+
+#pragma warning disable CS8602 // Dereference of a possibly null reference.
+        var servicesAtDistance = from serv in lst
+                                 where Helper.GetDistance(request.Latitude, request.Longtitude, serv.Location.Latitude, serv.Location.Longitude, serv.Name) < request.Meters
+                                 select serv;
+#pragma warning restore CS8602 // Dereference of a possibly null reference.
+
+        var r1 = _mapper.Map<List<ServiceItem>>(servicesAtDistance);
+        var paglst = r1.Skip((request.PageNumber - 1) * request.PageSize).Take(request.PageSize).ToList();
+        var result = new PaginatedList<ServiceItem>(paglst, paglst.Count, request.PageNumber, request.PageSize);
+
+        //var result = await r1.AsQueryable().PaginatedListAsync(request.PageNumber, request.PageSize); 
+
+        //lst = lst.Where(x => )
+        //where Helper.GetDistance(request.Latitude, request.Longtitude, loc.Latitude, loc.Longitude, serv.Name) < request.Meters
+
+        //var result = await services.ProjectTo<ServiceItem>(_mapper.ConfigurationProvider)
+        //    .PaginatedListAsync(request.PageNumber, request.PageSize);
+
         //throw new NotImplementedException();
         return result;
     }
