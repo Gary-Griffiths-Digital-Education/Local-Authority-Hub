@@ -1,9 +1,9 @@
 ﻿namespace LAHub.Domain.OpenReferralEnities;
 
-public class Physical_Address
+public class OpenReferralPhysical_Address
 {
-    private Physical_Address() { }
-    public Physical_Address(string id, string address_1, string? city, string postal_code, string? country, string? state_province)
+    private OpenReferralPhysical_Address() { }
+    public OpenReferralPhysical_Address(string id, string address_1, string? city, string postal_code, string? country, string? state_province)
     {
         Id = id;
         Address_1 = address_1;

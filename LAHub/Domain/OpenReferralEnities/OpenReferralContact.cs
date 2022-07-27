@@ -13,6 +13,6 @@ public class OpenReferralContact
     public string Id { get; init; } = default!;
     public string Title { get; init; } = default!;
     public string Name { get; init; } = default!;
-    public virtual ICollection<Phone>? Phones { get; set; }
+    public virtual ICollection<OpenReferralPhone>? Phones { get; set; }
     
 }

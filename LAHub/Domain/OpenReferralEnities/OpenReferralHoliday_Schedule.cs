@@ -1,9 +1,9 @@
 ﻿namespace LAHub.Domain.OpenReferralEnities;
 
-public class Holiday_Schedule
+public class OpenReferralHoliday_Schedule
 {
-    private Holiday_Schedule() { }
-    public Holiday_Schedule(string id, bool closed, DateTime? closes_at, DateTime? start_date, DateTime? end_date, DateTime? opens_at
+    private OpenReferralHoliday_Schedule() { }
+    public OpenReferralHoliday_Schedule(string id, bool closed, DateTime? closes_at, DateTime? start_date, DateTime? end_date, DateTime? opens_at
         //OpenReferralServiceAtLocation? service_at_location
         )
     {

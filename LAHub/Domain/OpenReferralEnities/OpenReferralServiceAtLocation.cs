@@ -10,7 +10,7 @@ public class OpenReferralServiceAtLocation
 {
     private OpenReferralServiceAtLocation() { }
     public OpenReferralServiceAtLocation(string id //, OpenReferralLocation location
-        , ICollection<Holiday_Schedule>? holidayScheduleCollection, ICollection<Regular_Schedule>? regular_schedule
+        , ICollection<OpenReferralHoliday_Schedule>? holidayScheduleCollection, ICollection<OpenReferralRegular_Schedule>? regular_schedule
         )
     {
         Id = id;
@@ -21,6 +21,6 @@ public class OpenReferralServiceAtLocation
 
     public string Id { get; init; } = default!;
     //public OpenReferralLocation Location { get; init; } = default!;
-    public virtual ICollection<Holiday_Schedule>? HolidayScheduleCollection { get; init; }
-    public virtual ICollection<Regular_Schedule>? Regular_schedule { get; init; }
+    public virtual ICollection<OpenReferralHoliday_Schedule>? HolidayScheduleCollection { get; init; }
+    public virtual ICollection<OpenReferralRegular_Schedule>? Regular_schedule { get; init; }
 }

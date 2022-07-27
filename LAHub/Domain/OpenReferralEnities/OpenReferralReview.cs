@@ -1,11 +1,11 @@
 ﻿namespace LAHub.Domain.OpenReferralEnities;
 
-public class Review
+public class OpenReferralReview
 {
-    private Review() { }
+    private OpenReferralReview() { }
 
     
-    public Review(string id, string title, string? description, DateTime date, string? score, string? url, string? widget
+    public OpenReferralReview(string id, string title, string? description, DateTime date, string? score, string? url, string? widget
         //,OpenReferralService service
         )
     {

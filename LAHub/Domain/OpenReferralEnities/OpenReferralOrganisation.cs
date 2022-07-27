@@ -9,7 +9,7 @@ public class OpenReferralOrganisation
     }
 
     public OpenReferralOrganisation(string? id, string? name, string? description, string? logo, string? uri, string? url
-        , ICollection<Review>? reviews, ICollection<OpenReferralService>? services
+        , ICollection<OpenReferralReview>? reviews, ICollection<OpenReferralService>? services
         )
     {
         Id = id;
@@ -44,7 +44,7 @@ public class OpenReferralOrganisation
     public string? Logo { get; init; }
     public string? Uri { get; init; }
     public string? Url { get; init; }
-    public virtual ICollection<Review>? Reviews { get; set; } = default!;
+    public virtual ICollection<OpenReferralReview>? Reviews { get; set; } = default!;
     public virtual ICollection<OpenReferralService>? Services { get; set; } = default!;
 
 

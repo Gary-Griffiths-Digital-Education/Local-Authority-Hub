@@ -1,9 +1,9 @@
 ﻿namespace LAHub.Domain.OpenReferralEnities;
 
-public class Funding
+public class OpenReferralFunding
 {
-    private Funding() { }
-    public Funding(string id, string source)
+    private OpenReferralFunding() { }
+    public OpenReferralFunding(string id, string source)
     {
         Id = id;
         Source = source;

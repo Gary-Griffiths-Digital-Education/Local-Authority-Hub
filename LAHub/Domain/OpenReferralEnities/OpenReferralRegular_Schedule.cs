@@ -1,9 +1,9 @@
 ﻿namespace LAHub.Domain.OpenReferralEnities;
 
-public class Regular_Schedule
+public class OpenReferralRegular_Schedule
 {
-    private Regular_Schedule() { }
-    public Regular_Schedule(string id, string description, DateTime? opens_at, DateTime? closes_at, string? byday, string? bymonthday, string? dtstart, string? freq, string? interval, DateTime? valid_from, DateTime? valid_to
+    private OpenReferralRegular_Schedule() { }
+    public OpenReferralRegular_Schedule(string id, string description, DateTime? opens_at, DateTime? closes_at, string? byday, string? bymonthday, string? dtstart, string? freq, string? interval, DateTime? valid_from, DateTime? valid_to
                             //, OpenReferralServiceAtLocation? service_at_location
         
         )

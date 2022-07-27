@@ -1,9 +1,9 @@
 ﻿namespace LAHub.Domain.OpenReferralEnities;
 
-public class Service_Area
+public class OpenReferralService_Area
 {
-    private Service_Area() { }
-    public Service_Area(string id, string service_area, string linkId, string? extent, string? uri)
+    private OpenReferralService_Area() { }
+    public OpenReferralService_Area(string id, string service_area, string linkId, string? extent, string? uri)
     {
         Id = id;
         Service_area = service_area;

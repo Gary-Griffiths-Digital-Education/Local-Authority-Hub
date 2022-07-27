@@ -1,9 +1,9 @@
 ﻿namespace LAHub.Domain.OpenReferralEnities;
 
-public class Linktaxonomycollection
+public class OpenReferralLinktaxonomycollection
 {
-    private Linktaxonomycollection() { }
-    public Linktaxonomycollection(string id, string link_id, string link_type)
+    private OpenReferralLinktaxonomycollection() { }
+    public OpenReferralLinktaxonomycollection(string id, string link_id, string link_type)
     {
         Id = id;
         Link_id = link_id;

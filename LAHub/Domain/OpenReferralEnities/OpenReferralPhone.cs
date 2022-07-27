@@ -1,9 +1,9 @@
 ﻿namespace LAHub.Domain.OpenReferralEnities;
 
-public class Phone
+public class OpenReferralPhone
 {
-    private Phone() { }
-    public Phone(string id, string number)
+    private OpenReferralPhone() { }
+    public OpenReferralPhone(string id, string number)
     {
         Id = id;
         Number = number;

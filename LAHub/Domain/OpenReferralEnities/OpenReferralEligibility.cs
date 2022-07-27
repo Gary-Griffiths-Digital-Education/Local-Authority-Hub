@@ -3,7 +3,7 @@
 public class EligibilityItem
 {
     private EligibilityItem() { }
-    public EligibilityItem(string id, string eligibility, string? linkId, int maximum_age, int minimum_age, ICollection<Taxonomy>? taxonomys)
+    public EligibilityItem(string id, string eligibility, string? linkId, int maximum_age, int minimum_age, ICollection<OpenReferralTaxonomy>? taxonomys)
     {
         Id = id;
         Eligibility = eligibility;
@@ -18,5 +18,5 @@ public class EligibilityItem
     public string? LinkId { get; init; }
     public int Maximum_age { get; init; }
     public int Minimum_age { get; init; }
-    public virtual ICollection<Taxonomy>? Taxonomys { get; init; }
+    public virtual ICollection<OpenReferralTaxonomy>? Taxonomys { get; init; }
 }
