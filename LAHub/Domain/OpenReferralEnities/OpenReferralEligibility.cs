@@ -1,9 +1,9 @@
 ﻿namespace LAHub.Domain.OpenReferralEnities;
 
-public class EligibilityItem
+public class OpenReferralEligibility : BaseEntity<string>
 {
-    private EligibilityItem() { }
-    public EligibilityItem(string id, string eligibility, string? linkId, int maximum_age, int minimum_age, ICollection<OpenReferralTaxonomy>? taxonomys)
+    private OpenReferralEligibility() { }
+    public OpenReferralEligibility(string id, string eligibility, string? linkId, int maximum_age, int minimum_age, ICollection<OpenReferralTaxonomy>? taxonomys)
     {
         Id = id;
         Eligibility = eligibility;
@@ -12,8 +12,6 @@ public class EligibilityItem
         Minimum_age = minimum_age;
         taxonomys = Taxonomys;
     }
-
-    public string Id { get; init; } = default!;
     public string Eligibility { get; init; } = default!;
     public string? LinkId { get; init; }
     public int Maximum_age { get; init; }

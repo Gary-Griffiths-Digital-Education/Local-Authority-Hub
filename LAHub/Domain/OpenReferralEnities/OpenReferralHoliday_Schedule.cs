@@ -1,6 +1,6 @@
 ﻿namespace LAHub.Domain.OpenReferralEnities;
 
-public class OpenReferralHoliday_Schedule
+public class OpenReferralHoliday_Schedule : BaseEntity<string>
 {
     private OpenReferralHoliday_Schedule() { }
     public OpenReferralHoliday_Schedule(string id, bool closed, DateTime? closes_at, DateTime? start_date, DateTime? end_date, DateTime? opens_at
@@ -15,8 +15,6 @@ public class OpenReferralHoliday_Schedule
         Opens_at = opens_at;
         //Service_at_location = service_at_location;
     }
-
-    public string Id { get; init; } = default!;
     public bool Closed { get; init; }
     public DateTime? Closes_at { get; init; }
     public DateTime? Start_date { get; init; }

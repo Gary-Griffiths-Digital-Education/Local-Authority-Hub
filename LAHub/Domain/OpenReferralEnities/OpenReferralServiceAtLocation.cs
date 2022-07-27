@@ -6,21 +6,21 @@ using System.Threading.Tasks;
 
 namespace LAHub.Domain.OpenReferralEnities;
 
-public class OpenReferralServiceAtLocation
+public class OpenReferralServiceAtLocation : BaseEntity<string>
 {
     private OpenReferralServiceAtLocation() { }
-    public OpenReferralServiceAtLocation(string id //, OpenReferralLocation location
-        , ICollection<OpenReferralHoliday_Schedule>? holidayScheduleCollection, ICollection<OpenReferralRegular_Schedule>? regular_schedule
+    public OpenReferralServiceAtLocation(string id, 
+        OpenReferralLocation location,
+        ICollection<OpenReferralHoliday_Schedule>? holidayScheduleCollection, ICollection<OpenReferralRegular_Schedule>? regular_schedule
         )
     {
         Id = id;
-        //Location = location;
+        Location = location;
         HolidayScheduleCollection = holidayScheduleCollection;
         Regular_schedule = regular_schedule;
     }
 
-    public string Id { get; init; } = default!;
-    //public OpenReferralLocation Location { get; init; } = default!;
+    public OpenReferralLocation Location { get; init; } = default!;
     public virtual ICollection<OpenReferralHoliday_Schedule>? HolidayScheduleCollection { get; init; }
     public virtual ICollection<OpenReferralRegular_Schedule>? Regular_schedule { get; init; }
 }

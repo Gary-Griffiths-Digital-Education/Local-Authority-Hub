@@ -1,4 +1,5 @@
-﻿using Application.Commands.CreateOrganisation;
+﻿using Application.Commands.CreateOpenReferralOrganisation;
+using Application.Commands.CreateOrganisation;
 using Application.Commands.TestCommand;
 using Ardalis.ApiEndpoints;
 using LAHub.Domain.OpenReferralEnities;
@@ -11,8 +12,13 @@ namespace WebAPI.Endpoints.OrganisationEndPoints;
 
 public class GetOpenReferralOrganisationEndPoint : EndpointBaseAsync
     .WithRequest<OpenReferralOrganisation>
-    .WithResult<ActionResult<List<OpenReferralOrganisation>>>
+    //.WithResult<ActionResult<List<OpenReferralOrganisation>>>
+    .WithResult<ActionResult<string>>
 {
+
+    private ISender _mediator = null!;
+    protected ISender Mediator => _mediator ??= HttpContext.RequestServices.GetRequiredService<ISender>();
+
     [SwaggerOperation(
     Summary = "Creates an Open Referral Organisation",
     Description = "Creates an Open Referral Organisation",
@@ -21,9 +27,24 @@ public class GetOpenReferralOrganisationEndPoint : EndpointBaseAsync
     ]
     [HttpPost]
     [Route("api/organizations")]
-    public override async Task<ActionResult<List<OpenReferralOrganisation>>> HandleAsync([FromBody] OpenReferralOrganisation request, CancellationToken cancellationToken = default)
+    //public override async Task<ActionResult<List<OpenReferralOrganisation>>> HandleAsync([FromBody] OpenReferralOrganisation request, CancellationToken cancellationToken = default)
+    //{
+    //    return await Task.Run(() => DoSomething(request, cancellationToken), cancellationToken);
+    //}
+
+    public override async Task<ActionResult<string>> HandleAsync([FromBody] OpenReferralOrganisation request, CancellationToken cancellationToken = default)
     {
-        return await Task.Run(() => DoSomething(request, cancellationToken), cancellationToken);
+        try
+        {
+            CreateOpenReferralOrganisationCommand command = new(request);
+            var result = await Mediator.Send(command, cancellationToken);
+            return result;
+        }
+        catch (Exception ex)
+        {
+            System.Diagnostics.Debug.WriteLine(ex.Message);
+            return BadRequest();
+        }
     }
 
     private List<OpenReferralOrganisation> DoSomething(OpenReferralOrganisation OpenReferralOrganisation, CancellationToken token)

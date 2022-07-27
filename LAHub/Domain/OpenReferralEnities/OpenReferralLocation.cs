@@ -1,11 +1,11 @@
 ﻿namespace LAHub.Domain.OpenReferralEnities;
 
-public class OpenReferralLocation
+public class OpenReferralLocation : BaseEntity<string>
 {
     private OpenReferralLocation() { }
-    public OpenReferralLocation(string id, string name, string? description, int latitude, int longitude
+    public OpenReferralLocation(string id, string name, string? description, double latitude, double longitude
         , ICollection<OpenReferralPhysical_Address>? physical_addresses, ICollection<Accessibility_For_Disabilities>? accessibility_for_disabilities
-        , ICollection<OpenReferralServiceAtLocation>? service_at_locations
+        //, ICollection<OpenReferralServiceAtLocation>? service_at_locations
         )
     {
         Id = id;
@@ -15,15 +15,13 @@ public class OpenReferralLocation
         Longitude = longitude;
         Physical_addresses = physical_addresses;
         Accessibility_for_disabilities = accessibility_for_disabilities;
-        Service_at_locations = service_at_locations;
+        //Service_at_locations = service_at_locations;
     }
-
-    public string Id { get; init; } = default!;
     public string Name { get; init; } = default!;
     public string? Description { get; init; }   
-    public int Latitude { get; init; }
-    public int Longitude { get; init; }
+    public double Latitude { get; init; }
+    public double Longitude { get; init; }
     public virtual ICollection<OpenReferralPhysical_Address>? Physical_addresses { get; init; }
     public virtual ICollection<Accessibility_For_Disabilities>? Accessibility_for_disabilities { get; init; }
-    public virtual ICollection<OpenReferralServiceAtLocation>? Service_at_locations { get; init; }
+    //public virtual ICollection<OpenReferralServiceAtLocation>? Service_at_locations { get; init; }
 }

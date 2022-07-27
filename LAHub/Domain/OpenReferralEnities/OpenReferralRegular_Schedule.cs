@@ -1,6 +1,6 @@
 ﻿namespace LAHub.Domain.OpenReferralEnities;
 
-public class OpenReferralRegular_Schedule
+public class OpenReferralRegular_Schedule : BaseEntity<string>
 {
     private OpenReferralRegular_Schedule() { }
     public OpenReferralRegular_Schedule(string id, string description, DateTime? opens_at, DateTime? closes_at, string? byday, string? bymonthday, string? dtstart, string? freq, string? interval, DateTime? valid_from, DateTime? valid_to
@@ -21,8 +21,6 @@ public class OpenReferralRegular_Schedule
         Valid_to = valid_to;
         //Service_at_location = service_at_location;
     }
-
-    public string Id { get; init; } = default!;
     public string Description { get; init; } = default!;
     public DateTime? Opens_at { get; init; }
     public DateTime? Closes_at { get; init; }

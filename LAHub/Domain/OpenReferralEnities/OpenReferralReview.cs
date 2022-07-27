@@ -1,6 +1,6 @@
 ﻿namespace LAHub.Domain.OpenReferralEnities;
 
-public class OpenReferralReview
+public class OpenReferralReview : BaseEntity<string>
 {
     private OpenReferralReview() { }
 
@@ -19,7 +19,6 @@ public class OpenReferralReview
         Widget = widget;
     }
 
-    public string Id { get; init; } = default!;
     //public OpenReferralService Service { get; set; } = default!;
     public string Title { get; init; } = default!;
     public string? Description { get; init; }

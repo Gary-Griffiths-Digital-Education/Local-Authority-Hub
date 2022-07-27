@@ -1,6 +1,6 @@
 ﻿namespace LAHub.Domain.OpenReferralEnities;
 
-public class OpenReferralOrganisation
+public class OpenReferralOrganisation : BaseEntity<string>
 {
     
     private OpenReferralOrganisation()
@@ -8,7 +8,7 @@ public class OpenReferralOrganisation
         
     }
 
-    public OpenReferralOrganisation(string? id, string? name, string? description, string? logo, string? uri, string? url
+    public OpenReferralOrganisation(string id, string? name, string? description, string? logo, string? uri, string? url
         , ICollection<OpenReferralReview>? reviews, ICollection<OpenReferralService>? services
         )
     {
@@ -22,23 +22,6 @@ public class OpenReferralOrganisation
         Services = services;
     }
 
-    /*
-    public OpenReferralOrganisation(string? id, string? name, string? description, string? logo, string? uri, string? url
-        ,ICollection<Review>? reviews, ICollection<OpenReferralService>? services
-        )
-    {
-        Id = id;
-        Name = name;
-        Description = description;
-        Logo = logo;
-        Uri = uri;
-        Url = url;
-        Reviews = reviews;
-        Services = services;
-    }
-    */
-
-    public string? Id { get; init; }
     public string? Name { get; init; }
     public string? Description { get; init; }
     public string? Logo { get; init; }

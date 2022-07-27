@@ -1,6 +1,6 @@
 ﻿namespace LAHub.Domain.OpenReferralEnities;
 
-public class OpenReferralPhysical_Address
+public class OpenReferralPhysical_Address : BaseEntity<string>
 {
     private OpenReferralPhysical_Address() { }
     public OpenReferralPhysical_Address(string id, string address_1, string? city, string postal_code, string? country, string? state_province)
@@ -13,7 +13,6 @@ public class OpenReferralPhysical_Address
         State_province = state_province;
     }
 
-    public string Id { get; init; } = default!;
     public string Address_1 { get; init; } = default!;
     public string? City { get; init; }
     public string Postal_code { get; init; } = default!;

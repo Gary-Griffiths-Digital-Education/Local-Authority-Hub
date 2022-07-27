@@ -1,5 +1,6 @@
 ﻿using Infrastructure.Identity;
 using LAHub.Domain.Entities;
+using LAHub.Domain.OpenReferralEnities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -95,6 +96,17 @@ public class ApplicationDbContextInitialiser
         foreach (var organisation in organisations)
         {
             _context.Organisations.Add(organisation);
+        }
+
+        await _context.SaveChangesAsync();
+
+        var openReferralOrganisationSeedData = new Infrastructure.Persistence.SeedData.Organisations.OpenReferralOrganisationSeedData();
+
+        IReadOnlyCollection<OpenReferralOrganisation> openReferralOrganisations = openReferralOrganisationSeedData.SeedOpenReferralOrganistions();
+
+        foreach (var openReferralOrganisation in openReferralOrganisations)
+        {
+            _context.OpenReferralOrganisations.Add(openReferralOrganisation);
         }
 
         await _context.SaveChangesAsync();

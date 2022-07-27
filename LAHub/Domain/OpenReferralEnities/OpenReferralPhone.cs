@@ -1,6 +1,6 @@
 ﻿namespace LAHub.Domain.OpenReferralEnities;
 
-public class OpenReferralPhone
+public class OpenReferralPhone : BaseEntity<string>
 {
     private OpenReferralPhone() { }
     public OpenReferralPhone(string id, string number)
@@ -9,6 +9,5 @@ public class OpenReferralPhone
         Number = number;
     }
 
-    public string Id { get; init; } = default!;
     public string Number { get; init; } = default!;
 }

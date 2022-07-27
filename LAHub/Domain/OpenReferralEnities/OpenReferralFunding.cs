@@ -1,6 +1,6 @@
 ﻿namespace LAHub.Domain.OpenReferralEnities;
 
-public class OpenReferralFunding
+public class OpenReferralFunding : BaseEntity<string>
 {
     private OpenReferralFunding() { }
     public OpenReferralFunding(string id, string source)
@@ -8,7 +8,5 @@ public class OpenReferralFunding
         Id = id;
         Source = source;
     }
-
-    public string Id { get; init; } = default!;
     public string Source { get; init; } = default!;
 }

@@ -1,13 +1,13 @@
 ﻿namespace LAHub.Domain.OpenReferralEnities;
 
-public class OpenReferralService
+public class OpenReferralService : BaseEntity<string>
 {
     private OpenReferralService() { }
 
     public OpenReferralService(string id, string name, string? description, string? accreditations, DateTime? assured_date, string? attending_access, string? attending_type, string? deliverable_type, string? status, string? url, string? email, string? fees
-        , ICollection<EligibilityItem>? eligibilitys, ICollection<OpenReferralFunding>? fundings
+        , ICollection<OpenReferralEligibility>? eligibilitys, ICollection<OpenReferralFunding>? fundings
         , ICollection<OpenReferralHoliday_Schedule>? holiday_schedules
-        , ICollection<LanguageItem>? languages
+        , ICollection<OpenReferralLanguage>? languages
         , ICollection<OpenReferralRegular_Schedule>? regular_schedules
         , ICollection<OpenReferralReview>? reviews
         , ICollection<OpenReferralContact>? contacts
@@ -42,7 +42,6 @@ public class OpenReferralService
         Service_taxonomys = service_taxonomys;
     }
 
-    public string Id { get; init; } = default!;
     public string Name { get; init; } = default!;
     public string? Description { get; init; }
     public string? Accreditations { get; init; }
@@ -55,10 +54,10 @@ public class OpenReferralService
     public string? Email { get; init; }
     public string? Fees { get; init; }
 
-    public virtual ICollection<EligibilityItem>? Eligibilitys { get; init; }
+    public virtual ICollection<OpenReferralEligibility>? Eligibilitys { get; init; }
     public virtual ICollection<OpenReferralFunding>? Fundings { get; init; }
     public virtual ICollection<OpenReferralHoliday_Schedule>? Holiday_schedules { get; init; }
-    public virtual ICollection<LanguageItem>? Languages { get; init; }
+    public virtual ICollection<OpenReferralLanguage>? Languages { get; init; }
     public virtual ICollection<OpenReferralRegular_Schedule>? Regular_schedules { get; init; }
     public virtual ICollection<OpenReferralReview>? Reviews { get; init; }
     public virtual ICollection<OpenReferralContact>? Contacts { get; init; }

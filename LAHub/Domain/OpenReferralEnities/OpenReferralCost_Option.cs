@@ -1,6 +1,6 @@
 ﻿namespace LAHub.Domain.OpenReferralEnities;
 
-public class OpenReferralCost_Option
+public class OpenReferralCost_Option : BaseEntity<string>
 {
     private OpenReferralCost_Option() { }
     public OpenReferralCost_Option(string id, string amount_description, int amount, string? linkId, string? option, DateTime? valid_from
@@ -15,8 +15,6 @@ public class OpenReferralCost_Option
         Valid_from = valid_from;
         Valid_to = valid_to;
     }
-
-    public string Id { get; init; } = default!;
     public string Amount_description { get; init; } = default!;
     public int Amount { get; init; }
     public string? LinkId { get; init; }

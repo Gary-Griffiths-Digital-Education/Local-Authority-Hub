@@ -6,17 +6,15 @@ using System.Threading.Tasks;
 
 namespace LAHub.Domain.OpenReferralEnities;
 
-public class OpenReferralService_Taxonomy
+public class OpenReferralService_Taxonomy : BaseEntity<string>
 {
     private OpenReferralService_Taxonomy() { }
-    public OpenReferralService_Taxonomy(string id, string? linkId) //, Taxonomy? taxonomy)
+    public OpenReferralService_Taxonomy(string id, string? linkId, OpenReferralTaxonomy? taxonomy)
     {
         Id = id;
         LinkId = linkId;
-        //Taxonomy = taxonomy;
+        Taxonomy = taxonomy;
     }
-
-    public string Id { get; init; } = default!;
     public string? LinkId { get; init; }
-    //public Taxonomy? Taxonomy { get; init; }
+    public OpenReferralTaxonomy? Taxonomy { get; init; }
 }
