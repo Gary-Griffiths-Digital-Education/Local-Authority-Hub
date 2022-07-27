@@ -57,6 +57,7 @@ public class ApplicationDbContextInitialiser
 
     public async Task TrySeedAsync()
     {
+        /*
         // Default roles
         var administratorRole = new IdentityRole("Administrator");
 
@@ -73,7 +74,7 @@ public class ApplicationDbContextInitialiser
             await _userManager.CreateAsync(administrator, "Administrator1!");
             await _userManager.AddToRolesAsync(administrator, new[] { administratorRole.Name });
         }
-
+        */
 
 
         // Default data

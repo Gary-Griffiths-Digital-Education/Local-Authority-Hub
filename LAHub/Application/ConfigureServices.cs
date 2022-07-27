@@ -31,4 +31,19 @@ public static class ConfigureServices
 
         return services;
     }
+
+    public static IServiceCollection AddWebUIApplicationServices(this IServiceCollection services)
+    {
+        var config = new MapperConfiguration(cfg =>
+        {
+            cfg.AddProfile(new AutoMappingProfiles());
+        });
+
+        var mapper = config.CreateMapper();
+        services.AddSingleton(mapper);
+
+        services.AddAutoMapper(Assembly.GetExecutingAssembly());
+
+        return services;
+    }
 }
