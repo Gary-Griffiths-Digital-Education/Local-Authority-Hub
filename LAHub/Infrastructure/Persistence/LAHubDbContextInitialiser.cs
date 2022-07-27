@@ -4,6 +4,7 @@ using LAHub.Domain.OpenReferralEnities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Configuration;
 
 namespace Infrastructure.Persistence;
 
@@ -22,15 +23,19 @@ public class ApplicationDbContextInitialiser
         _roleManager = roleManager;
     }
 
-    public void InitialiseAsync()
+    public async Task InitialiseAsync(IConfiguration configuration)
     {
         try
         {
             if (_context.Database.IsSqlServer() || _context.Database.IsNpgsql())
             {
-                _context.Database.EnsureDeleted();
-                _context.Database.EnsureCreated();
-                //await _context.Database.MigrateAsync();
+                if (configuration.GetValue<bool>("RecreateDbOnStartup"))
+                {
+                    _context.Database.EnsureDeleted();
+                    _context.Database.EnsureCreated();
+                }
+                else
+                    await _context.Database.MigrateAsync();
             }
             //else
             //{

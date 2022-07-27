@@ -32,7 +32,7 @@ if (app.Environment.IsDevelopment())
     using (var scope = app.Services.CreateScope())
     {
         var initialiser = scope.ServiceProvider.GetRequiredService<ApplicationDbContextInitialiser>();
-        initialiser.InitialiseAsync();
+        await initialiser.InitialiseAsync(builder.Configuration);
         await initialiser.SeedAsync();
     }
 }
@@ -44,3 +44,5 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
+public partial class Program { }

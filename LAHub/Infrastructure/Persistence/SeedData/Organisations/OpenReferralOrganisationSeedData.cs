@@ -17,7 +17,7 @@ public class OpenReferralOrganisationSeedData
     private OpenReferralOrganisation GetBristolCountyCouncil()
     {
         var bristolCountyCouncil = new OpenReferralOrganisation(
-            Guid.NewGuid().ToString(),
+            "72e653e8-1d05-4821-84e9-9177571a6013",
             "Bristol County Council",
             "Bristol County Council",
             null,
@@ -34,7 +34,7 @@ public class OpenReferralOrganisationSeedData
         return new()
         {
             new OpenReferralService(
-                Guid.NewGuid().ToString(),
+                "4591d551-0d6a-4c0d-b109-002e67318231",
                 "Aid for Children with Tracheostomies",
                 @"Aid for Children with Tracheostomies is a national self help group operating as a registered charity and is run by parents of children with a tracheostomy and by people who sympathise with the needs of such families. ACT as an organisation is non profit making, it links groups and individual members throughout Great Britain and Northern Ireland.",
                 null,
@@ -77,7 +77,7 @@ public class OpenReferralOrganisationSeedData
                     new OpenReferralServiceAtLocation(
                         "1749",
                         new OpenReferralLocation(
-                            Guid.NewGuid().ToString(),
+                            "256d0b97-d4c4-48e8-9475-bd7d42d1fc69",
                             "",
                             "",
                             52.6312,
