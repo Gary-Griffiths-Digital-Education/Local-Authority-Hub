@@ -1,10 +1,9 @@
-﻿using System.Reflection;
-using Application.Common.Behaviours;
-using Application.Common.Mappings;
+﻿using Application.Common.Behaviours;
 using Application.Models.DtoEntities;
 using AutoMapper;
 using FluentValidation;
 using MediatR;
+using System.Reflection;
 
 namespace Microsoft.Extensions.DependencyInjection;
 

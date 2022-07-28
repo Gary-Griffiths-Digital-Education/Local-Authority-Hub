@@ -24,7 +24,7 @@ public class GetOpenReferralOrganisationEndPoint : EndpointBaseAsync
     Tags = new[] { "OpenReferralOrganisation" })
     ]
     [HttpPost]
-    [Route("api/organizations")]
+    [Route("organizations")]
     //public override async Task<ActionResult<List<OpenReferralOrganisation>>> HandleAsync([FromBody] OpenReferralOrganisation request, CancellationToken cancellationToken = default)
     //{
     //    return await Task.Run(() => DoSomething(request, cancellationToken), cancellationToken);

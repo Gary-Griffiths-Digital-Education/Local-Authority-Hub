@@ -116,6 +116,8 @@ namespace Infrastructure.Persistence.SeedData.Organisations
                     contact
                 );
 
+            birminghamCityCouncil.Id = new Guid("843ea085-d1e8-4aef-b003-9e2f41156671");
+
             var address = new Address("Council House",
                         "Victoria Square",
                         "Birmingham",

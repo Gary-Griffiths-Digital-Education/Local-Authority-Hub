@@ -18,5 +18,6 @@ public class AutoMappingProfiles : Profile
         CreateMap<Service, ServiceDto>().ReverseMap();
         CreateMap<Tenant, TenantDto>().ReverseMap();
         CreateMap<Service, ServiceItem>().ReverseMap();
+
     }
 }

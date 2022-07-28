@@ -29,11 +29,6 @@ public class CreateOpenReferralOrganisationCommandHandler : IRequestHandler<Crea
 
         try
         {
-            //ToDo
-            //if (request.Services != null && request.Services.Any())
-            //    entity.Services = request.Services;
-            
-
             entity.AddDomainEvent(new OpenReferralOrganisationCreatedEvent(entity));
 
             _context.OpenReferralOrganisations.Add(entity);

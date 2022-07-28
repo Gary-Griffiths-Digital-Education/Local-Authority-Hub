@@ -4,6 +4,9 @@ using System.Text.Json;
 using WebAPI.Endpoints;
 using FluentAssertions;
 using Microsoft.AspNetCore.Mvc.Testing;
+using Microsoft.AspNetCore.Mvc;
+using Application.Commands.GetOrganisationById;
+using LAHub.Domain.Entities;
 
 namespace FunctionalTests;
 
@@ -28,7 +31,7 @@ public class WhenUsingOpenReferralOrganisationApiUnitTests
         var request = new HttpRequestMessage
         {
             Method = HttpMethod.Post,
-            RequestUri = new Uri(_client.BaseAddress + "api/organizations"),
+            RequestUri = new Uri(_client.BaseAddress + "organizations"),
             Content = new StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(command), Encoding.UTF8, "application/json"),
         };
 
@@ -40,7 +43,36 @@ public class WhenUsingOpenReferralOrganisationApiUnitTests
 
         response.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
         stringResult.ToString().Should().Be("ba1cca90-b02a-4a0b-afa0-d8aed1083c0d");
-        //string retVal = await JsonSerializer.DeserializeAsync<string>(await response.Content.ReadAsStreamAsync(), options: new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+    }
+
+    [Fact]
+    public async Task ThenTheOpenReferralOrganisationIsRetrieved()
+    {
+        var request = new HttpRequestMessage
+        {
+            Method = HttpMethod.Get,
+            RequestUri = new Uri(_client.BaseAddress + "organizations/72e653e8-1d05-4821-84e9-9177571a6013"),
+            
+        };
+
+        using var response = await _client.SendAsync(request);
+
+        response.EnsureSuccessStatusCode();
+
+        try
+        {
+            var retVal = await JsonSerializer.DeserializeAsync<ActionResult<OpenReferralOrganisationRecord>>(await response.Content.ReadAsStreamAsync(), options: new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+            
+        }
+        catch(Exception ex)
+        {
+            System.Diagnostics.Debug.WriteLine(ex.Message);
+        }
+
+
+        response.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
+        
+        
 
 
     }
