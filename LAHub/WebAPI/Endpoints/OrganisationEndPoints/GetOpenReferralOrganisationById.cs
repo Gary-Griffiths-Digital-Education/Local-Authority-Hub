@@ -10,7 +10,7 @@ namespace WebAPI.Endpoints.OrganisationEndPoints;
 
 public class GetOpenReferralOrganisationByIdEndPoint : EndpointBaseAsync
 .WithRequest<GetOpenReferralOrganisationByIdCommand>
-.WithResult<ActionResult<OpenReferralOrganisationRecord>>
+.WithResult<ActionResult<OpenReferralOrganisationWithServicesRecord>>
 {
     private ISender _mediator = null!;
     protected ISender Mediator => _mediator ??= HttpContext.RequestServices.GetRequiredService<ISender>();
@@ -22,7 +22,7 @@ public class GetOpenReferralOrganisationByIdEndPoint : EndpointBaseAsync
     Tags = new[] { "GetOpenReferralOrganisationsById" })
     ]
     [HttpGet(GetOpenReferralOrganisationByIdCommand.Route)]
-    public override async Task<ActionResult<OpenReferralOrganisationRecord>> HandleAsync([FromRoute] GetOpenReferralOrganisationByIdCommand request, CancellationToken cancellationToken = default)
+    public override async Task<ActionResult<OpenReferralOrganisationWithServicesRecord>> HandleAsync([FromRoute] GetOpenReferralOrganisationByIdCommand request, CancellationToken cancellationToken = default)
     {
         try
         { 

@@ -22,13 +22,22 @@ public class OpenReferralOrganisation : BaseEntity<string>
         Services = services;
     }
 
-    public string? Name { get; init; }
-    public string? Description { get; init; }
-    public string? Logo { get; init; }
-    public string? Uri { get; init; }
-    public string? Url { get; init; }
+    public string? Name { get; private set; }
+    public string? Description { get; private set; }
+    public string? Logo { get; private set; }
+    public string? Uri { get; private set; }
+    public string? Url { get; private set; }
     public virtual ICollection<OpenReferralReview>? Reviews { get; set; } = default!;
     public virtual ICollection<OpenReferralService>? Services { get; set; } = default!;
+
+    public void Update(OpenReferralOrganisation openReferralOrganisation)
+    {
+        Name = openReferralOrganisation.Name;
+        Description = openReferralOrganisation.Description;
+        Logo = openReferralOrganisation.Logo;
+        Uri = openReferralOrganisation.Uri;
+        Url = openReferralOrganisation.Url;
+    }
 
 
 }

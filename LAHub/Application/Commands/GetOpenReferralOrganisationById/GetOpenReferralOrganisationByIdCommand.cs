@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 namespace Application.Commands.GetOpenReferralOrganisationById;
 
 
-public class GetOpenReferralOrganisationByIdCommand : IRequest<OpenReferralOrganisationRecord>
+public class GetOpenReferralOrganisationByIdCommand : IRequest<OpenReferralOrganisationWithServicesRecord>
 {
     public const string Route = "/organizations/{id}";
     public static string BuildRoute(string orgId) => Route.Replace("{id:string}", orgId.ToString());
@@ -16,7 +16,7 @@ public class GetOpenReferralOrganisationByIdCommand : IRequest<OpenReferralOrgan
     public string Id { get; set; } = default!;
 }
 
-public class GetOpenReferralOrganisationByIdHandler : IRequestHandler<GetOpenReferralOrganisationByIdCommand, OpenReferralOrganisationRecord>
+public class GetOpenReferralOrganisationByIdHandler : IRequestHandler<GetOpenReferralOrganisationByIdCommand, OpenReferralOrganisationWithServicesRecord>
 {
     private readonly ILAHubDbContext _context;
     private readonly IMapper _mapper;
@@ -26,7 +26,7 @@ public class GetOpenReferralOrganisationByIdHandler : IRequestHandler<GetOpenRef
         _context = context;
         _mapper = mapper;
     }
-    public async Task<OpenReferralOrganisationRecord> Handle(GetOpenReferralOrganisationByIdCommand request, CancellationToken cancellationToken)
+    public async Task<OpenReferralOrganisationWithServicesRecord> Handle(GetOpenReferralOrganisationByIdCommand request, CancellationToken cancellationToken)
     {
         //var entity = await _context.Organisations
         //.FindAsync(new object[] { request.Id }, cancellationToken);
@@ -70,25 +70,11 @@ public class GetOpenReferralOrganisationByIdHandler : IRequestHandler<GetOpenRef
                     openReferralService.Email,
                     openReferralService.Fees
                     ));
-                //{
-                //Id = openReferralService.Id,
-                //    Name = openReferralService.Name,
-                //    Accreditations = openReferralService.Accreditations,
-                //    Assured_date = openReferralService.Assured_date,
-                //    Attending_access = openReferralService.Attending_access,
-                //    Attending_type = openReferralService.Attending_type,
-                //    Deliverable_type = openReferralService.Deliverable_type,
-                //    Description = openReferralService.Description,
-                //    Email = openReferralService.Email,
-                //    Fees = openReferralService.Fees,
-                //    Status = openReferralService.Status,
-                //    Url = openReferralService.Url,
-                //});
             }
         }
 
 
-        var result = new OpenReferralOrganisationRecord(
+        var result = new OpenReferralOrganisationWithServicesRecord(
             entity.Id,
             entity.Name,
             entity.Description,
@@ -96,16 +82,6 @@ public class GetOpenReferralOrganisationByIdHandler : IRequestHandler<GetOpenRef
             entity.Uri,
             entity.Url,
             openReferralServices);
-        //{
-        //    Id = entity.Id,
-        //    Name = entity.Name,
-        //    Description = entity.Description,
-        //    Logo = entity.Logo,
-        //    Uri = entity.Uri,
-        //    Url = entity.Url,
-        //    Services = openReferralServices
-        //};
-        
 
         return result;
     }

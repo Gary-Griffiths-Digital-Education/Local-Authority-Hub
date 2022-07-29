@@ -42,17 +42,17 @@ public class OpenReferralService : BaseEntity<string>
         Service_taxonomys = service_taxonomys;
     }
 
-    public string Name { get; init; } = default!;
-    public string? Description { get; init; }
-    public string? Accreditations { get; init; }
-    public DateTime? Assured_date { get; init; }
-    public string? Attending_access { get; init; }
-    public string? Attending_type { get; init; } 
-    public string? Deliverable_type { get; init; } 
-    public string? Status { get; init; }
-    public string? Url { get; init; }
-    public string? Email { get; init; }
-    public string? Fees { get; init; }
+    public string Name { get; private set; } = default!;
+    public string? Description { get; private set; }
+    public string? Accreditations { get; private set; }
+    public DateTime? Assured_date { get; private set; }
+    public string? Attending_access { get; private set; }
+    public string? Attending_type { get; private set; } 
+    public string? Deliverable_type { get; private set; } 
+    public string? Status { get; private set; }
+    public string? Url { get; private set; }
+    public string? Email { get; private set; }
+    public string? Fees { get; private set; }
 
     public virtual ICollection<OpenReferralEligibility>? Eligibilitys { get; init; }
     public virtual ICollection<OpenReferralFunding>? Fundings { get; init; }
@@ -65,5 +65,20 @@ public class OpenReferralService : BaseEntity<string>
     public virtual ICollection<OpenReferralService_Area>? Service_areas { get; init; }
     public virtual ICollection<OpenReferralServiceAtLocation>? Service_at_locations { get; init; }
     public virtual ICollection<OpenReferralService_Taxonomy>? Service_taxonomys { get; init; }
+
+    public void Update(OpenReferralService openReferralService)
+    {
+        Name = openReferralService.Name;
+        Description = openReferralService.Description;
+        Accreditations = openReferralService.Accreditations;
+        Assured_date = openReferralService.Assured_date;
+        Attending_access = openReferralService.Attending_access;
+        Attending_type = openReferralService.Attending_type;
+        Deliverable_type = openReferralService.Deliverable_type;
+        Status = openReferralService.Status;
+        Url = openReferralService.Url;
+        Email = openReferralService.Email;
+        Fees = openReferralService.Fees;
+    }
 
 }

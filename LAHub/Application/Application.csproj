@@ -18,6 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Commands\UpdateOpenReferralOrganisation\" />
     <Folder Include="Common\Exceptions\" />
     <Folder Include="Common\Models\" />
   </ItemGroup>

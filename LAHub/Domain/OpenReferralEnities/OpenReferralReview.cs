@@ -20,11 +20,21 @@ public class OpenReferralReview : BaseEntity<string>
     }
 
     //public OpenReferralService Service { get; set; } = default!;
-    public string Title { get; init; } = default!;
-    public string? Description { get; init; }
-    public DateTime Date { get; init; }
-    public string? Score { get; init; }
-    public string? Url { get; init; }
-    public string? Widget { get; init; }
+    public string Title { get; private set; } = default!;
+    public string? Description { get; private set; }
+    public DateTime Date { get; private set; }
+    public string? Score { get; private set; }
+    public string? Url { get; private set; }
+    public string? Widget { get; private set; }
+
+    public void Update(OpenReferralReview openReferralReview)
+    {
+        Title = openReferralReview.Title;
+        Description = openReferralReview.Description;
+        Date = openReferralReview.Date;
+        Score = openReferralReview.Score;
+        Url = openReferralReview.Url;
+        Widget = openReferralReview.Widget;
+    }
     
 }
