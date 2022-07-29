@@ -1,4 +1,5 @@
 ﻿using LAHub.Domain.OpenReferralEnities;
+using System.Collections.ObjectModel;
 
 namespace Infrastructure.Persistence.SeedData.Organisations;
 
@@ -23,7 +24,7 @@ public class OpenReferralOrganisationSeedData
             null,
             new Uri("https://www.bristol.gov.uk/").ToString(),
             "https://www.bristol.gov.uk/",
-            null,
+            new Collection<OpenReferralReview>(),
             GetBristolCountyCouncilServices()
             );
         return bristolCountyCouncil;

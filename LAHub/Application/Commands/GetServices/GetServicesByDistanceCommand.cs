@@ -66,12 +66,11 @@ public class GetServicesByDistanceCommandHandler : IRequestHandler<GetServicesBy
 
         var lst = entities.ToList();
 
-#pragma warning disable CS8602 // Dereference of a possibly null reference.
-        var servicesAtDistance = lst.Where(x => Helper.GetDistance(request.Latitude, request.Longtitude, x.Location.Latitude, x.Location.Longitude, x.Name) < request.Meters);
+        var servicesAtDistance = lst.Where(x => Helper.GetDistance(request.Latitude, request.Longtitude, x?.Location?.Latitude, x?.Location?.Longitude, x?.Name) < request.Meters);
         //var servicesAtDistance = from serv in lst
         //                         where Helper.GetDistance(request.Latitude, request.Longtitude, serv.Location.Latitude, serv.Location.Longitude, serv.Name) < request.Meters
         //                         select serv;
-#pragma warning restore CS8602 // Dereference of a possibly null reference.
+
 
         var r1 = _mapper.Map<List<ServiceItem>>(servicesAtDistance);
         var paglst = r1.Skip((request.PageNumber - 1) * request.PageSize).Take(request.PageSize).ToList();

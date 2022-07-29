@@ -1,20 +1,22 @@
-﻿namespace LAHub.Domain.OpenReferralEnities;
+﻿using System.Collections.ObjectModel;
+
+namespace LAHub.Domain.OpenReferralEnities;
 
 public class OpenReferralService : BaseEntity<string>
 {
     private OpenReferralService() { }
 
     public OpenReferralService(string id, string name, string? description, string? accreditations, DateTime? assured_date, string? attending_access, string? attending_type, string? deliverable_type, string? status, string? url, string? email, string? fees
-        , ICollection<OpenReferralEligibility>? eligibilitys, ICollection<OpenReferralFunding>? fundings
-        , ICollection<OpenReferralHoliday_Schedule>? holiday_schedules
-        , ICollection<OpenReferralLanguage>? languages
-        , ICollection<OpenReferralRegular_Schedule>? regular_schedules
-        , ICollection<OpenReferralReview>? reviews
-        , ICollection<OpenReferralContact>? contacts
-        , ICollection<OpenReferralCost_Option>? cost_options
-        , ICollection<OpenReferralService_Area>? service_areas
-        , ICollection<OpenReferralServiceAtLocation>? service_at_locations
-        , ICollection<OpenReferralService_Taxonomy>? service_taxonomys
+        , ICollection<OpenReferralEligibility> eligibilitys, ICollection<OpenReferralFunding> fundings
+        , ICollection<OpenReferralHoliday_Schedule> holiday_schedules
+        , ICollection<OpenReferralLanguage> languages
+        , ICollection<OpenReferralRegular_Schedule> regular_schedules
+        , ICollection<OpenReferralReview> reviews
+        , ICollection<OpenReferralContact> contacts
+        , ICollection<OpenReferralCost_Option> cost_options
+        , ICollection<OpenReferralService_Area> service_areas
+        , ICollection<OpenReferralServiceAtLocation> service_at_locations
+        , ICollection<OpenReferralService_Taxonomy> service_taxonomys
         )
     {
         Id = id;
@@ -54,17 +56,17 @@ public class OpenReferralService : BaseEntity<string>
     public string? Email { get; private set; }
     public string? Fees { get; private set; }
 
-    public virtual ICollection<OpenReferralEligibility>? Eligibilitys { get; init; }
-    public virtual ICollection<OpenReferralFunding>? Fundings { get; init; }
-    public virtual ICollection<OpenReferralHoliday_Schedule>? Holiday_schedules { get; init; }
-    public virtual ICollection<OpenReferralLanguage>? Languages { get; init; }
-    public virtual ICollection<OpenReferralRegular_Schedule>? Regular_schedules { get; init; }
-    public virtual ICollection<OpenReferralReview>? Reviews { get; init; }
-    public virtual ICollection<OpenReferralContact>? Contacts { get; init; }
-    public virtual ICollection<OpenReferralCost_Option>? Cost_options { get; init; }
-    public virtual ICollection<OpenReferralService_Area>? Service_areas { get; init; }
-    public virtual ICollection<OpenReferralServiceAtLocation>? Service_at_locations { get; init; }
-    public virtual ICollection<OpenReferralService_Taxonomy>? Service_taxonomys { get; init; }
+    public virtual ICollection<OpenReferralEligibility> Eligibilitys { get; init; } = new Collection<OpenReferralEligibility>();
+    public virtual ICollection<OpenReferralFunding> Fundings { get; init; } = new Collection<OpenReferralFunding>();
+    public virtual ICollection<OpenReferralHoliday_Schedule> Holiday_schedules { get; init; } = new Collection<OpenReferralHoliday_Schedule>();
+    public virtual ICollection<OpenReferralLanguage> Languages { get; init; } = new Collection<OpenReferralLanguage>();
+    public virtual ICollection<OpenReferralRegular_Schedule> Regular_schedules { get; init; } = new Collection<OpenReferralRegular_Schedule>();
+    public virtual ICollection<OpenReferralReview> Reviews { get; init; } = new Collection<OpenReferralReview>();
+    public virtual ICollection<OpenReferralContact> Contacts { get; init; } = new Collection<OpenReferralContact>();
+    public virtual ICollection<OpenReferralCost_Option> Cost_options { get; init; } = new Collection<OpenReferralCost_Option>();
+    public virtual ICollection<OpenReferralService_Area> Service_areas { get; init; } = new Collection<OpenReferralService_Area>();
+    public virtual ICollection<OpenReferralServiceAtLocation> Service_at_locations { get; init; } = new Collection<OpenReferralServiceAtLocation>();
+    public virtual ICollection<OpenReferralService_Taxonomy> Service_taxonomys { get; init; } = new Collection<OpenReferralService_Taxonomy>();
 
     public void Update(OpenReferralService openReferralService)
     {

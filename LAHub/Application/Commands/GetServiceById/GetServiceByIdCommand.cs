@@ -49,8 +49,9 @@ public class GetServiceByIdCommandHandler : IRequestHandler<GetServiceByIdComman
 
         //Need to remove self referencing items
 
-#pragma warning disable CS8602 // Dereference of a possibly null reference.
-        entity.Organisation.Services = null!;
+
+        if (entity.Organisation != null)
+            entity.Organisation.Services = null!;
 
 //        foreach (var item in entity.ServiceLocations)
 //        {
@@ -58,7 +59,7 @@ public class GetServiceByIdCommandHandler : IRequestHandler<GetServiceByIdComman
 //            item.Service = null;
 //#pragma warning restore CS8625 // Cannot convert null literal to non-nullable reference type.
 //        }
-#pragma warning restore CS8602 // Dereference of a possibly null reference.          
+         
 
         return entity;
     }

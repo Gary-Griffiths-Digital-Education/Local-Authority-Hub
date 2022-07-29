@@ -108,20 +108,24 @@ public class UpdateOrganisationCommandHandler : IRequestHandler<UpdateOrganisati
         }
         
 
-#pragma warning disable CS8601 // Possible null reference assignment.
+
         entity.Id = request.Id;
-        entity.Tenant = tenant;
-        entity.OrganisationType = organisationType;
+        if (tenant != null)
+            entity.Tenant = tenant;
+        if (organisationType != null)
+            entity.OrganisationType = organisationType;
+#pragma warning disable CS8601 // Possible null reference assignment.        
         entity.Name = request.Name;
         entity.Description = request.Description;
         entity.LogoUrl = request.LogoUrl;
         entity.LogoAltText = request.LogoAltText;
+#pragma warning restore CS8601 // Possible null reference assignment.        
         entity.Contact = contact;
 
         //ToDo
         //if (request.Services != null && request.Services.Any())
         //    entity.Services = request.Services;
-#pragma warning restore CS8601 // Possible null reference assignment.
+
 
         try
         {
