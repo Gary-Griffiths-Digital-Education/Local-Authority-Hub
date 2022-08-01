@@ -19,7 +19,7 @@ public class GetOpenReferralServicesByDistance : EndpointBaseAsync
     Summary = "Gets services by distance",
     Description = "Gets services by distance",
     //OperationId = "Author.Create",
-    Tags = new[] { "GetServicesByDistance" })
+    Tags = new[] { "Services" })
     ]
     [HttpGet(GetOpenReferralServicesByDistanceCommand.Route)]
     public override async Task<ActionResult<PaginatedList<OpenReferralServiceRecord>>> HandleAsync([FromRoute] GetOpenReferralServicesByDistanceCommand request, CancellationToken cancellationToken = default)

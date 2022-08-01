@@ -17,7 +17,7 @@ public class ListTenants : EndpointBaseAsync
     Summary = "List of Tenants",
     Description = "List of Tenants",
     OperationId = "Tenant.List",
-    Tags = new[] { "ListTenants" })
+    Tags = new[] { "Simple Organisation" })
     ]
     [HttpGet]
     [Route("api/ListTenantsDepricated")]

@@ -18,7 +18,7 @@ public class GetServiceById : EndpointBaseAsync
     Summary = "Gets a service by id",
     Description = "Gets the required service by id",
     //OperationId = "Author.Create",
-    Tags = new[] { "GetServicesById" })
+    Tags = new[] { "Simple Organisation" })
     ]
     [HttpGet(GetServiceByIdCommand.Route)]
     public override async Task<ActionResult<Service>> HandleAsync([FromBody] GetServiceByIdCommand request, CancellationToken cancellationToken = default)

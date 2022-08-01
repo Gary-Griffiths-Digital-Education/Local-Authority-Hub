@@ -21,7 +21,7 @@ public class GetServices : EndpointBaseAsync
     Summary = "Get a list of service within a certain distance",
     Description = "Get a list of service within a certain distance",
     //OperationId = "Author.Create",
-    Tags = new[] { "GetServicesByDistance" })
+    Tags = new[] { "Simple Organisation" })
     ]
     [HttpPost]
     [Route("api/GetServicesByDistanceDepricated")]

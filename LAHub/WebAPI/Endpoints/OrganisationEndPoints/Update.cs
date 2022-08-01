@@ -17,7 +17,7 @@ public class Update : EndpointBaseAsync
     Summary = "Updates an Organisation",
     Description = "Updates an Organisation with Services",
     OperationId = "Organisation.Update",
-    Tags = new[] { "UpdateOrganisation" })
+    Tags = new[] { "Simple Organisation" })
     ]
     [HttpPut]
     [Route("api/UpdateOrganisation")]

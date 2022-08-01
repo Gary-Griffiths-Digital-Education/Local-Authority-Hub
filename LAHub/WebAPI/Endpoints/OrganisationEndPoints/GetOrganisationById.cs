@@ -18,7 +18,7 @@ public class GetOrganisationByIdEndPoint : EndpointBaseAsync
     Summary = "Gets a Organisation by id",
     Description = "Gets the required Organisation by id",
     //OperationId = "Author.Create",
-    Tags = new[] { "GetOrganisationsById" })
+    Tags = new[] { "Simple Organisation" })
     ]
     [HttpGet(GetOrganisationByIdCommand.Route)]
     public override async Task<ActionResult<Organisation>> HandleAsync([FromBody] GetOrganisationByIdCommand request, CancellationToken cancellationToken = default)

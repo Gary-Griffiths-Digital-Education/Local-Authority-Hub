@@ -4,6 +4,7 @@ using Application.Commands.ListOrganisation;
 using LAHub.Domain.OpenReferralEnities;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace WebAPI.Endpoints;
 
@@ -24,7 +25,7 @@ public class MinimalOrganisationEndPoints
                 System.Diagnostics.Debug.WriteLine(ex.Message);
                 throw;
             }
-        });
+        }).WithMetadata(new SwaggerOperationAttribute("Organisations", "Create Organisation") { Tags = new[] { "Organisations" } });
 
         app.MapGet("api/organizations/{id}", async (string id, CancellationToken cancellationToken, ISender _mediator) =>
         {
@@ -42,7 +43,7 @@ public class MinimalOrganisationEndPoints
                 System.Diagnostics.Debug.WriteLine(ex.Message);
                 throw;
             }
-        });
+        }).WithMetadata(new SwaggerOperationAttribute("Get Organisation", "Get Organisation By Id") { Tags = new[] { "Organisations" } });
 
         app.MapGet("api/organizations", async (CancellationToken cancellationToken, ISender _mediator) =>
         {
@@ -57,7 +58,7 @@ public class MinimalOrganisationEndPoints
                 System.Diagnostics.Debug.WriteLine(ex.Message);
                 throw;
             }
-        });
+        }).WithMetadata(new SwaggerOperationAttribute("List Organisations", "List Organisations") { Tags = new[] { "Organisations" } });
 
         app.MapPut("api/organizations/{id}", async (string id, [FromBody] OpenReferralOrganisation request, CancellationToken cancellationToken, ISender _mediator) =>
         {
@@ -72,6 +73,6 @@ public class MinimalOrganisationEndPoints
                 System.Diagnostics.Debug.WriteLine(ex.Message);
                 throw;
             }
-        });
+        }).WithMetadata(new SwaggerOperationAttribute("Update Organisation", "Update Organisation") { Tags = new[] { "Organisations" } });
     }
 }

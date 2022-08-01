@@ -17,7 +17,7 @@ public class ListOrganisationTypes : EndpointBaseAsync
     Summary = "List of OrganisationTypes",
     Description = "List of OrganisationTypes",
     OperationId = "OrganisationType.List",
-    Tags = new[] { "ListOrganisationTypes" })
+    Tags = new[] { "Simple Organisation" })
     ]
     [HttpGet]
     [Route("api/ListOrganisationTypesDepricated")]

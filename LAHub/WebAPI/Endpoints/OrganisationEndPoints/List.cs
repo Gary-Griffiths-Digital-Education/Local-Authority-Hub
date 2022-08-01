@@ -17,7 +17,7 @@ public class ListOrganisations : EndpointBaseAsync
     Summary = "List of Organisations",
     Description = "List of Organisations",
     OperationId = "Organisation.List",
-    Tags = new[] { "ListOrganisations" })
+    Tags = new[] { "Simple Organisation" })
     ]
     [HttpGet(ListOrganisationCommand.Route)]
     public override async Task<ActionResult<List<OrganisationRecord>>> HandleAsync([FromBody] ListOrganisationCommand request, CancellationToken cancellationToken = default)

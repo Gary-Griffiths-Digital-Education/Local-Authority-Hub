@@ -14,10 +14,10 @@ public class CreateOrganisation : EndpointBaseAsync
     protected ISender Mediator => _mediator ??= HttpContext.RequestServices.GetRequiredService<ISender>();
 
     [SwaggerOperation(
-    Summary = "Creates an Organisation",
+    Summary = "Creates Organisation",
     Description = "Creates an Organisation with Services",
     OperationId = "Organisation.Create",
-    Tags = new[] { "CreateOrganisation" })
+    Tags = new[] { "Simple Organisation" })
     ]
     [HttpPost]
     [Route("api/CreateMyOrganisationDepricated")]

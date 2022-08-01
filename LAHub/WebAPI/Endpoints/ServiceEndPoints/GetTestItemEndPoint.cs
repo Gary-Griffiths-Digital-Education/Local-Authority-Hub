@@ -22,7 +22,7 @@ public class GetTestItemEndPoint : EndpointBaseAsync
     Summary = "Test Command",
     Description = "Test Command",
     //OperationId = "Author.Create",
-    Tags = new[] { "GetTestCommand" })
+    Tags = new[] { "Test Command" })
     ]
     [HttpPost]
     [Route("api/GetTestCommandDepricated")]
