@@ -13,7 +13,7 @@ public class GetOrganisationByIdCommand : IRequest<Organisation>
         Id = id;
     }
 
-    public const string Route = "api/GetOrganisationById/{OrganisationId:Guid}";
+    public const string Route = "api/GetOrganisationByIdDepricated/{OrganisationId:Guid}";
     public static string BuildRoute(Guid orgId) => Route.Replace("{OrganisationId:Guid}", orgId.ToString());
 
     public Guid Id { get; set; }

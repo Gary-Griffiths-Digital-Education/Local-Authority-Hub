@@ -20,7 +20,7 @@ public class ListOrganisationTypes : EndpointBaseAsync
     Tags = new[] { "ListOrganisationTypes" })
     ]
     [HttpGet]
-    [Route("api/ListOrganisationTypes")]
+    [Route("api/ListOrganisationTypesDepricated")]
     public override async Task<ActionResult<List<OrganisationTypeRecord>>> HandleAsync(CancellationToken cancellationToken = new())
     {
 

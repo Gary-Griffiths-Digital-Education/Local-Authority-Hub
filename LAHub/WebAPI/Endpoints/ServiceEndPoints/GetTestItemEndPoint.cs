@@ -25,7 +25,7 @@ public class GetTestItemEndPoint : EndpointBaseAsync
     Tags = new[] { "GetTestCommand" })
     ]
     [HttpPost]
-    [Route("api/GetTestCommand")]
+    [Route("api/GetTestCommandDepricated")]
     public override async Task<ActionResult<PaginatedList<TestItem>>> HandleAsync([FromBody] TestCommand request, CancellationToken cancellationToken = default)
     {
         try

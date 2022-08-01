@@ -10,9 +10,6 @@ namespace Application.Commands.GetOpenReferralOrganisationById;
 
 public class GetOpenReferralOrganisationByIdCommand : IRequest<OpenReferralOrganisationWithServicesRecord>
 {
-    public const string Route = "/organizations/{id}";
-    public static string BuildRoute(string orgId) => Route.Replace("{id:string}", orgId.ToString());
-
     public string Id { get; set; } = default!;
 }
 

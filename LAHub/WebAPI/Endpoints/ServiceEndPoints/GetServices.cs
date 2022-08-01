@@ -24,7 +24,7 @@ public class GetServices : EndpointBaseAsync
     Tags = new[] { "GetServicesByDistance" })
     ]
     [HttpPost]
-    [Route("api/GetServicesByDistance")]
+    [Route("api/GetServicesByDistanceDepricated")]
     public override async Task<ActionResult<PaginatedList<ServiceItem>>> HandleAsync([FromBody] GetServicesByDistanceCommand request, CancellationToken cancellationToken = default)
     {
         try

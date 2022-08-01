@@ -18,9 +18,6 @@ public class UpdateOpenReferralOrganisationCommand : IRequest<string>
 
     public OpenReferralOrganisation OpenReferralOrganisation { get; init; }
 
-    public const string Route = "/organizations/{id}";
-    public static string BuildRoute(string orgId) => Route.Replace("{id:string}", orgId.ToString());
-
     public string Id { get; set; } = default!;
 }
 

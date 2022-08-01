@@ -20,7 +20,7 @@ public class ListTenants : EndpointBaseAsync
     Tags = new[] { "ListTenants" })
     ]
     [HttpGet]
-    [Route("api/ListTenants")]
+    [Route("api/ListTenantsDepricated")]
     public override async Task<ActionResult<List<TenantRecord>>> HandleAsync(CancellationToken cancellationToken = new())
     {
 

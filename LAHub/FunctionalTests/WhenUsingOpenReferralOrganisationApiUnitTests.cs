@@ -18,7 +18,8 @@ public class WhenUsingOpenReferralOrganisationApiUnitTests : BaseWhenUsingOpenRe
         var request = new HttpRequestMessage
         {
             Method = HttpMethod.Post,
-            RequestUri = new Uri(_client.BaseAddress + "organizations"),
+            //RequestUri = new Uri(_client.BaseAddress + "organizations"),
+            RequestUri = new Uri(_client.BaseAddress + "api/organizations"),
             Content = new StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(command), Encoding.UTF8, "application/json"),
         };
 
@@ -38,7 +39,7 @@ public class WhenUsingOpenReferralOrganisationApiUnitTests : BaseWhenUsingOpenRe
         var request = new HttpRequestMessage
         {
             Method = HttpMethod.Get,
-            RequestUri = new Uri(_client.BaseAddress + "organizations/72e653e8-1d05-4821-84e9-9177571a6013"),
+            RequestUri = new Uri(_client.BaseAddress + "api/organizations/72e653e8-1d05-4821-84e9-9177571a6013"),
             
         };
 
@@ -62,7 +63,7 @@ public class WhenUsingOpenReferralOrganisationApiUnitTests : BaseWhenUsingOpenRe
         var request = new HttpRequestMessage
         {
             Method = HttpMethod.Get,
-            RequestUri = new Uri(_client.BaseAddress + "Organisations"),
+            RequestUri = new Uri(_client.BaseAddress + "api/organizations"),
 
         };
 
@@ -87,7 +88,7 @@ public class WhenUsingOpenReferralOrganisationApiUnitTests : BaseWhenUsingOpenRe
         var request = new HttpRequestMessage
         {
             Method = HttpMethod.Put,
-            RequestUri = new Uri(_client.BaseAddress + "organizations/72e653e8-1d05-4821-84e9-9177571a6013"),
+            RequestUri = new Uri(_client.BaseAddress + "api/organizations/72e653e8-1d05-4821-84e9-9177571a6013"),
             Content = new StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(command), Encoding.UTF8, "application/json"),
         };
 

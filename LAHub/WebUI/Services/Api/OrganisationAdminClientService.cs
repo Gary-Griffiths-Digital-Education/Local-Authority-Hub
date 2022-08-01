@@ -58,7 +58,7 @@ public class OrganisationAdminClientService : ApiService, IOrganisationAdminClie
         var request = new HttpRequestMessage
         {
             Method = HttpMethod.Get,
-            RequestUri = new Uri(_client.BaseAddress + "api/ListTenants"),
+            RequestUri = new Uri(_client.BaseAddress + "api/ListTenantsDepricated"),
         };
 
         using var response = await _client.SendAsync(request);
@@ -76,7 +76,7 @@ public class OrganisationAdminClientService : ApiService, IOrganisationAdminClie
         var request = new HttpRequestMessage
         {
             Method = HttpMethod.Get,
-            RequestUri = new Uri(_client.BaseAddress + "api/ListOrganisationTypes"),
+            RequestUri = new Uri(_client.BaseAddress + "api/ListOrganisationTypesDepricated"),
         };
 
         using var response = await _client.SendAsync(request);
@@ -157,7 +157,7 @@ public class OrganisationAdminClientService : ApiService, IOrganisationAdminClie
         var request = new HttpRequestMessage
         {
             Method = HttpMethod.Post,
-            RequestUri = new Uri(_client.BaseAddress + "api/CreateMyOrganisation"),
+            RequestUri = new Uri(_client.BaseAddress + "api/CreateMyOrganisationDepricated"),
             Content = new StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(command), Encoding.UTF8, "application/json"),
         };
 
@@ -203,7 +203,7 @@ public class OrganisationAdminClientService : ApiService, IOrganisationAdminClie
         var request = new HttpRequestMessage
         {
             Method = HttpMethod.Put,
-            RequestUri = new Uri(_client.BaseAddress + "api/UpdateOrganisation"),
+            RequestUri = new Uri(_client.BaseAddress + "api/UpdateOrganisationDepricated"),
             Content = new StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(command), Encoding.UTF8, "application/json"),
         };
 

@@ -2,6 +2,7 @@ using Application.Common.Interfaces;
 using Infrastructure.Persistence;
 using Microsoft.OpenApi.Models;
 using WebAPI;
+using WebAPI.Endpoints;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,10 +16,14 @@ builder.Services.AddEndpointsApiExplorer()
 
 builder.Services.AddSingleton<ICurrentUserService, CurrentUserService>();
 
+builder.Services.AddScoped<MinimalOrganisationEndPoints>();
+builder.Services.AddScoped<MinimalGeneralEndPoints>();
+
 
 builder.Services.AddSwaggerGen(c => {
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
     c.EnableAnnotations();
+    c.OperationFilter<ReApplyOptionalRouteParameterOperationFilter>();
 });
 
 var app = builder.Build();
@@ -35,6 +40,17 @@ if (app.Environment.IsDevelopment())
         await initialiser.InitialiseAsync(builder.Configuration);
         await initialiser.SeedAsync();
     }
+}
+
+using (var scope = app.Services.CreateScope())
+{
+    var orgservice = scope.ServiceProvider.GetService<MinimalOrganisationEndPoints>();
+    if (orgservice != null)
+        orgservice.RegisterOrganisationEndPoints(app);
+
+    var genservice = scope.ServiceProvider.GetService<MinimalGeneralEndPoints>();
+    if (genservice != null)
+        genservice.RegisterMinimalGeneralEndPoints(app);
 }
 
 app.UseHttpsRedirection();

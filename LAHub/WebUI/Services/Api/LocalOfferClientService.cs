@@ -32,7 +32,7 @@ public class LocalOfferClientService : ApiService, ILocalOfferClientService
         var request = new HttpRequestMessage
         {
             Method = HttpMethod.Post,
-            RequestUri = new Uri(_client.BaseAddress + "api/GetServicesByDistance"),
+            RequestUri = new Uri(_client.BaseAddress + "api/GetServicesByDistanceDepricated"),
             Content = new StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(command), Encoding.UTF8, "application/json"),
         };
 
@@ -74,7 +74,7 @@ public class LocalOfferClientService : ApiService, ILocalOfferClientService
         var request = new HttpRequestMessage
         {
             Method = HttpMethod.Post,
-            RequestUri = new Uri(_client.BaseAddress + "api/GetTestCommand"),
+            RequestUri = new Uri(_client.BaseAddress + "api/GetTestCommandDepricated"),
             Content = new StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(command), Encoding.UTF8, "application/json"),
         };
 

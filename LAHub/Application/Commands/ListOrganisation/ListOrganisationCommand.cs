@@ -15,7 +15,7 @@ public class ListOrganisationCommand : IRequest<List<OrganisationRecord>>
         OrganisationTypeId = organisationTypeId;
     }
 
-    public const string Route = "api/ListOrganisations/{TenantId:Guid}/{OrganisationTypeId:Guid}";
+    public const string Route = "api/ListOrganisationsDepricated/{TenantId:Guid}/{OrganisationTypeId:Guid}";
     public static string BuildRoute(Guid tenantId, Guid? orgTypeId)
     {
         string route = Route.Replace("{TenantId:Guid}", tenantId.ToString());

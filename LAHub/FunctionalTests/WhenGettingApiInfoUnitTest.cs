@@ -20,7 +20,7 @@ public class WhenGettingApiInfoUnitTest
     [Fact]
     public async Task ThenReturnsVersionAndLastUpdateDate()
     {
-        var response = await _client.GetAsync("info");
+        var response = await _client.GetAsync("api/info");
         response.EnsureSuccessStatusCode();
         var stringResponse = await response.Content.ReadAsStringAsync();
 

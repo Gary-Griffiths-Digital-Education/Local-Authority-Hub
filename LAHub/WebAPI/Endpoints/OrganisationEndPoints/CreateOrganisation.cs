@@ -20,7 +20,7 @@ public class CreateOrganisation : EndpointBaseAsync
     Tags = new[] { "CreateOrganisation" })
     ]
     [HttpPost]
-    [Route("api/CreateMyOrganisation")]
+    [Route("api/CreateMyOrganisationDepricated")]
     //public override async Task<ActionResult<Guid>> HandleAsync([FromBody] CreateOrganisationCommand request, CancellationToken cancellationToken = default)
     public override async Task<ActionResult<Guid>> HandleAsync([FromBody] CreateOrganisationCommand request, CancellationToken cancellationToken = default)
     {

@@ -29,5 +29,20 @@ namespace WebAPI.Controllers
             })
             .ToArray();
         }
+
+        //[HttpGet("GetBy/{name?}")]
+        //public string GetBy(string name = "Hello World")
+        //{
+        //    return name;
+
+        //}
+
+        //[HttpGet("TestServicesByDistance/{latitude}/{longtitude}/{meters}/{pageNumber?}/{pageSize?}")]
+        
+        //public string TestServicesByDistance([FromRoute] double latitude, [FromRoute] double longtitude, [FromRoute] double meters, [FromRoute] int? pageNumber = 1, [FromRoute] int? pageSize = 10)
+        //{
+        //    return "Hello";
+
+        //}
     }
 }

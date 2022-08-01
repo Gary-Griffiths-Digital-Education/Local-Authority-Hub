@@ -10,14 +10,7 @@ public class ListOpenReferralOrganisationCommand : IRequest<List<OpenReferralOrg
     public ListOpenReferralOrganisationCommand()
     {
        
-    }
-
-    public const string Route = "Organisations";
-    public static string BuildRoute()
-    {
-        return Route;
-    }
-    
+    }    
 }
 
 public class ListOpenReferralOrganisationCommandHandler : IRequestHandler<ListOpenReferralOrganisationCommand, List<OpenReferralOrganisationRecord>>
