@@ -17,8 +17,7 @@ public class WhenUsingOpenReferralServiceApiUnitTests : BaseWhenUsingOpenReferra
         var request = new HttpRequestMessage
         {
             Method = HttpMethod.Get,
-            RequestUri = new Uri(_client.BaseAddress + "api/ServicesByDistance/52.6312/-1.66526/1609.34/1/10"),
-
+            RequestUri = new Uri(_client.BaseAddress + "api/services?latitude=52.6312&longtitude=-1.66526&proximity=1609.34&pageNumber=1&pageSize=10"),
         };
 
         using var response = await _client.SendAsync(request);

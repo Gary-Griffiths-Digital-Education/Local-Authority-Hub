@@ -18,7 +18,7 @@ builder.Services.AddSingleton<ICurrentUserService, CurrentUserService>();
 
 builder.Services.AddScoped<MinimalOrganisationEndPoints>();
 builder.Services.AddScoped<MinimalGeneralEndPoints>();
-
+builder.Services.AddScoped<MinimalServiceEndPoints>();
 
 builder.Services.AddSwaggerGen(c => {
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
@@ -47,6 +47,10 @@ using (var scope = app.Services.CreateScope())
     var orgservice = scope.ServiceProvider.GetService<MinimalOrganisationEndPoints>();
     if (orgservice != null)
         orgservice.RegisterOrganisationEndPoints(app);
+
+    var serservice = scope.ServiceProvider.GetService<MinimalServiceEndPoints>();
+    if (serservice != null)
+        serservice.RegisterServiceEndPoints(app);
 
     var genservice = scope.ServiceProvider.GetService<MinimalGeneralEndPoints>();
     if (genservice != null)
