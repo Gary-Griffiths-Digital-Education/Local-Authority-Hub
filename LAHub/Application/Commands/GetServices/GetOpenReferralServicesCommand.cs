@@ -68,7 +68,7 @@ public class GetOpenReferralServicesCommandHandler : IRequestHandler<GetOpenRefe
             dbservices = new List<OpenReferralService>();
         }
 
-        var fileterServices = dbservices.Select(x => new OpenReferralServiceRecord(
+        var filteredServices = dbservices.Select(x => new OpenReferralServiceRecord(
             x.Id,       
             x.Name,
             x.Description,
@@ -85,12 +85,12 @@ public class GetOpenReferralServicesCommandHandler : IRequestHandler<GetOpenRefe
 
         if (request != null)
         {
-            var pagelist = fileterServices.Skip((request.PageNumber - 1) * request.PageSize).Take(request.PageSize).ToList();
-            var result = new PaginatedList<OpenReferralServiceRecord>(fileterServices, pagelist.Count, request.PageNumber, request.PageSize);
+            var pagelist = filteredServices.Skip((request.PageNumber - 1) * request.PageSize).Take(request.PageSize).ToList();
+            var result = new PaginatedList<OpenReferralServiceRecord>(filteredServices, pagelist.Count, request.PageNumber, request.PageSize);
             return result;
         }
 
-        return new PaginatedList<OpenReferralServiceRecord>(fileterServices, fileterServices.Count, 1, 10);
+        return new PaginatedList<OpenReferralServiceRecord>(filteredServices, filteredServices.Count, 1, 10);
 
     }
 

@@ -1,9 +1,6 @@
 ﻿using Application.Common.Models;
 using FluentAssertions;
-using Infrastructure.Persistence.SeedData.Organisations;
 using LAHub.Domain.OpenReferralEnities;
-using Microsoft.AspNetCore.Mvc.Testing;
-using System.Text;
 using System.Text.Json;
 
 namespace FunctionalTests;
@@ -12,7 +9,7 @@ namespace FunctionalTests;
 public class WhenUsingOpenReferralServiceApiUnitTests : BaseWhenUsingOpenReferralApiUnitTests
 {
     [Fact]
-    public async Task ThenByDistanceTheOpenReferralServicesAreRetrieved()
+    public async Task ThenTheOpenReferralServicesAreRetrieved()
     {
         var request = new HttpRequestMessage
         {
