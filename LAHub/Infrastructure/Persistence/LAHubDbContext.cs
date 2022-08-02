@@ -1,5 +1,6 @@
 ﻿using Application.Common.Interfaces;
 using Duende.IdentityServer.EntityFramework.Options;
+using Infrastructure.Common;
 using Infrastructure.Identity;
 using Infrastructure.Persistence.Interceptors;
 using LAHub.Domain.Entities;
@@ -70,6 +71,8 @@ public class LAHubDbContext : ApiAuthorizationDbContext<ApplicationUser>, ILAHub
         //    .HasOne<Grade>(s => s.Grade)
         //    .WithMany(g => g.Students)
         //    .HasForeignKey(s => s.CurrentGradeId);
+
+        builder.Entity<OpenReferralService>().HasEnum(e => e.ServiceDelivery);
 
         builder.Entity<LAHub.Domain.Entities.Service>()
             .HasMany(x => x.ServiceClassifications);

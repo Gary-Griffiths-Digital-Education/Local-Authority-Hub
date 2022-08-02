@@ -47,6 +47,7 @@ public class OpenReferralOrganisationSeedData
                 "www.actfortrachykids.com",
                 "support@ACTfortrachykids.com",
                 null,
+                ServiceDelivery.Online,
                 new List<OpenReferralEligibility>
                 {
                     new OpenReferralEligibility("9109Children","",null,0,13,new List<OpenReferralTaxonomy>())
