@@ -1,6 +1,6 @@
 ﻿namespace LAHub.Domain.RecordEntities;
 
-public class OpenReferralTaxonomyRecord
+public record OpenReferralTaxonomyRecord
 {
     private OpenReferralTaxonomyRecord() { }
     public OpenReferralTaxonomyRecord(string id, string name, string? vocabulary, string? parent)

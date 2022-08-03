@@ -1,6 +1,7 @@
 ﻿using FluentAssertions;
 using Infrastructure.Persistence.SeedData.Organisations;
 using LAHub.Domain.OpenReferralEnities;
+using LAHub.Domain.RecordEntities;
 using Microsoft.AspNetCore.Mvc.Testing;
 using System.Text;
 using System.Text.Json;

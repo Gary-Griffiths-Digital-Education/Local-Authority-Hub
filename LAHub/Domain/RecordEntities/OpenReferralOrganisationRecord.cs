@@ -1,4 +1,4 @@
-﻿namespace LAHub.Domain.OpenReferralEnities;
+﻿namespace LAHub.Domain.RecordEntities;
 
 public record OpenReferralOrganisationRecord
 {

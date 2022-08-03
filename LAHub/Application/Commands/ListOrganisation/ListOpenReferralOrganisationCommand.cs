@@ -1,5 +1,6 @@
 ﻿using Application.Common.Interfaces;
 using LAHub.Domain.OpenReferralEnities;
+using LAHub.Domain.RecordEntities;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 

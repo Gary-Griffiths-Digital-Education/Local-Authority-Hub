@@ -2,6 +2,7 @@
 using Application.Common.Models;
 using LAHub.Domain;
 using LAHub.Domain.OpenReferralEnities;
+using LAHub.Domain.RecordEntities;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
@@ -44,7 +45,13 @@ public class GetOpenReferralServicesCommandHandler : IRequestHandler<GetOpenRefe
     public async Task<PaginatedList<OpenReferralServiceRecord>> Handle(GetOpenReferralServicesCommand request, CancellationToken cancellationToken)
     {
         var entities = await _context.OpenReferralServices
+           .Include(x => x.ServiceDelivery)
            .Include(x => x.Eligibilitys)
+           .Include(x => x.Contacts)
+           .ThenInclude(x => x.Phones)
+           .Include(x => x.Languages)
+           .Include(x => x.Service_areas)
+           .Include(x => x.Service_taxonomys)
            .Include(x => x.Service_at_locations)  
            .ThenInclude(x => x.Location).ToListAsync();
 
@@ -80,7 +87,14 @@ public class GetOpenReferralServicesCommandHandler : IRequestHandler<GetOpenRefe
             x.Status,
             x.Url,
             x.Email,
-            x.Fees
+            x.Fees,
+            x.ServiceDelivery.Select(x => new OpenReferralServiceDeliveryRecord(x.Id, x.ServiceDelivery)).ToList(),
+            x.Eligibilitys.Select(x => new OpenReferralEligibilityRecord(x.Id, x.Eligibility, x.Maximum_age, x.Minimum_age)).ToList(),
+            x.Contacts.Select(x => new OpenReferralContactRecord(x.Id, x.Title, x.Name, x.Phones?.Select(x => new OpenReferralPhoneRecord(x.Id, x.Number)).ToList())).ToList(),
+            x.Languages.Select(x => new OpenReferralLanguageRecord(x.Id, x.Language)).ToList(),
+            x.Service_areas.Select(x => new OpenReferralService_AreaRecord(x.Id, x.Service_area, x.Extent, x.Uri)).ToList(),
+            x.Service_at_locations.Select(x => new OpenReferralServiceAtLocationRecord(x.Id, new OpenReferralLocationRecord(x.Location.Id, x.Location.Name, x.Location.Description, x.Location.Latitude, x.Location.Longitude))).ToList(),
+            x.Service_taxonomys.Select(x => new OpenReferralService_TaxonomyRecord(x.Id, (x.Taxonomy != null) ? new OpenReferralTaxonomyRecord(x.Taxonomy.Id, x.Taxonomy.Name, x.Taxonomy.Vocabulary, x.Taxonomy.Parent) : null)).ToList()
             )).ToList();
 
         if (request != null)

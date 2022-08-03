@@ -1,6 +1,7 @@
 ﻿using Application.Common.Models;
 using FluentAssertions;
 using LAHub.Domain.OpenReferralEnities;
+using LAHub.Domain.RecordEntities;
 using System.Text.Json;
 
 namespace FunctionalTests;
