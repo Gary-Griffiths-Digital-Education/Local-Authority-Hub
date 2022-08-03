@@ -59,6 +59,7 @@ public class LAHubDbContext : ApiAuthorizationDbContext<ApplicationUser>, ILAHub
     public DbSet<OpenReferralService_Taxonomy> OpenReferralService_Taxonomies => Set<OpenReferralService_Taxonomy>();
     public DbSet<OpenReferralServiceAtLocation> OpenReferralServiceAtLocations => Set<OpenReferralServiceAtLocation>();
     public DbSet<OpenReferralTaxonomy> OpenReferralTaxonomies => Set<OpenReferralTaxonomy>();
+    public DbSet<OpenReferralServiceDelivery> OpenReferralServiceDeliveries => Set<OpenReferralServiceDelivery>();
     #endregion
 
     protected override void OnModelCreating(ModelBuilder builder)
