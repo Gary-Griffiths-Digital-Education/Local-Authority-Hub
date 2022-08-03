@@ -144,7 +144,10 @@ public class WhenUsingOpenReferralOrganisationApiUnitTests : BaseWhenUsingOpenRe
                 "www.testservice.com",
                 "support@testservice.com",
                 null,
-                ServiceDelivery.Online,
+                new List<OpenReferralServiceDelivery>
+                {
+                    new OpenReferralServiceDelivery(Guid.NewGuid().ToString(),ServiceDelivery.Online)
+                },
                 new List<OpenReferralEligibility>
                 {
                     new OpenReferralEligibility("Test9109Children","",null,0,13,new List<OpenReferralTaxonomy>())

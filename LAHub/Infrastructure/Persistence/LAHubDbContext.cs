@@ -72,7 +72,7 @@ public class LAHubDbContext : ApiAuthorizationDbContext<ApplicationUser>, ILAHub
         //    .WithMany(g => g.Students)
         //    .HasForeignKey(s => s.CurrentGradeId);
 
-        builder.Entity<OpenReferralService>().HasEnum(e => e.ServiceDelivery);
+        builder.Entity<OpenReferralServiceDelivery>().HasEnum(e => e.ServiceDelivery);
 
         builder.Entity<LAHub.Domain.Entities.Service>()
             .HasMany(x => x.ServiceClassifications);

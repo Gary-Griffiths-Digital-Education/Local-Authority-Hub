@@ -7,7 +7,7 @@ public class OpenReferralService : BaseEntity<string>
     private OpenReferralService() { }
 
     public OpenReferralService(string id, string name, string? description, string? accreditations, DateTime? assured_date, string? attending_access, string? attending_type, string? deliverable_type, string? status, string? url, string? email, string? fees
-        , ServiceDelivery serviceDelivery
+        , ICollection<OpenReferralServiceDelivery> serviceDelivery
         , ICollection<OpenReferralEligibility> eligibilitys, ICollection<OpenReferralFunding> fundings
         , ICollection<OpenReferralHoliday_Schedule> holiday_schedules
         , ICollection<OpenReferralLanguage> languages
@@ -57,8 +57,7 @@ public class OpenReferralService : BaseEntity<string>
     public string? Url { get; private set; }
     public string? Email { get; private set; }
     public string? Fees { get; private set; }
-    public ServiceDelivery ServiceDelivery { get; private set; }
-
+    public virtual ICollection<OpenReferralServiceDelivery> ServiceDelivery { get; init; } = new Collection<OpenReferralServiceDelivery>();
     public virtual ICollection<OpenReferralEligibility> Eligibilitys { get; init; } = new Collection<OpenReferralEligibility>();
     public virtual ICollection<OpenReferralFunding> Fundings { get; init; } = new Collection<OpenReferralFunding>();
     public virtual ICollection<OpenReferralHoliday_Schedule> Holiday_schedules { get; init; } = new Collection<OpenReferralHoliday_Schedule>();
