@@ -1,7 +1,9 @@
 ﻿using Application.Commands.CreateOpenReferralOrganisation;
 using Application.Commands.GetOpenReferralOrganisationById;
 using Application.Commands.ListOrganisation;
+using AutoMapper;
 using LAHub.Domain.OpenReferralEnities;
+using LAHub.Domain.RecordEntities;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
@@ -12,7 +14,7 @@ public class MinimalOrganisationEndPoints
 {
     public void RegisterOrganisationEndPoints(WebApplication app)
     {
-        app.MapPost("api/organizations", async ([FromBody] OpenReferralOrganisation request, CancellationToken cancellationToken, ISender _mediator) =>
+        app.MapPost("api/organizations", async ([FromBody] OpenReferralOrganisationWithServicesRecord request, CancellationToken cancellationToken, ISender _mediator) =>
         {
             try
             {
@@ -60,11 +62,12 @@ public class MinimalOrganisationEndPoints
             }
         }).WithMetadata(new SwaggerOperationAttribute("List Organisations", "List Organisations") { Tags = new[] { "Organisations" } });
 
-        app.MapPut("api/organizations/{id}", async (string id, [FromBody] OpenReferralOrganisation request, CancellationToken cancellationToken, ISender _mediator) =>
+        app.MapPut("api/organizations/{id}", async (string id, [FromBody] OpenReferralOrganisationWithServicesRecord request, CancellationToken cancellationToken, ISender _mediator, IMapper mapper) =>
         {
             try
             {
-                UpdateOpenReferralOrganisationCommand command = new(id, request);
+                OpenReferralOrganisation openReferralOrganisation = mapper.Map<OpenReferralOrganisation>(request);
+                UpdateOpenReferralOrganisationCommand command = new(id, openReferralOrganisation);
                 var result = await _mediator.Send(command, cancellationToken);
                 return result;
             }

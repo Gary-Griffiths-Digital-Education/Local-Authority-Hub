@@ -55,7 +55,11 @@ public class UpdateOpenReferralOrganisationCommandHandler : IRequestHandler<Upda
                 foreach (var existingChild in entity.Services)
                 {
                     if (!request.OpenReferralOrganisation.Services.Any(c => c.Id == existingChild.Id))
-                        _context.OpenReferralServices.Remove(existingChild);
+                    {
+                        // Replace with soft delete
+                        //_context.OpenReferralServices.Remove(existingChild);
+                    }
+
                 }
 
                 // Update and Insert children

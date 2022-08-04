@@ -14,7 +14,7 @@ public class WhenUsingOpenReferralOrganisationApiUnitTests : BaseWhenUsingOpenRe
     [Fact]
     public async Task ThenTheOpenReferralOrganisationIsCreated()
     {
-        var command = GetTestCountyCouncil();
+        var command = GetTestCountyCouncilRecord();
 
         var request = new HttpRequestMessage
         {
@@ -83,23 +83,45 @@ public class WhenUsingOpenReferralOrganisationApiUnitTests : BaseWhenUsingOpenRe
     [Fact]
     public async Task ThenTheOpenReferralOrganisationIsUpdated()
     {
-        OpenReferralOrganisationSeedData openReferralOrganisationSeedData = new OpenReferralOrganisationSeedData();
-        var command = openReferralOrganisationSeedData.SeedOpenReferralOrganistions().ElementAt(0);
-
         var request = new HttpRequestMessage
         {
-            Method = HttpMethod.Put,
+            Method = HttpMethod.Get,
             RequestUri = new Uri(_client.BaseAddress + "api/organizations/72e653e8-1d05-4821-84e9-9177571a6013"),
-            Content = new StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(command), Encoding.UTF8, "application/json"),
+
         };
 
         using var response = await _client.SendAsync(request);
 
         response.EnsureSuccessStatusCode();
 
-        var stringResult = await response.Content.ReadAsStringAsync();
 
-        response.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
+        var retVal = await JsonSerializer.DeserializeAsync<OpenReferralOrganisationWithServicesRecord>(await response.Content.ReadAsStreamAsync(), options: new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+        ArgumentNullException.ThrowIfNull(retVal, nameof(retVal));
+
+        var update = new OpenReferralOrganisationWithServicesRecord(
+            retVal.Id,
+            retVal.Name,
+            retVal.Description + " Update Test",
+            retVal.Logo,
+            retVal.Uri,
+            retVal.Url,
+            retVal.Services
+            );
+
+        var updaterequest = new HttpRequestMessage
+        {
+            Method = HttpMethod.Put,
+            RequestUri = new Uri(_client.BaseAddress + "api/organizations/72e653e8-1d05-4821-84e9-9177571a6013"),
+            Content = new StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(update), Encoding.UTF8, "application/json"),
+        };
+
+        using var updateresponse = await _client.SendAsync(updaterequest);
+
+        updateresponse.EnsureSuccessStatusCode();
+
+        var stringResult = await updateresponse.Content.ReadAsStringAsync();
+
+        updateresponse.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
         stringResult.ToString().Should().Be("72e653e8-1d05-4821-84e9-9177571a6013");
     }
 
@@ -113,7 +135,7 @@ public class WhenUsingOpenReferralOrganisationApiUnitTests : BaseWhenUsingOpenRe
         return openReferralOrganistions;
     }
 
-    private OpenReferralOrganisationRecord GetTestCountyCouncilRecord()
+    private OpenReferralOrganisationWithServicesRecord GetTestCountyCouncilRecord()
     {
         var bristolCountyCouncil = new OpenReferralOrganisationWithServicesRecord(
             "ba1cca90-b02a-4a0b-afa0-d8aed1083c0d",
@@ -122,7 +144,7 @@ public class WhenUsingOpenReferralOrganisationApiUnitTests : BaseWhenUsingOpenRe
             null,
             new Uri("https://www.test.gov.uk/").ToString(),
             "https://www.test.gov.uk/",
-            null//GetTestCountyCouncilServices()
+            GetTestCountyCouncilServicesRecord()
             );
 
         return bristolCountyCouncil;

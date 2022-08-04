@@ -17,5 +17,6 @@ public abstract class BaseWhenUsingOpenReferralApiUnitTests
 
         _client = webAppFactory.CreateDefaultClient();
         _client.BaseAddress = new Uri("https://localhost:7128/");
+
     }
 }
