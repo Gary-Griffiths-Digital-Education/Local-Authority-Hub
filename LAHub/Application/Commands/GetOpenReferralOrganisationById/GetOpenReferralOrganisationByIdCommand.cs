@@ -76,7 +76,7 @@ public class GetOpenReferralOrganisationByIdHandler : IRequestHandler<GetOpenRef
                     openReferralService.Contacts.Select(x => new OpenReferralContactRecord(x.Id, x.Title, x.Name, x.Phones?.Select(x => new OpenReferralPhoneRecord(x.Id, x.Number)).ToList())).ToList(),
                     openReferralService.Languages.Select(x => new OpenReferralLanguageRecord(x.Id, x.Language)).ToList(),
                     openReferralService.Service_areas.Select(x => new OpenReferralService_AreaRecord(x.Id, x.Service_area, x.Extent, x.Uri)).ToList(),
-                    openReferralService.Service_at_locations.Select(x => new OpenReferralServiceAtLocationRecord(x.Id, new OpenReferralLocationRecord(x.Location.Id, x.Location.Name, x.Location.Description, x.Location.Latitude, x.Location.Longitude))).ToList(),
+                    openReferralService.Service_at_locations.Select(x => new OpenReferralServiceAtLocationRecord(x.Id, new OpenReferralLocationRecord(x.Location.Id, x.Location.Name, x.Location.Description, x.Location.Latitude, x.Location.Longitude, x.Location?.Physical_addresses?.Select(x => new OpenReferralPhysical_AddressRecord(x.Id, x.Address_1, x.City, x.Postal_code, x.Country, x.State_province)).ToList() ) )).ToList(),
                     openReferralService.Service_taxonomys.Select(x => new OpenReferralService_TaxonomyRecord(x.Id, (x.Taxonomy != null) ? new OpenReferralTaxonomyRecord(x.Taxonomy.Id, x.Taxonomy.Name, x.Taxonomy.Vocabulary, x.Taxonomy.Parent) : null)).ToList()
                     ));
             }

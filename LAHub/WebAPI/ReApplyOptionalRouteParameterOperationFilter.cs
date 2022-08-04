@@ -19,9 +19,9 @@ public class ReApplyOptionalRouteParameterOperationFilter : IOperationFilter
 
 		string regex = $"{{(?<{captureName}>\\w+)\\?}}";
 
-		var matches = System.Text.RegularExpressions.Regex.Matches(httpMethodWithOptional.Template, regex);
+        var matches = System.Text.RegularExpressions.Regex.Matches(httpMethodWithOptional.Template ?? string.Empty, regex);
 
-		foreach (System.Text.RegularExpressions.Match match in matches)
+        foreach (System.Text.RegularExpressions.Match match in matches)
 		{
 			var name = match.Groups[captureName].Value;
 

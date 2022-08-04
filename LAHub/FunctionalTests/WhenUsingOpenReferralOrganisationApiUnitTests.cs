@@ -113,6 +113,143 @@ public class WhenUsingOpenReferralOrganisationApiUnitTests : BaseWhenUsingOpenRe
         return openReferralOrganistions;
     }
 
+    private OpenReferralOrganisationRecord GetTestCountyCouncilRecord()
+    {
+        var bristolCountyCouncil = new OpenReferralOrganisationWithServicesRecord(
+            "ba1cca90-b02a-4a0b-afa0-d8aed1083c0d",
+            "Test County Council",
+            "Test County Council",
+            null,
+            new Uri("https://www.test.gov.uk/").ToString(),
+            "https://www.test.gov.uk/",
+            null//GetTestCountyCouncilServices()
+            );
+
+        return bristolCountyCouncil;
+    }
+
+    private List<OpenReferralServiceRecord> GetTestCountyCouncilServicesRecord()
+    {
+        return new()
+        {
+            new OpenReferralServiceRecord(
+                "c1b5dd80-7506-4424-9711-fe175fa13eb8",
+                "Test Organisation for Children with Tracheostomies",
+                @"Test Organisation for for Children with Tracheostomies is a national self help group operating as a registered charity and is run by parents of children with a tracheostomy and by people who sympathise with the needs of such families. ACT as an organisation is non profit making, it links groups and individual members throughout Great Britain and Northern Ireland.",
+                null,
+                null,
+                null,
+                null,
+                null,
+                "active",
+                "www.testservice.com",
+                "support@testservice.com",
+                null,
+                new List<OpenReferralServiceDeliveryRecord>
+                {
+                    new OpenReferralServiceDeliveryRecord(Guid.NewGuid().ToString(),ServiceDelivery.Online)
+                },
+                new List<OpenReferralEligibilityRecord>
+                {
+                    new OpenReferralEligibilityRecord("Test9109Children","",0,13) //,new List<OpenReferralTaxonomy>())
+                },
+                //new List<OpenReferralFunding>(),
+                //new List<OpenReferralHoliday_Schedule>(),
+                //new List<OpenReferralLanguage>(),
+                //new List<OpenReferralRegular_Schedule>(),
+                //new List<OpenReferralReview>(),
+                new List<OpenReferralContactRecord>()
+                {
+                    new OpenReferralContactRecord(
+                        "Test1567",
+                        "",
+                        "",
+                        new List<OpenReferralPhoneRecord>()
+                        {
+                            new OpenReferralPhoneRecord("1568", "01827 65779")
+                        }
+                        )
+                },
+                new List<OpenReferralLanguageRecord>()
+                {
+                    new OpenReferralLanguageRecord("442a06cd-aa14-4ea3-9f11-b45c1bc4861f", "English")
+                },
+                //new List<OpenReferralCost_Option>(),
+                new List<OpenReferralService_AreaRecord>()
+                {
+                    new OpenReferralService_AreaRecord(Guid.NewGuid().ToString(), "National", null,"http://statistics.data.gov.uk/id/statistical-geography/K02000001")
+                },
+                new List<OpenReferralServiceAtLocationRecord>()
+                {
+                    new OpenReferralServiceAtLocationRecord(
+                        "Test1749",
+                        new OpenReferralLocationRecord(
+                            "a878aadc-6097-4a0f-b3e1-77fd4511175d",
+                            "",
+                            "",
+                            52.6312,
+                            -1.66526,
+                            new List<OpenReferralPhysical_AddressRecord>()
+                            {
+                                new OpenReferralPhysical_AddressRecord(
+                                    Guid.NewGuid().ToString(),
+                                    "75 Sheepcote Lane",
+                                    ", Stathe, Tamworth, Staffordshire, ",
+                                    "B77 3JN",
+                                    "England",
+                                    null
+                                    )
+                            }
+                            //new List<Accessibility_For_Disabilities>()
+                            )
+                        //new List<OpenReferralHoliday_Schedule>(),
+                        //new List<OpenReferralRegular_Schedule>()
+                        )
+
+                },
+                new List<OpenReferralService_TaxonomyRecord>()
+                {
+                    new OpenReferralService_TaxonomyRecord
+                    ("Test9107",
+                    new OpenReferralTaxonomyRecord(
+                        "Test bccsource:Organisation",
+                        "Organisation",
+                        "Test BCC Data Sources",
+                        null
+                        )),
+
+                    new OpenReferralService_TaxonomyRecord
+                    ("Test9108",
+                    new OpenReferralTaxonomyRecord(
+                        "Test bccprimaryservicetype:38",
+                        "Support",
+                        "Test BCC Primary Services",
+                        null
+                        )),
+
+                    new OpenReferralService_TaxonomyRecord
+                    ("Test9109",
+                    new OpenReferralTaxonomyRecord(
+                        "Test bccagegroup:37",
+                        "Children",
+                        "Test BCC Age Groups",
+                        null
+                        )),
+
+                    new OpenReferralService_TaxonomyRecord
+                    ("Test9110",
+                    new OpenReferralTaxonomyRecord(
+                        "Testbccusergroup:56",
+                        "Long Term Health Conditions",
+                        "Test BCC User Groups",
+                        null
+                        ))
+                }
+                )
+
+        };
+    }
+
     private OpenReferralOrganisation GetTestCountyCouncil()
     {
         var bristolCountyCouncil = new OpenReferralOrganisation(
