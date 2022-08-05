@@ -11,64 +11,38 @@
             <form method="post">
                 <fieldset class="govuk-fieldset">
                     <h1 class="govuk-heading-m">
-                        Edit Organisation
+                        Organisation
                     </h1>
 
-                    <input asp-for="@Model.OrganisationId" type="hidden" >
-                    <input asp-for="@Model.TenantId" type="hidden" >
-                    <input asp-for="@Model.OrganisationTypeId" type="hidden" >
-                    @if(@Model.Organisation.Contact != null)
-                    {
-                        <input asp-for="@Model.ContactId" type="hidden" >    
-                    }
+                    <input asp-for="@Model.OrganisationViewModel.Id" type="hidden" >
                     
-                    <div class="govuk-form-group">
-                        <label class="govuk-label" for="SelectedOrganisationType">
-                            Organisation Types
-                        </label>
-                        <select class="govuk-select" id="SelectedOrganisationType" name="SelectedOrganisationType" asp-for="SelectedOrganisationType" asp-items="Model.OrganisationTypeList"></select> 
-                    </div>
 
                     <div class="govuk-form-group">
                         <label class="govuk-label" for="name">
                             Name
                         </label>
-                        <input class="govuk-input" id="name" name="name" value="@Model.Organisation.Name" type="text" autocomplete="name">
+                        <input class="govuk-input" id="name" name="name" value="@Model.OrganisationViewModel.Name" type="text" autocomplete="name">
                     </div>
 
                     <div class="govuk-form-group">
                         <label class="govuk-label" for="description">
                             Description
                         </label>
-                        <input class="govuk-input" id="description" name="description" value="@Model.Organisation.Description" type="text" autocomplete="description">
+                        <input class="govuk-input" id="description" name="description" value="@Model.OrganisationViewModel.Description" type="text" autocomplete="description">
                     </div>
 
                     <div class="govuk-form-group">
                         <label class="govuk-label" for="logoUrl">
-                            Logo Url
+                            Url
                         </label>
-                        <input class="govuk-input" id="logoUrl" name="logoUrl" value="@Model.Organisation.LogoUrl" type="text" autocomplete="logoUrl">
+                        <input class="govuk-input" id="url" name="url" value="@Model.OrganisationViewModel.Url" type="text" autocomplete="url">
                     </div>
 
                     <div class="govuk-form-group">
                         <label class="govuk-label" for="logoAltText">
-                            Logo Alt Text
+                            Logo
                         </label>
-                        <input class="govuk-input" id="logoAltText" name="logoAltText" value="@Model.Organisation.LogoAltText" type="text" autocomplete="logoAltText">
-                    </div>
-
-                    <div class="govuk-form-group">
-                        <label class="govuk-label" for="ContactName">
-                            Contact Name
-                        </label>
-                        <input class="govuk-input" id="ContactName" name="ContactName" value="@Model.ContactName" type="text" autocomplete="ContactName">
-                    </div>
-
-                    <div class="govuk-form-group">
-                        <label class="govuk-label" for="ContactEmail">
-                            Contact Email
-                        </label>
-                        <input class="govuk-input" id="ContactEmail" name="ContactEmail" value="@Model.ContactEmail" type="text" autocomplete="ContactEmail">
+                        <input class="govuk-input" id="logo" name="logo" value="@Model.OrganisationViewModel.Logo" type="text" autocomplete="logo">
                     </div>
 
                      <button type="submit" class="govuk-button" data-module="govuk-button" data-prevent-double-click="true">

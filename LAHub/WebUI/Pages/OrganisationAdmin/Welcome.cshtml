@@ -1,0 +1,22 @@
+﻿@page
+@model WebUI.Pages.OrganisationAdmin.WelcomeModel
+@{
+}
+
+<a asp-page="/OrganisationAdmin/OrganisationDetail" asp-route-id="@Model.OrganisationViewModel.Id" class="govuk-back-link">Back</a>
+
+<main class="govuk-main-wrapper " id="main-content" role="main">
+    <div class="govuk-grid-column-two-thirds">
+
+    <h1 class="govuk-heading-xl">Add details about the support you offer</h1>
+
+    <p>Tell families and the people working with them about the support or services you offer.</p>
+    <p>These details help families and people working with them decide whether your support is right for them.</p>
+
+    <input asp-for="@Model.StrOrganisationViewModel" type="hidden" >
+
+    <a asp-page="/OrganisationAdmin/ServiceName" asp-route-strOrganisationViewModel="@Model.StrOrganisationViewModel" class="govuk-button" data-module="govuk-button">
+        Add details
+    </a>
+  </div>
+</main>

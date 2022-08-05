@@ -1,94 +1,40 @@
-using Application.Commands.ListOrganisation;
+using LAHub.Domain.RecordEntities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using WebUI.Services.Api;
 
 namespace WebUI.Pages.OrganisationAdmin
 {
     public class ListOrganisationsModel : PageModel
     {
-        private readonly IOrganisationAdminClientService _organisationAdminClientService;
-        public ListOrganisationsModel(IOrganisationAdminClientService organisationAdminClientService)
+        private readonly IOpenReferralOrganisationAdminClientService _openReferralOrganisationAdminClientService;
+        
+        public ListOrganisationsModel(IOpenReferralOrganisationAdminClientService openReferralOrganisationAdminClientService
+            )
         {
-            _organisationAdminClientService = organisationAdminClientService;
+            _openReferralOrganisationAdminClientService = openReferralOrganisationAdminClientService;
         }
-        public List<SelectListItem> TenantSelectionList { get; private set; } = new List<SelectListItem>();
+        
+        public List<OpenReferralOrganisationRecord> Organisations { get; private set; } = default!;
 
-        [BindProperty]
-        public string SelectedTenant { get; set; } = default!;
-
-        public List<SelectListItem> OrganisationTypeList { get; private set; } = new List<SelectListItem>();
-
-        [BindProperty]
-        public string SelectedOrganisationType { get; set; } = default!;
-        public List<OrganisationRecord> Organisations { get; private set; } = default!;
-
-        public async Task OnGetAsync()
+        public void OnGetAsync()
         {
-            await PopulateLists();
         }
 
-        public async Task OnPostButton1()
+        public async Task<IActionResult> OnPostButton1()
         {
-            Guid? selectedOrganisationType = null;
-            if (SelectedOrganisationType != null && SelectedOrganisationType != "All")
-            {
-                selectedOrganisationType = new Guid(SelectedOrganisationType);
-            }
-            Organisations = await _organisationAdminClientService.GetOrganisations(new Guid(SelectedTenant), selectedOrganisationType);
+            Organisations = await _openReferralOrganisationAdminClientService.GetListOpenReferralOrganisations();
 
-            await PopulateLists();
+            return Page();
         }
-
         public IActionResult OnPostButton2()
         {
             Guid? idGuid = null;
-            Guid? selectedOrganisationType = null;
-            if (SelectedOrganisationType != null && SelectedOrganisationType != "All")
-            {
-                selectedOrganisationType = new Guid(SelectedOrganisationType);
-            }
-
-            Guid? selectedTenant = new Guid(SelectedTenant);
 
             return RedirectToPage("/OrganisationAdmin/OrganisationDetail", new
             {
                 id = idGuid,
-                tenantId = selectedTenant,
-                organisationTypeId = selectedOrganisationType
             });
-        }
-
-        private async Task PopulateLists()
-        {
-            var tenantList = await _organisationAdminClientService.GetTenantList();
-            if (tenantList != null)
-            {
-                TenantSelectionList = tenantList.Select(tenant => new SelectListItem
-                {
-                    Text = (tenant.Description != null) ? tenant.Description : tenant.Name,
-                    Value = tenant.Id.ToString()
-                }).ToList();
-            }
-
-            var organisationTypeList = await _organisationAdminClientService.GetOrganisationTypeList();
-            if (organisationTypeList != null)
-            {
-                OrganisationTypeList = organisationTypeList.Select(orgType => new SelectListItem
-                {
-                    Text = orgType.Name,
-                    Value = orgType.Id.ToString()
-                }).ToList();
-
-            }
-
-            OrganisationTypeList.Insert(0, new SelectListItem
-            {
-                Text = "All",
-                Value = "All"
-            });
-
         }
     }
 }
