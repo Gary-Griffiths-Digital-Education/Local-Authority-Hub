@@ -12,8 +12,7 @@ namespace WebUI.Pages.OrganisationAdmin;
 public class TypeOfServiceModel : PageModel
 {
     private readonly IOpenReferralOrganisationAdminClientService _openReferralOrganisationAdminClientService;
-    //Dictionary<string, int> DictServiceDelivery = new();
-
+    
     public List<OpenReferralTaxonomyRecord> OpenReferralTaxonomyRecords { get; private set; } = default!;
     [BindProperty]
     public List<string> TaxonomySelection { get; set; } = default!;
@@ -30,8 +29,6 @@ public class TypeOfServiceModel : PageModel
 
     public async Task OnGet(string strOrganisationViewModel)
     {
-        //DictServiceDelivery = ((ServiceDelivery[])Enum.GetValues(typeof(ServiceDelivery))).ToDictionary(k => k.ToString(), v => (int)v);
-
         StrOrganisationViewModel = strOrganisationViewModel;
 
         PaginatedList<OpenReferralTaxonomyRecord>  taxonomies = await _openReferralOrganisationAdminClientService.GetTaxonomyList();
@@ -48,7 +45,7 @@ public class TypeOfServiceModel : PageModel
         }
         
 
-        return RedirectToPage("/OrganisationAdmin/Welcome", new
+        return RedirectToPage("/OrganisationAdmin/ServiceDeliveryType", new
         {
             strOrganisationViewModel = StrOrganisationViewModel
         });
