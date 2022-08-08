@@ -24,7 +24,6 @@
 	<ItemGroup>
 	  <Folder Include="Infrastructure\Configuration\" />
 	  <Folder Include="Models\Configuration\" />
-	  <Folder Include="Models\Links\" />
 	  <Folder Include="Extensions\" />
 	</ItemGroup>
 

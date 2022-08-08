@@ -32,4 +32,26 @@ public class WhenUsingOpenReferralServiceApiUnitTests : BaseWhenUsingOpenReferra
         ArgumentNullException.ThrowIfNull(item, nameof(item));
         item.Id.Should().Be("4591d551-0d6a-4c0d-b109-002e67318231");
     }
+
+    [Fact]
+    public async Task ThenTheOpenReferralServiceIsRetrieved()
+    {
+        var request = new HttpRequestMessage
+        {
+            Method = HttpMethod.Get,
+            RequestUri = new Uri(_client.BaseAddress + "api/services/4591d551-0d6a-4c0d-b109-002e67318231"),
+
+        };
+
+        using var response = await _client.SendAsync(request);
+
+        response.EnsureSuccessStatusCode();
+
+        var retVal = await JsonSerializer.DeserializeAsync<OpenReferralServiceRecord>(await response.Content.ReadAsStreamAsync(), options: new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+
+        response.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
+        retVal.Should().NotBeNull();
+        ArgumentNullException.ThrowIfNull(retVal, nameof(retVal));
+        retVal.Id.Should().Be("4591d551-0d6a-4c0d-b109-002e67318231");
+    }
 }

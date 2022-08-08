@@ -1,0 +1,76 @@
+﻿using Application.Common.Exceptions;
+using Application.Common.Interfaces;
+using LAHub.Domain.OpenReferralEnities;
+using LAHub.Domain.RecordEntities;
+using MediatR;
+using Microsoft.EntityFrameworkCore;
+
+namespace Application.Commands.GetOpenReferralService;
+
+public class GetOpenReferralServiceByIdCommand : IRequest<OpenReferralServiceRecord>
+{
+    public GetOpenReferralServiceByIdCommand(string id)
+    {
+        Id = id;
+    }
+
+    public const string Route = "api/GetServiceByIdDepricated/{ServiceId:Guid}";
+    public static string BuildRoute(Guid srvId) => Route.Replace("{ServiceId:Guid}", srvId.ToString());
+
+    public string Id { get; set; }
+}
+
+public class GetOpenReferralServiceByIdCommandHandler : IRequestHandler<GetOpenReferralServiceByIdCommand, OpenReferralServiceRecord>
+{
+    private readonly ILAHubDbContext _context;
+
+    public GetOpenReferralServiceByIdCommandHandler(ILAHubDbContext context)
+    {
+        _context = context;
+    }
+
+    public async Task<OpenReferralServiceRecord> Handle(GetOpenReferralServiceByIdCommand request, CancellationToken cancellationToken)
+    {
+        var entity = await _context.OpenReferralServices
+            .Include(x => x.ServiceDelivery)
+            .Include(x => x.Eligibilitys)
+            .Include(x => x.Contacts)
+            .ThenInclude(x => x.Phones)
+            .Include(x => x.Languages)
+            .Include(x => x.Service_areas)
+            .Include(x => x.Service_at_locations)
+            .ThenInclude(x => x.Location)
+            .Include(x => x.Service_taxonomys)
+            .FirstOrDefaultAsync(p => p.Id == request.Id, cancellationToken: cancellationToken);
+
+        if (entity == null)
+        {
+            throw new NotFoundException(nameof(OpenReferralService), request.Id);
+        }
+
+        var result = new OpenReferralServiceRecord(
+            entity.Id,
+            entity.Name,
+            entity.Description,
+            entity.Accreditations,
+            entity.Assured_date,
+            entity.Attending_access,
+            entity.Attending_type,
+            entity.Deliverable_type,
+            entity.Status,
+            entity.Url,
+            entity.Email,
+            entity.Fees,
+            entity.ServiceDelivery.Select(x => new OpenReferralServiceDeliveryRecord(x.Id, x.ServiceDelivery)).ToList(),
+            entity.Eligibilitys.Select(x => new OpenReferralEligibilityRecord(x.Id, x.Eligibility, x.Maximum_age, x.Minimum_age)).ToList(),
+            entity.Contacts.Select(x => new OpenReferralContactRecord(x.Id, x.Title, x.Name, x.Phones?.Select(x => new OpenReferralPhoneRecord(x.Id, x.Number)).ToList())).ToList(),
+            entity.Languages.Select(x => new OpenReferralLanguageRecord(x.Id, x.Language)).ToList(),
+            entity.Service_areas.Select(x => new OpenReferralService_AreaRecord(x.Id, x.Service_area, x.Extent, x.Uri)).ToList(),
+            entity.Service_at_locations.Select(x => new OpenReferralServiceAtLocationRecord(x.Id, new OpenReferralLocationRecord(x.Location.Id, x.Location.Name, x.Location.Description, x.Location.Latitude, x.Location.Longitude, x.Location?.Physical_addresses?.Select(x => new OpenReferralPhysical_AddressRecord(x.Id, x.Address_1, x.City, x.Postal_code, x.Country, x.State_province)).ToList()))).ToList(),
+            entity.Service_taxonomys.Select(x => new OpenReferralService_TaxonomyRecord(x.Id, (x.Taxonomy != null) ? new OpenReferralTaxonomyRecord(x.Taxonomy.Id, x.Taxonomy.Name, x.Taxonomy.Vocabulary, x.Taxonomy.Parent) : null)).ToList()
+            );
+
+        return result;
+    }
+}
+

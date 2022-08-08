@@ -1,4 +1,5 @@
-﻿using Application.Commands.GetServices;
+﻿using Application.Commands.GetOpenReferralService;
+using Application.Commands.GetServices;
 using Application.Common.Models;
 using LAHub.Domain.OpenReferralEnities;
 using MediatR;
@@ -27,6 +28,21 @@ public class MinimalServiceEndPoints
                 throw;
             }
         }).WithMetadata(new SwaggerOperationAttribute("List Services", "List Services") { Tags = new[] { "Services" } });
+
+        app.MapGet("api/services/{id}", async (string id, CancellationToken cancellationToken, ISender _mediator) =>
+        {
+            try
+            {
+                GetOpenReferralServiceByIdCommand command = new(id);
+                var result = await _mediator.Send(command, cancellationToken);
+                return result;
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex.Message);
+                throw;
+            }
+        }).WithMetadata(new SwaggerOperationAttribute("Get Service by Id", "Get Service by Id") { Tags = new[] { "Services" } });
     }
     
 }

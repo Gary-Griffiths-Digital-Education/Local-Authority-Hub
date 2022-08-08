@@ -4,6 +4,7 @@ using Application.Commands.TestCommand;
 using Application.Common.Models;
 using Application.Models;
 using LAHub.Domain.Entities;
+using LAHub.Domain.RecordEntities;
 using SFA.DAS.HashingService;
 using System.Text;
 using System.Text.Json;
@@ -12,6 +13,8 @@ namespace WebUI.Services.Api;
 
 public interface ILocalOfferClientService
 {
+    Task<PaginatedList<OpenReferralServiceRecord>> GetLocalOffers(double latitude, double longtitude, double proximity, int pageNumber, int pageSize);
+
     Task<PaginatedList<ServiceItem>> GetLocalOffers(double latitude, double logtitude, double meters);
     Task<PaginatedList<TestItem>> GetTestCommand(double latitude, double logtitude, double meters);
     Task<Service> GetLocalOfferById(Guid id);
@@ -23,6 +26,22 @@ public class LocalOfferClientService : ApiService, ILocalOfferClientService
         : base(client, hashingService)
     {
         
+    }
+
+    public async Task<PaginatedList<OpenReferralServiceRecord>> GetLocalOffers(double latitude, double longtitude, double proximity, int pageNumber, int pageSize)
+    {
+        var request = new HttpRequestMessage
+        {
+            Method = HttpMethod.Get,
+            RequestUri = new Uri(_client.BaseAddress + $"api/services?latitude={latitude}&longtitude=-{longtitude}&proximity={proximity}&pageNumber={pageNumber}&pageSize={pageSize}"),
+        };
+
+        using var response = await _client.SendAsync(request);
+
+        response.EnsureSuccessStatusCode();
+
+
+        return await JsonSerializer.DeserializeAsync<PaginatedList<OpenReferralServiceRecord>>(await response.Content.ReadAsStreamAsync(), options: new JsonSerializerOptions { PropertyNameCaseInsensitive = true }) ?? new PaginatedList<OpenReferralServiceRecord>();
     }
 
     public async Task<PaginatedList<ServiceItem>> GetLocalOffers(double latitude, double logtitude, double meters)
