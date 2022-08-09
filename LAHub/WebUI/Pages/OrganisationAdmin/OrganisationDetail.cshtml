@@ -6,51 +6,51 @@
 <a asp-page="/OrganisationAdmin/ListOrganisations" class="govuk-back-link">Back</a>
 
 <main class="govuk-main-wrapper " id="main-content" role="main">
-    <div class="govuk-grid-column-two-thirds">
-         <div class="govuk-grid-row">
-            <form method="post">
-                <fieldset class="govuk-fieldset">
-                    <h1 class="govuk-heading-m">
-                        Organisation
-                    </h1>
+    
+        <div class="govuk-grid-row">
+        <form method="post">
+            <fieldset class="govuk-fieldset">
+                <h1 class="govuk-heading-m">
+                    Organisation
+                </h1>
 
-                    <input asp-for="@Model.OrganisationViewModel.Id" type="hidden" >
+                <input asp-for="@Model.OrganisationViewModel.Id" type="hidden" >
                     
 
-                    <div class="govuk-form-group">
-                        <label class="govuk-label" for="name">
-                            Name
-                        </label>
-                        <input class="govuk-input" id="name" name="name" value="@Model.OrganisationViewModel.Name" type="text" autocomplete="name">
-                    </div>
+                <div class="govuk-form-group">
+                    <label class="govuk-label" for="name">
+                        Name
+                    </label>
+                    <input class="govuk-input" id="name" name="name" value="@Model.OrganisationViewModel.Name" type="text" autocomplete="name">
+                </div>
 
-                    <div class="govuk-form-group">
-                        <label class="govuk-label" for="description">
-                            Description
-                        </label>
-                        <input class="govuk-input" id="description" name="description" value="@Model.OrganisationViewModel.Description" type="text" autocomplete="description">
-                    </div>
+                <div class="govuk-form-group">
+                    <label class="govuk-label" for="description">
+                        Description
+                    </label>
+                    <input class="govuk-input" id="description" name="description" value="@Model.OrganisationViewModel.Description" type="text" autocomplete="description">
+                </div>
 
-                    <div class="govuk-form-group">
-                        <label class="govuk-label" for="logoUrl">
-                            Url
-                        </label>
-                        <input class="govuk-input" id="url" name="url" value="@Model.OrganisationViewModel.Url" type="text" autocomplete="url">
-                    </div>
+                <div class="govuk-form-group">
+                    <label class="govuk-label" for="logoUrl">
+                        Url
+                    </label>
+                    <input class="govuk-input" id="url" name="url" value="@Model.OrganisationViewModel.Url" type="text" autocomplete="url">
+                </div>
 
-                    <div class="govuk-form-group">
-                        <label class="govuk-label" for="logoAltText">
-                            Logo
-                        </label>
-                        <input class="govuk-input" id="logo" name="logo" value="@Model.OrganisationViewModel.Logo" type="text" autocomplete="logo">
-                    </div>
+                <div class="govuk-form-group">
+                    <label class="govuk-label" for="logoAltText">
+                        Logo
+                    </label>
+                    <input class="govuk-input" id="logo" name="logo" value="@Model.OrganisationViewModel.Logo" type="text" autocomplete="logo">
+                </div>
 
-                     <button type="submit" class="govuk-button" data-module="govuk-button" data-prevent-double-click="true">
-                        Save and Continue
-                    </button>
-                </fieldset>
-            </form>
-        </div>
+                    <button type="submit" class="govuk-button" data-module="govuk-button" data-prevent-double-click="true">
+                    Save and Continue
+                </button>
+            </fieldset>
+        </form>
     </div>
+    
    
 </main>

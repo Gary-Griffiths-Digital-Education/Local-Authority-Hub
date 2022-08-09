@@ -1,5 +1,4 @@
-using LAHub.Domain.Entities;
-using Microsoft.AspNetCore.Mvc;
+using LAHub.Domain.RecordEntities;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using WebUI.Services.Api;
 
@@ -9,14 +8,14 @@ namespace WebUI.Pages
     {
         private readonly ILocalOfferClientService _localOfferClientService;
 
-        public Service LocalOffer { get; set; } = default!;
+        public OpenReferralServiceRecord LocalOffer { get; set; } = default!;
 
         public LocalOfferDetailModel(ILocalOfferClientService localOfferClientService)
         {
             _localOfferClientService = localOfferClientService;
         }   
 
-        public async Task OnGetAsync(Guid id)
+        public async Task OnGetAsync(string id)
         {
             LocalOffer = await _localOfferClientService.GetLocalOfferById(id);
         }

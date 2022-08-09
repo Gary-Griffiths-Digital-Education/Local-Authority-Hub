@@ -14,9 +14,6 @@ public class GetOpenReferralServiceByIdCommand : IRequest<OpenReferralServiceRec
         Id = id;
     }
 
-    public const string Route = "api/GetServiceByIdDepricated/{ServiceId:Guid}";
-    public static string BuildRoute(Guid srvId) => Route.Replace("{ServiceId:Guid}", srvId.ToString());
-
     public string Id { get; set; }
 }
 
@@ -40,7 +37,9 @@ public class GetOpenReferralServiceByIdCommandHandler : IRequestHandler<GetOpenR
             .Include(x => x.Service_areas)
             .Include(x => x.Service_at_locations)
             .ThenInclude(x => x.Location)
+            .ThenInclude(x => x.Physical_addresses)
             .Include(x => x.Service_taxonomys)
+            .ThenInclude(x => x.Taxonomy)
             .FirstOrDefaultAsync(p => p.Id == request.Id, cancellationToken: cancellationToken);
 
         if (entity == null)

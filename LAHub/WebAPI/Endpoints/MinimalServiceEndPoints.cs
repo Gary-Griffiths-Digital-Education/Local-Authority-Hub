@@ -14,7 +14,7 @@ public class MinimalServiceEndPoints
     {
         //Http://localhost:portnumber/latitude/longtitude/meters?pageNumber=1&pageSize=10
         //string[]? taxonomy_id, string[]? taxonomy_type, string[]? vocabulary,
-        app.MapGet("api/services", async (int? minimum_age, int? maximum_age, double ? latitude, double? longtitude, double? proximity, int? pageNumber, int? pageSize, string? text, CancellationToken cancellationToken, ISender _mediator) =>
+        app.MapGet("api/services", async (int? minimum_age, int? maximum_age, double? latitude, double? longtitude, double? proximity, int? pageNumber, int? pageSize, string? text, CancellationToken cancellationToken, ISender _mediator) =>
         {
             try
             {

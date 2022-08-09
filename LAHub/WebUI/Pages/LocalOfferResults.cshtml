@@ -50,6 +50,27 @@
                         <input asp-for="@Model.CurrentLongitude" type="hidden">
 
                         <div class="govuk-form-group">
+                            <label class="govuk-label" for="searchText">
+                                Search Text
+                            </label>
+                            <input class="govuk-input" id="searchText" name="searchText" value="@Model.SearchText" type="text" autocomplete="searchText">
+                        </div>
+
+                        <div class="govuk-form-group">
+                            <label class="govuk-label" for="minimumAge">
+                                Minimum Age
+                            </label>
+                            <input class="govuk-input" id="minimumAge" name="minimumAge" value="@Model.MinimumAge" asp-for="MinimumAge" type="text" pattern="\d*" oninput="this.value=this.value.replace(/[^0-9]/g,'');" autocomplete="minimumAge">
+                        </div>
+
+                        <div class="govuk-form-group">
+                            <label class="govuk-label" for="maximumAge">
+                                Maximum Age
+                            </label>
+                            <input class="govuk-input" id="maximumAge" name="maximumAge" value="@Model.MaximumAge" asp-for="MaximumAge"  type="text" pattern="\d*" oninput="this.value=this.value.replace(/[^0-9]/g,'');" autocomplete="maximumAge">
+                        </div>
+
+                        <div class="govuk-form-group">
                         <label class="govuk-label" for="SelectedDistance">
                             Max Distance
                         </label>

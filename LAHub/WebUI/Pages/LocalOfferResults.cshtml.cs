@@ -1,9 +1,13 @@
 using Application.Common.Models;
 using Application.Models;
+using LAHub.Domain.RecordEntities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using WebUI.Services.Api;
+
+//For Paging
+//https://mycodingtips.com/2021/2/12/pagination-in-asp-net-core-razor-pages-using-custom-tag-helper
 
 namespace WebUI.Pages
 {
@@ -14,9 +18,16 @@ namespace WebUI.Pages
         public double CurrentLatitude { get; set; }
         public double CurrentLongitude { get; set; }
 
-        public PaginatedList<ServiceItem> SearchResults { get; set; } = default!;
+        public PaginatedList<OpenReferralServiceRecord> SearchResults { get; set; } = default!;
 
         public string SelectedDistance { get; set; } = "212892";
+
+        [BindProperty(SupportsGet = true)]
+        public string MinimumAge { get; set; } = "0";
+        [BindProperty(SupportsGet = true)]
+        public string MaximumAge { get; set; } = "99";
+        [BindProperty(SupportsGet = true)]
+        public string? SearchText { get; set; }
 
         public List<SelectListItem> DistanceSelectionList { get; } = new List<SelectListItem>
         {
@@ -33,12 +44,22 @@ namespace WebUI.Pages
             _localOfferClientService = localOfferClientService;
         }
 
-        public async Task OnGetAsync(double latitude, double longitude, double distance)
+        public async Task OnGetAsync(double latitude, double longitude, double distance, string minimumAge, string maximumAge, string searchText)
         {
             CurrentLatitude = latitude;
             CurrentLongitude = longitude;
             SelectedDistance = distance.ToString();
-            SearchResults = await _localOfferClientService.GetLocalOffers(latitude, longitude, distance);
+            if (!int.TryParse(minimumAge, out int minAge))
+            {
+                minAge = 0;
+            }
+
+            if (!int.TryParse(maximumAge, out int maxAge))
+            {
+                maxAge = 99;
+            }
+
+            SearchResults = await _localOfferClientService.GetLocalOffers(minAge, maxAge, latitude, longitude, distance, 1, 99, SearchText ?? string.Empty);
         }
 
         public IActionResult OnPost()
@@ -57,7 +78,10 @@ namespace WebUI.Pages
             {
                 latitude = CurrentLatitude,
                 longitude = CurrentLongitude,
-                distance = SelectedDistance
+                distance = SelectedDistance,
+                minimumAge = MinimumAge,
+                maximumAge = MaximumAge,
+                searchText = SearchText
             });
 
         }

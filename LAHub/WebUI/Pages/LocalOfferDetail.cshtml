@@ -22,10 +22,19 @@
             Details
           </h2>
           <ul class="app-task-list__items">
-              <li><label>Minimum Age:  </label>@Model.LocalOffer.MinimumAge</li>
+            @if(@Model.LocalOffer.Eligibilities != null)
+            {
+                foreach(var eligability in @Model.LocalOffer.Eligibilities)
+                {
+                     <li><label>Minimum Age:  </label>@eligability.Minimum_age</li>  
+                     <li><label>Minimum Age:  </label>@eligability.Maximum_age</li>
+                }          
+            }
+            
+               @*         <li><label>Minimum Age:  </label>@Model.LocalOffer..MinimumAge</li>
                 <li><label>Minimum Age:  </label>@Model.LocalOffer.MaximumAge</li>
                 <li><label>Cost:         </label>@Model.LocalOffer.CostAmount</li>
-                <li><label>OpeningHours: </label>@Model.LocalOffer.OpeningHours</li>
+                <li><label>OpeningHours: </label>@Model.LocalOffer.OpeningHours</li>*@
           </ul>
         </li>
 
@@ -34,32 +43,65 @@
             Support For
           </h2>
           <ul class="app-task-list__items">
-              @foreach(var item in @Model.LocalOffer.ServiceClassifications)
+            @if(@Model.LocalOffer.Service_taxonomys != null)
+            {
+                @foreach(var seviceTaxonomy in @Model.LocalOffer.Service_taxonomys)
                 {
-                    <li>@item.Classification.Name</li>
-                }
+                    if (@seviceTaxonomy != null)
+                    {
+                       <li>@seviceTaxonomy?.Taxonomy?.Vocabulary</li>               
+                    }
+                }          
+            }
           </ul>
         </li>
 
-        @if(@Model.LocalOffer.Contact != null)
+        @if(@Model.LocalOffer.Contacts != null)
         {
              <li>
-          <h2 class="app-task-list__section">
-            Contact
-          </h2>
-          <ul class="app-task-list__items no-bullets">
-             <li><label>Name: </label>@Model.LocalOffer.Contact.Name</li>
-                <li>@Model.LocalOffer.Contact.AddressLine1</li>
-                <li>@Model.LocalOffer.Contact.AddressLine2</li>
-                <li>@Model.LocalOffer.Contact.TownOrCity</li>
-                <li>@Model.LocalOffer.Contact.County</li>
-                <li>@Model.LocalOffer.Contact.Postcode</li>
-          </ul>
-        </li>          
+              <h2 class="app-task-list__section">
+                Contact
+              </h2>
+              @foreach(var contactItem in @Model.LocalOffer.Contacts)
+              {
+                  <ul class="app-task-list__items no-bullets">
+                     <li><label>Name: </label>@contactItem.Title &nbsp; @contactItem.Name</li>
+                        @*<li>@Model.LocalOffer.Contact.AddressLine1</li>
+                        <li>@Model.LocalOffer.Contact.AddressLine2</li>
+                        <li>@Model.LocalOffer.Contact.TownOrCity</li>
+                        <li>@Model.LocalOffer.Contact.County</li>
+                        <li>@Model.LocalOffer.Contact.Postcode</li>*@
+                  </ul>
+              }
+            </li>          
         }
      
+        @if(@Model.LocalOffer.Service_at_locations != null)
+        {
+             <li>
+              <h2 class="app-task-list__section">
+                Contact
+              </h2>
+            @foreach(var servicelocation in @Model.LocalOffer.Service_at_locations.Where(x => x != null && x.Location != null))
+            {
+                @if(@servicelocation != null && @servicelocation?.Location != null && @servicelocation.Location.Physical_addresses != null)
+                {
+                    @foreach(var physicalAddress in @servicelocation.Location.Physical_addresses)
+                    {
+                        <ul class="app-task-list__items no-bullets">
+                            <li>@physicalAddress.Address_1</li>
+                            <li>@physicalAddress.City</li>
+                            <li>@physicalAddress.Postal_code</li>
+                            <li>@physicalAddress.Country</li>
+                            <li>@physicalAddress.State_province</li>
+                        </ul>
+                    }     
+                }
+                        
+            }
+            </li>
+        }
 
-       
       </ul>
     </div>
   </div>

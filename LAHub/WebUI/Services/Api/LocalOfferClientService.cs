@@ -13,11 +13,11 @@ namespace WebUI.Services.Api;
 
 public interface ILocalOfferClientService
 {
-    Task<PaginatedList<OpenReferralServiceRecord>> GetLocalOffers(double latitude, double longtitude, double proximity, int pageNumber, int pageSize);
-
+    Task<PaginatedList<OpenReferralServiceRecord>> GetLocalOffers(int minimum_age, int maximum_age, double latitude, double longtitude, double proximity, int pageNumber, int pageSize, string text);
+    Task<OpenReferralServiceRecord> GetLocalOfferById(string id);
     Task<PaginatedList<ServiceItem>> GetLocalOffers(double latitude, double logtitude, double meters);
-    Task<PaginatedList<TestItem>> GetTestCommand(double latitude, double logtitude, double meters);
     Task<Service> GetLocalOfferById(Guid id);
+    Task<PaginatedList<TestItem>> GetTestCommand(double latitude, double logtitude, double meters);
 }
 
 public class LocalOfferClientService : ApiService, ILocalOfferClientService
@@ -28,22 +28,41 @@ public class LocalOfferClientService : ApiService, ILocalOfferClientService
         
     }
 
-    public async Task<PaginatedList<OpenReferralServiceRecord>> GetLocalOffers(double latitude, double longtitude, double proximity, int pageNumber, int pageSize)
+    public async Task<PaginatedList<OpenReferralServiceRecord>> GetLocalOffers(int minimum_age, int maximum_age, double latitude, double longtitude, double proximity, int pageNumber, int pageSize, string text)
     {
         var request = new HttpRequestMessage
         {
             Method = HttpMethod.Get,
-            RequestUri = new Uri(_client.BaseAddress + $"api/services?latitude={latitude}&longtitude=-{longtitude}&proximity={proximity}&pageNumber={pageNumber}&pageSize={pageSize}"),
+            RequestUri = new Uri(_client.BaseAddress + $"api/services?minimum_age={minimum_age}&maximum_age={maximum_age}&latitude={latitude}&longtitude={longtitude}&proximity={proximity}&pageNumber={pageNumber}&pageSize={pageSize}&text={text}"),
         };
 
         using var response = await _client.SendAsync(request);
 
         response.EnsureSuccessStatusCode();
 
-
         return await JsonSerializer.DeserializeAsync<PaginatedList<OpenReferralServiceRecord>>(await response.Content.ReadAsStreamAsync(), options: new JsonSerializerOptions { PropertyNameCaseInsensitive = true }) ?? new PaginatedList<OpenReferralServiceRecord>();
     }
 
+    public async Task<OpenReferralServiceRecord> GetLocalOfferById(string id)
+    {
+        var request = new HttpRequestMessage
+        {
+            Method = HttpMethod.Get,
+            RequestUri = new Uri(_client.BaseAddress + $"api/services/{id}"),
+
+        };
+
+        using var response = await _client.SendAsync(request);
+
+        response.EnsureSuccessStatusCode();
+
+        var retVal = await JsonSerializer.DeserializeAsync<OpenReferralServiceRecord>(await response.Content.ReadAsStreamAsync(), options: new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+        ArgumentNullException.ThrowIfNull(retVal, nameof(retVal));
+
+        return retVal;
+    }
+
+    #region Depricated
     public async Task<PaginatedList<ServiceItem>> GetLocalOffers(double latitude, double logtitude, double meters)
     {
         GetServicesByDistanceCommand command = new(latitude, logtitude, meters);
@@ -85,6 +104,8 @@ public class LocalOfferClientService : ApiService, ILocalOfferClientService
 #pragma warning restore CS8603 // Possible null reference return.
 
     }
+
+    #endregion
 
     public async Task<PaginatedList<TestItem>> GetTestCommand(double latitude, double logtitude, double meters)
     {

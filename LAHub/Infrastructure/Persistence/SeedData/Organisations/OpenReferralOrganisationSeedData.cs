@@ -64,8 +64,8 @@ public class OpenReferralOrganisationSeedData
                 {
                     new OpenReferralContact(
                         "1567", 
-                        "", 
-                        "", 
+                        "Mr", 
+                        "John Smith", 
                         new List<OpenReferralPhone>()
                         {
                             new OpenReferralPhone("1567", "01827 65778")

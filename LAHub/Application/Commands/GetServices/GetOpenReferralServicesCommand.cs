@@ -63,7 +63,7 @@ public class GetOpenReferralServicesCommandHandler : IRequestHandler<GetOpenRefe
             dbservices = dbservices.Where(x => x.Eligibilitys.Any(x => x.Maximum_age <= request.MaximumAge.Value));
 
         if (request?.MinimumAge != null)
-            dbservices = dbservices.Where(x => x.Eligibilitys.Any(x => x.Minimum_age <= request.MinimumAge.Value));
+            dbservices = dbservices.Where(x => x.Eligibilitys.Any(x => x.Minimum_age >= request.MinimumAge.Value));
 
         if (request?.Text != null)
         {
