@@ -18,7 +18,7 @@ public class TypeOfServiceModel : PageModel
     public List<string> TaxonomySelection { get; set; } = default!;
 
     [BindProperty]
-    public string? StrOrganisationViewModel { get; private set; }
+    public string? StrOrganisationViewModel { get; set; }
 
     public TypeOfServiceModel(IOpenReferralOrganisationAdminClientService openReferralOrganisationAdminClientService)
     {
@@ -42,6 +42,8 @@ public class TypeOfServiceModel : PageModel
         if (StrOrganisationViewModel != null)
         {
             var organisationViewModel = JsonConvert.DeserializeObject<OrganisationViewModel>(StrOrganisationViewModel) ?? new OrganisationViewModel();
+            organisationViewModel.TaxonomySelection = new List<string>(TaxonomySelection);
+            StrOrganisationViewModel = JsonConvert.SerializeObject(organisationViewModel);
         }
         
 

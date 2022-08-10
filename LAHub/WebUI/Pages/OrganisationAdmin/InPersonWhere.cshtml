@@ -1,0 +1,143 @@
+﻿@page
+@model WebUI.Pages.OrganisationAdmin.InPersonWhereModel
+@{
+}
+
+<a asp-page="/OrganisationAdmin/ServiceDeliveryType" asp-route-id="@Model.StrOrganisationViewModel" class="govuk-back-link">Back</a>
+
+<style>
+#mylocation,#conditional-address{display:none;}
+#mylocation:checked~#conditional-address{display:block;}
+
+#show,#content{display:none;}
+#show:checked~#content{display:block;}
+
+/*
+.initialHide {
+  display: none;
+}
+#location ~ .initialHide {
+  display: none;
+}
+#location:checked ~ .initialHide {
+  display: block;
+}
+
+#conditional-address {
+    display: none;
+}
+#location:checked ~ #conditional-address {
+    display: block;
+}
+*/
+
+</style>
+
+<main class="govuk-main-wrapper " id="main-content" role="main">
+
+    
+
+    <input type="checkbox" id="mylocation" name="mylocation" value="Bike">
+    <label for="mylocation"> I have a bike</label><br>
+
+    
+    
+
+    <br/>
+    <br/>
+     <fieldset class="govuk-fieldset">
+          <h1 class="govuk-fieldset__heading">
+          Where does the in person support take place?
+        </h1>
+     
+      <form method="post">
+
+          <div class="govuk-checkboxes" data-module="govuk-checkboxes">
+            <div class="govuk-checkboxes__item">
+              <input class="govuk-checkboxes__input" id="show" name="show" type="checkbox" value="Our own location" aria-controls="conditional-address">
+              <label class="govuk-label govuk-checkboxes__label" for="show">
+                Our own location
+              </label>
+            </div>
+
+            <div id="content"><span >Do you need some help?</span></div>
+
+        </div>
+
+          @*<div class="govuk-checkboxes" data-module="govuk-checkboxes">
+              <div class="govuk-checkboxes__item">
+              <input type=checkbox id="show" class="govuk-checkboxes__input">
+              <input class="govuk-checkboxes__input" id="show" name="show" type="checkbox" value="Our own location" aria-controls="conditional-address">
+                <label for="show">Help?</label>
+                <div id="content"><span >Do you need some help?</span></div>
+             </div>
+         </div>*@
+
+        <div class="govuk-form-group">
+          <div id="hint" class="govuk-hint">
+            Select all that apply.
+          </div>
+          <div class="govuk-checkboxes" data-module="govuk-checkboxes">
+            <div class="govuk-checkboxes__item">
+              <input class="govuk-checkboxes__input" id="location" name="location" type="checkbox" value="Our own location" aria-controls="conditional-address">
+              <label class="govuk-label govuk-checkboxes__label" for="location">
+                Our own location
+              </label>
+            </div>
+
+            
+
+            <div id="content1">
+            <div class="govuk-checkboxes__conditional" id="conditional-address">
+              <div class="govuk-form-group">
+                <label class="govuk-label" for="address-line-1">
+                  Address line 1
+                </label>
+                <input class="govuk-input" id="address-line-1" name="address-line-1" type="text" autocomplete="address-line1">
+              </div>
+
+              <div class="govuk-form-group">
+                <label class="govuk-label" for="address-line-2">
+                  Address line 2 (optional)
+                </label>
+                <input class="govuk-input" id="address-line-2" name="address-line-2" type="text" autocomplete="address-line2">
+              </div>
+
+              <div class="govuk-form-group">
+                <label class="govuk-label" for="address-town">
+                  Town or city
+                </label>
+                <input class="govuk-input govuk-!-width-two-thirds" id="address-town" name="address-town" type="text" autocomplete="address-level2">
+              </div>
+
+              <div class="govuk-form-group">
+                <label class="govuk-label" for="address-county">
+                  County (optional)
+                </label>
+                <input class="govuk-input govuk-!-width-two-thirds" id="address-county" name="address-county" type="text">
+              </div>
+
+              <div class="govuk-form-group">
+                <label class="govuk-label" for="address-postcode">
+                  Postcode
+                </label>
+                <input class="govuk-input govuk-input--width-10" id="address-postcode" name="address-postcode" type="text" autocomplete="postal-code">
+              </div>
+            </div>
+            </div>
+            <div class="govuk-checkboxes__item">
+              <input class="govuk-checkboxes__input" id="location-2" name="location" type="checkbox" value="The family's home">
+              <label class="govuk-label govuk-checkboxes__label" for="location-2">
+                The family's home
+              </label>
+            </div>
+          </div>
+        </div>
+
+      <button class="govuk-button">
+        Continue
+      </button>
+    </form>
+    </fieldset>
+
+</main>

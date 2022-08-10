@@ -6,14 +6,21 @@
 <a asp-page="/OrganisationAdmin/OrganisationDetail" asp-route-id="@Model.OrganisationViewModel.Id" class="govuk-back-link">Back</a>
 
 <main class="govuk-main-wrapper " id="main-content" role="main">
-    <h1 class="govuk-heading-xl">Add details about the support you offer</h1>
-
-    <p>Tell families and the people working with them about the support or services you offer.</p>
-    <p>These details help families and people working with them decide whether your support is right for them.</p>
+    <h1 class="govuk-heading-xl">@Model.OrganisationViewModel.Name</h1>
 
     <input asp-for="@Model.StrOrganisationViewModel" type="hidden" >
 
+    <hr class="govuk-section-break govuk-section-break--visible govuk-section-break--l">
+    <h2 class="govuk-heading-l">Services</h2>
+    <p class="govuk-caption-m">Add and remove services provided by your organisation.</p>
+    <div class="cards">
+      <div class="card">
+        <h2 class="govuk-heading-m">
     <a asp-page="/OrganisationAdmin/ServiceName" asp-route-strOrganisationViewModel="@Model.StrOrganisationViewModel" class="govuk-button" data-module="govuk-button">
-        Add details
+        Add a service
     </a>
+    </h2>
+        <p class="govuk-body-s">Add details for a service provided by your organisation.</p>
+      </div>
+    </div>
 </main>

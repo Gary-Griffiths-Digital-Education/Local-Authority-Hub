@@ -2,6 +2,8 @@ using LAHub.Domain;
 using LAHub.Domain.OpenReferralEnities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Newtonsoft.Json;
+using WebUI.Models;
 
 namespace WebUI.Pages.OrganisationAdmin;
 
@@ -9,10 +11,11 @@ public class ServiceDeliveryTypeModel : PageModel
 {
     public Dictionary<int, string> DictServiceDelivery = new();
 
+    [BindProperty]
     public List<string> ServiceDeliverySelection { get; set; } = default!;
 
     [BindProperty]
-    public string? StrOrganisationViewModel { get; private set; }
+    public string? StrOrganisationViewModel { get; set; }
 
     public void OnGet(string strOrganisationViewModel)
     {
@@ -29,6 +32,35 @@ public class ServiceDeliveryTypeModel : PageModel
                 continue;
             DictServiceDelivery[myEnumDescription.Id] = myEnumDescription.Name;
         }
+    }
+
+    public IActionResult OnPost()
+    {
+        if (!ModelState.IsValid)
+        {
+            return Page();
+        }
+
+        if (StrOrganisationViewModel != null)
+        {
+            var organisationViewModel = JsonConvert.DeserializeObject<OrganisationViewModel>(StrOrganisationViewModel) ?? new OrganisationViewModel();
+            organisationViewModel.ServiceDeliverySelection = new List<string>(ServiceDeliverySelection);
+            StrOrganisationViewModel = JsonConvert.SerializeObject(organisationViewModel);
+        }
+
+        if (ServiceDeliverySelection.Contains("1"))
+        {
+            return RedirectToPage("/OrganisationAdmin/InPersonWhere", new
+            {
+                strOrganisationViewModel = StrOrganisationViewModel
+            });
+        }
+
+        return RedirectToPage("/OrganisationAdmin/WhoFor", new
+        {
+            strOrganisationViewModel = StrOrganisationViewModel
+        });
+
     }
 
 }

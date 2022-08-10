@@ -7,9 +7,12 @@ namespace WebUI.Pages.OrganisationAdmin;
 
 public class ServiceNameModel : PageModel
 {
+    [BindProperty]
     public string ServiceName { get; set; } = default!;
-    public string ServiceDescription { get; set; } = default!;
-    public string? StrOrganisationViewModel { get; private set; }
+    //public string ServiceDescription { get; set; } = default!;
+
+    [BindProperty]
+    public string? StrOrganisationViewModel { get; set; }
     public void OnGet(string strOrganisationViewModel)
     {
         StrOrganisationViewModel = strOrganisationViewModel;
@@ -27,7 +30,7 @@ public class ServiceNameModel : PageModel
             var organisationViewModel = JsonConvert.DeserializeObject<OrganisationViewModel>(StrOrganisationViewModel) ?? new OrganisationViewModel();
 
             organisationViewModel.ServiceName = ServiceName;
-            organisationViewModel.ServiceDescription = ServiceDescription;
+            //organisationViewModel.ServiceDescription = ServiceDescription;
 
             StrOrganisationViewModel = JsonConvert.SerializeObject(organisationViewModel);
         }
