@@ -38,10 +38,19 @@ public class InPersonWhereModel : PageModel
 
     public IActionResult OnPost()
     {
-        if (!ModelState.IsValid)
+        if (InPersonSelection.Contains("Our own location"))
+        {
+            if (!ModelState.IsValid)
+            {
+                return Page();
+            }
+        }
+
+        if (!InPersonSelection.Any())
         {
             return Page();
         }
+        
 
         if (!string.IsNullOrEmpty(StrOrganisationViewModel))
         {
