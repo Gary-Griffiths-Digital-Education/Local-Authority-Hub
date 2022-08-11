@@ -16,6 +16,7 @@ public class OrganisationViewModel
     public List<string>? ServiceDeliverySelection { get; set; } = default!;
     public List<string>? InPersonSelection { get; set; } = default!;
     public List<string>? WhoForSelection { get; set; } = default!;
+    public List<string>? Languages { get; set; } = default!;
     public int? MinAge { get; set; } = default!;
     public int? MaxAge { get; set; } = default!;
     public string? Address_1 { get; set; } = default!;

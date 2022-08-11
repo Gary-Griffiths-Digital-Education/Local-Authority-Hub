@@ -3,7 +3,7 @@
 
 // Write your JavaScript code.
 
-function toggleAddress(controlId) {
+function toggleVisibility(controlId) {
     var x = document.getElementById(controlId);
     if (x.style.display === "none") {
         x.style.display = "block";

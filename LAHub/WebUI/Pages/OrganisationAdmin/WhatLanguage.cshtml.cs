@@ -125,9 +125,11 @@ public class WhatLanguageModel : PageModel
             return Page();
         }
 
+        organisationViewModel.Languages = new List<string>(LanguageCode);
+
         StrOrganisationViewModel = JsonConvert.SerializeObject(organisationViewModel);
 
-        return RedirectToPage("/OrganisationAdmin/WhatLanguage", new
+        return RedirectToPage("/OrganisationAdmin/PayForService", new
         {
             strOrganisationViewModel = StrOrganisationViewModel
         });
