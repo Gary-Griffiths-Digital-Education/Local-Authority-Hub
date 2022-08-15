@@ -40,6 +40,8 @@ public class InPersonWhereModel : PageModel
     {
         if (InPersonSelection.Contains("Our own location"))
         {
+            ModelState.Remove("Country");
+            Country = "England";
             if (!ModelState.IsValid)
             {
                 return Page();
@@ -60,6 +62,7 @@ public class InPersonWhereModel : PageModel
             OrganisationViewModel.City = City;
             OrganisationViewModel.State_province = State_province;
             OrganisationViewModel.Country = "England";
+            OrganisationViewModel.Postal_code = Postal_code;
 
             StrOrganisationViewModel = JsonConvert.SerializeObject(OrganisationViewModel);
         }

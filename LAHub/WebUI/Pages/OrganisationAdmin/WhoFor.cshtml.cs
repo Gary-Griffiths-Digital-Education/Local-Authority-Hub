@@ -42,7 +42,7 @@ public class WhoForModel : PageModel
             organisationViewModel.MinAge = minAge;
         }
 
-        if (int.TryParse(SelectedMinAge, out int maxAge))
+        if (int.TryParse(SelectedMaxAge, out int maxAge))
         {
             organisationViewModel.MaxAge = maxAge;
         }

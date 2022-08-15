@@ -7,7 +7,7 @@ namespace WebUI.Services.Api;
 
 public interface IOpenReferralOrganisationAdminClientService
 {
-    Task<PaginatedList<OpenReferralTaxonomyRecord>> GetTaxonomyList();
+    Task<PaginatedList<OpenReferralTaxonomyRecord>> GetTaxonomyList(int pageNumber = 1, int pageSize = 10);
     Task<List<OpenReferralOrganisationRecord>> GetListOpenReferralOrganisations();
     Task<OpenReferralOrganisationWithServicesRecord> GetOpenReferralOrganisationById(string id);
 }
@@ -20,12 +20,12 @@ public class OpenReferralOrganisationAdminClientService : ApiService, IOpenRefer
 
     }
 
-    public async Task<PaginatedList<OpenReferralTaxonomyRecord>> GetTaxonomyList()
+    public async Task<PaginatedList<OpenReferralTaxonomyRecord>> GetTaxonomyList(int pageNumber=1, int pageSize=10)
     {
         var request = new HttpRequestMessage
         {
             Method = HttpMethod.Get,
-            RequestUri = new Uri(_client.BaseAddress + "api/taxonomies?pageNumber=1&pageSize=10"),
+            RequestUri = new Uri(_client.BaseAddress + $"api/taxonomies?pageNumber={pageNumber}&pageSize={pageSize}"),
         };
 
         using var response = await _client.SendAsync(request);

@@ -12,3 +12,4 @@
 - https://localhost:7177/OrganisationAdmin/PayForService
 - https://localhost:7177/OrganisationAdmin/ContactDetails
 - https://localhost:7177/OrganisationAdmin/ServiceDescription
+- https://localhost:7177/OrganisationAdmin/CheckServiceDetails
