@@ -5,18 +5,16 @@ using WebUI.Models;
 
 namespace WebUI.Pages.OrganisationAdmin;
 
-public class PayForServiceModel : PageModel
+public class ContactDetailsModel : PageModel
 {
-    
-    
     [BindProperty]
-    public string IsPayedFor { get; set; } = default!;
-
+    public List<string> ContactSelection { get; set; } = default!;
     [BindProperty]
-    public string PayUnit { get; set; } = default!;
-
+    public string Email { get; set; } = default!;
     [BindProperty]
-    public decimal Cost { get; set; }
+    public string Telephone { get; set; } = default!;
+    [BindProperty]
+    public string Website { get; set; } = default!;
 
     [BindProperty]
     public string? StrOrganisationViewModel { get; set; }
@@ -36,14 +34,14 @@ public class PayForServiceModel : PageModel
         if (!string.IsNullOrEmpty(StrOrganisationViewModel))
         {
             var organisationViewModel = JsonConvert.DeserializeObject<OrganisationViewModel>(StrOrganisationViewModel) ?? new OrganisationViewModel();
-            organisationViewModel.IsPayedFor = IsPayedFor;
-            organisationViewModel.PayUnit = PayUnit;    
-            organisationViewModel.Cost = Cost;
+            organisationViewModel.Email = Email;
+            organisationViewModel.Telephone = Telephone;
+            organisationViewModel.Website = Website;
 
             StrOrganisationViewModel = JsonConvert.SerializeObject(organisationViewModel);
         }
 
-        return RedirectToPage("/OrganisationAdmin/ContactDetails", new
+        return RedirectToPage("/OrganisationAdmin/ServiceDescription", new
         {
             strOrganisationViewModel = StrOrganisationViewModel
         });

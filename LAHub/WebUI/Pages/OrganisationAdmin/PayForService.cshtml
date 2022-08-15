@@ -16,11 +16,6 @@
 
           <input asp-for="@Model.StrOrganisationViewModel" type="hidden" >
 
-          @foreach (var gender in Model.Genders)
-    {
-        <input type="radio" asp-for="Gender" value="@gender" />@gender<br />
-    }
-
       <div class="govuk-form-group">
       <div class="govuk-radios" data-module="govuk-radios">
         <div class="govuk-radios__item">
@@ -37,7 +32,7 @@
             </label>
             <div class="govuk-input__wrapper">
               <div class="govuk-input__prefix" aria-hidden="true">£</div>
-              <input class="govuk-input govuk-input--width-5" id="cost-per-item" name="cost-per-item" type="text" spellcheck="false">
+              <input class="govuk-input govuk-input--width-5"  name="Cost" value="Cost" type="number" step="0.01" spellcheck="false">
             </div>
           </div>
           <div class="govuk-form-group">

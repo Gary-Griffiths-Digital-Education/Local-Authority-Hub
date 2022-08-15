@@ -1,0 +1,78 @@
+﻿@page
+@model WebUI.Pages.OrganisationAdmin.ContactDetailsModel
+@{
+}
+
+<a asp-page="/OrganisationAdmin/PayForService" asp-route-strOrganisationViewModel="@Model.StrOrganisationViewModel" class="govuk-back-link">Back</a>
+
+<main class="govuk-main-wrapper " id="main-content" role="main">
+    <fieldset class="govuk-fieldset">
+      <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+        <h1 class="govuk-fieldset__heading">
+          How can people contact the service?
+        </h1>
+      </legend>
+
+      <form method="post">
+
+          <input asp-for="@Model.StrOrganisationViewModel" type="hidden" >
+
+        <div class="govuk-form-group">
+            <div id="contact-hint" class="govuk-hint">
+              Select all that apply.
+            </div>
+            <div class="govuk-checkboxes" data-module="govuk-checkboxes">
+              <div class="govuk-checkboxes__item">
+                <input class="govuk-checkboxes__input" name="ContactSelection" type="checkbox" value="email" onclick="toggleVisibility('email-contact')" data-aria-controls="email-contact">
+                <label class="govuk-label govuk-checkboxes__label" for="ContactSelection">
+                  Email
+                </label>
+              </div>
+              <div class="govuk-checkboxes__conditional" style="display: none;" id="email-contact">
+                <div class="govuk-form-group">
+                  <label class="govuk-label" for="contact-by-email">
+                    Email address
+                  </label>
+                  <input class="govuk-input govuk-!-width-one-third" name="Email" value="@Model.Email" type="email" spellcheck="false" autocomplete="email">
+                </div>
+
+              </div>
+              <div class="govuk-checkboxes__item">
+                <input class="govuk-checkboxes__input" name="ContactSelection" type="checkbox" value="phone" onclick="toggleVisibility('phone-contact')" data-aria-controls="phone-contact">
+                <label class="govuk-label govuk-checkboxes__label" for="ContactSelection">
+                  Telephone
+                </label>
+              </div>
+              <div class="govuk-checkboxes__conditional" style="display: none;" id="phone-contact">
+                <div class="govuk-form-group">
+                  <label class="govuk-label" for="contact-by-phone">
+                    Telephone number
+                  </label>
+                  <input class="govuk-input govuk-!-width-one-third" name="Telephone" value="@Model.Telephone" type="tel" autocomplete="tel">
+                </div>
+
+              </div>
+              <div class="govuk-checkboxes__item">
+                <input class="govuk-checkboxes__input" name="ContactSelection" type="checkbox" value="website" onclick="toggleVisibility('website-contact')" data-aria-controls="website-contact">
+                <label class="govuk-label govuk-checkboxes__label" for="ContactSelection">
+                  Website
+                </label>
+              </div>
+              <div class="govuk-checkboxes__conditional" style="display: none;" id="website-contact">
+                <div class="govuk-form-group">
+                  <label class="govuk-label" for="contact-by-website">
+                    Website
+                  </label>
+                  <input class="govuk-input govuk-!-width-one-third" name="Website" value="@Model.Website" autocomplete="website">
+                </div>
+
+              </div>
+            </div>
+        </div>
+
+      <button type="submit" class="govuk-button">
+        Continue
+      </button>
+    </form>
+    </fieldset>
+</main>

@@ -24,5 +24,11 @@ public class OrganisationViewModel
     public string? Postal_code { get; set; } = default!;
     public string? Country { get; set; } = default!;
     public string? State_province { get; set; } = default!;
+    public string? IsPayedFor { get; set; } = default!;
+    public string? PayUnit { get; set; } = default!;
+    public decimal? Cost { get; set; } = default!;
+    public string? Email { get; set; } = default!;
+    public string? Telephone { get; set; } = default!;
+    public string? Website { get; set; } = default!;
 
 }

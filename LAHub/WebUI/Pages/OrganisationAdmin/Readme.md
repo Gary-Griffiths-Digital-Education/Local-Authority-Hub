@@ -10,3 +10,5 @@
 - https://localhost:7177/OrganisationAdmin/WhoFor
 - https://localhost:7177/OrganisationAdmin/WhatLanguage
 - https://localhost:7177/OrganisationAdmin/PayForService
+- https://localhost:7177/OrganisationAdmin/ContactDetails
+- https://localhost:7177/OrganisationAdmin/ServiceDescription
