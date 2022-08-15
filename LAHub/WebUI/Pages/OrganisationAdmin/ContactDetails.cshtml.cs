@@ -22,6 +22,22 @@ public class ContactDetailsModel : PageModel
     public void OnGet(string strOrganisationViewModel)
     {
         StrOrganisationViewModel = strOrganisationViewModel;
+
+        var organisationViewModel = JsonConvert.DeserializeObject<OrganisationViewModel>(StrOrganisationViewModel);
+        if (organisationViewModel != null)
+        {
+            if (!string.IsNullOrWhiteSpace(organisationViewModel.Email))
+                Email = organisationViewModel.Email;
+            if (!string.IsNullOrWhiteSpace(organisationViewModel.Telephone))
+                Telephone = organisationViewModel.Telephone;
+            if (!string.IsNullOrWhiteSpace(organisationViewModel.Website))
+                Website = organisationViewModel.Website;
+
+            if (organisationViewModel.ContactSelection != null && organisationViewModel.ContactSelection.Any())
+            {
+                ContactSelection = organisationViewModel.ContactSelection;
+            }
+        }
     }
 
     public IActionResult OnPost()
@@ -37,6 +53,7 @@ public class ContactDetailsModel : PageModel
             organisationViewModel.Email = Email;
             organisationViewModel.Telephone = Telephone;
             organisationViewModel.Website = Website;
+            organisationViewModel.ContactSelection = ContactSelection;
 
             StrOrganisationViewModel = JsonConvert.SerializeObject(organisationViewModel);
         }

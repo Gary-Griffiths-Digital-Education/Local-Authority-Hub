@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Newtonsoft.Json;
 using WebUI.Models;
 
@@ -22,6 +21,21 @@ public class WhoForModel : PageModel
     public void OnGet(string strOrganisationViewModel)
     {
         StrOrganisationViewModel = strOrganisationViewModel;
+
+        var organisationViewModel = JsonConvert.DeserializeObject<OrganisationViewModel>(StrOrganisationViewModel);
+        if (organisationViewModel != null)
+        {
+            if (organisationViewModel.WhoForSelection != null && organisationViewModel.WhoForSelection.Any())
+                WhoForSelection = organisationViewModel.WhoForSelection;
+            if (organisationViewModel.MinAge != null)
+            {
+                SelectedMinAge = organisationViewModel.MinAge.Value.ToString();
+            }
+            if (organisationViewModel.MaxAge != null)
+            {
+                SelectedMinAge = organisationViewModel.MaxAge.Value.ToString();
+            }
+        }
     }
 
     public IActionResult OnPost()

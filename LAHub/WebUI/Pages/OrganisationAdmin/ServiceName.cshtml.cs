@@ -9,13 +9,18 @@ public class ServiceNameModel : PageModel
 {
     [BindProperty]
     public string ServiceName { get; set; } = default!;
-    //public string ServiceDescription { get; set; } = default!;
 
     [BindProperty]
     public string? StrOrganisationViewModel { get; set; }
     public void OnGet(string strOrganisationViewModel)
     {
         StrOrganisationViewModel = strOrganisationViewModel;
+
+        var organisationViewModel = JsonConvert.DeserializeObject<OrganisationViewModel>(StrOrganisationViewModel) ?? new OrganisationViewModel();
+        if (organisationViewModel != null && !string.IsNullOrEmpty(organisationViewModel.ServiceName))
+        {
+            ServiceName = organisationViewModel.ServiceName;    
+        }
     }
 
     public IActionResult OnPost()

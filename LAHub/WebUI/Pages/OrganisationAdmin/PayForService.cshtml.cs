@@ -24,6 +24,19 @@ public class PayForServiceModel : PageModel
     public void OnGet(string strOrganisationViewModel)
     {
         StrOrganisationViewModel = strOrganisationViewModel;
+
+        var organisationViewModel = JsonConvert.DeserializeObject<OrganisationViewModel>(StrOrganisationViewModel);
+        if (organisationViewModel != null)
+        {
+            if (!string.IsNullOrEmpty(organisationViewModel.IsPayedFor))
+                IsPayedFor = organisationViewModel.IsPayedFor;
+
+            if (!string.IsNullOrEmpty(organisationViewModel.PayUnit))
+                IsPayedFor = organisationViewModel.PayUnit;
+
+            if (organisationViewModel.Cost != null)
+                Cost = organisationViewModel.Cost.Value;
+        }
     }
 
     public IActionResult OnPost()

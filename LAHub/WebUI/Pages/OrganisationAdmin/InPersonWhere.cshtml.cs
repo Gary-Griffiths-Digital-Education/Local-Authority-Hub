@@ -33,7 +33,21 @@ public class InPersonWhereModel : PageModel
         if (!string.IsNullOrEmpty(strOrganisationViewModel))
             OrganisationViewModel = JsonConvert.DeserializeObject<OrganisationViewModel>(StrOrganisationViewModel) ?? new OrganisationViewModel();
 
+        
         OrganisationViewModel.Country = "England";
+        if (OrganisationViewModel != null)
+        {
+            if (!string.IsNullOrEmpty(OrganisationViewModel.Address_1))
+                Address_1 = OrganisationViewModel.Address_1;
+            if (!string.IsNullOrEmpty(OrganisationViewModel.City))
+                City = OrganisationViewModel.City;
+            if (!string.IsNullOrEmpty(OrganisationViewModel.Postal_code))
+                Postal_code = OrganisationViewModel.Postal_code;
+            if (!string.IsNullOrEmpty(OrganisationViewModel.State_province))
+                State_province = OrganisationViewModel.State_province;
+            if (OrganisationViewModel.InPersonSelection != null && OrganisationViewModel.InPersonSelection.Any())
+                InPersonSelection = OrganisationViewModel.InPersonSelection;
+        }
     }
 
     public IActionResult OnPost()

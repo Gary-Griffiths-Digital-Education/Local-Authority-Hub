@@ -32,6 +32,12 @@ public class ServiceDeliveryTypeModel : PageModel
                 continue;
             DictServiceDelivery[myEnumDescription.Id] = myEnumDescription.Name;
         }
+
+        var organisationViewModel = JsonConvert.DeserializeObject<OrganisationViewModel>(StrOrganisationViewModel) ?? new OrganisationViewModel();
+        if (organisationViewModel != null && organisationViewModel.ServiceDeliverySelection != null)
+        {
+            ServiceDeliverySelection = organisationViewModel.ServiceDeliverySelection;
+        }
     }
 
     public IActionResult OnPost()

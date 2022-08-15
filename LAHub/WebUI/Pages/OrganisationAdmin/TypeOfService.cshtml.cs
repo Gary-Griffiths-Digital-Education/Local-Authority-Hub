@@ -1,5 +1,4 @@
 using Application.Common.Models;
-using LAHub.Domain.OpenReferralEnities;
 using LAHub.Domain.RecordEntities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -25,8 +24,6 @@ public class TypeOfServiceModel : PageModel
         _openReferralOrganisationAdminClientService = openReferralOrganisationAdminClientService;
     }
 
-
-
     public async Task OnGet(string strOrganisationViewModel)
     {
         StrOrganisationViewModel = strOrganisationViewModel;
@@ -35,6 +32,12 @@ public class TypeOfServiceModel : PageModel
 
         if (taxonomies != null)
             OpenReferralTaxonomyRecords = new List<OpenReferralTaxonomyRecord>(taxonomies.Items);
+
+        var organisationViewModel = JsonConvert.DeserializeObject<OrganisationViewModel>(StrOrganisationViewModel) ?? new OrganisationViewModel();
+        if (organisationViewModel != null && organisationViewModel.TaxonomySelection != null && organisationViewModel.TaxonomySelection.Any())
+        {
+            TaxonomySelection = organisationViewModel.TaxonomySelection;
+        }
     }
 
     public IActionResult OnPost()

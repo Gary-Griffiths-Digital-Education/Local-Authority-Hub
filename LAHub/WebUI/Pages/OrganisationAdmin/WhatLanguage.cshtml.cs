@@ -98,6 +98,12 @@ public class WhatLanguageModel : PageModel
     public void OnGet(string strOrganisationViewModel)
     {
         StrOrganisationViewModel = strOrganisationViewModel;
+
+        var organisationViewModel = JsonConvert.DeserializeObject<OrganisationViewModel>(StrOrganisationViewModel);
+        if (organisationViewModel != null && organisationViewModel.Languages != null && organisationViewModel.Languages.Any())
+        {
+            LanguageCode = organisationViewModel.Languages;
+        }
     }
 
     public void OnPostAddAnotherLanguage()

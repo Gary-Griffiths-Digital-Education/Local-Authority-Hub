@@ -16,6 +16,12 @@ public class ServiceDescriptionModel : PageModel
     public void OnGet(string strOrganisationViewModel)
     {
         StrOrganisationViewModel = strOrganisationViewModel;
+
+        var organisationViewModel = JsonConvert.DeserializeObject<OrganisationViewModel>(StrOrganisationViewModel) ?? new OrganisationViewModel();
+        if (organisationViewModel != null && !string.IsNullOrEmpty(organisationViewModel.ServiceDescription))
+        {
+            Description = organisationViewModel.ServiceDescription;
+        }
     }
 
     public IActionResult OnPost()
