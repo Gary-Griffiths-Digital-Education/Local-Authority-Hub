@@ -1,6 +1,8 @@
-﻿namespace LAHub.Domain.OpenReferralEnities;
+﻿using Domain.Common;
 
-public class OpenReferralPhysical_Address : BaseEntity<string>
+namespace LAHub.Domain.OpenReferralEnities;
+
+public class OpenReferralPhysical_Address : BaseAuditableEntity<string>
 {
     private OpenReferralPhysical_Address() { }
     public OpenReferralPhysical_Address(string id, string address_1, string? city, string postal_code, string? country, string? state_province)

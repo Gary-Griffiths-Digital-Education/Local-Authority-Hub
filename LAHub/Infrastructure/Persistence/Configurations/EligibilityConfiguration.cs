@@ -4,15 +4,12 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Infrastructure.Persistence.Configurations;
 
-public class ServiceConfiguration : IEntityTypeConfiguration<OpenReferralService>
+public class EligibilityConfiguration : IEntityTypeConfiguration<OpenReferralEligibility>
 {
-    public void Configure(EntityTypeBuilder<OpenReferralService> builder)
+    public void Configure(EntityTypeBuilder<OpenReferralEligibility> builder)
     {
-        builder.Property(t => t.Name)
-            .HasMaxLength(50)
+        builder.Property(t => t.Eligibility)
             .IsRequired();
-        builder.Property(t => t.Description)
-            .HasMaxLength(500);
         builder.Property(t => t.Created)
             .IsRequired();
         builder.Property(t => t.CreatedBy)

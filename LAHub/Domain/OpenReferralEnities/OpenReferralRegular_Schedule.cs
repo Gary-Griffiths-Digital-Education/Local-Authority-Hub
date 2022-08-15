@@ -1,6 +1,8 @@
-﻿namespace LAHub.Domain.OpenReferralEnities;
+﻿using Domain.Common;
 
-public class OpenReferralRegular_Schedule : BaseEntity<string>
+namespace LAHub.Domain.OpenReferralEnities;
+
+public class OpenReferralRegular_Schedule : BaseAuditableEntity<string>
 {
     private OpenReferralRegular_Schedule() { }
     public OpenReferralRegular_Schedule(string id, string description, DateTime? opens_at, DateTime? closes_at, string? byday, string? bymonthday, string? dtstart, string? freq, string? interval, DateTime? valid_from, DateTime? valid_to

@@ -1,6 +1,8 @@
-﻿namespace LAHub.Domain.OpenReferralEnities;
+﻿using Domain.Common;
 
-public class Accessibility_For_Disabilities : BaseEntity<string>
+namespace LAHub.Domain.OpenReferralEnities;
+
+public class Accessibility_For_Disabilities : BaseAuditableEntity<string>
 {
     private Accessibility_For_Disabilities() { }
     public Accessibility_For_Disabilities(string id, string accessibility)

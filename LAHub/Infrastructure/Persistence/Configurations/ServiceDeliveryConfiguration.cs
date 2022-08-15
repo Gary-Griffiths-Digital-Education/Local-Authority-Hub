@@ -1,16 +1,15 @@
-﻿using LAHub.Domain.Entities;
+﻿using LAHub.Domain.OpenReferralEnities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Infrastructure.Persistence.Configurations;
 
-public class ServiceClassificationConfiguration : IEntityTypeConfiguration<ServiceClassification>
+public class ServiceDeliveryConfiguration : IEntityTypeConfiguration<OpenReferralServiceDelivery>
 {
-    public void Configure(EntityTypeBuilder<ServiceClassification> builder)
+    public void Configure(EntityTypeBuilder<OpenReferralServiceDelivery> builder)
     {
-        builder.Property(t => t.ServiceId)
-            .IsRequired();
-        builder.Property(t => t.ClassificationId)
+        builder.Property(t => t.ServiceDelivery)
+            .HasMaxLength(50)
             .IsRequired();
         builder.Property(t => t.Created)
             .IsRequired();

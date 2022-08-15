@@ -3,7 +3,6 @@ using Duende.IdentityServer.EntityFramework.Options;
 using Infrastructure.Common;
 using Infrastructure.Identity;
 using Infrastructure.Persistence.Interceptors;
-using LAHub.Domain.Entities;
 using LAHub.Domain.OpenReferralEnities;
 using MediatR;
 using Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
@@ -28,15 +27,6 @@ public class LAHubDbContext : ApiAuthorizationDbContext<ApplicationUser>, ILAHub
         _mediator = mediator;
         _auditableEntitySaveChangesInterceptor = auditableEntitySaveChangesInterceptor;
     }
-
-    public DbSet<Address> Addresses => Set<Address>();
-    public DbSet<Classification> Classifications => Set<Classification>();
-    public DbSet<Contact> Contacts => Set<Contact>();
-    public DbSet<Location> Locations => Set<Location>();
-    public DbSet<Organisation> Organisations => Set<Organisation>();
-    public DbSet<OrganisationType> OrganisationTypes => Set<OrganisationType>();
-    public DbSet<Service> Services => Set<Service>();
-    public DbSet<Tenant> Tenants => Set<Tenant>();
 
     #region Open Referral Entities
     public DbSet<Accessibility_For_Disabilities> Accessibility_For_Disabilities => Set<Accessibility_For_Disabilities>();
@@ -74,9 +64,6 @@ public class LAHubDbContext : ApiAuthorizationDbContext<ApplicationUser>, ILAHub
         //    .HasForeignKey(s => s.CurrentGradeId);
 
         builder.Entity<OpenReferralServiceDelivery>().HasEnum(e => e.ServiceDelivery);
-
-        builder.Entity<LAHub.Domain.Entities.Service>()
-            .HasMany(x => x.ServiceClassifications);
 
         builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
 

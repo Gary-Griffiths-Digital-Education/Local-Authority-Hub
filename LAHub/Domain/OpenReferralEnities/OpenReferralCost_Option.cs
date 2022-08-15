@@ -1,6 +1,8 @@
-﻿namespace LAHub.Domain.OpenReferralEnities;
+﻿using Domain.Common;
 
-public class OpenReferralCost_Option : BaseEntity<string>
+namespace LAHub.Domain.OpenReferralEnities;
+
+public class OpenReferralCost_Option : BaseAuditableEntity<string>
 {
     private OpenReferralCost_Option() { }
     public OpenReferralCost_Option(string id, string amount_description, int amount, string? linkId, string? option, DateTime? valid_from

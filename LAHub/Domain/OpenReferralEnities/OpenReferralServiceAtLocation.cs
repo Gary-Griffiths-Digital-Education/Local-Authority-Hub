@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Domain.Common;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace LAHub.Domain.OpenReferralEnities;
 
-public class OpenReferralServiceAtLocation : BaseEntity<string>
+public class OpenReferralServiceAtLocation : BaseAuditableEntity<string>
 {
     private OpenReferralServiceAtLocation() { }
     public OpenReferralServiceAtLocation(string id, 

@@ -1,6 +1,8 @@
-﻿namespace LAHub.Domain.OpenReferralEnities;
+﻿using Domain.Common;
 
-public class OpenReferralContact : BaseEntity<string>
+namespace LAHub.Domain.OpenReferralEnities;
+
+public class OpenReferralContact : BaseAuditableEntity<string>
 {
     private OpenReferralContact() { }
     public OpenReferralContact(string id, string title, string name, ICollection<OpenReferralPhone>? phones)

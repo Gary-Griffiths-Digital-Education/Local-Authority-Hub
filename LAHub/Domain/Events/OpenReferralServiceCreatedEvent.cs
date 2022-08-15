@@ -1,4 +1,5 @@
-﻿using LAHub.Domain.OpenReferralEnities;
+﻿using Domain.Common;
+using LAHub.Domain.OpenReferralEnities;
 
 namespace LAHub.Domain.Events;
 

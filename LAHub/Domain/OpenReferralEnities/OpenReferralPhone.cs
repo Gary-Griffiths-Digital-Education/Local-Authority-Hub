@@ -1,6 +1,8 @@
-﻿namespace LAHub.Domain.OpenReferralEnities;
+﻿using Domain.Common;
 
-public class OpenReferralPhone : BaseEntity<string>
+namespace LAHub.Domain.OpenReferralEnities;
+
+public class OpenReferralPhone : BaseAuditableEntity<string>
 {
     private OpenReferralPhone() { }
     public OpenReferralPhone(string id, string number)

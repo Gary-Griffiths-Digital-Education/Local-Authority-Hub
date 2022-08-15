@@ -1,10 +1,12 @@
 ﻿using Application.Commands.GetServices;
 using FluentAssertions;
-using LAHub.Domain.Entities;
+
 
 namespace Application.IntegrationTests.Commands;
 
 using static Testing;
+
+/*
 public  class WhenGettingServices : BaseTestFixture
 {
     private readonly Testing _testing;
@@ -73,3 +75,4 @@ public  class WhenGettingServices : BaseTestFixture
     }
     
 }
+*/

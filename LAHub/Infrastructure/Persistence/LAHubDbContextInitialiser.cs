@@ -1,5 +1,4 @@
 ﻿using Infrastructure.Identity;
-using LAHub.Domain.Entities;
 using LAHub.Domain.OpenReferralEnities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -64,7 +63,7 @@ public class ApplicationDbContextInitialiser
 
     public async Task TrySeedAsync()
     {
-        if (_context.Classifications.Any())
+        if (_context.OpenReferralOrganisations.Any())
             return;
 
         // Default roles
@@ -88,28 +87,6 @@ public class ApplicationDbContextInitialiser
 
         // Default data
         // Seed, if necessary
-        List<Classification> classifications = new()
-        {
-            new Classification("Autism", "Autism" ),
-            new Classification("Brest Feeding", "Brest Feeding Support" ),
-        };
-
-        var organisationSeedData = new Infrastructure.Persistence.SeedData.Organisations.OrganisationSeedData(classifications);
-        
-
-        _context.Classifications.AddRange(classifications);
-
-        await _context.SaveChangesAsync();
-
-        IReadOnlyCollection<Organisation> organisations = organisationSeedData.SeedOrganistions();
-
-        foreach (var organisation in organisations)
-        {
-            _context.Organisations.Add(organisation);
-        }
-
-        await _context.SaveChangesAsync();
-
         var openReferralOrganisationSeedData = new Infrastructure.Persistence.SeedData.Organisations.OpenReferralOrganisationSeedData();
 
         IReadOnlyCollection<OpenReferralOrganisation> openReferralOrganisations = openReferralOrganisationSeedData.SeedOpenReferralOrganistions();

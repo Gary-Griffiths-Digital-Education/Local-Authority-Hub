@@ -1,8 +1,9 @@
-﻿using System.Collections.ObjectModel;
+﻿using Domain.Common;
+using System.Collections.ObjectModel;
 
 namespace LAHub.Domain.OpenReferralEnities;
 
-public class OpenReferralService : BaseEntity<string>
+public class OpenReferralService : BaseAuditableEntity<string>
 {
     private OpenReferralService() { }
 

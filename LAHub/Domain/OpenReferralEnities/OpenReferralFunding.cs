@@ -1,6 +1,8 @@
-﻿namespace LAHub.Domain.OpenReferralEnities;
+﻿using Domain.Common;
 
-public class OpenReferralFunding : BaseEntity<string>
+namespace LAHub.Domain.OpenReferralEnities;
+
+public class OpenReferralFunding : BaseAuditableEntity<string>
 {
     private OpenReferralFunding() { }
     public OpenReferralFunding(string id, string source)

@@ -1,6 +1,8 @@
-﻿namespace LAHub.Domain.OpenReferralEnities;
+﻿using Domain.Common;
 
-public class OpenReferralTaxonomy : BaseEntity<string>
+namespace LAHub.Domain.OpenReferralEnities;
+
+public class OpenReferralTaxonomy : BaseAuditableEntity<string>
 {
     private OpenReferralTaxonomy() { }
     public OpenReferralTaxonomy(string id, string name, string? vocabulary, string? parent

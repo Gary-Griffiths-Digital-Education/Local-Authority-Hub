@@ -1,6 +1,8 @@
-﻿namespace LAHub.Domain.OpenReferralEnities;
+﻿using Domain.Common;
 
-public class OpenReferralLanguage : BaseEntity<string>
+namespace LAHub.Domain.OpenReferralEnities;
+
+public class OpenReferralLanguage : BaseAuditableEntity<string>
 {
     private OpenReferralLanguage() { }
     public OpenReferralLanguage(string id, string language)

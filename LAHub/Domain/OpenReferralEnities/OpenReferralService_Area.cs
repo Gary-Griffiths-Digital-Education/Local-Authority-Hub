@@ -1,6 +1,8 @@
-﻿namespace LAHub.Domain.OpenReferralEnities;
+﻿using Domain.Common;
 
-public class OpenReferralService_Area : BaseEntity<string>
+namespace LAHub.Domain.OpenReferralEnities;
+
+public class OpenReferralService_Area : BaseAuditableEntity<string>
 {
     private OpenReferralService_Area() { }
     public OpenReferralService_Area(string id, string service_area, string? linkId, string? extent, string? uri)

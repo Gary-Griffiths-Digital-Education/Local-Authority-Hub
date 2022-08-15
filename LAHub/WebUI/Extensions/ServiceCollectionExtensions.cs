@@ -13,7 +13,6 @@ public static class ServiceCollectionExtensions
         serviceCollection.AddClient<IApiService>((c, s) => new ApiService(c, s.GetRequiredService<IHashingService>()));
         serviceCollection.AddClient<IPostcodeLocationClientService>((c, s) => new PostcodeLocationClientService(c, s.GetRequiredService<IHashingService>()));
         serviceCollection.AddClient<ILocalOfferClientService>((c, s) => new LocalOfferClientService(c, s.GetRequiredService<IHashingService>()));
-        serviceCollection.AddClient<IOrganisationAdminClientService>((c, s) => new OrganisationAdminClientService(c, s.GetRequiredService<IHashingService>()));
         serviceCollection.AddClient<IOpenReferralOrganisationAdminClientService>((c, s) => new OpenReferralOrganisationAdminClientService(c, s.GetRequiredService<IHashingService>()));
         return serviceCollection;
     }

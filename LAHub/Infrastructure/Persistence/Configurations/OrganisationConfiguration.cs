@@ -1,12 +1,12 @@
-﻿using LAHub.Domain.Entities;
+﻿using LAHub.Domain.OpenReferralEnities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Infrastructure.Persistence.Configurations;
 
-public class OrganisationConfiguration : IEntityTypeConfiguration<Organisation>
+public class OrganisationConfiguration : IEntityTypeConfiguration<OpenReferralOrganisation>
 {
-    public void Configure(EntityTypeBuilder<Organisation> builder)
+    public void Configure(EntityTypeBuilder<OpenReferralOrganisation> builder)
     {
         builder.Property(t => t.Name)
             .HasMaxLength(50)

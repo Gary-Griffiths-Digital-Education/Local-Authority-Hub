@@ -1,21 +1,19 @@
-﻿using LAHub.Domain.Entities;
+﻿using LAHub.Domain.OpenReferralEnities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Infrastructure.Persistence.Configurations;
 
-public class AddressConfiguration : IEntityTypeConfiguration<Address>
+public class AddressConfiguration : IEntityTypeConfiguration<OpenReferralPhysical_Address>
 {
-    public void Configure(EntityTypeBuilder<Address> builder)
+    public void Configure(EntityTypeBuilder<OpenReferralPhysical_Address> builder)
     {
-        builder.Property(t => t.AddressLine1)
+        builder.Property(t => t.Address_1)
             .HasMaxLength(50)
             .IsRequired();
-        builder.Property(t => t.AddressLine2)
+        builder.Property(t => t.City)
             .HasMaxLength(50);
-        builder.Property(t => t.TownOrCity)
-            .HasMaxLength(50);
-        builder.Property(t => t.Postcode)
+        builder.Property(t => t.Postal_code)
             .HasMaxLength(10)
             .IsRequired();
         builder.Property(t => t.Created)

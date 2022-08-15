@@ -1,12 +1,12 @@
-﻿using LAHub.Domain.Entities;
+﻿using LAHub.Domain.OpenReferralEnities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Infrastructure.Persistence.Configurations;
 
-public class LocationConfiguration : IEntityTypeConfiguration<Location>
+public class LocationConfiguration : IEntityTypeConfiguration<OpenReferralLocation>
 {
-    public void Configure(EntityTypeBuilder<Location> builder)
+    public void Configure(EntityTypeBuilder<OpenReferralLocation> builder)
     {
         builder.Property(t => t.Name)
             .HasMaxLength(50)

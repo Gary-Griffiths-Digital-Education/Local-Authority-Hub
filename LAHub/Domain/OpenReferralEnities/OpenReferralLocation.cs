@@ -1,6 +1,8 @@
-﻿namespace LAHub.Domain.OpenReferralEnities;
+﻿using Domain.Common;
 
-public class OpenReferralLocation : BaseEntity<string>
+namespace LAHub.Domain.OpenReferralEnities;
+
+public class OpenReferralLocation : BaseAuditableEntity<string>
 {
     private OpenReferralLocation() { }
     public OpenReferralLocation(string id, string name, string? description, double latitude, double longitude

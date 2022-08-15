@@ -4,15 +4,13 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Infrastructure.Persistence.Configurations;
 
-public class ServiceConfiguration : IEntityTypeConfiguration<OpenReferralService>
+public class ServiceAtLocationConfiguration : IEntityTypeConfiguration<OpenReferralServiceAtLocation>
 {
-    public void Configure(EntityTypeBuilder<OpenReferralService> builder)
+    public void Configure(EntityTypeBuilder<OpenReferralServiceAtLocation> builder)
     {
-        builder.Property(t => t.Name)
-            .HasMaxLength(50)
-            .IsRequired();
-        builder.Property(t => t.Description)
-            .HasMaxLength(500);
+        //Needs investigating
+        //builder.Property(t => t.Location)
+        //    .IsRequired();
         builder.Property(t => t.Created)
             .IsRequired();
         builder.Property(t => t.CreatedBy)
