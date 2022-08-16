@@ -7,12 +7,10 @@
 
 <main class="govuk-main-wrapper " id="main-content" role="main">
     <fieldset class="govuk-fieldset">
-      <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
-        <h1 class="govuk-fieldset__heading">
+         <h1 class="govuk-fieldset__heading-m">
           How can people contact the service?
         </h1>
-      </legend>
-
+      
       <form method="post">
 
           <input asp-for="@Model.StrOrganisationViewModel" type="hidden" >
@@ -23,12 +21,12 @@
             </div>
             <div class="govuk-checkboxes" data-module="govuk-checkboxes">
               <div class="govuk-checkboxes__item">
-                <input class="govuk-checkboxes__input" name="ContactSelection" type="checkbox" value="email" onclick="toggleVisibility('email-contact')" data-aria-controls="email-contact">
+                <input class="govuk-checkboxes__input" name="ContactSelection" type="checkbox" @( Model.ContactSelection.Contains("email") == true ? "checked" : "" ) value="email" onclick="toggleVisibility('email-contact')" data-aria-controls="email-contact">
                 <label class="govuk-label govuk-checkboxes__label" for="ContactSelection">
                   Email
                 </label>
               </div>
-              <div class="govuk-checkboxes__conditional" style="display: none;" id="email-contact">
+              <div class="govuk-checkboxes__conditional"  style="display: @( Model.ContactSelection.Contains("email") == true ? "block;" : "none;" )" id="email-contact">
                 <div class="govuk-form-group">
                   <label class="govuk-label" for="contact-by-email">
                     Email address
@@ -38,12 +36,12 @@
 
               </div>
               <div class="govuk-checkboxes__item">
-                <input class="govuk-checkboxes__input" name="ContactSelection" type="checkbox" value="phone" onclick="toggleVisibility('phone-contact')" data-aria-controls="phone-contact">
+                <input class="govuk-checkboxes__input" name="ContactSelection" type="checkbox" @( Model.ContactSelection.Contains("phone") == true ? "checked" : "" ) value="phone" onclick="toggleVisibility('phone-contact')" data-aria-controls="phone-contact">
                 <label class="govuk-label govuk-checkboxes__label" for="ContactSelection">
                   Telephone
                 </label>
               </div>
-              <div class="govuk-checkboxes__conditional" style="display: none;" id="phone-contact">
+              <div class="govuk-checkboxes__conditional" style="display: @( Model.ContactSelection.Contains("phone") == true ? "block;" : "none;" )" id="phone-contact">
                 <div class="govuk-form-group">
                   <label class="govuk-label" for="contact-by-phone">
                     Telephone number
@@ -53,12 +51,12 @@
 
               </div>
               <div class="govuk-checkboxes__item">
-                <input class="govuk-checkboxes__input" name="ContactSelection" type="checkbox" value="website" onclick="toggleVisibility('website-contact')" data-aria-controls="website-contact">
+                <input class="govuk-checkboxes__input" name="ContactSelection" type="checkbox" @( Model.ContactSelection.Contains("website") == true ? "checked" : "" ) value="website" onclick="toggleVisibility('website-contact')" data-aria-controls="website-contact">
                 <label class="govuk-label govuk-checkboxes__label" for="ContactSelection">
                   Website
                 </label>
               </div>
-              <div class="govuk-checkboxes__conditional" style="display: none;" id="website-contact">
+              <div class="govuk-checkboxes__conditional" style="display: @( Model.ContactSelection.Contains("website") == true ? "block;" : "none;" )" id="website-contact">
                 <div class="govuk-form-group">
                   <label class="govuk-label" for="contact-by-website">
                     Website

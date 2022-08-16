@@ -27,7 +27,7 @@ public  class WhenGettingServices : BaseTestFixture
 
         await AddAsync(openReferralOrganisation);
 
-        var query = new GetOpenReferralServicesCommand(null, null, 52.0, -1.7, 212892, 1, 10, null);
+        var query = new GetOpenReferralServicesCommand("active", null, null, 52.0, -1.7, 212892, 1, 10, null);
 
         var result = await SendAsync(query);
 

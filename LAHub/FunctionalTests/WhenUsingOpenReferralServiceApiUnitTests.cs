@@ -1,6 +1,5 @@
 ﻿using Application.Common.Models;
 using FluentAssertions;
-using LAHub.Domain.OpenReferralEnities;
 using LAHub.Domain.RecordEntities;
 using System.Text.Json;
 
@@ -15,7 +14,7 @@ public class WhenUsingOpenReferralServiceApiUnitTests : BaseWhenUsingOpenReferra
         var request = new HttpRequestMessage
         {
             Method = HttpMethod.Get,
-            RequestUri = new Uri(_client.BaseAddress + "api/services?minimum_age=0&maximum_age=99&latitude=52.6312&longtitude=-1.66526&proximity=1609.34&pageNumber=1&pageSize=10&text="),
+            RequestUri = new Uri(_client.BaseAddress + "api/services?status=active&minimum_age=0&maximum_age=99&latitude=52.6312&longtitude=-1.66526&proximity=1609.34&pageNumber=1&pageSize=10&text="),
         };
 
         using var response = await _client.SendAsync(request);

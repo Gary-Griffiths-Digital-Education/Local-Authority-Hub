@@ -59,7 +59,7 @@ namespace WebUI.Pages
                 maxAge = 99;
             }
 
-            SearchResults = await _localOfferClientService.GetLocalOffers(minAge, maxAge, latitude, longitude, distance, 1, 99, SearchText ?? string.Empty);
+            SearchResults = await _localOfferClientService.GetLocalOffers("active", minAge, maxAge, latitude, longitude, distance, 1, 99, SearchText ?? string.Empty);
         }
 
         public IActionResult OnPost()

@@ -11,8 +11,9 @@ namespace Application.Commands.GetServices;
 public class GetOpenReferralServicesCommand : IRequest<PaginatedList<OpenReferralServiceRecord>>
 {
     public GetOpenReferralServicesCommand() { }
-    public GetOpenReferralServicesCommand(int? minimum_age, int? maximum_age, double? latitude, double? longtitude, double? proximity, int? pageNumber, int? pageSize, string? text)
+    public GetOpenReferralServicesCommand(string? status, int? minimum_age, int? maximum_age, double? latitude, double? longtitude, double? proximity, int? pageNumber, int? pageSize, string? text)
     {
+        Status = status;
         MaximumAge = maximum_age;
         MinimumAge = minimum_age;
         Latitude = latitude;
@@ -23,6 +24,7 @@ public class GetOpenReferralServicesCommand : IRequest<PaginatedList<OpenReferra
         Text = text;
     }
 
+    public string? Status { get; set; }
     public int? MaximumAge { get; set; }
     public int? MinimumAge { get; set; }
     public double? Latitude { get; set; }
@@ -44,6 +46,9 @@ public class GetOpenReferralServicesCommandHandler : IRequestHandler<GetOpenRefe
     }
     public async Task<PaginatedList<OpenReferralServiceRecord>> Handle(GetOpenReferralServicesCommand request, CancellationToken cancellationToken)
     {
+        if (string.IsNullOrEmpty(request.Status))
+            request.Status = "active";
+
         var entities = await _context.OpenReferralServices
            .Include(x => x.ServiceDelivery)
            .Include(x => x.Eligibilitys)
@@ -53,7 +58,8 @@ public class GetOpenReferralServicesCommandHandler : IRequestHandler<GetOpenRefe
            .Include(x => x.Service_areas)
            .Include(x => x.Service_taxonomys)
            .Include(x => x.Service_at_locations)  
-           .ThenInclude(x => x.Location).ToListAsync();
+           .ThenInclude(x => x.Location)
+           .Where(x => x.Status == request.Status).ToListAsync();
 
         IEnumerable<OpenReferralService> dbservices = default!;
         if (request?.Latitude != null && request?.Longtitude != null && request?.Meters != null)
