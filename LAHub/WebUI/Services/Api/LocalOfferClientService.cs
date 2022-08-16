@@ -1,8 +1,6 @@
-﻿using Application.Commands.TestCommand;
-using Application.Common.Models;
+﻿using Application.Common.Models;
 using LAHub.Domain.RecordEntities;
 using SFA.DAS.HashingService;
-using System.Text;
 using System.Text.Json;
 
 namespace WebUI.Services.Api;
@@ -12,6 +10,8 @@ public interface ILocalOfferClientService
     Task<PaginatedList<OpenReferralServiceRecord>> GetLocalOffers(string status, int minimum_age, int maximum_age, double latitude, double longtitude, double proximity, int pageNumber, int pageSize, string text);
     Task<OpenReferralServiceRecord> GetLocalOfferById(string id);
     //Task<PaginatedList<TestItem>> GetTestCommand(double latitude, double logtitude, double meters);
+
+    Task<List<OpenReferralServiceRecord>> GetServicesByOrganisationId(string id);
 }
 
 public class LocalOfferClientService : ApiService, ILocalOfferClientService
@@ -59,24 +59,40 @@ public class LocalOfferClientService : ApiService, ILocalOfferClientService
         return retVal;
     }
 
-//    public async Task<PaginatedList<TestItem>> GetTestCommand(double latitude, double logtitude, double meters)
-//    {
-//        GetServicesByDistanceCommand command = new(latitude, logtitude, meters);
+    public async Task<List<OpenReferralServiceRecord>> GetServicesByOrganisationId(string id)
+    {
+        var request = new HttpRequestMessage
+        {
+            Method = HttpMethod.Get,
+            RequestUri = new Uri(_client.BaseAddress + $"api/organisationservices/{id}"),
+        };
 
-//        var request = new HttpRequestMessage
-//        {
-//            Method = HttpMethod.Post,
-//            RequestUri = new Uri(_client.BaseAddress + "api/GetTestCommandDepricated"),
-//            Content = new StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(command), Encoding.UTF8, "application/json"),
-//        };
+        using var response = await _client.SendAsync(request);
 
-//        using var response = await _client.SendAsync(request);
+        response.EnsureSuccessStatusCode();
 
-//        response.EnsureSuccessStatusCode();
+        return await JsonSerializer.DeserializeAsync<List<OpenReferralServiceRecord>>(await response.Content.ReadAsStreamAsync(), options: new JsonSerializerOptions { PropertyNameCaseInsensitive = true }) ?? new List<OpenReferralServiceRecord>();
+    }
 
-//#pragma warning disable CS8603 // Possible null reference return.
-//        return await JsonSerializer.DeserializeAsync<PaginatedList<TestItem>>(await response.Content.ReadAsStreamAsync(), options: new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
-//#pragma warning restore CS8603 // Possible null reference return.
 
-//    }
+    //    public async Task<PaginatedList<TestItem>> GetTestCommand(double latitude, double logtitude, double meters)
+    //    {
+    //        GetServicesByDistanceCommand command = new(latitude, logtitude, meters);
+
+    //        var request = new HttpRequestMessage
+    //        {
+    //            Method = HttpMethod.Post,
+    //            RequestUri = new Uri(_client.BaseAddress + "api/GetTestCommandDepricated"),
+    //            Content = new StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(command), Encoding.UTF8, "application/json"),
+    //        };
+
+    //        using var response = await _client.SendAsync(request);
+
+    //        response.EnsureSuccessStatusCode();
+
+    //#pragma warning disable CS8603 // Possible null reference return.
+    //        return await JsonSerializer.DeserializeAsync<PaginatedList<TestItem>>(await response.Content.ReadAsStreamAsync(), options: new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+    //#pragma warning restore CS8603 // Possible null reference return.
+
+    //    }
 }

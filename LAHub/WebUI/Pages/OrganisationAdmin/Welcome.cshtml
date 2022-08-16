@@ -16,11 +16,34 @@
     <div class="cards">
       <div class="card">
         <h2 class="govuk-heading-m">
-    <a asp-page="/OrganisationAdmin/ServiceName" asp-route-strOrganisationViewModel="@Model.StrOrganisationViewModel" class="govuk-button" data-module="govuk-button">
-        Add a service
-    </a>
-    </h2>
+            <a asp-page="/OrganisationAdmin/ServiceName" asp-route-strOrganisationViewModel="@Model.StrOrganisationViewModel" class="govuk-button" data-module="govuk-button">
+                Add a service
+            </a>
+        </h2>
         <p class="govuk-body-s">Add details for a service provided by your organisation.</p>
       </div>
     </div>
+
+    <table class="govuk-table">
+            <thead class="govuk-table__head">
+                <tr class="govuk-table__row">
+                    <th scope="col" class="govuk-table__header">Name</th>
+                    <th scope="col" class="govuk-table__header">Description</th>
+                    <th scope="col" class="govuk-table__header">Action</th>
+                </tr>
+            </thead>
+            <tbody class="govuk-table__body">
+                @foreach (var item in @Model.Services)
+                {
+                    <tr class="govuk-table__row">
+                        <th scope="row" class="govuk-table__header">@item.Name</th>
+                        <td class="govuk-table__cell">@item.Description</td>
+                        <td class="govuk-table__cell">
+                            <a asp-page="/OrganisationAdmin/ServiceName" asp-route-strOrganisationViewModel="@Model.StrOrganisationViewModel" asp-route-id="@item.Id" style="color:blue" class="govuk-!-font-weight-bold govuk-body govuk-!-font-size-16">Edit</a>
+                        </td>
+                    </tr>
+                }
+        </tbody>
+    </table>
+
 </main>

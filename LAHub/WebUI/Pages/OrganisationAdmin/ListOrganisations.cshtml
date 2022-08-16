@@ -27,16 +27,16 @@ display:none;
             </fieldset>
             <fieldset class="govuk-fieldset">
                 <br>
-                 <button type="submit" asp-page-handler="Button1" class="govuk-button" data-module="govuk-button" data-prevent-double-click="true">
+                @* <button type="submit" asp-page-handler="Button1" class="govuk-button" data-module="govuk-button" data-prevent-double-click="true">
                     Get Organisations
                 </button>
-                <br>
+                <br>*@
                 <button type="submit" asp-page-handler="Button2" class="govuk-button" data-module="govuk-button" data-prevent-double-click="true">
                     Add New Orgaisation +
                 </button>
 
             </fieldset>
-        </form>
+        
 
         @if (@Model.Organisations != null && @Model.Organisations.Any())
         {
@@ -62,6 +62,16 @@ display:none;
                     }
           </tbody>
         </table>
+
+        @if (@Model.Organisations != null && @Model.Organisations.Count() > 5)
+        {
+                <button type="submit" asp-page-handler="Button2" class="govuk-button" data-module="govuk-button" data-prevent-double-click="true">
+                    Add New Orgaisation +
+                </button>    
         }
+                
+
+        }
+        </form>
     </div>
 </main>
