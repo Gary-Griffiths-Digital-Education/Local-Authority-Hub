@@ -41,31 +41,31 @@
               </legend>
               <div class="govuk-radios" data-module="govuk-radios">
                 <div class="govuk-radios__item">
-                  <input class="govuk-radios__input" id="cost-unit" type="radio" asp-for="PayUnit" value="Session" />
+                  <input class="govuk-radios__input" id="cost-unit" type="radio" name="PayUnit" value="Session" @(Model.PayUnit != null && Model.PayUnit == "Session" ? "checked" : "") />
                   <label class="govuk-label govuk-radios__label" for="cost-unit">
                     Session
                   </label>
                 </div>
                 <div class="govuk-radios__item">
-                  <input class="govuk-radios__input" id="cost-unit-2" type="radio" name="PayUnit" value="Hour" />
+                  <input class="govuk-radios__input" id="cost-unit-2" type="radio" name="PayUnit" value="Hour" @(Model.PayUnit != null && Model.PayUnit == "Hour" ? "checked" : "") />
                   <label class="govuk-label govuk-radios__label" for="cost-unit-2">
                     Hour
                   </label>
                 </div>
                 <div class="govuk-radios__item">
-                  <input class="govuk-radios__input" id="cost-unit-3" type="radio" asp-for="PayUnit" value="Day" />
+                  <input class="govuk-radios__input" id="cost-unit-3" type="radio" name="PayUnit" value="Day" @(Model.PayUnit != null && Model.PayUnit == "Day" ? "checked" : "") />
                   <label class="govuk-label govuk-radios__label" for="cost-unit-3">
                     Day
                   </label>
                 </div>
                 <div class="govuk-radios__item">
-                  <input class="govuk-radios__input" id="cost-unit-4" type="radio" asp-for="PayUnit" value="Week" />
+                  <input class="govuk-radios__input" id="cost-unit-4" type="radio" name="PayUnit" value="Week" @(Model.PayUnit != null && Model.PayUnit == "Week" ? "checked" : "") />
                   <label class="govuk-label govuk-radios__label" for="cost-unit-4">
                     Week
                   </label>
                 </div>
                 <div class="govuk-radios__item">
-                  <input class="govuk-radios__input" id="cost-unit-5" type="radio" asp-for="PayUnit" value="Course" />
+                  <input class="govuk-radios__input" id="cost-unit-5" type="radio" name="PayUnit" value="Course" @(Model.PayUnit != null && Model.PayUnit == "Course" ? "checked" : "") />
                   <label class="govuk-label govuk-radios__label" for="cost-unit-5">
                     Course
                   </label>
