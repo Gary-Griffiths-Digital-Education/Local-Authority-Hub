@@ -29,6 +29,7 @@
                 <tr class="govuk-table__row">
                     <th scope="col" class="govuk-table__header">Name</th>
                     <th scope="col" class="govuk-table__header">Description</th>
+                    <th scope="col" class="govuk-table__header">Status</th>
                     <th scope="col" class="govuk-table__header">Action</th>
                 </tr>
             </thead>
@@ -38,6 +39,7 @@
                     <tr class="govuk-table__row">
                         <th scope="row" class="govuk-table__header">@item.Name</th>
                         <td class="govuk-table__cell">@item.Description</td>
+                        <td class="govuk-table__cell">@item.Status</td>
                         <td class="govuk-table__cell">
                             <a asp-page="/OrganisationAdmin/ServiceName" asp-route-strOrganisationViewModel="@Model.StrOrganisationViewModel" asp-route-id="@item.Id" style="color:blue" class="govuk-!-font-weight-bold govuk-body govuk-!-font-size-16">Edit</a>
                         </td>
