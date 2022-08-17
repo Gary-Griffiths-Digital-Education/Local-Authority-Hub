@@ -32,7 +32,7 @@ public class PayForServiceModel : PageModel
                 IsPayedFor = organisationViewModel.IsPayedFor;
 
             if (!string.IsNullOrEmpty(organisationViewModel.PayUnit))
-                IsPayedFor = organisationViewModel.PayUnit;
+                PayUnit = organisationViewModel.PayUnit;
 
             if (organisationViewModel.Cost != null)
                 Cost = organisationViewModel.Cost.Value;

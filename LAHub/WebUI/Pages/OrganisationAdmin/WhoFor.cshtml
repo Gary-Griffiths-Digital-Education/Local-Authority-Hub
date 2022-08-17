@@ -22,30 +22,30 @@
           </div>
           <div class="govuk-checkboxes" data-module="govuk-checkboxes">
             <div class="govuk-checkboxes__item">
-              <input class="govuk-checkboxes__input" id="WhoForSelection" name="WhoForSelection" type="checkbox" value="Parents">
-              <label class="govuk-label govuk-checkboxes__label" for="WhoForSelection">
+              <input class="govuk-checkboxes__input" id="WhoForSelection1" name="WhoForSelection" type="checkbox" value="Parents" @(Model.WhoForSelection != null && Model.WhoForSelection.Any(x=>x=="Parents") ? "checked" : "")>
+              <label class="govuk-label govuk-checkboxes__label" for="WhoForSelection1">
                 Parents
               </label>
             </div>
             <div class="govuk-checkboxes__item">
-              <input class="govuk-checkboxes__input" id="WhoForSelection" name="WhoForSelection" type="checkbox" value="Carers">
-              <label class="govuk-label govuk-checkboxes__label" for="WhoForSelection">
+              <input class="govuk-checkboxes__input" id="WhoForSelection2" name="WhoForSelection" type="checkbox" value="Carers" @(Model.WhoForSelection != null && Model.WhoForSelection.Any(x=>x=="Carers") ? "checked" : "")>
+              <label class="govuk-label govuk-checkboxes__label" for="WhoForSelection2">
                 Carers
               </label>
             </div>
             <div class="govuk-checkboxes__item">
-              <input class="govuk-checkboxes__input" id="WhoForSelection" name="WhoForSelection" type="checkbox" value="Guardians">
-              <label class="govuk-label govuk-checkboxes__label" for="WhoForSelection">
+              <input class="govuk-checkboxes__input" id="WhoForSelection3" name="WhoForSelection" type="checkbox" value="Guardians" @(Model.WhoForSelection != null && Model.WhoForSelection.Any(x=>x=="Guardians") ? "checked" : "")>
+              <label class="govuk-label govuk-checkboxes__label" for="WhoForSelection3">
                 Guardians
               </label>
             </div>
             <div class="govuk-checkboxes__item">
-              <input class="govuk-checkboxes__input" onclick="toggleVisibility('age-range')" id="WhoForSelection" name="WhoForSelection" type="checkbox" value="Children" aria-controls="age-range">
-              <label class="govuk-label govuk-checkboxes__label" for="WhoForSelection">
+              <input class="govuk-checkboxes__input" id="WhoForSelectionAge" name="WhoForSelection" type="checkbox" value="Children" data-aria-controls="age-range" @(Model.WhoForSelection != null && Model.WhoForSelection.Any(x=>x=="Children") ? "data-conditional-active" : "")>
+              <label class="govuk-label govuk-checkboxes__label" for="WhoForSelectionAge">
                 Children and young people
               </label>
             </div>
-            <div class="govuk-checkboxes__conditional" id="age-range" style="display: none;">
+            <div class="govuk-checkboxes__conditional govuk-checkboxes__conditional--hidden" id="age-range" >
               <div class="govuk-form-group">
                 <label class="govuk-label" for="SelectedMinAge">
                   From

@@ -21,12 +21,12 @@
           </div>
           <div class="govuk-checkboxes" data-module="govuk-checkboxes">
             <div class="govuk-checkboxes__item">
-              <input class="govuk-checkboxes__input" onclick="toggleVisibility('conditional-address')" id="InPersonSelection" name="InPersonSelection" type="checkbox" value="Our own location" aria-controls="conditional-address">
+              <input class="govuk-checkboxes__input" id="InPersonSelection" name="InPersonSelection" type="checkbox" value="Our own location" data-aria-controls="conditional-address" @(Model.InPersonSelection != null && Model.InPersonSelection.Any(x=>x=="Our own location") ? "data-conditional-active" : "")>
               <label class="govuk-label govuk-checkboxes__label" for="InPersonSelection">
                 Our own location
               </label>
             </div>
-            <div class="govuk-checkboxes__conditional" id="conditional-address" style="display: none;">
+            <div class="govuk-checkboxes__conditional govuk-checkboxes__conditional--hidden" id="conditional-address">
               <div class="govuk-form-group">
                 <label class="govuk-label" for="Address_1">
                   Address line 1
@@ -56,7 +56,7 @@
               </div>
             </div>
             <div class="govuk-checkboxes__item">
-              <input class="govuk-checkboxes__input" id="InPersonSelection" name="InPersonSelection" type="checkbox" value="The family's home">
+              <input class="govuk-checkboxes__input" id="InPersonSelection" name="InPersonSelection" type="checkbox" value="The family's home" @(Model.InPersonSelection != null && Model.InPersonSelection.Any(x=>x=="The family's home") ? "checked" : "")>
               <label class="govuk-label govuk-checkboxes__label" for="InPersonSelection">
                 The family's home
               </label>

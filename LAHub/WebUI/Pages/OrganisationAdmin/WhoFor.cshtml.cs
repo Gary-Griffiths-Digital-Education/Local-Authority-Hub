@@ -33,7 +33,7 @@ public class WhoForModel : PageModel
             }
             if (organisationViewModel.MaxAge != null)
             {
-                SelectedMinAge = organisationViewModel.MaxAge.Value.ToString();
+                SelectedMaxAge = organisationViewModel.MaxAge.Value.ToString();
             }
         }
     }

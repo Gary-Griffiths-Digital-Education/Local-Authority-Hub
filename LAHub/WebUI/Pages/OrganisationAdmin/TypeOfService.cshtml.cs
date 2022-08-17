@@ -28,7 +28,7 @@ public class TypeOfServiceModel : PageModel
     {
         StrOrganisationViewModel = strOrganisationViewModel;
 
-        PaginatedList<OpenReferralTaxonomyRecord>  taxonomies = await _openReferralOrganisationAdminClientService.GetTaxonomyList();
+        PaginatedList<OpenReferralTaxonomyRecord> taxonomies = await _openReferralOrganisationAdminClientService.GetTaxonomyList();
 
         if (taxonomies != null)
             OpenReferralTaxonomyRecords = new List<OpenReferralTaxonomyRecord>(taxonomies.Items);
