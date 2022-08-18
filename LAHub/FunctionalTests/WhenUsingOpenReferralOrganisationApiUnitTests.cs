@@ -192,6 +192,7 @@ public class WhenUsingOpenReferralOrganisationApiUnitTests : BaseWhenUsingOpenRe
                         }
                         )
                 },
+                new List<OpenReferralCost_OptionRecord>(),
                 new List<OpenReferralLanguageRecord>()
                 {
                     new OpenReferralLanguageRecord("442a06cd-aa14-4ea3-9f11-b45c1bc4861f", "English")

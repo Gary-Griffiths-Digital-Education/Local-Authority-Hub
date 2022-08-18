@@ -1,11 +1,9 @@
-﻿using Domain.Common;
+﻿namespace LAHub.Domain.RecordEntities;
 
-namespace LAHub.Domain.OpenReferralEnities;
-
-public class OpenReferralCost_Option : BaseAuditableEntity<string>
+public class OpenReferralCost_OptionRecord
 {
-    private OpenReferralCost_Option() { }
-    public OpenReferralCost_Option(string id, string amount_description, decimal amount, string? linkId, string? option, DateTime? valid_from
+    private OpenReferralCost_OptionRecord() { }
+    public OpenReferralCost_OptionRecord(string id, string amount_description, decimal amount, string? linkId, string? option, DateTime? valid_from
         , DateTime? valid_to
         )
     {
@@ -17,6 +15,7 @@ public class OpenReferralCost_Option : BaseAuditableEntity<string>
         Valid_from = valid_from;
         Valid_to = valid_to;
     }
+    public string Id { get; set; } = default!;
     public string Amount_description { get; init; } = default!;
     public decimal Amount { get; init; }
     public string? LinkId { get; init; }
@@ -24,3 +23,4 @@ public class OpenReferralCost_Option : BaseAuditableEntity<string>
     public DateTime? Valid_from { get; init; }
     public DateTime? Valid_to { get; init; }
 }
+

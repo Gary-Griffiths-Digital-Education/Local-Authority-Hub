@@ -23,6 +23,8 @@ public class OrganisationViewModel
     public string? Address_1 { get; set; } = default!;
     public string? City { get; set; } = default!;
     public string? Postal_code { get; set; } = default!;
+    public double? Latitude { get; set; } = default!;
+    public double? Longtitude { get; set; } = default!;
     public string? Country { get; set; } = default!;
     public string? State_province { get; set; } = default!;
     public string? IsPayedFor { get; set; } = default!;

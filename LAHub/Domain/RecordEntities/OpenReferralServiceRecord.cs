@@ -10,6 +10,7 @@ public record OpenReferralServiceRecord
         , ICollection<OpenReferralServiceDeliveryRecord>? serviceDelivery
         , ICollection<OpenReferralEligibilityRecord>? eligibilities
         , ICollection<OpenReferralContactRecord>? contacts
+        , ICollection<OpenReferralCost_OptionRecord> cost_options
         , ICollection<OpenReferralLanguageRecord>? languages
         , ICollection<OpenReferralService_AreaRecord>? service_areas
         , ICollection<OpenReferralServiceAtLocationRecord>? service_at_locations
@@ -31,6 +32,7 @@ public record OpenReferralServiceRecord
         ServiceDelivery = serviceDelivery;
         Eligibilities = eligibilities;
         Contacts = contacts;
+        Cost_options = cost_options;
         Languages = languages;
         Service_areas = service_areas;
         Service_at_locations = service_at_locations;
@@ -52,6 +54,7 @@ public record OpenReferralServiceRecord
     public ICollection<OpenReferralServiceDeliveryRecord>? ServiceDelivery { get; init; }
     public ICollection<OpenReferralEligibilityRecord>? Eligibilities { get; init; }
     public ICollection<OpenReferralContactRecord>? Contacts { get; init; }
+    public ICollection<OpenReferralCost_OptionRecord>? Cost_options { get; init; }
     public ICollection<OpenReferralLanguageRecord>? Languages { get; init; }
     public ICollection<OpenReferralService_AreaRecord>? Service_areas { get; init; }
     public ICollection<OpenReferralServiceAtLocationRecord>? Service_at_locations { get; init; }

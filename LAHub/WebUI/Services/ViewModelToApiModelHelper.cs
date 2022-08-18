@@ -8,8 +8,10 @@ namespace WebUI.Services;
 
 public interface IViewModelToApiModelHelper
 {
-    Task<OpenReferralOrganisationWithServicesRecord> GetOrganisation(OrganisationViewModel viewModel, double latitude, double longtitude);
+    Task<OpenReferralOrganisationWithServicesRecord> GetOrganisation(OrganisationViewModel viewModel);
 }
+
+//add cost
 
 public class ViewModelToApiModelHelper : IViewModelToApiModelHelper
 {
@@ -19,7 +21,7 @@ public class ViewModelToApiModelHelper : IViewModelToApiModelHelper
         _openReferralOrganisationAdminClientService = openReferralOrganisationAdminClientService;
     }
     
-    public async Task<OpenReferralOrganisationWithServicesRecord> GetOrganisation(OrganisationViewModel viewModel, double latitude, double longtitude)
+    public async Task<OpenReferralOrganisationWithServicesRecord> GetOrganisation(OrganisationViewModel viewModel)
     {
         var contactId = Guid.NewGuid().ToString();
 
@@ -40,7 +42,7 @@ public class ViewModelToApiModelHelper : IViewModelToApiModelHelper
                 null,
                 null,
                 null,
-                null,
+                string.Join(",", (viewModel.InPersonSelection != null) ? viewModel.InPersonSelection.ToArray() : Array.Empty<string>()),
                 "pending",
                 viewModel.Website,
                 viewModel.Email,
@@ -51,15 +53,16 @@ public class ViewModelToApiModelHelper : IViewModelToApiModelHelper
                 {
                     new OpenReferralContactRecord(
                         contactId,
-                        string.Empty,
+                        "Service",
                         string.Empty,
                         new List<OpenReferralPhoneRecord>()
                         {
                             new OpenReferralPhoneRecord(contactId, viewModel.Telephone ?? string.Empty)
                         }
                         )
-                }
-                , GetLanguages(viewModel.Languages)
+                },
+                GetCost(viewModel.IsPayedFor == "Yes", viewModel.PayUnit ?? string.Empty, viewModel.Cost),
+                GetLanguages(viewModel.Languages)
                 , new List<OpenReferralService_AreaRecord>()
                 {
                     new OpenReferralService_AreaRecord(Guid.NewGuid().ToString(), "Local", null, "http://statistics.data.gov.uk/id/statistical-geography/K02000001")
@@ -73,29 +76,41 @@ public class ViewModelToApiModelHelper : IViewModelToApiModelHelper
                             Guid.NewGuid().ToString(),
                             "Our Location",
                             "",
-                            latitude,
-                            longtitude,
+                            viewModel?.Latitude ?? 0.0D,
+                            viewModel?.Longtitude ?? 0.0D,
                             new List<OpenReferralPhysical_AddressRecord>()
                             {
                                 new OpenReferralPhysical_AddressRecord(
                                     Guid.NewGuid().ToString(),
-                                    viewModel.Address_1 ?? string.Empty,
-                                    viewModel.City ?? string.Empty,
-                                    viewModel.Postal_code ?? string.Empty,
+                                    viewModel?.Address_1 ?? string.Empty,
+                                    viewModel?.City ?? string.Empty,
+                                    viewModel?.Postal_code ?? string.Empty,
                                     "England",
-                                    viewModel.State_province ?? string.Empty
+                                    viewModel?.State_province ?? string.Empty
                                     )
                             }
                         ))
                 }
-                , await GetOpenReferralTaxonomies(viewModel.TaxonomySelection)
+                , await GetOpenReferralTaxonomies(viewModel?.TaxonomySelection)
                 )
             }); 
             
         return organisation;
     }
 
-    private List<OpenReferralServiceDeliveryRecord> GetDeliveryTypes(List<string>? serviceDeliverySelection)
+    private static List<OpenReferralCost_OptionRecord>  GetCost(bool isPayedFor, string payUnit, decimal? cost)
+    {
+        List<OpenReferralCost_OptionRecord> list = new();
+
+        if (isPayedFor && cost != null)
+        {
+            list.Add(new OpenReferralCost_OptionRecord(Guid.NewGuid().ToString(), payUnit ?? string.Empty, cost.Value, null, null, null, null));
+        }
+
+        return list;
+    }
+
+    private static List<OpenReferralServiceDeliveryRecord> GetDeliveryTypes(List<string>? serviceDeliverySelection)
     {
         List<OpenReferralServiceDeliveryRecord> list = new();
         if (serviceDeliverySelection == null)
@@ -121,11 +136,12 @@ public class ViewModelToApiModelHelper : IViewModelToApiModelHelper
         return list;
     }
 
-    private List<OpenReferralEligibilityRecord> GetEligibilities(string whoFor, int minAge, int maxAge)
+    private static List<OpenReferralEligibilityRecord> GetEligibilities(string whoFor, int minAge, int maxAge)
     {
-        List<OpenReferralEligibilityRecord> list = new();
-
-        list.Add(new OpenReferralEligibilityRecord(Guid.NewGuid().ToString(), whoFor, maxAge, minAge));
+        List<OpenReferralEligibilityRecord> list = new()
+        {
+            new OpenReferralEligibilityRecord(Guid.NewGuid().ToString(), whoFor, maxAge, minAge)
+        };
 
         return list;
     }
@@ -152,7 +168,7 @@ public class ViewModelToApiModelHelper : IViewModelToApiModelHelper
         return openReferralTaxonomyRecords;
     }
 
-    private List<OpenReferralLanguageRecord> GetLanguages(List<string>? viewModellanguages)
+    private static List<OpenReferralLanguageRecord> GetLanguages(List<string>? viewModellanguages)
     {
         List<OpenReferralLanguageRecord> languages = new();
 

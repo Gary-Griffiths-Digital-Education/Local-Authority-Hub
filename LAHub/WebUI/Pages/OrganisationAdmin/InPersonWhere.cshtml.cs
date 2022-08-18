@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Newtonsoft.Json;
 using WebUI.Models;
+using WebUI.Services.Api;
 
 namespace WebUI.Pages.OrganisationAdmin;
 
@@ -27,6 +28,13 @@ public class InPersonWhereModel : PageModel
     [BindProperty]
     public string? StrOrganisationViewModel { get; set; }
 
+    private readonly IPostcodeLocationClientService _postcodeLocationClientService;
+
+    public InPersonWhereModel(IPostcodeLocationClientService postcodeLocationClientService)
+    {
+        _postcodeLocationClientService = postcodeLocationClientService;
+    }
+
     public void OnGet(string strOrganisationViewModel)
     {
         StrOrganisationViewModel = strOrganisationViewModel;
@@ -50,7 +58,7 @@ public class InPersonWhereModel : PageModel
         }
     }
 
-    public IActionResult OnPost()
+    public async Task<IActionResult> OnPost()
     {
         if (InPersonSelection.Contains("Our own location"))
         {
@@ -77,6 +85,16 @@ public class InPersonWhereModel : PageModel
             OrganisationViewModel.State_province = State_province;
             OrganisationViewModel.Country = "England";
             OrganisationViewModel.Postal_code = Postal_code;
+
+            if (!string.IsNullOrEmpty(Postal_code))
+            {
+                PostcodeApiModel postcodeApiModel = await _postcodeLocationClientService.LookupPostcode(Postal_code);
+                if (postcodeApiModel != null)
+                {
+                    OrganisationViewModel.Latitude = postcodeApiModel.result.latitude;
+                    OrganisationViewModel.Longtitude = postcodeApiModel.result.longitude;
+                }
+            }
 
             StrOrganisationViewModel = JsonConvert.SerializeObject(OrganisationViewModel);
         }
