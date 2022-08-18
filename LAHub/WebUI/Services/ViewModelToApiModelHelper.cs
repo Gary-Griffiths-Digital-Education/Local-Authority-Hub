@@ -11,8 +11,6 @@ public interface IViewModelToApiModelHelper
     Task<OpenReferralOrganisationWithServicesRecord> GetOrganisation(OrganisationViewModel viewModel);
 }
 
-//add cost
-
 public class ViewModelToApiModelHelper : IViewModelToApiModelHelper
 {
     private readonly IOpenReferralOrganisationAdminClientService _openReferralOrganisationAdminClientService;

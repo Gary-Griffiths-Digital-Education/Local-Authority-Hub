@@ -41,6 +41,18 @@ public class ApiModelToViewModelHelper
                 }
             }
 
+            organisationViewModel.IsPayedFor = "No";
+            if (openReferralServiceRecord?.Cost_options != null && openReferralServiceRecord.Cost_options.Any())
+            {
+                var cost = openReferralServiceRecord.Cost_options.FirstOrDefault();
+                if (cost != null)
+                {
+                    organisationViewModel.IsPayedFor = "Yes";
+                    organisationViewModel.PayUnit = cost.Amount_description;
+                    organisationViewModel.Cost = cost.Amount;
+                }
+            }
+
             organisationViewModel.Languages = openReferralServiceRecord?.Languages?.Select(x => x.Language).ToList();
 
             if (openReferralServiceRecord?.Service_at_locations != null)
@@ -66,8 +78,6 @@ public class ApiModelToViewModelHelper
                 }
             }
 
-            
-
             if (openReferralServiceRecord?.Service_taxonomys != null)
             {
                 organisationViewModel.TaxonomySelection = new List<string>();
@@ -86,6 +96,5 @@ public class ApiModelToViewModelHelper
         }
 
         return organisationViewModel;
-
     }
 }
