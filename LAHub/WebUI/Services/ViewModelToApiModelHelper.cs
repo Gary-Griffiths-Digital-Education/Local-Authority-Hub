@@ -1,26 +1,38 @@
-﻿using LAHub.Domain.OpenReferralEnities;
-using System.Collections.ObjectModel;
+﻿using Application.Common.Models;
+using LAHub.Domain.OpenReferralEnities;
+using LAHub.Domain.RecordEntities;
 using WebUI.Models;
+using WebUI.Services.Api;
 
 namespace WebUI.Services;
 
-public class ViewModelToApiModelHelper
+public interface IViewModelToApiModelHelper
 {
-    public static OpenReferralOrganisation GetOrganisation(OrganisationViewModel viewModel)
-    {
-        
+    Task<OpenReferralOrganisationWithServicesRecord> GetOrganisation(OrganisationViewModel viewModel, double latitude, double longtitude);
+}
 
-        var organisation = new OpenReferralOrganisation(
+public class ViewModelToApiModelHelper : IViewModelToApiModelHelper
+{
+    private readonly IOpenReferralOrganisationAdminClientService _openReferralOrganisationAdminClientService;
+    public ViewModelToApiModelHelper(IOpenReferralOrganisationAdminClientService openReferralOrganisationAdminClientService)
+    {
+        _openReferralOrganisationAdminClientService = openReferralOrganisationAdminClientService;
+    }
+    
+    public async Task<OpenReferralOrganisationWithServicesRecord> GetOrganisation(OrganisationViewModel viewModel, double latitude, double longtitude)
+    {
+        var contactId = Guid.NewGuid().ToString();
+
+        var organisation = new OpenReferralOrganisationWithServicesRecord(
             viewModel.Id.ToString(),
             viewModel.Name,
             viewModel.Description,
             viewModel.Logo,
             new Uri(viewModel.Url ?? string.Empty).ToString(),
             viewModel.Url,
-            new Collection<OpenReferralReview>(),
-            new List<OpenReferralService>()
+            new List<OpenReferralServiceRecord>()
         {
-            new OpenReferralService(
+            new OpenReferralServiceRecord(
                 viewModel.ServiceId ?? Guid.NewGuid().ToString(),
                 viewModel.ServiceName ?? string.Empty,
                 viewModel.ServiceDescription,
@@ -30,116 +42,62 @@ public class ViewModelToApiModelHelper
                 null,
                 null,
                 "pending",
-                "www.actfortrachykids.com",
-                "support@ACTfortrachykids.com",
+                viewModel.Website,
+                viewModel.Email,
                 null,
                 GetDeliveryTypes(viewModel.ServiceDeliverySelection),
-                new List<OpenReferralEligibility>
+                GetEligibilities("Children", viewModel.MinAge ?? 0, viewModel.MaxAge ?? 0),
+                new List<OpenReferralContactRecord>()
                 {
-                    new OpenReferralEligibility("9109Children","",null,0,13,new List<OpenReferralTaxonomy>())
-                },
-                new List<OpenReferralFunding>(),
-                new List<OpenReferralHoliday_Schedule>(),
-                new List<OpenReferralLanguage>(),
-                new List<OpenReferralRegular_Schedule>(),
-                new List<OpenReferralReview>(),
-                new List<OpenReferralContact>()
-                {
-                    new OpenReferralContact(
-                        "1567",
-                        "Mr",
-                        "John Smith",
-                        new List<OpenReferralPhone>()
+                    new OpenReferralContactRecord(
+                        contactId,
+                        string.Empty,
+                        string.Empty,
+                        new List<OpenReferralPhoneRecord>()
                         {
-                            new OpenReferralPhone("1567", "01827 65778")
+                            new OpenReferralPhoneRecord(contactId, viewModel.Telephone ?? string.Empty)
                         }
                         )
-                },
-                new List<OpenReferralCost_Option>(),
-                new List<OpenReferralService_Area>()
+                }
+                , GetLanguages(viewModel.Languages)
+                , new List<OpenReferralService_AreaRecord>()
                 {
-                    new OpenReferralService_Area(Guid.NewGuid().ToString(), "National", null, null, "http://statistics.data.gov.uk/id/statistical-geography/K02000001")
-                },
-                new List<OpenReferralServiceAtLocation>()
+                    new OpenReferralService_AreaRecord(Guid.NewGuid().ToString(), "Local", null, "http://statistics.data.gov.uk/id/statistical-geography/K02000001")
+                
+                }
+                , new List<OpenReferralServiceAtLocationRecord>()
                 {
-                    new OpenReferralServiceAtLocation(
-                        "1749",
-                        new OpenReferralLocation(
-                            "256d0b97-d4c4-48e8-9475-bd7d42d1fc69",
+                    new OpenReferralServiceAtLocationRecord(
+                        Guid.NewGuid().ToString(),
+                        new OpenReferralLocationRecord(
+                            Guid.NewGuid().ToString(),
+                            "Our Location",
                             "",
-                            "",
-                            52.6312,
-                            -1.66526,
-                            new List<OpenReferralPhysical_Address>()
+                            latitude,
+                            longtitude,
+                            new List<OpenReferralPhysical_AddressRecord>()
                             {
-                                new OpenReferralPhysical_Address(
+                                new OpenReferralPhysical_AddressRecord(
                                     Guid.NewGuid().ToString(),
-                                    "75 Sheepcote Lane",
-                                    ", Stathe, Tamworth, Staffordshire, ",
-                                    "B77 3JN",
+                                    viewModel.Address_1 ?? string.Empty,
+                                    viewModel.City ?? string.Empty,
+                                    viewModel.Postal_code ?? string.Empty,
                                     "England",
-                                    null
+                                    viewModel.State_province ?? string.Empty
                                     )
-                            },
-                            new List<Accessibility_For_Disabilities>()
-                            ),
-                        new List<OpenReferralHoliday_Schedule>(),
-                        new List<OpenReferralRegular_Schedule>()
-                        )
-
-                },
-                new List<OpenReferralService_Taxonomy>()
-                {
-                    new OpenReferralService_Taxonomy
-                    ("9107",
-                    null,
-                    new OpenReferralTaxonomy(
-                        "bccsource:Organisation",
-                        "Organisation",
-                        "BCC Data Sources",
-                        null
-                        )),
-
-                    new OpenReferralService_Taxonomy
-                    ("9108",
-                    null,
-                    new OpenReferralTaxonomy(
-                        "bccprimaryservicetype:38",
-                        "Support",
-                        "BCC Primary Services",
-                        null
-                        )),
-
-                    new OpenReferralService_Taxonomy
-                    ("9109",
-                    null,
-                    new OpenReferralTaxonomy(
-                        "bccagegroup:37",
-                        "Children",
-                        "BCC Age Groups",
-                        null
-                        )),
-
-                    new OpenReferralService_Taxonomy
-                    ("9110",
-                    null,
-                    new OpenReferralTaxonomy(
-                        "bccusergroup:56",
-                        "Long Term Health Conditions",
-                        "BCC User Groups",
-                        null
+                            }
                         ))
                 }
+                , await GetOpenReferralTaxonomies(viewModel.TaxonomySelection)
                 )
-
-        });
-
+            }); 
+            
         return organisation;
     }
 
-    private static List<OpenReferralServiceDelivery> GetDeliveryTypes(List<string>? serviceDeliverySelection)
+    private List<OpenReferralServiceDeliveryRecord> GetDeliveryTypes(List<string>? serviceDeliverySelection)
     {
-        List<OpenReferralServiceDelivery> list = new();
+        List<OpenReferralServiceDeliveryRecord> list = new();
         if (serviceDeliverySelection == null)
             return list;
 
@@ -149,13 +107,13 @@ public class ViewModelToApiModelHelper
             {
 
                 case "In Person":
-                    list.Add(new OpenReferralServiceDelivery(Guid.NewGuid().ToString(), ServiceDelivery.InPerson));
+                    list.Add(new OpenReferralServiceDeliveryRecord(Guid.NewGuid().ToString(), ServiceDelivery.InPerson));
                     break;
                 case "Online":
-                    list.Add(new OpenReferralServiceDelivery(Guid.NewGuid().ToString(), ServiceDelivery.Online));
+                    list.Add(new OpenReferralServiceDeliveryRecord(Guid.NewGuid().ToString(), ServiceDelivery.Online));
                     break;
                 case "Telephone":
-                    list.Add(new OpenReferralServiceDelivery(Guid.NewGuid().ToString(), ServiceDelivery.Telephone));
+                    list.Add(new OpenReferralServiceDeliveryRecord(Guid.NewGuid().ToString(), ServiceDelivery.Telephone));
                     break;
             }
         }
@@ -163,10 +121,49 @@ public class ViewModelToApiModelHelper
         return list;
     }
 
-    private static List<OpenReferralEligibility> GetEligibilities()
+    private List<OpenReferralEligibilityRecord> GetEligibilities(string whoFor, int minAge, int maxAge)
     {
-        List<OpenReferralEligibility> list = new();
+        List<OpenReferralEligibilityRecord> list = new();
+
+        list.Add(new OpenReferralEligibilityRecord(Guid.NewGuid().ToString(), whoFor, maxAge, minAge));
 
         return list;
+    }
+
+    private async Task<List<OpenReferralService_TaxonomyRecord>> GetOpenReferralTaxonomies(List<string>? taxonomySelection)
+    {
+        List<OpenReferralService_TaxonomyRecord> openReferralTaxonomyRecords = new();
+
+        PaginatedList<OpenReferralTaxonomyRecord> taxonomies = await _openReferralOrganisationAdminClientService.GetTaxonomyList(1, 9999);
+
+        if (taxonomies != null && taxonomySelection != null)
+        {
+            foreach (string taxonomyKey in taxonomySelection)
+            {
+                OpenReferralTaxonomyRecord? taxonomy = taxonomies.Items.FirstOrDefault(x => x.Id == taxonomyKey);
+                if (taxonomy != null)
+                {
+                    
+                    openReferralTaxonomyRecords.Add(new OpenReferralService_TaxonomyRecord(Guid.NewGuid().ToString(), taxonomy));
+                }
+            }
+        }
+
+        return openReferralTaxonomyRecords;
+    }
+
+    private List<OpenReferralLanguageRecord> GetLanguages(List<string>? viewModellanguages)
+    {
+        List<OpenReferralLanguageRecord> languages = new();
+
+        if (viewModellanguages != null)
+        {
+            foreach (string lang in viewModellanguages)
+            {
+                languages.Add(new OpenReferralLanguageRecord(Guid.NewGuid().ToString(), lang));
+            }
+        }
+
+        return languages;
     }
 }
