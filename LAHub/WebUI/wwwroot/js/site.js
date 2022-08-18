@@ -3,11 +3,8 @@
 
 // Write your JavaScript code.
 
-function toggleVisibility(controlId) {
-    var x = document.getElementById(controlId);
-    if (x.style.display === "none") {
-        x.style.display = "block";
-    } else {
-        x.style.display = "none";
-    }
+function restoreConditionalInputs() {
+    $("[data-conditional-active]").click();
 }
+
+restoreConditionalInputs();

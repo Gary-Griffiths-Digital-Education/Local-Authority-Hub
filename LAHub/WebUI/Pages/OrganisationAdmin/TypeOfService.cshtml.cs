@@ -24,24 +24,11 @@ public class TypeOfServiceModel : PageModel
         _openReferralOrganisationAdminClientService = openReferralOrganisationAdminClientService;
     }
 
-    bool GetIsJavascriptOn()
-    {
-        //If client has the cookie with name and value: hasjs=false
-        if (Request.Cookies.ContainsKey("hasjs") &&
-            Request.Cookies["hasjs"] == "false")
-            return false;
-        else //Client doesn't have the cookie: hasjs=false
-            return true;
-    }
-
     public async Task OnGet(string strOrganisationViewModel)
     {
-        bool jsEnabled = GetIsJavascriptOn();
-
-        //this.HttpContext.Request.j
         StrOrganisationViewModel = strOrganisationViewModel;
 
-        PaginatedList<OpenReferralTaxonomyRecord>  taxonomies = await _openReferralOrganisationAdminClientService.GetTaxonomyList();
+        PaginatedList<OpenReferralTaxonomyRecord> taxonomies = await _openReferralOrganisationAdminClientService.GetTaxonomyList();
 
         if (taxonomies != null)
             OpenReferralTaxonomyRecords = new List<OpenReferralTaxonomyRecord>(taxonomies.Items);
@@ -50,12 +37,6 @@ public class TypeOfServiceModel : PageModel
         if (organisationViewModel != null && organisationViewModel.TaxonomySelection != null && organisationViewModel.TaxonomySelection.Any())
         {
             TaxonomySelection = organisationViewModel.TaxonomySelection;
-            if (taxonomies != null)
-            {
-                var choosen = taxonomies.Items.Where(x => TaxonomySelection.Contains(x.Id));
-                var choosenNames = taxonomies.Items.Where(x => TaxonomySelection.Contains(x.Id)).Select(x => x.Name).ToList();
-            }
-                
         }
     }
 

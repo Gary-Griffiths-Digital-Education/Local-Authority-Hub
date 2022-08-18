@@ -15,10 +15,10 @@
     <link rel="apple-touch-icon" href="~/lib/govuk/assets/images/govuk-apple-touch-icon.png" />
 
      <!--[if !IE 8]><!-->
-      <link rel="stylesheet" href="~/lib/govuk/govuk-frontend-4.1.0.min.css" />
+      <link rel="stylesheet" href="~/lib/govuk/govuk-frontend-4.3.0.min.css" />
     <!--<![endif]-->
     <!--[if IE 8]>
-      <link rel="stylesheet" href="~/lib/govuk/govuk-frontend-ie8-4.1.0.min.css" />
+      <link rel="stylesheet" href="~/lib/govuk/govuk-frontend-ie8-4.3.0.min.css" />
     <![endif]-->
 
 
@@ -57,7 +57,17 @@
     </footer>*@
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/govuk/govuk-frontend-4.1.0.min.js"></script>
+
+    <script>
+      document.body.className = ((document.body.className) ? document.body.className + ' js-enabled' : 'js-enabled');
+    </script>
+    <!-- component HTML -->
+    <script src="~/lib/govuk/govuk-frontend-4.3.0.min.js"></script>
+    <script>
+      window.GOVUKFrontend.initAll()
+    </script>
+
+    
     @*<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>*@
     <script src="~/js/site.js" asp-append-version="true"></script>
 
