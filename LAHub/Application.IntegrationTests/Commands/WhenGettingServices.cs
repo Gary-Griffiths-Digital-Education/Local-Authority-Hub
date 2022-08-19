@@ -57,6 +57,7 @@ public  class WhenGettingServices : BaseTestFixture
         {
             new OpenReferralService(
                 "17f7fa15-349d-471a-b078-455ab94dcf36",
+                "92dbfcea-6d08-444f-94d8-db64ac86ec8c",
                 "Service 1 Name",
                 @"Service 1 Description",
                 null,

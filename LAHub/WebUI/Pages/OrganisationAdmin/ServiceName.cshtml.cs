@@ -1,7 +1,10 @@
+using LAHub.Domain.RecordEntities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Newtonsoft.Json;
 using WebUI.Models;
+using WebUI.Services;
+using WebUI.Services.Api;
 
 namespace WebUI.Pages.OrganisationAdmin;
 
@@ -12,14 +15,37 @@ public class ServiceNameModel : PageModel
 
     [BindProperty]
     public string? StrOrganisationViewModel { get; set; }
-    public void OnGet(string strOrganisationViewModel)
+
+    private readonly IOpenReferralOrganisationAdminClientService _openReferralOrganisationAdminClientService;
+
+    public ServiceNameModel(IOpenReferralOrganisationAdminClientService openReferralOrganisationAdminClientService)
+    {
+        _openReferralOrganisationAdminClientService = openReferralOrganisationAdminClientService;
+    }
+    public async Task OnGet(string strOrganisationViewModel, string id)
     {
         StrOrganisationViewModel = strOrganisationViewModel;
 
         var organisationViewModel = JsonConvert.DeserializeObject<OrganisationViewModel>(StrOrganisationViewModel) ?? new OrganisationViewModel();
-        if (organisationViewModel != null && !string.IsNullOrEmpty(organisationViewModel.ServiceName))
+        if (organisationViewModel != null)
         {
-            ServiceName = organisationViewModel.ServiceName;    
+            if (!string.IsNullOrEmpty(organisationViewModel.ServiceName))
+                ServiceName = organisationViewModel.ServiceName;
+
+            if (!string.IsNullOrEmpty(id))
+            {
+                organisationViewModel.ServiceId = id;
+                OpenReferralOrganisationWithServicesRecord openReferralOrganisation = await _openReferralOrganisationAdminClientService.GetOpenReferralOrganisationById(organisationViewModel.Id.ToString());
+                var vm = ApiModelToViewModelHelper.CreateViewModel(openReferralOrganisation, id);
+                if (vm != null)
+                {
+                    if (!string.IsNullOrEmpty(vm.ServiceName))
+                        ServiceName = vm.ServiceName;
+                    StrOrganisationViewModel = JsonConvert.SerializeObject(vm);
+                } 
+            }
+
+               
         }
     }
 

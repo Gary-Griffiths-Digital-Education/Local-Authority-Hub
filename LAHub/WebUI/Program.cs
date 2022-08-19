@@ -1,4 +1,5 @@
 using WebUI.Extensions;
+using WebUI.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,6 +9,8 @@ builder.Services
     .AddHashingService()
     .AddClientServices()
     .AddWebUIServices(builder.Configuration);
+
+builder.Services.AddTransient<IViewModelToApiModelHelper, ViewModelToApiModelHelper>();
 
 builder.Services.AddRazorPages();
 

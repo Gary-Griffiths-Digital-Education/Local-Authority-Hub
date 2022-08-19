@@ -157,7 +157,6 @@ public class ViewModelToApiModelHelper : IViewModelToApiModelHelper
                 OpenReferralTaxonomyRecord? taxonomy = taxonomies.Items.FirstOrDefault(x => x.Id == taxonomyKey);
                 if (taxonomy != null)
                 {
-                    
                     openReferralTaxonomyRecords.Add(new OpenReferralService_TaxonomyRecord(Guid.NewGuid().ToString(), taxonomy));
                 }
             }

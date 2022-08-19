@@ -82,7 +82,7 @@ public class GetOpenReferralServicesCommandHandler : IRequestHandler<GetOpenRefe
         }
 
         var filteredServices = dbservices.Select(x => new OpenReferralServiceRecord(
-            x.Id,       
+            x.Id, 
             x.Name,
             x.Description,
             x.Accreditations,

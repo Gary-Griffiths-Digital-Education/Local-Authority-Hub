@@ -7,7 +7,7 @@ public class OpenReferralService : BaseAuditableEntity<string>
 {
     private OpenReferralService() { }
 
-    public OpenReferralService(string id, string name, string? description, string? accreditations, DateTime? assured_date, string? attending_access, string? attending_type, string? deliverable_type, string? status, string? url, string? email, string? fees
+    public OpenReferralService(string id, string parentId, string name, string? description, string? accreditations, DateTime? assured_date, string? attending_access, string? attending_type, string? deliverable_type, string? status, string? url, string? email, string? fees
         , ICollection<OpenReferralServiceDelivery> serviceDelivery
         , ICollection<OpenReferralEligibility> eligibilitys, ICollection<OpenReferralFunding> fundings
         , ICollection<OpenReferralHoliday_Schedule> holiday_schedules
@@ -22,6 +22,7 @@ public class OpenReferralService : BaseAuditableEntity<string>
         )
     {
         Id = id;
+        OpenReferralOrganisationId = parentId;
         Name = name;
         Description = description;
         Accreditations = accreditations;
@@ -47,6 +48,7 @@ public class OpenReferralService : BaseAuditableEntity<string>
         ServiceDelivery = serviceDelivery;
     }
 
+    public string OpenReferralOrganisationId { get; set; } = default!;
     public string Name { get; private set; } = default!;
     public string? Description { get; private set; }
     public string? Accreditations { get; private set; }

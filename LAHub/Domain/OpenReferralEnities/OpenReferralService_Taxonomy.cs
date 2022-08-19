@@ -12,5 +12,5 @@ public class OpenReferralService_Taxonomy : BaseAuditableEntity<string>
         Taxonomy = taxonomy;
     }
     public string? LinkId { get; init; }
-    public OpenReferralTaxonomy? Taxonomy { get; init; }
+    public OpenReferralTaxonomy? Taxonomy { get; set; }
 }

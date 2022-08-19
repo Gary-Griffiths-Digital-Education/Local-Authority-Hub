@@ -25,17 +25,18 @@ public class OpenReferralOrganisationSeedData
             new Uri("https://www.bristol.gov.uk/").ToString(),
             "https://www.bristol.gov.uk/",
             new Collection<OpenReferralReview>(),
-            GetBristolCountyCouncilServices()
+            GetBristolCountyCouncilServices("72e653e8-1d05-4821-84e9-9177571a6013")
             );
         return bristolCountyCouncil;
     }
 
-    private List<OpenReferralService> GetBristolCountyCouncilServices()
+    private List<OpenReferralService> GetBristolCountyCouncilServices(string parentId)
     {
         return new()
         {
             new OpenReferralService(
                 "4591d551-0d6a-4c0d-b109-002e67318231",
+                parentId,
                 "Aid for Children with Tracheostomies",
                 @"Aid for Children with Tracheostomies is a national self help group operating as a registered charity and is run by parents of children with a tracheostomy and by people who sympathise with the needs of such families. ACT as an organisation is non profit making, it links groups and individual members throughout Great Britain and Northern Ireland.",
                 null,
@@ -57,7 +58,10 @@ public class OpenReferralOrganisationSeedData
                 },
                 new List<OpenReferralFunding>(),
                 new List<OpenReferralHoliday_Schedule>(),
-                new List<OpenReferralLanguage>(),
+                new List<OpenReferralLanguage>()
+                {
+                    new OpenReferralLanguage("724630f7-4c8b-4864-96be-bc74891f2b4a","English")
+                },
                 new List<OpenReferralRegular_Schedule>(),
                 new List<OpenReferralReview>(),
                 new List<OpenReferralContact>()

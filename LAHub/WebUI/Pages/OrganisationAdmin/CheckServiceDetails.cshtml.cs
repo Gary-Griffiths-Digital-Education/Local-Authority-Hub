@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Newtonsoft.Json;
 using WebUI.Models;
+using WebUI.Services;
 using WebUI.Services.Api;
 
 namespace WebUI.Pages.OrganisationAdmin;
@@ -28,15 +29,16 @@ public class CheckServiceDetailsModel : PageModel
     public string? StrOrganisationViewModel { get; set; }
 
     private readonly IOpenReferralOrganisationAdminClientService _openReferralOrganisationAdminClientService;
-    public CheckServiceDetailsModel(IOpenReferralOrganisationAdminClientService openReferralOrganisationAdminClientService)
+    private readonly IViewModelToApiModelHelper _viewModelToApiModelHelper;
+    public CheckServiceDetailsModel(IOpenReferralOrganisationAdminClientService openReferralOrganisationAdminClientService,
+        IViewModelToApiModelHelper viewModelToApiModelHelper)
     {
         _openReferralOrganisationAdminClientService = openReferralOrganisationAdminClientService;
+        _viewModelToApiModelHelper = viewModelToApiModelHelper;
     }
 
-    public async Task OnGet(string strOrganisationViewModel)
+    private async Task InitPage()
     {
-        StrOrganisationViewModel = strOrganisationViewModel;
-
         if (StrOrganisationViewModel != null)
         {
             OrganisationViewModel = JsonConvert.DeserializeObject<OrganisationViewModel>(StrOrganisationViewModel) ?? new OrganisationViewModel();
@@ -77,5 +79,43 @@ public class CheckServiceDetailsModel : PageModel
                 }
             }
         }
+    }
+
+    public async Task OnGet(string strOrganisationViewModel)
+    {
+        StrOrganisationViewModel = strOrganisationViewModel;
+
+        await InitPage();
+    }
+
+    public async Task<IActionResult> OnPost()
+    {
+        if (StrOrganisationViewModel != null)
+        {
+            var organisationViewModel = JsonConvert.DeserializeObject<OrganisationViewModel>(StrOrganisationViewModel) ?? new OrganisationViewModel();
+            if (organisationViewModel != null)
+            {
+                string result = string.Empty;
+                OpenReferralOrganisationWithServicesRecord openReferralOrganisationWithServicesRecord = await _viewModelToApiModelHelper.GetOrganisation(organisationViewModel);
+                if (organisationViewModel.Id == Guid.Empty)
+                {
+                    result = await _openReferralOrganisationAdminClientService.CreateOrganisation(openReferralOrganisationWithServicesRecord);
+                }
+                else
+                {
+                    result = await _openReferralOrganisationAdminClientService.UpdateOrganisation(openReferralOrganisationWithServicesRecord);
+                }
+            }
+        }
+
+        return RedirectToPage("/OrganisationAdmin/Welcome", new
+        {
+            StrOrganisationViewModel
+        });
+
+        //await InitPage();
+
+        //return Page();    
+
     }
 }

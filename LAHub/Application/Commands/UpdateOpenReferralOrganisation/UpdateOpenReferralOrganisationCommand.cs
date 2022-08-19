@@ -73,9 +73,30 @@ public class UpdateOpenReferralOrganisationCommandHandler : IRequestHandler<Upda
                         existingChild.Update(childModel);
                     else
                     {
-                        entity.AddDomainEvent(new OpenReferralServiceCreatedEvent(childModel));
+                        childModel.OpenReferralOrganisationId = request.Id;
 
-                        _context.OpenReferralServices.Add(childModel);
+                        if (childModel != null && childModel.Service_taxonomys != null)
+                        {
+#pragma warning disable CS8602 // Dereference of a possibly null reference.
+                            for (int i = 0; i < childModel.Service_taxonomys.Count; i++)
+                            {
+                                if (childModel.Service_taxonomys.ElementAt(i) != null && childModel.Service_taxonomys.ElementAt(i).Taxonomy != null)
+                                {
+                                    string id = childModel?.Service_taxonomys?.ElementAt(i)?.Taxonomy?.Id ?? string.Empty;
+                                    var tx = _context.OpenReferralTaxonomies.FirstOrDefault(x => x.Id == id);
+                                    if (childModel != null)
+                                        childModel.Service_taxonomys.ElementAt(i).Taxonomy = tx;
+                                }
+                            }
+#pragma warning restore CS8602 // Dereference of a possibly null reference.
+                        }
+
+                        if (childModel != null)
+                        {
+                            entity.AddDomainEvent(new OpenReferralServiceCreatedEvent(childModel));
+                            _context.OpenReferralServices.Add(childModel);
+                        }
+                        
 
                     }
                 }

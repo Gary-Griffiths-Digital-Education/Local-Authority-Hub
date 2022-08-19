@@ -5,7 +5,7 @@ namespace WebUI.Services;
 
 public class ApiModelToViewModelHelper
 {
-    public static OrganisationViewModel CreateViewModel(OpenReferralOrganisationWithServicesRecord apiModel)
+    public static OrganisationViewModel CreateViewModel(OpenReferralOrganisationWithServicesRecord apiModel, string serviceId)
     {
         OrganisationViewModel organisationViewModel = new()
         {
@@ -19,12 +19,12 @@ public class ApiModelToViewModelHelper
 
         //May be need to include service Id
 
-        OpenReferralServiceRecord? openReferralServiceRecord = apiModel?.Services?.FirstOrDefault();
+        OpenReferralServiceRecord? openReferralServiceRecord = apiModel?.Services?.FirstOrDefault(x => x.Id == serviceId);
         if (openReferralServiceRecord != null)
         {
             organisationViewModel.ServiceId = openReferralServiceRecord.Id;
-            organisationViewModel.Name = openReferralServiceRecord.Name;
-            organisationViewModel.Description = openReferralServiceRecord.Description;
+            organisationViewModel.ServiceName = openReferralServiceRecord.Name;
+            organisationViewModel.ServiceDescription = openReferralServiceRecord.Description;
             organisationViewModel.InPersonSelection = openReferralServiceRecord?.Deliverable_type?.Split(',').ToList();
             organisationViewModel.Email = openReferralServiceRecord?.Email;
             organisationViewModel.Website = openReferralServiceRecord?.Url;
