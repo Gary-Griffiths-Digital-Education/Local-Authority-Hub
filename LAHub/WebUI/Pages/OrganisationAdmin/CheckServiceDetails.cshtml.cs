@@ -105,16 +105,19 @@ public class CheckServiceDetailsModel : PageModel
                         organisationViewModel.ServiceId = service.Id;
                     }
                 }
-                
-                if (organisationViewModel.Id == Guid.Empty)
-                {
-                    result = await _openReferralOrganisationAdminClientService.CreateOrganisation(openReferralOrganisationWithServicesRecord);
-                }
-                else
-                {
-                    result = await _openReferralOrganisationAdminClientService.UpdateOrganisation(openReferralOrganisationWithServicesRecord);
-                }
 
+                if (openReferralOrganisationWithServicesRecord != null)
+                {
+                    if (organisationViewModel.Id == Guid.Empty)
+                    {
+                        result = await _openReferralOrganisationAdminClientService.CreateOrganisation(openReferralOrganisationWithServicesRecord);
+                    }
+                    else
+                    {
+                        result = await _openReferralOrganisationAdminClientService.UpdateOrganisation(openReferralOrganisationWithServicesRecord);
+                    }
+                }
+                
                 if (!string.IsNullOrEmpty(result))
                     StrOrganisationViewModel = JsonConvert.SerializeObject(organisationViewModel);
             }

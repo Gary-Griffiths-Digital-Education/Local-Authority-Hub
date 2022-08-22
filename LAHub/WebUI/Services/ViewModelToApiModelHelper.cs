@@ -119,13 +119,13 @@ public class ViewModelToApiModelHelper : IViewModelToApiModelHelper
             switch(serviceDelivery)
             {
 
-                case "In Person":
+                case "1":
                     list.Add(new OpenReferralServiceDeliveryRecord(Guid.NewGuid().ToString(), ServiceDelivery.InPerson));
                     break;
-                case "Online":
+                case "2":
                     list.Add(new OpenReferralServiceDeliveryRecord(Guid.NewGuid().ToString(), ServiceDelivery.Online));
                     break;
-                case "Telephone":
+                case "3":
                     list.Add(new OpenReferralServiceDeliveryRecord(Guid.NewGuid().ToString(), ServiceDelivery.Telephone));
                     break;
             }
