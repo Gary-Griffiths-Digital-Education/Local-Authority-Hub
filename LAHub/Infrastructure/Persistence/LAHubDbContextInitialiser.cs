@@ -30,7 +30,7 @@ public class ApplicationDbContextInitialiser
             {
                 if (configuration.GetValue<bool>("RecreateDbOnStartup"))
                 {
-                    _context.Database.EnsureDeleted();
+                    //_context.Database.EnsureDeleted();
                     _context.Database.EnsureCreated();
                 }
                 else

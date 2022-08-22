@@ -53,6 +53,8 @@ public class ApiModelToViewModelHelper
                 }
             }
 
+            organisationViewModel.ServiceDeliverySelection = openReferralServiceRecord?.ServiceDelivery?.Select(x => x.ServiceDelivery.ToString()).ToList();
+
             organisationViewModel.Languages = openReferralServiceRecord?.Languages?.Select(x => x.Language).ToList();
 
             if (openReferralServiceRecord?.Service_at_locations != null)

@@ -97,6 +97,15 @@ public class CheckServiceDetailsModel : PageModel
             {
                 string result = string.Empty;
                 OpenReferralOrganisationWithServicesRecord openReferralOrganisationWithServicesRecord = await _viewModelToApiModelHelper.GetOrganisation(organisationViewModel);
+                if (openReferralOrganisationWithServicesRecord != null)
+                {
+                    var service = openReferralOrganisationWithServicesRecord?.Services?.FirstOrDefault();
+                    if (service != null)
+                    {
+                        organisationViewModel.ServiceId = service.Id;
+                    }
+                }
+                
                 if (organisationViewModel.Id == Guid.Empty)
                 {
                     result = await _openReferralOrganisationAdminClientService.CreateOrganisation(openReferralOrganisationWithServicesRecord);
@@ -105,6 +114,9 @@ public class CheckServiceDetailsModel : PageModel
                 {
                     result = await _openReferralOrganisationAdminClientService.UpdateOrganisation(openReferralOrganisationWithServicesRecord);
                 }
+
+                if (!string.IsNullOrEmpty(result))
+                    StrOrganisationViewModel = JsonConvert.SerializeObject(organisationViewModel);
             }
         }
 
