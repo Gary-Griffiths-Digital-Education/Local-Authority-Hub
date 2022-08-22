@@ -69,9 +69,9 @@ public  class WhenGettingServices : BaseTestFixture
                 "www.service1.com",
                 "support@service1.com",
                 null,
-                new List<OpenReferralServiceDelivery>
+                new List<OpenReferralServiceDeliveryEx>
                 {
-                    new OpenReferralServiceDelivery("d79c612a-7bdd-4646-99a9-c0cc2fdf97e2",ServiceDelivery.Online)
+                    new OpenReferralServiceDeliveryEx("d79c612a-7bdd-4646-99a9-c0cc2fdf97e2",ServiceDelivery.Online)
                 },
                 new List<OpenReferralEligibility>
                 {

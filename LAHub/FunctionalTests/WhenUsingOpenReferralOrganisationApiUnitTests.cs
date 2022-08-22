@@ -306,9 +306,9 @@ public class WhenUsingOpenReferralOrganisationApiUnitTests : BaseWhenUsingOpenRe
                 "www.testservice.com",
                 "support@testservice.com",
                 null,
-                new List<OpenReferralServiceDelivery>
+                new List<OpenReferralServiceDeliveryEx>
                 {
-                    new OpenReferralServiceDelivery(Guid.NewGuid().ToString(),ServiceDelivery.Online)
+                    new OpenReferralServiceDeliveryEx(Guid.NewGuid().ToString(),ServiceDelivery.Online)
                 },
                 new List<OpenReferralEligibility>
                 {

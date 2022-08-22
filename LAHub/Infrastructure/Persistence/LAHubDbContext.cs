@@ -49,7 +49,7 @@ public class LAHubDbContext : ApiAuthorizationDbContext<ApplicationUser>, ILAHub
     public DbSet<OpenReferralService_Taxonomy> OpenReferralService_Taxonomies => Set<OpenReferralService_Taxonomy>();
     public DbSet<OpenReferralServiceAtLocation> OpenReferralServiceAtLocations => Set<OpenReferralServiceAtLocation>();
     public DbSet<OpenReferralTaxonomy> OpenReferralTaxonomies => Set<OpenReferralTaxonomy>();
-    public DbSet<OpenReferralServiceDelivery> OpenReferralServiceDeliveries => Set<OpenReferralServiceDelivery>();
+    public DbSet<OpenReferralServiceDeliveryEx> OpenReferralServiceDeliveries => Set<OpenReferralServiceDeliveryEx>();
     #endregion
 
     protected override void OnModelCreating(ModelBuilder builder)
@@ -63,7 +63,7 @@ public class LAHubDbContext : ApiAuthorizationDbContext<ApplicationUser>, ILAHub
         //    .WithMany(g => g.Students)
         //    .HasForeignKey(s => s.CurrentGradeId);
 
-        builder.Entity<OpenReferralServiceDelivery>().HasEnum(e => e.ServiceDelivery);
+        builder.Entity<OpenReferralServiceDeliveryEx>().HasEnum(e => e.ServiceDeliveryEx);
 
         builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
 

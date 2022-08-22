@@ -19,7 +19,7 @@ public class AutoMappingProfiles : Profile
         CreateMap<OpenReferralService_AreaRecord, OpenReferralService_Area>();
         CreateMap<OpenReferralService_TaxonomyRecord, OpenReferralService_Taxonomy>();
         CreateMap<OpenReferralServiceAtLocationRecord, OpenReferralServiceAtLocation>();
-        CreateMap<OpenReferralServiceDeliveryRecord, OpenReferralServiceDelivery>();
+        CreateMap<OpenReferralServiceDeliveryRecord, OpenReferralServiceDeliveryEx>();
         CreateMap<OpenReferralServiceRecord, OpenReferralService>();
         CreateMap<OpenReferralTaxonomyRecord, OpenReferralTaxonomy>();
 

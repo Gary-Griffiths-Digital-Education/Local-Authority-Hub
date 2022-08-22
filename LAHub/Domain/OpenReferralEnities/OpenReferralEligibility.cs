@@ -15,7 +15,7 @@ public class OpenReferralEligibility : BaseAuditableEntity<string>
         taxonomys = Taxonomys;
     }
 
-    public string OpenReferralServiceId { get; set; }
+    public string OpenReferralServiceId { get; set; } = default!;
     public string Eligibility { get; init; } = default!;
     public string? LinkId { get; init; }
     public int Maximum_age { get; init; }

@@ -2,14 +2,14 @@
 
 namespace LAHub.Domain.OpenReferralEnities;
 
-public class OpenReferralServiceDelivery : BaseAuditableEntity<string>
+public class OpenReferralServiceDeliveryEx : BaseAuditableEntity<string>
 {
-    private OpenReferralServiceDelivery() { }
-    public OpenReferralServiceDelivery(string id, ServiceDelivery serviceDelivery)
+    private OpenReferralServiceDeliveryEx() { }
+    public OpenReferralServiceDeliveryEx(string id, ServiceDelivery serviceDelivery)
     {
         Id = id;
-        ServiceDelivery = serviceDelivery;
+        ServiceDeliveryEx = serviceDelivery;
     }
 
-    public ServiceDelivery ServiceDelivery { get; private set; }
+    public ServiceDelivery ServiceDeliveryEx { get; private set; }
 }

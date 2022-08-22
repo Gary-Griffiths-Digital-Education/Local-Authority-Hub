@@ -4,11 +4,11 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Infrastructure.Persistence.Configurations;
 
-public class ServiceDeliveryConfiguration : IEntityTypeConfiguration<OpenReferralServiceDelivery>
+public class ServiceDeliveryConfiguration : IEntityTypeConfiguration<OpenReferralServiceDeliveryEx>
 {
-    public void Configure(EntityTypeBuilder<OpenReferralServiceDelivery> builder)
+    public void Configure(EntityTypeBuilder<OpenReferralServiceDeliveryEx> builder)
     {
-        builder.Property(t => t.ServiceDelivery)
+        builder.Property(t => t.ServiceDeliveryEx)
             .HasMaxLength(50)
             .IsRequired();
         builder.Property(t => t.Created)
